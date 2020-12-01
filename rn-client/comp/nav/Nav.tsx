@@ -1,36 +1,20 @@
+import { Button, Footer, FooterTab, Icon, Text } from "native-base";
 import React from "react";
-import {
-  Container,
-  Header,
-  Content,
-  Footer,
-  FooterTab,
-  Button,
-  Icon,
-  Text,
-  Badge,
-} from "native-base";
 
 export default function Nav() {
   return (
     <Footer style={{ zIndex: 1000 }}>
       <FooterTab>
-        <Button badge vertical>
-          <Badge>
-            <Text>2</Text>
-          </Badge>
-          <Icon name="apps" />
+        <Button vertical>
+          <Icon type="FontAwesome" name="book" />
           <Text>Apps</Text>
         </Button>
         <Button vertical>
-          <Icon name="camera" />
+          <Icon type="FontAwesome" name="calendar-check-o" />
           <Text>Camera</Text>
         </Button>
-        <Button active badge vertical>
-          <Badge>
-            <Text>51</Text>
-          </Badge>
-          <Icon active name="navigate" />
+        <Button vertical>
+          <Icon type="FontAwesome" name="list-alt" />
           <Text>Navigate</Text>
         </Button>
         <Button vertical>
