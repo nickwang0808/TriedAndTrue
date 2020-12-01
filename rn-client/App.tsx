@@ -1,21 +1,11 @@
-import { useFonts } from "expo-font";
-import { StatusBar } from "expo-status-bar";
-import {
-  Body,
-  Col,
-  Container,
-  Content,
-  Grid,
-  Header,
-  Left,
-  Right,
-  Title,
-} from "native-base";
-import React from "react";
-import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
-import Nav from "./comp/nav/Nav";
 import { Ionicons } from "@expo/vector-icons";
-import RecipeCard from "./comp/collections/RecipeCard";
+import { NavigationContainer } from "@react-navigation/native";
+import { useFonts } from "expo-font";
+import { Container } from "native-base";
+import React from "react";
+import { StyleSheet } from "react-native";
+import Nav from "./comp/nav/Nav";
+import RecipeDetailsTop from "./comp/RecipeDetails/RecipeDetailsTop";
 
 export default function App() {
   const [loaded] = useFonts({
@@ -28,17 +18,12 @@ export default function App() {
 
   return (
     <>
-      <Container>
-        <Header>
-          <Left />
-          <Body>
-            <Title>Recipe</Title>
-          </Body>
-          <Right></Right>
-        </Header>
-        <Content padder></Content>
-      </Container>
-      <Nav />
+      <NavigationContainer>
+        <Container>
+          <RecipeDetailsTop />
+        </Container>
+        <Nav />
+      </NavigationContainer>
     </>
   );
 }
