@@ -6,7 +6,7 @@ import Ingredients from "./Ingredients";
 import PrepTimeCard from "./PrepTimeCard";
 import TitleCard from "./TitleCard";
 
-export default function RecipeDetailsTop() {
+export default function RecipeDetailsMain() {
   return (
     <>
       <Content>

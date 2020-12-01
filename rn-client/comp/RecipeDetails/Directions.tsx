@@ -1,5 +1,6 @@
 import { Body, Left, List, ListItem, Right, Text } from "native-base";
 import React from "react";
+import { StyleSheet } from "react-native";
 
 const Data = [
   "In a large bowl, add the beef. Sprinkle evenly with the Worcestershire sauce, seasoning salt, garlic powder, and pepper. Use your hands to mix the ingredients until they are just combined.",
@@ -30,6 +31,8 @@ function DirectionItem({ step, index }: IDirectionItem) {
     </ListItem>
   );
 }
+
+const style = StyleSheet.create({});
 
 interface IDirectionItem {
   step: string;
