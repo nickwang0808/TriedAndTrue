@@ -1,7 +1,6 @@
-import { StyleSheet } from "react-native";
+import { Card, CardItem, Icon, Text, View } from "native-base";
 import React from "react";
-import { Image } from "react-native";
-import { Card, CardItem, Text, Icon, View } from "native-base";
+import { Image, StyleSheet } from "react-native";
 export default function RecipeCard() {
   return (
     <View style={style.card}>
@@ -35,7 +34,7 @@ export default function RecipeCard() {
 const p4 = 2;
 
 const style = StyleSheet.create({
-  card: { margin: "1%", width: "48%" },
+  card: { /* margin: "1%", */ width: "49%" },
   cardImg: {
     paddingTop: p4,
     paddingLeft: p4,

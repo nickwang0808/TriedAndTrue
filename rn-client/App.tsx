@@ -2,8 +2,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import React from "react";
+import MealPlannerMain from "./comp/MealPlanner/MealPlannerMain";
 import Nav from "./comp/nav/Nav";
-import RecipeGrid from "./comp/RecipeCollections/RecipeGrid";
 
 export default function App() {
   const [loaded] = useFonts({
@@ -17,7 +17,8 @@ export default function App() {
   return (
     <>
       <NavigationContainer>
-        <RecipeGrid />
+        <MealPlannerMain />
+        {/* <RecipeGrid /> */}
         {/* <RecipeDetailsMain /> */}
         <Nav />
       </NavigationContainer>

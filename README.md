@@ -7,3 +7,8 @@ let me show you how to use this repo,
 3. now `git clone https://github.com/nickwang0808/TriedAndTrue.git` in your desired directory, it will automatically create the root folder for you
 4. navigate to TriedAndTrue/rn-client and run `npm i` to install dependencies
 5. now you can run `expo start` and it will pop up a QR code, scan it with your Expo mobile app and you are good to go!
+
+# Tasks
+
+- RecipeDetails modal completed
+- Recipe Collections screen completed
