@@ -8,3 +8,11 @@
 - table:
     schema: public
     name: user
+  array_relationships:
+  - name: recipes
+    using:
+      foreign_key_constraint_on:
+        column: owner
+        table:
+          schema: public
+          name: recipe

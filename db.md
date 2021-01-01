@@ -8,12 +8,14 @@
 ### recipe
 
 - id
+- owner => user.id
 - title
 - img
 - total_time
 - yields
 - ingredients []
-- owner => user.id
+- created_at
+- ratings
 
 ### planner
 
