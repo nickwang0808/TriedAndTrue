@@ -1,0 +1,10 @@
+- table:
+    schema: public
+    name: recipe
+  object_relationships:
+  - name: user
+    using:
+      foreign_key_constraint_on: owner
+- table:
+    schema: public
+    name: user
