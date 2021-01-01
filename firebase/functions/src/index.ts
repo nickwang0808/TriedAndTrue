@@ -16,5 +16,11 @@ export const customClaims = functions.https.onCall(async (_, context) => {
 
   await admin.auth().setCustomUserClaims(claims.sub, hasuraClaims);
 
-  return { complete: true };
+  return true;
 });
+
+export const newUserRecordWrite = functions.auth
+  .user()
+  .onCreate(async (user) => {
+    // write to db
+  });
