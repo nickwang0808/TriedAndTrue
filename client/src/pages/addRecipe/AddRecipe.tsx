@@ -1,5 +1,18 @@
 import { gql, useMutation } from "@apollo/client";
-import { IonContent, IonPage } from "@ionic/react";
+import {
+  IonButton,
+  IonButtons,
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonHeader,
+  IonIcon,
+  IonInput,
+  IonPage,
+  IonRow,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
 import React from "react";
 import {
   AddRecipeMutation,
@@ -37,21 +50,40 @@ const ADD_RECIPE = gql`
   }
 `;
 
-export default function RecipePage() {
+export default function AddRecipe() {
   const [addRecipe] = useMutation<
     AddRecipeMutation,
     AddRecipeMutationVariables
   >(ADD_RECIPE);
 
-  const handleAddRecipe = () => {
-    addRecipe({
-      variables: {},
-    });
-  };
+  // const handleAddRecipe = () => {
+  //   addRecipe({
+  //     variables: {},
+  //   });
+  // };
 
   return (
     <IonPage>
-      <IonContent fullscreen></IonContent>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonButton>
+              <IonIcon name="close" />
+            </IonButton>
+          </IonButtons>
+          <IonTitle>Create Recipe</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+
+      <IonContent fullscreen>
+        <IonGrid>
+          <IonRow>
+            <IonCol>
+              <IonInput>Title</IonInput>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+      </IonContent>
     </IonPage>
   );
 }
