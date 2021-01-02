@@ -1,6 +1,7 @@
 import "firebase/analytics";
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/functions";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCAL53jTnorrWIreLo-PRFDg1wlzf7wE-8",
@@ -16,4 +17,4 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
-export const cloudFn = firebase.functions().httpsCallable;
+export const cloudFn = firebase.functions();

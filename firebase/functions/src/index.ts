@@ -1,6 +1,10 @@
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
-admin.initializeApp();
+import fetch from "node-fetch";
+const serviceAccount = require("./secret.json");
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
 
 export const customClaims = functions.https.onCall(async (_, context) => {
   const claims = context.auth?.token;
@@ -29,7 +33,7 @@ export const newUserRecordWrite = functions.auth
     const admin_secret = "myadminsecretkey";
     const url = "http://35.220.182.160:8080/v1/graphql";
     const query = `mutation ($id: String!, $name: String, $imgURL: String, $email: String!) {
-        insert_user(objects: [{email: $email, id: $id, img: $imgURl, name: $name}], on_conflict: {constraint: user_pkey, update_columns: [name, email, img]}) {
+        insert_user(objects: [{email: $email, id: $id, img: $imgURL, name: $name}], on_conflict: {constraint: user_pkey, update_columns: [name, email, img]}) {
           affected_rows
         }
       }
@@ -37,16 +41,21 @@ export const newUserRecordWrite = functions.auth
 
     const variables = { id: uid, name: displayName, imgURL: photoURL, email };
 
-    const result = await fetch(url, {
-      headers: {
-        "content-type": "application/json",
-        "x-hasura-admin-secret": admin_secret,
-      },
-      body: JSON.stringify({
-        query: query,
-        variables: variables,
-      }),
-    }).then((res) => res.json());
+    try {
+      const result = await fetch(url, {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+          "x-hasura-admin-secret": admin_secret,
+        },
+        body: JSON.stringify({
+          query: query,
+          variables: variables,
+        }),
+      }).then((res) => res.json());
 
-    console.log(result);
+      console.log(result);
+    } catch (err) {
+      console.log(err);
+    }
   });
