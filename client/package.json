@@ -5,6 +5,11 @@
   "dependencies": {
     "@apollo/client": "^3.3.6",
     "@capacitor/core": "2.4.5",
+    "@graphql-codegen/cli": "^1.20.0",
+    "@graphql-codegen/introspection": "^1.18.1",
+    "@graphql-codegen/typescript": "^1.20.0",
+    "@graphql-codegen/typescript-operations": "^1.17.13",
+    "@graphql-codegen/typescript-react-apollo": "^2.2.1",
     "@ionic/react": "^5.0.7",
     "@ionic/react-router": "^5.0.7",
     "@testing-library/jest-dom": "^4.2.4",
@@ -31,7 +36,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "generate": "graphql-codegen --config codegen.js"
   },
   "eslintConfig": {
     "extends": "react-app"

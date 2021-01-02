@@ -1,0 +1,978 @@
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
+export type Maybe<T> = T | null;
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+/** All built-in and custom scalars, mapped to their actual values */
+export type Scalars = {
+  ID: string;
+  String: string;
+  Boolean: boolean;
+  Int: number;
+  Float: number;
+  json: any;
+  uuid: any;
+};
+
+/** expression to compare columns of type Int. All fields are combined with logical 'AND'. */
+export type Int_Comparison_Exp = {
+  _eq?: Maybe<Scalars['Int']>;
+  _gt?: Maybe<Scalars['Int']>;
+  _gte?: Maybe<Scalars['Int']>;
+  _in?: Maybe<Array<Scalars['Int']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['Int']>;
+  _lte?: Maybe<Scalars['Int']>;
+  _neq?: Maybe<Scalars['Int']>;
+  _nin?: Maybe<Array<Scalars['Int']>>;
+};
+
+/** expression to compare columns of type String. All fields are combined with logical 'AND'. */
+export type String_Comparison_Exp = {
+  _eq?: Maybe<Scalars['String']>;
+  _gt?: Maybe<Scalars['String']>;
+  _gte?: Maybe<Scalars['String']>;
+  _ilike?: Maybe<Scalars['String']>;
+  _in?: Maybe<Array<Scalars['String']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _like?: Maybe<Scalars['String']>;
+  _lt?: Maybe<Scalars['String']>;
+  _lte?: Maybe<Scalars['String']>;
+  _neq?: Maybe<Scalars['String']>;
+  _nilike?: Maybe<Scalars['String']>;
+  _nin?: Maybe<Array<Scalars['String']>>;
+  _nlike?: Maybe<Scalars['String']>;
+  _nsimilar?: Maybe<Scalars['String']>;
+  _similar?: Maybe<Scalars['String']>;
+};
+
+
+/** expression to compare columns of type json. All fields are combined with logical 'AND'. */
+export type Json_Comparison_Exp = {
+  _eq?: Maybe<Scalars['json']>;
+  _gt?: Maybe<Scalars['json']>;
+  _gte?: Maybe<Scalars['json']>;
+  _in?: Maybe<Array<Scalars['json']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['json']>;
+  _lte?: Maybe<Scalars['json']>;
+  _neq?: Maybe<Scalars['json']>;
+  _nin?: Maybe<Array<Scalars['json']>>;
+};
+
+/** mutation root */
+export type Mutation_Root = {
+  __typename?: 'mutation_root';
+  /** delete data from the table: "recipe" */
+  delete_recipe?: Maybe<Recipe_Mutation_Response>;
+  /** delete single row from the table: "recipe" */
+  delete_recipe_by_pk?: Maybe<Recipe>;
+  /** delete data from the table: "user" */
+  delete_user?: Maybe<User_Mutation_Response>;
+  /** delete single row from the table: "user" */
+  delete_user_by_pk?: Maybe<User>;
+  /** insert data into the table: "recipe" */
+  insert_recipe?: Maybe<Recipe_Mutation_Response>;
+  /** insert a single row into the table: "recipe" */
+  insert_recipe_one?: Maybe<Recipe>;
+  /** insert data into the table: "user" */
+  insert_user?: Maybe<User_Mutation_Response>;
+  /** insert a single row into the table: "user" */
+  insert_user_one?: Maybe<User>;
+  /** update data of the table: "recipe" */
+  update_recipe?: Maybe<Recipe_Mutation_Response>;
+  /** update single row of the table: "recipe" */
+  update_recipe_by_pk?: Maybe<Recipe>;
+  /** update data of the table: "user" */
+  update_user?: Maybe<User_Mutation_Response>;
+  /** update single row of the table: "user" */
+  update_user_by_pk?: Maybe<User>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_RecipeArgs = {
+  where: Recipe_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Recipe_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_UserArgs = {
+  where: User_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_User_By_PkArgs = {
+  id: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_RecipeArgs = {
+  objects: Array<Recipe_Insert_Input>;
+  on_conflict?: Maybe<Recipe_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Recipe_OneArgs = {
+  object: Recipe_Insert_Input;
+  on_conflict?: Maybe<Recipe_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_UserArgs = {
+  objects: Array<User_Insert_Input>;
+  on_conflict?: Maybe<User_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_User_OneArgs = {
+  object: User_Insert_Input;
+  on_conflict?: Maybe<User_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_RecipeArgs = {
+  _inc?: Maybe<Recipe_Inc_Input>;
+  _set?: Maybe<Recipe_Set_Input>;
+  where: Recipe_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Recipe_By_PkArgs = {
+  _inc?: Maybe<Recipe_Inc_Input>;
+  _set?: Maybe<Recipe_Set_Input>;
+  pk_columns: Recipe_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_UserArgs = {
+  _set?: Maybe<User_Set_Input>;
+  where: User_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_User_By_PkArgs = {
+  _set?: Maybe<User_Set_Input>;
+  pk_columns: User_Pk_Columns_Input;
+};
+
+/** column ordering options */
+export enum Order_By {
+  /** in the ascending order, nulls last */
+  Asc = 'asc',
+  /** in the ascending order, nulls first */
+  AscNullsFirst = 'asc_nulls_first',
+  /** in the ascending order, nulls last */
+  AscNullsLast = 'asc_nulls_last',
+  /** in the descending order, nulls first */
+  Desc = 'desc',
+  /** in the descending order, nulls first */
+  DescNullsFirst = 'desc_nulls_first',
+  /** in the descending order, nulls last */
+  DescNullsLast = 'desc_nulls_last'
+}
+
+/** query root */
+export type Query_Root = {
+  __typename?: 'query_root';
+  /** fetch data from the table: "recipe" */
+  recipe: Array<Recipe>;
+  /** fetch aggregated fields from the table: "recipe" */
+  recipe_aggregate: Recipe_Aggregate;
+  /** fetch data from the table: "recipe" using primary key columns */
+  recipe_by_pk?: Maybe<Recipe>;
+  /** fetch data from the table: "user" */
+  user: Array<User>;
+  /** fetch aggregated fields from the table: "user" */
+  user_aggregate: User_Aggregate;
+  /** fetch data from the table: "user" using primary key columns */
+  user_by_pk?: Maybe<User>;
+};
+
+
+/** query root */
+export type Query_RootRecipeArgs = {
+  distinct_on?: Maybe<Array<Recipe_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Recipe_Order_By>>;
+  where?: Maybe<Recipe_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootRecipe_AggregateArgs = {
+  distinct_on?: Maybe<Array<Recipe_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Recipe_Order_By>>;
+  where?: Maybe<Recipe_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootRecipe_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** query root */
+export type Query_RootUserArgs = {
+  distinct_on?: Maybe<Array<User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Order_By>>;
+  where?: Maybe<User_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootUser_AggregateArgs = {
+  distinct_on?: Maybe<Array<User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Order_By>>;
+  where?: Maybe<User_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootUser_By_PkArgs = {
+  id: Scalars['String'];
+};
+
+/** columns and relationships of "recipe" */
+export type Recipe = {
+  __typename?: 'recipe';
+  id: Scalars['uuid'];
+  img?: Maybe<Scalars['String']>;
+  ingredients?: Maybe<Scalars['json']>;
+  owner: Scalars['String'];
+  title: Scalars['String'];
+  total_time?: Maybe<Scalars['Int']>;
+  /** An object relationship */
+  user: User;
+  yields?: Maybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "recipe" */
+export type RecipeIngredientsArgs = {
+  path?: Maybe<Scalars['String']>;
+};
+
+/** aggregated selection of "recipe" */
+export type Recipe_Aggregate = {
+  __typename?: 'recipe_aggregate';
+  aggregate?: Maybe<Recipe_Aggregate_Fields>;
+  nodes: Array<Recipe>;
+};
+
+/** aggregate fields of "recipe" */
+export type Recipe_Aggregate_Fields = {
+  __typename?: 'recipe_aggregate_fields';
+  avg?: Maybe<Recipe_Avg_Fields>;
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<Recipe_Max_Fields>;
+  min?: Maybe<Recipe_Min_Fields>;
+  stddev?: Maybe<Recipe_Stddev_Fields>;
+  stddev_pop?: Maybe<Recipe_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Recipe_Stddev_Samp_Fields>;
+  sum?: Maybe<Recipe_Sum_Fields>;
+  var_pop?: Maybe<Recipe_Var_Pop_Fields>;
+  var_samp?: Maybe<Recipe_Var_Samp_Fields>;
+  variance?: Maybe<Recipe_Variance_Fields>;
+};
+
+
+/** aggregate fields of "recipe" */
+export type Recipe_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Recipe_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "recipe" */
+export type Recipe_Aggregate_Order_By = {
+  avg?: Maybe<Recipe_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Recipe_Max_Order_By>;
+  min?: Maybe<Recipe_Min_Order_By>;
+  stddev?: Maybe<Recipe_Stddev_Order_By>;
+  stddev_pop?: Maybe<Recipe_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Recipe_Stddev_Samp_Order_By>;
+  sum?: Maybe<Recipe_Sum_Order_By>;
+  var_pop?: Maybe<Recipe_Var_Pop_Order_By>;
+  var_samp?: Maybe<Recipe_Var_Samp_Order_By>;
+  variance?: Maybe<Recipe_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "recipe" */
+export type Recipe_Arr_Rel_Insert_Input = {
+  data: Array<Recipe_Insert_Input>;
+  on_conflict?: Maybe<Recipe_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Recipe_Avg_Fields = {
+  __typename?: 'recipe_avg_fields';
+  total_time?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "recipe" */
+export type Recipe_Avg_Order_By = {
+  total_time?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "recipe". All fields are combined with a logical 'AND'. */
+export type Recipe_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Recipe_Bool_Exp>>>;
+  _not?: Maybe<Recipe_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Recipe_Bool_Exp>>>;
+  id?: Maybe<Uuid_Comparison_Exp>;
+  img?: Maybe<String_Comparison_Exp>;
+  ingredients?: Maybe<Json_Comparison_Exp>;
+  owner?: Maybe<String_Comparison_Exp>;
+  title?: Maybe<String_Comparison_Exp>;
+  total_time?: Maybe<Int_Comparison_Exp>;
+  user?: Maybe<User_Bool_Exp>;
+  yields?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "recipe" */
+export enum Recipe_Constraint {
+  /** unique or primary key constraint */
+  RecipePkey = 'recipe_pkey'
+}
+
+/** input type for incrementing integer column in table "recipe" */
+export type Recipe_Inc_Input = {
+  total_time?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "recipe" */
+export type Recipe_Insert_Input = {
+  id?: Maybe<Scalars['uuid']>;
+  img?: Maybe<Scalars['String']>;
+  ingredients?: Maybe<Scalars['json']>;
+  owner?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  total_time?: Maybe<Scalars['Int']>;
+  user?: Maybe<User_Obj_Rel_Insert_Input>;
+  yields?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Recipe_Max_Fields = {
+  __typename?: 'recipe_max_fields';
+  id?: Maybe<Scalars['uuid']>;
+  img?: Maybe<Scalars['String']>;
+  owner?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  total_time?: Maybe<Scalars['Int']>;
+  yields?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "recipe" */
+export type Recipe_Max_Order_By = {
+  id?: Maybe<Order_By>;
+  img?: Maybe<Order_By>;
+  owner?: Maybe<Order_By>;
+  title?: Maybe<Order_By>;
+  total_time?: Maybe<Order_By>;
+  yields?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Recipe_Min_Fields = {
+  __typename?: 'recipe_min_fields';
+  id?: Maybe<Scalars['uuid']>;
+  img?: Maybe<Scalars['String']>;
+  owner?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  total_time?: Maybe<Scalars['Int']>;
+  yields?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "recipe" */
+export type Recipe_Min_Order_By = {
+  id?: Maybe<Order_By>;
+  img?: Maybe<Order_By>;
+  owner?: Maybe<Order_By>;
+  title?: Maybe<Order_By>;
+  total_time?: Maybe<Order_By>;
+  yields?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "recipe" */
+export type Recipe_Mutation_Response = {
+  __typename?: 'recipe_mutation_response';
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<Recipe>;
+};
+
+/** input type for inserting object relation for remote table "recipe" */
+export type Recipe_Obj_Rel_Insert_Input = {
+  data: Recipe_Insert_Input;
+  on_conflict?: Maybe<Recipe_On_Conflict>;
+};
+
+/** on conflict condition type for table "recipe" */
+export type Recipe_On_Conflict = {
+  constraint: Recipe_Constraint;
+  update_columns: Array<Recipe_Update_Column>;
+  where?: Maybe<Recipe_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "recipe" */
+export type Recipe_Order_By = {
+  id?: Maybe<Order_By>;
+  img?: Maybe<Order_By>;
+  ingredients?: Maybe<Order_By>;
+  owner?: Maybe<Order_By>;
+  title?: Maybe<Order_By>;
+  total_time?: Maybe<Order_By>;
+  user?: Maybe<User_Order_By>;
+  yields?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: "recipe" */
+export type Recipe_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "recipe" */
+export enum Recipe_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Img = 'img',
+  /** column name */
+  Ingredients = 'ingredients',
+  /** column name */
+  Owner = 'owner',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  TotalTime = 'total_time',
+  /** column name */
+  Yields = 'yields'
+}
+
+/** input type for updating data in table "recipe" */
+export type Recipe_Set_Input = {
+  id?: Maybe<Scalars['uuid']>;
+  img?: Maybe<Scalars['String']>;
+  ingredients?: Maybe<Scalars['json']>;
+  owner?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  total_time?: Maybe<Scalars['Int']>;
+  yields?: Maybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Recipe_Stddev_Fields = {
+  __typename?: 'recipe_stddev_fields';
+  total_time?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "recipe" */
+export type Recipe_Stddev_Order_By = {
+  total_time?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Recipe_Stddev_Pop_Fields = {
+  __typename?: 'recipe_stddev_pop_fields';
+  total_time?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "recipe" */
+export type Recipe_Stddev_Pop_Order_By = {
+  total_time?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Recipe_Stddev_Samp_Fields = {
+  __typename?: 'recipe_stddev_samp_fields';
+  total_time?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "recipe" */
+export type Recipe_Stddev_Samp_Order_By = {
+  total_time?: Maybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type Recipe_Sum_Fields = {
+  __typename?: 'recipe_sum_fields';
+  total_time?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "recipe" */
+export type Recipe_Sum_Order_By = {
+  total_time?: Maybe<Order_By>;
+};
+
+/** update columns of table "recipe" */
+export enum Recipe_Update_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Img = 'img',
+  /** column name */
+  Ingredients = 'ingredients',
+  /** column name */
+  Owner = 'owner',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  TotalTime = 'total_time',
+  /** column name */
+  Yields = 'yields'
+}
+
+/** aggregate var_pop on columns */
+export type Recipe_Var_Pop_Fields = {
+  __typename?: 'recipe_var_pop_fields';
+  total_time?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "recipe" */
+export type Recipe_Var_Pop_Order_By = {
+  total_time?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Recipe_Var_Samp_Fields = {
+  __typename?: 'recipe_var_samp_fields';
+  total_time?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "recipe" */
+export type Recipe_Var_Samp_Order_By = {
+  total_time?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Recipe_Variance_Fields = {
+  __typename?: 'recipe_variance_fields';
+  total_time?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "recipe" */
+export type Recipe_Variance_Order_By = {
+  total_time?: Maybe<Order_By>;
+};
+
+/** subscription root */
+export type Subscription_Root = {
+  __typename?: 'subscription_root';
+  /** fetch data from the table: "recipe" */
+  recipe: Array<Recipe>;
+  /** fetch aggregated fields from the table: "recipe" */
+  recipe_aggregate: Recipe_Aggregate;
+  /** fetch data from the table: "recipe" using primary key columns */
+  recipe_by_pk?: Maybe<Recipe>;
+  /** fetch data from the table: "user" */
+  user: Array<User>;
+  /** fetch aggregated fields from the table: "user" */
+  user_aggregate: User_Aggregate;
+  /** fetch data from the table: "user" using primary key columns */
+  user_by_pk?: Maybe<User>;
+};
+
+
+/** subscription root */
+export type Subscription_RootRecipeArgs = {
+  distinct_on?: Maybe<Array<Recipe_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Recipe_Order_By>>;
+  where?: Maybe<Recipe_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootRecipe_AggregateArgs = {
+  distinct_on?: Maybe<Array<Recipe_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Recipe_Order_By>>;
+  where?: Maybe<Recipe_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootRecipe_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** subscription root */
+export type Subscription_RootUserArgs = {
+  distinct_on?: Maybe<Array<User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Order_By>>;
+  where?: Maybe<User_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootUser_AggregateArgs = {
+  distinct_on?: Maybe<Array<User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Order_By>>;
+  where?: Maybe<User_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootUser_By_PkArgs = {
+  id: Scalars['String'];
+};
+
+/** columns and relationships of "user" */
+export type User = {
+  __typename?: 'user';
+  email: Scalars['String'];
+  id: Scalars['String'];
+  img?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  /** An array relationship */
+  recipes: Array<Recipe>;
+  /** An aggregated array relationship */
+  recipes_aggregate: Recipe_Aggregate;
+};
+
+
+/** columns and relationships of "user" */
+export type UserRecipesArgs = {
+  distinct_on?: Maybe<Array<Recipe_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Recipe_Order_By>>;
+  where?: Maybe<Recipe_Bool_Exp>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserRecipes_AggregateArgs = {
+  distinct_on?: Maybe<Array<Recipe_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Recipe_Order_By>>;
+  where?: Maybe<Recipe_Bool_Exp>;
+};
+
+/** aggregated selection of "user" */
+export type User_Aggregate = {
+  __typename?: 'user_aggregate';
+  aggregate?: Maybe<User_Aggregate_Fields>;
+  nodes: Array<User>;
+};
+
+/** aggregate fields of "user" */
+export type User_Aggregate_Fields = {
+  __typename?: 'user_aggregate_fields';
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<User_Max_Fields>;
+  min?: Maybe<User_Min_Fields>;
+};
+
+
+/** aggregate fields of "user" */
+export type User_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<User_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "user" */
+export type User_Aggregate_Order_By = {
+  count?: Maybe<Order_By>;
+  max?: Maybe<User_Max_Order_By>;
+  min?: Maybe<User_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "user" */
+export type User_Arr_Rel_Insert_Input = {
+  data: Array<User_Insert_Input>;
+  on_conflict?: Maybe<User_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "user". All fields are combined with a logical 'AND'. */
+export type User_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<User_Bool_Exp>>>;
+  _not?: Maybe<User_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<User_Bool_Exp>>>;
+  email?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<String_Comparison_Exp>;
+  img?: Maybe<String_Comparison_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  recipes?: Maybe<Recipe_Bool_Exp>;
+};
+
+/** unique or primary key constraints on table "user" */
+export enum User_Constraint {
+  /** unique or primary key constraint */
+  UserPkey = 'user_pkey'
+}
+
+/** input type for inserting data into table "user" */
+export type User_Insert_Input = {
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  img?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  recipes?: Maybe<Recipe_Arr_Rel_Insert_Input>;
+};
+
+/** aggregate max on columns */
+export type User_Max_Fields = {
+  __typename?: 'user_max_fields';
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  img?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "user" */
+export type User_Max_Order_By = {
+  email?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  img?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type User_Min_Fields = {
+  __typename?: 'user_min_fields';
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  img?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "user" */
+export type User_Min_Order_By = {
+  email?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  img?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "user" */
+export type User_Mutation_Response = {
+  __typename?: 'user_mutation_response';
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<User>;
+};
+
+/** input type for inserting object relation for remote table "user" */
+export type User_Obj_Rel_Insert_Input = {
+  data: User_Insert_Input;
+  on_conflict?: Maybe<User_On_Conflict>;
+};
+
+/** on conflict condition type for table "user" */
+export type User_On_Conflict = {
+  constraint: User_Constraint;
+  update_columns: Array<User_Update_Column>;
+  where?: Maybe<User_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "user" */
+export type User_Order_By = {
+  email?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  img?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  recipes_aggregate?: Maybe<Recipe_Aggregate_Order_By>;
+};
+
+/** primary key columns input for table: "user" */
+export type User_Pk_Columns_Input = {
+  id: Scalars['String'];
+};
+
+/** select columns of table "user" */
+export enum User_Select_Column {
+  /** column name */
+  Email = 'email',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Img = 'img',
+  /** column name */
+  Name = 'name'
+}
+
+/** input type for updating data in table "user" */
+export type User_Set_Input = {
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  img?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+/** update columns of table "user" */
+export enum User_Update_Column {
+  /** column name */
+  Email = 'email',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Img = 'img',
+  /** column name */
+  Name = 'name'
+}
+
+
+/** expression to compare columns of type uuid. All fields are combined with logical 'AND'. */
+export type Uuid_Comparison_Exp = {
+  _eq?: Maybe<Scalars['uuid']>;
+  _gt?: Maybe<Scalars['uuid']>;
+  _gte?: Maybe<Scalars['uuid']>;
+  _in?: Maybe<Array<Scalars['uuid']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['uuid']>;
+  _lte?: Maybe<Scalars['uuid']>;
+  _neq?: Maybe<Scalars['uuid']>;
+  _nin?: Maybe<Array<Scalars['uuid']>>;
+};
+
+export type GetProfileQueryVariables = Exact<{
+  uid: Scalars['String'];
+}>;
+
+
+export type GetProfileQuery = (
+  { __typename?: 'query_root' }
+  & { user: Array<(
+    { __typename?: 'user' }
+    & Pick<User, 'email' | 'name' | 'img'>
+  )> }
+);
+
+export type AddRecipeMutationVariables = Exact<{
+  img?: Maybe<Scalars['String']>;
+  ingredients?: Maybe<Scalars['json']>;
+  title: Scalars['String'];
+  total_time?: Maybe<Scalars['Int']>;
+  yields?: Maybe<Scalars['String']>;
+}>;
+
+
+export type AddRecipeMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_recipe?: Maybe<(
+    { __typename?: 'recipe_mutation_response' }
+    & { returning: Array<(
+      { __typename?: 'recipe' }
+      & Pick<Recipe, 'id' | 'img' | 'ingredients' | 'title' | 'total_time' | 'yields'>
+    )> }
+  )> }
+);
+
+
+export const GetProfileDocument = gql`
+    query GetProfile($uid: String!) {
+  user(where: {id: {_eq: $uid}}) {
+    email
+    name
+    img
+  }
+}
+    `;
+
+/**
+ * __useGetProfileQuery__
+ *
+ * To run a query within a React component, call `useGetProfileQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProfileQuery({
+ *   variables: {
+ *      uid: // value for 'uid'
+ *   },
+ * });
+ */
+export function useGetProfileQuery(baseOptions: Apollo.QueryHookOptions<GetProfileQuery, GetProfileQueryVariables>) {
+        return Apollo.useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, baseOptions);
+      }
+export function useGetProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProfileQuery, GetProfileQueryVariables>) {
+          return Apollo.useLazyQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, baseOptions);
+        }
+export type GetProfileQueryHookResult = ReturnType<typeof useGetProfileQuery>;
+export type GetProfileLazyQueryHookResult = ReturnType<typeof useGetProfileLazyQuery>;
+export type GetProfileQueryResult = Apollo.QueryResult<GetProfileQuery, GetProfileQueryVariables>;
+export const AddRecipeDocument = gql`
+    mutation AddRecipe($img: String, $ingredients: json, $title: String!, $total_time: Int, $yields: String) {
+  insert_recipe(
+    objects: [{img: $img, ingredients: $ingredients, title: $title, total_time: $total_time, yields: $yields}]
+  ) {
+    returning {
+      id
+      img
+      ingredients
+      title
+      total_time
+      yields
+    }
+  }
+}
+    `;
+export type AddRecipeMutationFn = Apollo.MutationFunction<AddRecipeMutation, AddRecipeMutationVariables>;
+
+/**
+ * __useAddRecipeMutation__
+ *
+ * To run a mutation, you first call `useAddRecipeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddRecipeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addRecipeMutation, { data, loading, error }] = useAddRecipeMutation({
+ *   variables: {
+ *      img: // value for 'img'
+ *      ingredients: // value for 'ingredients'
+ *      title: // value for 'title'
+ *      total_time: // value for 'total_time'
+ *      yields: // value for 'yields'
+ *   },
+ * });
+ */
+export function useAddRecipeMutation(baseOptions?: Apollo.MutationHookOptions<AddRecipeMutation, AddRecipeMutationVariables>) {
+        return Apollo.useMutation<AddRecipeMutation, AddRecipeMutationVariables>(AddRecipeDocument, baseOptions);
+      }
+export type AddRecipeMutationHookResult = ReturnType<typeof useAddRecipeMutation>;
+export type AddRecipeMutationResult = Apollo.MutationResult<AddRecipeMutation>;
+export type AddRecipeMutationOptions = Apollo.BaseMutationOptions<AddRecipeMutation, AddRecipeMutationVariables>;
