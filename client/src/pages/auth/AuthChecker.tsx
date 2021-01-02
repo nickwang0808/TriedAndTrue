@@ -2,7 +2,7 @@ import { IonButton } from "@ionic/react";
 import firebase from "firebase/app";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { auth, cloudFn } from "../../firebase/config";
+import { auth, cloudFn } from "../../config/firebaseConfig";
 
 export default function AuthChecker() {
   const [token, setToken] = useState("");
@@ -79,5 +79,4 @@ const StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: white;
 `;
