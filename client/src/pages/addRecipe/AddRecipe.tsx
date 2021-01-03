@@ -53,7 +53,7 @@ export default function AddRecipe() {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent>
+      <IonContent fullscreen>
         <IonList>
           <IonItem>
             <StyledStackLabel>Title</StyledStackLabel>
@@ -131,9 +131,11 @@ export default function AddRecipe() {
       </IonContent>
 
       <IonFooter>
-        <IonToolbar className="ion-padding-horizontal">
-          <IonButton expand="full">Save Recipe</IonButton>
-        </IonToolbar>
+        {/* <IonToolbar> */}
+        <IonButton className="ion-margin-horizontal" expand="full">
+          Save Recipe
+        </IonButton>
+        {/* </IonToolbar> */}
       </IonFooter>
     </IonPage>
   );
