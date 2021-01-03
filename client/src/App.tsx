@@ -27,8 +27,8 @@ import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import client from "./config/apoloConfig";
 import AuthChecker from "./pages/auth/AuthChecker";
+import RecipeDetailsPage from "./pages/recipeDetails/RecipeDetailsPage";
 import RecipePage from "./pages/recipes/RecipePage";
-import Tab1 from "./pages/Tab1";
 import Tab3 from "./pages/Tab3";
 /* Theme variables */
 import "./theme/variables.css";
@@ -40,9 +40,10 @@ const App: React.FC = () => (
         <IonReactRouter>
           <IonTabs>
             <IonRouterOutlet>
-              <Route path="/tab1" component={Tab1} exact={true} />
-              <Route path="/tab2" component={RecipePage} exact={true} />
+              <Route path="/tab1" component={RecipePage} exact={true} />
+              <Route path="/tab2" component={RecipeDetailsPage} exact={true} />
               <Route path="/tab3" component={Tab3} />
+              <Route path="/recipe" component={Tab3} />
               <Route
                 path="/"
                 render={() => <Redirect to="/tab1" />}
