@@ -1,56 +1,93 @@
-import { IonContent, IonIcon, IonPage } from "@ionic/react";
-import React from "react";
+import {
+  IonContent,
+  IonLabel,
+  IonList,
+  IonPage,
+  IonSegment,
+  IonSegmentButton,
+} from "@ionic/react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import calendar from "../../assets/svg/calendar.svg";
-import pencil from "../../assets/svg/pencil.svg";
+import CookTime from "../../components/detailsPageComp/CookTime";
+import DetailsPageTitle from "../../components/detailsPageComp/DetailsPageTitle";
+import DirectionsListItem from "../../components/listItem/DirectionsListItem";
+import IngredientListItem from "../../components/listItem/IngredientListItem";
 
 export default function RecipeDetailsPage() {
+  const [showDirections, setShowDirections] = useState(false);
+
+  const directions = (
+    <>
+      <DirectionsListItem
+        showDelete={false}
+        content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quibusdam autem sapiente delectus culpa unde quas nulla consequatur enim. At accusantium velit similique optio a temporibus, nobis et! Placeat, eaque!"
+        index={1}
+        showBackground
+      />
+      <DirectionsListItem
+        showDelete={false}
+        content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quibusdam autem sapiente delectus culpa unde quas nulla consequatur enim. At accusantium velit similique optio a temporibus, nobis et! Placeat, eaque!"
+        index={2}
+        // showBackground
+      />
+      <DirectionsListItem
+        showDelete={false}
+        content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quibusdam autem sapiente delectus culpa unde quas nulla consequatur enim. At accusantium velit similique optio a temporibus, nobis et! Placeat, eaque!"
+        index={3}
+        showBackground
+      />
+    </>
+  );
+
+  const ingredients = (
+    <>
+      <IngredientListItem
+        materialText="beef"
+        quantityText="1 1/2 lbs"
+        showBackground
+      />
+      <IngredientListItem
+        materialText="beef"
+        quantityText="1 1/2 lbs"
+        // showBackground
+      />
+      <IngredientListItem
+        materialText="beef"
+        quantityText="1 1/2 lbs"
+        showBackground
+      />
+    </>
+  );
   return (
     <IonPage>
       <IonContent>
-        <StyledImg src="https://picsum.photos/300/200" />
+        <DetailsPageTitle />
 
-        <StyledTitleAndIconWrapper>
-          <StyledTitle>Hometown Grilled Hamburgers</StyledTitle>
-          <StyledIconWrapper>
-            <IonIcon size="large" icon={pencil} />
-            <IonIcon size="large" icon={calendar} />
-          </StyledIconWrapper>
-        </StyledTitleAndIconWrapper>
+        <CookTime />
+
+        <IonSegment
+          onIonChange={(e) =>
+            setShowDirections(e.detail.value === "ingredients" ? false : true)
+          }
+        >
+          <IonSegmentButton value="ingredients">
+            <IonLabel>Ingredients</IonLabel>
+          </IonSegmentButton>
+          <IonSegmentButton value="directions">
+            <IonLabel>Directions</IonLabel>
+          </IonSegmentButton>
+        </IonSegment>
+
+        <StyledIngredientList>
+          {showDirections ? directions : ingredients}
+        </StyledIngredientList>
       </IonContent>
     </IonPage>
   );
 }
 
-const StyledImg = styled.img`
-  width: 100%;
-  height: 230;
-
-  object-fit: cover;
-`;
-
-const StyledTitleAndIconWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 0 8px;
-
-  margin-top: -20px; /* control how much title gets pushed up */
-`;
-
-const StyledIconWrapper = styled.div`
-  display: flex;
-  margin: 0 8px 8px 0;
-  width: 88px;
-  justify-content: space-between;
-`;
-
-const StyledTitle = styled.div`
-  background: white;
+const StyledIngredientList = styled(IonList).attrs({
+  lines: "none",
+})`
   padding: 8px;
-  max-width: 60%;
-
-  font-weight: normal;
-  font-size: 22px;
-  line-height: 125%;
 `;

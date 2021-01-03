@@ -6,19 +6,22 @@ import trash from "../../assets/svg/trash.svg";
 interface IProps {
   content: string;
   showBackground?: boolean;
+  showDelete?: boolean;
   index: number;
 }
 
 export default function DirectionsListItem({
   content,
   showBackground = false,
+  showDelete = true,
   index,
 }: IProps) {
   return (
     <StyledWrapper showBackground={showBackground}>
       <StyledIndexBox>{index}</StyledIndexBox>
       <div>{content}</div>
-      <IonIcon size="small" slot="end" src={trash} />
+
+      {showDelete && <IonIcon size="small" slot="end" src={trash} />}
     </StyledWrapper>
   );
 }

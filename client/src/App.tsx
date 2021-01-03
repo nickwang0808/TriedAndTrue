@@ -30,6 +30,7 @@ import AuthChecker from "./pages/auth/AuthChecker";
 import RecipeDetailsPage from "./pages/recipeDetails/RecipeDetailsPage";
 import RecipePage from "./pages/recipes/RecipePage";
 import Tab3 from "./pages/Tab3";
+import "./style.css";
 /* Theme variables */
 import "./theme/variables.css";
 
