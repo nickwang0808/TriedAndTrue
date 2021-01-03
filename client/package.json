@@ -56,7 +56,8 @@
   },
   "devDependencies": {
     "@capacitor/cli": "2.4.5",
-    "@types/styled-components": "^5.1.7"
+    "@types/styled-components": "^5.1.7",
+    "@types/webpack-env": "^1.16.0"
   },
   "description": "An Ionic project"
 }

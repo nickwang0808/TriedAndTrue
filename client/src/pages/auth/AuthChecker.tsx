@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { IonButton } from "@ionic/react";
 import firebase from "firebase/app";
 import React, { useEffect, useState } from "react";
@@ -8,16 +8,7 @@ import {
   GetProfileQuery,
   GetProfileQueryVariables,
 } from "../../generated/graphql";
-
-const GET_PROFILE = gql`
-  query GetProfile($uid: String!) {
-    user(where: { id: { _eq: $uid } }) {
-      email
-      name
-      img
-    }
-  }
-`;
+import { GET_PROFILE } from "../../gql/query/getProfile.graphql";
 
 interface IProps {
   children: React.ReactNode;

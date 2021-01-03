@@ -862,19 +862,6 @@ export type Uuid_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['uuid']>>;
 };
 
-export type GetProfileQueryVariables = Exact<{
-  uid: Scalars['String'];
-}>;
-
-
-export type GetProfileQuery = (
-  { __typename?: 'query_root' }
-  & { user: Array<(
-    { __typename?: 'user' }
-    & Pick<User, 'email' | 'name' | 'img'>
-  )> }
-);
-
 export type AddRecipeMutationVariables = Exact<{
   img?: Maybe<Scalars['String']>;
   ingredients?: Maybe<Scalars['json']>;
@@ -895,42 +882,20 @@ export type AddRecipeMutation = (
   )> }
 );
 
+export type GetProfileQueryVariables = Exact<{
+  uid: Scalars['String'];
+}>;
 
-export const GetProfileDocument = gql`
-    query GetProfile($uid: String!) {
-  user(where: {id: {_eq: $uid}}) {
-    email
-    name
-    img
-  }
-}
-    `;
 
-/**
- * __useGetProfileQuery__
- *
- * To run a query within a React component, call `useGetProfileQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetProfileQuery({
- *   variables: {
- *      uid: // value for 'uid'
- *   },
- * });
- */
-export function useGetProfileQuery(baseOptions: Apollo.QueryHookOptions<GetProfileQuery, GetProfileQueryVariables>) {
-        return Apollo.useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, baseOptions);
-      }
-export function useGetProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProfileQuery, GetProfileQueryVariables>) {
-          return Apollo.useLazyQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, baseOptions);
-        }
-export type GetProfileQueryHookResult = ReturnType<typeof useGetProfileQuery>;
-export type GetProfileLazyQueryHookResult = ReturnType<typeof useGetProfileLazyQuery>;
-export type GetProfileQueryResult = Apollo.QueryResult<GetProfileQuery, GetProfileQueryVariables>;
+export type GetProfileQuery = (
+  { __typename?: 'query_root' }
+  & { user: Array<(
+    { __typename?: 'user' }
+    & Pick<User, 'email' | 'name' | 'img'>
+  )> }
+);
+
+
 export const AddRecipeDocument = gql`
     mutation AddRecipe($img: String, $ingredients: json, $title: String!, $total_time: Int, $yields: String) {
   insert_recipe(
@@ -976,3 +941,38 @@ export function useAddRecipeMutation(baseOptions?: Apollo.MutationHookOptions<Ad
 export type AddRecipeMutationHookResult = ReturnType<typeof useAddRecipeMutation>;
 export type AddRecipeMutationResult = Apollo.MutationResult<AddRecipeMutation>;
 export type AddRecipeMutationOptions = Apollo.BaseMutationOptions<AddRecipeMutation, AddRecipeMutationVariables>;
+export const GetProfileDocument = gql`
+    query GetProfile($uid: String!) {
+  user(where: {id: {_eq: $uid}}) {
+    email
+    name
+    img
+  }
+}
+    `;
+
+/**
+ * __useGetProfileQuery__
+ *
+ * To run a query within a React component, call `useGetProfileQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProfileQuery({
+ *   variables: {
+ *      uid: // value for 'uid'
+ *   },
+ * });
+ */
+export function useGetProfileQuery(baseOptions: Apollo.QueryHookOptions<GetProfileQuery, GetProfileQueryVariables>) {
+        return Apollo.useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, baseOptions);
+      }
+export function useGetProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProfileQuery, GetProfileQueryVariables>) {
+          return Apollo.useLazyQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, baseOptions);
+        }
+export type GetProfileQueryHookResult = ReturnType<typeof useGetProfileQuery>;
+export type GetProfileLazyQueryHookResult = ReturnType<typeof useGetProfileLazyQuery>;
+export type GetProfileQueryResult = Apollo.QueryResult<GetProfileQuery, GetProfileQueryVariables>;

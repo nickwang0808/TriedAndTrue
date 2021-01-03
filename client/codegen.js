@@ -3,7 +3,7 @@ module.exports = {
     {
       "http://35.220.182.160:8080/v1/graphql": {
         headers: {
-          "x-hasura-admin-secret": process.env.AUTH_TOKEN,
+          "x-hasura-admin-secret": "myadminsecretkey",
         },
       },
     },
