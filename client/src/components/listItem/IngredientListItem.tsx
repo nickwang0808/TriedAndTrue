@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
-import { IonIcon, IonItem } from "@ionic/react";
+import { IonItem } from "@ionic/react";
 import React from "react";
-import trash from "../../assets/svg/trash.svg";
 
 interface IProps {
   quantityText: string;
@@ -18,7 +17,6 @@ export default function IngredientListItem({
     <StyledWrapper showBackground={showBackground}>
       <StyledTitle>{quantityText}</StyledTitle>
       <div>{materialText}</div>
-      <IonIcon icon={trash} size="small" slot="end" />
     </StyledWrapper>
   );
 }

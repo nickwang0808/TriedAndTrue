@@ -1,5 +1,4 @@
 import { useMutation } from "@apollo/client";
-import styled from "@emotion/styled";
 import {
   IonButton,
   IonButtons,
@@ -59,6 +58,7 @@ export default function AddRecipe() {
                 control={control}
                 name="title"
                 rules={{ required: true }}
+                defaultValue=""
                 render={({ onChange, ref }) => (
                   <IonInput
                     placeholder="Recipe Title"
@@ -175,10 +175,6 @@ export default function AddRecipe() {
     </IonPage>
   );
 }
-
-const StyledIngredientList = styled(IonList)`
-  padding: 8px;
-`;
 
 function Header() {
   return (

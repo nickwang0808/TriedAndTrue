@@ -1,27 +1,22 @@
 import styled from "@emotion/styled";
-import { IonIcon, IonItem } from "@ionic/react";
+import { IonItem } from "@ionic/react";
 import React from "react";
-import trash from "../../assets/svg/trash.svg";
 
 interface IProps {
   content: string;
   showBackground?: boolean;
-  showDelete?: boolean;
   index: number;
 }
 
 export default function DirectionsListItem({
   content,
   showBackground = false,
-  showDelete = true,
   index,
 }: IProps) {
   return (
     <StyledWrapper showBackground={showBackground}>
       <StyledIndexBox slot="start">{index}</StyledIndexBox>
       <div>{content}</div>
-
-      {showDelete && <IonIcon size="small" slot="end" src={trash} />}
     </StyledWrapper>
   );
 }

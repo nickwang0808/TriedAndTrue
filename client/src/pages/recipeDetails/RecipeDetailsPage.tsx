@@ -16,48 +16,23 @@ import IngredientListItem from "../../components/listItem/IngredientListItem";
 export default function RecipeDetailsPage() {
   const [showDirections, setShowDirections] = useState(false);
 
-  const directions = (
-    <>
-      <DirectionsListItem
-        showDelete={false}
-        content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quibusdam autem sapiente delectus culpa unde quas nulla consequatur enim. At accusantium velit similique optio a temporibus, nobis et! Placeat, eaque!"
-        index={1}
-        showBackground
-      />
-      <DirectionsListItem
-        showDelete={false}
-        content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quibusdam autem sapiente delectus culpa unde quas nulla consequatur enim. At accusantium velit similique optio a temporibus, nobis et! Placeat, eaque!"
-        index={2}
-        // showBackground
-      />
-      <DirectionsListItem
-        showDelete={false}
-        content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quibusdam autem sapiente delectus culpa unde quas nulla consequatur enim. At accusantium velit similique optio a temporibus, nobis et! Placeat, eaque!"
-        index={3}
-        showBackground
-      />
-    </>
-  );
+  const directions = [1, 2, 3, 4, 5].map((num) => (
+    <DirectionsListItem
+      key={num}
+      content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quibusdam autem sapiente delectus culpa unde quas nulla consequatur enim. At accusantium velit similique optio a temporibus, nobis et! Placeat, eaque!"
+      showBackground={num % 2 === 0 ? true : false}
+      index={num}
+    />
+  ));
 
-  const ingredients = (
-    <>
-      <IngredientListItem
-        materialText="beef"
-        quantityText="1 1/2 lbs"
-        showBackground
-      />
-      <IngredientListItem
-        materialText="beef"
-        quantityText="1 1/2 lbs"
-        // showBackground
-      />
-      <IngredientListItem
-        materialText="beef"
-        quantityText="1 1/2 lbs"
-        showBackground
-      />
-    </>
-  );
+  const ingredients = [1, 2, 3, 4, 5].map((num) => (
+    <IngredientListItem
+      key={num}
+      materialText="beef"
+      quantityText="1 1/2 lbs"
+      showBackground={num % 2 === 0 ? true : false}
+    />
+  ));
   return (
     <IonPage>
       <IonContent>
@@ -66,6 +41,7 @@ export default function RecipeDetailsPage() {
         <CookTime />
 
         <IonSegment
+          mode="md"
           value={showDirections ? "directions" : "ingredients"}
           onIonChange={(e) =>
             setShowDirections(e.detail.value === "ingredients" ? false : true)
