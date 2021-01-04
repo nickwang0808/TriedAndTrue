@@ -18,6 +18,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React from "react";
+import { Controller, useForm } from "react-hook-form";
 import AddInstructionLIstItem from "../../components/listItem/AddInstructionLIstItem";
 import DirectionsListItem from "../../components/listItem/DirectionsListItem";
 import IngredientListItem from "../../components/listItem/IngredientListItem";
@@ -40,53 +41,113 @@ export default function AddRecipe() {
   //   });
   // };
 
+  const { register, formState, handleSubmit, watch, control } = useForm();
+  const onSubmit = (data: any) => console.log({ data, formState });
+
+  console.log(watch());
+
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonButton>
-              <IonIcon name="close" />
-            </IonButton>
-          </IonButtons>
-          <IonTitle>Create Recipe</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <Header />
 
       <IonContent fullscreen>
-        <IonList>
-          <IonItem>
-            <IonLabel position="stacked">Title</IonLabel>
-            <IonInput placeholder="Recipe Title" />
-          </IonItem>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <IonList lines="none">
+            <IonItem>
+              <IonLabel position="stacked">Title</IonLabel>
+              <Controller
+                control={control}
+                name="title"
+                rules={{ required: true }}
+                render={({ onChange, ref }) => (
+                  <IonInput
+                    placeholder="Recipe Title"
+                    onIonChange={(e) => onChange(e.detail.value)}
+                    ref={ref}
+                  />
+                )}
+              />
+            </IonItem>
 
-          <IonItem>
-            <IonLabel position="stacked">Meal Type</IonLabel>
-            <IonSelect
-              /* value={gender} */ placeholder="Select One"
-              // onIonChange={(e) => setGender(e.detail.value)}
-            >
-              <IonSelectOption value="breakfast">breakfast</IonSelectOption>
-              <IonSelectOption value="lunch">lunch</IonSelectOption>
-              <IonSelectOption value="dinner">dinner</IonSelectOption>
-              <IonSelectOption value="snack">snack</IonSelectOption>
-              <IonSelectOption value="desert">desert</IonSelectOption>
-            </IonSelect>
-          </IonItem>
+            <IonItem>
+              <IonLabel position="stacked">Meal Type</IonLabel>
+              <Controller
+                control={control}
+                name="type"
+                rules={{ required: true }}
+                defaultValue="unset"
+                render={({ onChange, value, ref }) => (
+                  <IonSelect
+                    value={value}
+                    placeholder="Select One"
+                    onIonChange={(e) => onChange(e.detail.value)}
+                    ref={ref}
+                    defaultValue="lunch"
+                  >
+                    <IonSelectOption value="breakfast">
+                      breakfast
+                    </IonSelectOption>
+                    <IonSelectOption value="lunch">lunch</IonSelectOption>
+                    <IonSelectOption value="dinner">dinner</IonSelectOption>
+                    <IonSelectOption value="snack">snack</IonSelectOption>
+                    <IonSelectOption value="desert">desert</IonSelectOption>
+                  </IonSelect>
+                )}
+              />
+            </IonItem>
 
-          <IonItem>
-            <IonLabel position="stacked">Total Time</IonLabel>
-            <IonInput type="number" placeholder="minutes" defaultValue={1} />
-          </IonItem>
-          <IonItem>
-            <IonLabel position="stacked">Servings</IonLabel>
-            <IonInput type="number" />
-          </IonItem>
-          <IonItem>
-            <IonLabel position="stacked">Cuisine</IonLabel>
-            <IonInput type="text" placeholder="Select Cuisine" />
-          </IonItem>
-        </IonList>
+            <IonItem>
+              <IonLabel position="stacked">Total Time</IonLabel>
+              <Controller
+                name="time"
+                control={control}
+                defaultValue={0}
+                render={({ onChange, ref }) => (
+                  <IonInput
+                    type="number"
+                    placeholder="minutes"
+                    ref={ref}
+                    onIonChange={(e) => onChange(e.detail.value)}
+                  />
+                )}
+              />
+            </IonItem>
+            <IonItem>
+              <IonLabel position="stacked">Servings</IonLabel>
+
+              <Controller
+                name="serving"
+                control={control}
+                defaultValue={0}
+                render={({ onChange, ref }) => (
+                  <IonInput
+                    type="number"
+                    placeholder="servings"
+                    ref={ref}
+                    onIonChange={(e) => onChange(e.detail.value)}
+                  />
+                )}
+              />
+            </IonItem>
+            <IonItem>
+              <IonLabel position="stacked">Cuisine</IonLabel>
+
+              <Controller
+                name="serving"
+                control={control}
+                defaultValue={0}
+                render={({ onChange, ref }) => (
+                  <IonInput
+                    type="text"
+                    placeholder="Select Cuisine"
+                    ref={ref}
+                    onIonChange={(e) => onChange(e.detail.value)}
+                  />
+                )}
+              />
+            </IonItem>
+          </IonList>
+        </form>
 
         <div className="ion-margin-vertical" />
 
@@ -132,7 +193,11 @@ export default function AddRecipe() {
 
       <IonFooter>
         {/* <IonToolbar> */}
-        <IonButton className="ion-margin-horizontal" expand="full">
+        <IonButton
+          onClick={() => handleSubmit(onSubmit)()}
+          className="ion-margin-horizontal"
+          expand="full"
+        >
           Save Recipe
         </IonButton>
         {/* </IonToolbar> */}
@@ -144,3 +209,18 @@ export default function AddRecipe() {
 const StyledIngredientList = styled(IonList)`
   padding: 8px;
 `;
+
+function Header() {
+  return (
+    <IonHeader>
+      <IonToolbar>
+        <IonButtons slot="start">
+          <IonButton>
+            <IonIcon name="close" />
+          </IonButton>
+        </IonButtons>
+        <IonTitle>Create Recipe</IonTitle>
+      </IonToolbar>
+    </IonHeader>
+  );
+}
