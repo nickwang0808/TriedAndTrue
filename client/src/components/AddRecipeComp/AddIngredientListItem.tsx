@@ -8,6 +8,7 @@ interface IProps {
   onChange: (...event: any[]) => void;
   inputRef: React.MutableRefObject<any>;
   value: any;
+  remove: () => void;
 }
 
 export default function AddIngredientListItem({
@@ -15,6 +16,7 @@ export default function AddIngredientListItem({
   onChange,
   value,
   inputRef,
+  remove,
 }: IProps) {
   return (
     <StyledWrapper showBackground={showBackground}>
@@ -23,7 +25,7 @@ export default function AddIngredientListItem({
         onIonChange={(e) => onChange(e.detail.value)}
         ref={inputRef}
       />
-      <IonIcon icon={trash} size="small" slot="end" />
+      <IonIcon onClick={remove} icon={trash} size="small" slot="end" />
     </StyledWrapper>
   );
 }

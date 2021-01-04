@@ -15,7 +15,7 @@ interface IIngredient {
 }
 
 export default function AddDirections({ control }: IProps) {
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: "directions",
   });
@@ -37,6 +37,7 @@ export default function AddDirections({ control }: IProps) {
           defaultValue={field.value}
           render={({ ref, value, onChange }) => (
             <AddDirectionListItem
+              remove={remove}
               onChange={onChange}
               inputRef={ref}
               value={value}
@@ -61,7 +62,7 @@ export default function AddDirections({ control }: IProps) {
         }}
       />
       <IonButton fill="outline" onClick={handleAppendIngredient}>
-        Add Ingredient
+        Add Direction
       </IonButton>
     </StyledIngredientList>
   );

@@ -15,7 +15,7 @@ interface IIngredient {
 }
 
 export default function AddIngredients({ control }: IProps) {
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: "ingredients",
   });
@@ -40,6 +40,7 @@ export default function AddIngredients({ control }: IProps) {
               onChange={onChange}
               inputRef={ref}
               value={value}
+              remove={remove}
               showBackground={index % 2 === 0 ? true : false}
             />
           )}

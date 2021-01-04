@@ -9,6 +9,7 @@ interface IProps {
   inputRef: React.MutableRefObject<any>;
   value: any;
   index: number;
+  remove: () => void;
 }
 
 export default function AddDirectionListItem({
@@ -17,6 +18,7 @@ export default function AddDirectionListItem({
   value,
   inputRef,
   index,
+  remove,
 }: IProps) {
   return (
     <StyledWrapper showBackground={showBackground}>
@@ -30,7 +32,7 @@ export default function AddDirectionListItem({
         mode="ios"
       />
 
-      <IonIcon size="small" slot="end" src={trash} />
+      <IonIcon onClick={remove} size="small" slot="end" src={trash} />
     </StyledWrapper>
   );
 }
