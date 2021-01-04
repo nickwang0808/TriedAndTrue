@@ -56,12 +56,12 @@ export default function AddRecipe() {
       <IonContent fullscreen>
         <IonList>
           <IonItem>
-            <StyledStackLabel>Title</StyledStackLabel>
+            <IonLabel position="stacked">Title</IonLabel>
             <IonInput placeholder="Recipe Title" />
           </IonItem>
 
           <IonItem>
-            <StyledStackLabel>Meal Type</StyledStackLabel>
+            <IonLabel position="stacked">Meal Type</IonLabel>
             <IonSelect
               /* value={gender} */ placeholder="Select One"
               // onIonChange={(e) => setGender(e.detail.value)}
@@ -75,15 +75,15 @@ export default function AddRecipe() {
           </IonItem>
 
           <IonItem>
-            <StyledStackLabel>Total Time</StyledStackLabel>
+            <IonLabel position="stacked">Total Time</IonLabel>
             <IonInput type="number" placeholder="minutes" defaultValue={1} />
           </IonItem>
           <IonItem>
-            <StyledStackLabel>Servings</StyledStackLabel>
+            <IonLabel position="stacked">Servings</IonLabel>
             <IonInput type="number" />
           </IonItem>
           <IonItem>
-            <StyledStackLabel>Cuisine</StyledStackLabel>
+            <IonLabel position="stacked">Cuisine</IonLabel>
             <IonInput type="text" placeholder="Select Cuisine" />
           </IonItem>
         </IonList>
@@ -92,7 +92,7 @@ export default function AddRecipe() {
 
         <BlockSeparator title="Ingredients" />
 
-        <StyledIngredientList>
+        <StyledIngredientList lines="none">
           <IngredientListItem
             materialText="beef"
             quantityText="1 1/2 lbs"
@@ -108,7 +108,7 @@ export default function AddRecipe() {
           <IonButton fill="outline">Add Ingredient</IonButton>
         </StyledIngredientList>
         <BlockSeparator title="Directions" />
-        <StyledIngredientList>
+        <StyledIngredientList lines="none">
           <DirectionsListItem
             content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quibusdam autem sapiente delectus culpa unde quas nulla consequatur enim. At accusantium velit similique optio a temporibus, nobis et! Placeat, eaque!"
             index={1}
@@ -140,17 +140,6 @@ export default function AddRecipe() {
     </IonPage>
   );
 }
-
-// const StyledStackLabel = styled(IonLabel).attrs({
-//   position: "stacked",
-// })``;
-
-// const StyledIngredientList = styled(IonList).attrs({
-//   lines: "none",
-// })`
-//   padding: 8px;
-// `;
-const StyledStackLabel = styled(IonLabel)``;
 
 const StyledIngredientList = styled(IonList)`
   padding: 8px;

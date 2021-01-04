@@ -26,6 +26,7 @@ import { ellipse, square, triangle } from "ionicons/icons";
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import client from "./config/apoloConfig";
+import AddRecipe from "./pages/addRecipe/AddRecipe";
 import AuthChecker from "./pages/auth/AuthChecker";
 import RecipeDetailsPage from "./pages/recipeDetails/RecipeDetailsPage";
 import RecipePage from "./pages/recipes/RecipePage";
@@ -43,7 +44,7 @@ const App: React.FC = () => (
             <IonRouterOutlet>
               <Route path="/tab1" component={RecipePage} exact={true} />
               <Route path="/tab2" component={RecipeDetailsPage} exact={true} />
-              <Route path="/tab3" component={Tab3} />
+              <Route path="/tab3" component={AddRecipe} />
               <Route path="/recipe" component={Tab3} />
               <Route
                 path="/"

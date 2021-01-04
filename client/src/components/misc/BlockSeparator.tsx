@@ -20,7 +20,7 @@ const StyledDiv = styled.div`
   width: 100vw;
   background-color: rgba(227, 236, 240, 0.5);
 
-  padding: 0 16px
+  padding: 0 16px;
 
   display: flex;
   align-items: center;

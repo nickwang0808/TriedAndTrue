@@ -66,6 +66,7 @@ export default function RecipeDetailsPage() {
         <CookTime />
 
         <IonSegment
+          value={showDirections ? "directions" : "ingredients"}
           onIonChange={(e) =>
             setShowDirections(e.detail.value === "ingredients" ? false : true)
           }
