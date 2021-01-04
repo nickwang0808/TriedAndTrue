@@ -12,7 +12,6 @@ import {
 } from "@ionic/react";
 import { add } from "ionicons/icons";
 import React from "react";
-import RecipeCard from "../../components/card/RecipeCard";
 
 export default function RecipePage() {
   return (
@@ -30,13 +29,14 @@ export default function RecipePage() {
       </IonHeader>
 
       <IonContent fullscreen>
-        <StyledGrid>
+        <NoRecipe />
+        {/* <StyledGrid>
           <RecipeCard />
           <RecipeCard />
           <RecipeCard />
           <RecipeCard />
           <RecipeCard />
-        </StyledGrid>
+        </StyledGrid> */}
       </IonContent>
     </IonPage>
   );
@@ -48,4 +48,22 @@ const StyledGrid = styled.div`
   gap: 8px;
 
   padding: 8px;
+`;
+
+function NoRecipe() {
+  return (
+    <StyledWrapper>
+      <p className="ion-text-center">
+        Automatically import your favorite recipe or manually add one below.
+      </p>
+      <IonButton>Import from Website</IonButton>
+      <IonButton fill="outline">Manually Add</IonButton>
+    </StyledWrapper>
+  );
+}
+
+const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;

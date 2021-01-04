@@ -1,3 +1,17 @@
 :root {
   --ion-font-family: Sura;
+  --ion-tab-bar-background: #2a5077;
+  /* --ion-tab-bar-color-selected: white; */
 }
+
+ion-tab-button {
+  --color-selected: yellow;
+  --color: black;
+  /* font-size: 1.8rem;
+  font-weight: 600; */
+  /* --ripple-color: var(--highlight); */
+}
+/* 
+ion-icon {
+  color: red;
+} */
