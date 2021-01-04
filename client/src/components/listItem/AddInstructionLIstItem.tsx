@@ -13,6 +13,7 @@ export default function AddInstructionLIstItem({ index }: IProps) {
       <IonTextarea
         placeholder="Add recipe instructions here..."
         autoGrow
+        mode="ios"
         rows={4}
       ></IonTextarea>
     </StyledWrapper>

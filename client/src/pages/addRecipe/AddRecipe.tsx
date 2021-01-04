@@ -19,9 +19,8 @@ import {
 } from "@ionic/react";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import AddInstructionLIstItem from "../../components/listItem/AddInstructionLIstItem";
-import DirectionsListItem from "../../components/listItem/DirectionsListItem";
-import IngredientListItem from "../../components/listItem/IngredientListItem";
+import AddDirections from "../../components/AddRecipeComp/AddDirections";
+import AddIngredients from "../../components/AddRecipeComp/AddIngredients";
 import BlockSeparator from "../../components/misc/BlockSeparator";
 import {
   AddRecipeMutation,
@@ -42,6 +41,7 @@ export default function AddRecipe() {
   // };
 
   const { register, formState, handleSubmit, watch, control } = useForm();
+
   const onSubmit = (data: any) => console.log({ data, formState });
 
   console.log(watch());
@@ -112,6 +112,7 @@ export default function AddRecipe() {
                 )}
               />
             </IonItem>
+
             <IonItem>
               <IonLabel position="stacked">Servings</IonLabel>
 
@@ -129,6 +130,7 @@ export default function AddRecipe() {
                 )}
               />
             </IonItem>
+
             <IonItem>
               <IonLabel position="stacked">Cuisine</IonLabel>
 
@@ -153,42 +155,10 @@ export default function AddRecipe() {
 
         <BlockSeparator title="Ingredients" />
 
-        <StyledIngredientList lines="none">
-          <IngredientListItem
-            materialText="beef"
-            quantityText="1 1/2 lbs"
-            showBackground
-          />
-          <IngredientListItem materialText="beef" quantityText="1 1/2 lbs" />
-          <IngredientListItem
-            materialText="beef"
-            quantityText="1 1/2 lbs"
-            showBackground
-          />
-          <IngredientListItem materialText="beef" quantityText="1 1/2 lbs" />
-          <IonButton fill="outline">Add Ingredient</IonButton>
-        </StyledIngredientList>
-        <BlockSeparator title="Directions" />
-        <StyledIngredientList lines="none">
-          <DirectionsListItem
-            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quibusdam autem sapiente delectus culpa unde quas nulla consequatur enim. At accusantium velit similique optio a temporibus, nobis et! Placeat, eaque!"
-            index={1}
-            showBackground
-          />
-          <DirectionsListItem
-            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quibusdam autem sapiente delectus culpa unde quas nulla consequatur enim. At accusantium velit similique optio a temporibus, nobis et! Placeat, eaque!"
-            index={2}
-            // showBackground
-          />
-          <DirectionsListItem
-            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quibusdam autem sapiente delectus culpa unde quas nulla consequatur enim. At accusantium velit similique optio a temporibus, nobis et! Placeat, eaque!"
-            index={3}
-            showBackground
-          />
-          <AddInstructionLIstItem index={4} />
+        <AddIngredients control={control} />
 
-          <IonButton fill="outline">Add Instructions</IonButton>
-        </StyledIngredientList>
+        <BlockSeparator title="Directions" />
+        <AddDirections control={control} />
       </IonContent>
 
       <IonFooter>

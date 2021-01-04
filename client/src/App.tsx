@@ -27,7 +27,6 @@ import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import client from "./config/apoloConfig";
 import AddRecipe from "./pages/addRecipe/AddRecipe";
-import AuthChecker from "./pages/auth/AuthChecker";
 import RecipeDetailsPage from "./pages/recipeDetails/RecipeDetailsPage";
 import RecipePage from "./pages/recipes/RecipePage";
 import Tab3 from "./pages/Tab3";
@@ -37,39 +36,39 @@ import "./theme/variables.css";
 
 const App: React.FC = () => (
   <ApolloProvider client={client}>
-    <AuthChecker>
-      <IonApp>
-        <IonReactRouter>
-          <IonTabs>
-            <IonRouterOutlet>
-              <Route path="/tab1" component={RecipePage} exact={true} />
-              <Route path="/tab2" component={RecipeDetailsPage} exact={true} />
-              <Route path="/tab3" component={AddRecipe} />
-              <Route path="/recipe" component={Tab3} />
-              <Route
-                path="/"
-                render={() => <Redirect to="/tab1" />}
-                exact={true}
-              />
-            </IonRouterOutlet>
-            <IonTabBar slot="bottom">
-              <IonTabButton tab="tab1" href="/tab1">
-                <IonIcon icon={triangle} />
-                <IonLabel>Tab 1</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="tab2" href="/tab2">
-                <IonIcon icon={ellipse} />
-                <IonLabel>Tab 2</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="tab3" href="/tab3">
-                <IonIcon icon={square} />
-                <IonLabel>Tab 3</IonLabel>
-              </IonTabButton>
-            </IonTabBar>
-          </IonTabs>
-        </IonReactRouter>
-      </IonApp>
-    </AuthChecker>
+    {/* <AuthChecker> */}
+    <IonApp>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route path="/tab1" component={RecipePage} exact={true} />
+            <Route path="/tab2" component={RecipeDetailsPage} exact={true} />
+            <Route path="/tab3" component={AddRecipe} />
+            <Route path="/recipe" component={Tab3} />
+            <Route
+              path="/"
+              render={() => <Redirect to="/tab1" />}
+              exact={true}
+            />
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="tab1" href="/tab1">
+              <IonIcon icon={triangle} />
+              <IonLabel>Tab 1</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="tab2" href="/tab2">
+              <IonIcon icon={ellipse} />
+              <IonLabel>Tab 2</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="tab3" href="/tab3">
+              <IonIcon icon={square} />
+              <IonLabel>Tab 3</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+    {/* </AuthChecker> */}
   </ApolloProvider>
 );
 
