@@ -1,5 +1,6 @@
 import { IonContent, IonPage } from "@ionic/react";
 import React from "react";
+import BlockSeparator from "../../components/misc/BlockSeparator";
 import Header from "./Header";
 
 export default function MealPlannerMainPage() {
@@ -7,7 +8,9 @@ export default function MealPlannerMainPage() {
     <>
       <IonPage>
         <Header />
-        <IonContent></IonContent>
+        <IonContent>
+          <BlockSeparator title="Monday" subTitle="(23rd)" />
+        </IonContent>
       </IonPage>
     </>
   );
