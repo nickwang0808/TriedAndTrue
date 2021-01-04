@@ -31,9 +31,9 @@ import profileIcon from "./assets/svg/profileIcon.svg";
 import recipeIcon from "./assets/svg/recipeIcon.svg";
 import client from "./config/apoloConfig";
 import AddRecipe from "./pages/addRecipe/AddRecipe";
+import MealPlannerMainPage from "./pages/mealPlanner/MealPlannerMainPage";
 import RecipeDetailsPage from "./pages/recipeDetails/RecipeDetailsPage";
 import RecipePage from "./pages/recipes/RecipePage";
-import Tab3 from "./pages/Tab3";
 import "./style.css";
 /* Theme variables */
 import "./theme/variables.css";
@@ -58,7 +58,7 @@ const App: React.FC = () => {
                 exact={true}
               />
               <Route path="/lists" component={AddRecipe} />
-              <Route path="/profile" component={Tab3} />
+              <Route path="/profile" component={MealPlannerMainPage} />
               <Route
                 path="/"
                 render={() => <Redirect to="/tab1" />}
