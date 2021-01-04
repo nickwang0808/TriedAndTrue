@@ -1,5 +1,5 @@
+import styled from "@emotion/styled";
 import React from "react";
-import styled from "styled-components";
 
 interface IProps {
   title?: string;
@@ -15,12 +15,12 @@ export default function BlockSeparator({ subTitle, title }: IProps) {
   );
 }
 
-const StyledDiv = styled.div.attrs({
-  className: "ion-padding-horizontal",
-})`
+const StyledDiv = styled.div`
   height: 3rem;
   width: 100vw;
   background-color: rgba(227, 236, 240, 0.5);
+
+  padding: 0 16px
 
   display: flex;
   align-items: center;

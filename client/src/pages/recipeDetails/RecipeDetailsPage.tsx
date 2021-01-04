@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import {
   IonContent,
   IonLabel,
@@ -7,7 +8,6 @@ import {
   IonSegmentButton,
 } from "@ionic/react";
 import React, { useState } from "react";
-import styled from "styled-components";
 import CookTime from "../../components/detailsPageComp/CookTime";
 import DetailsPageTitle from "../../components/detailsPageComp/DetailsPageTitle";
 import DirectionsListItem from "../../components/listItem/DirectionsListItem";
@@ -78,7 +78,7 @@ export default function RecipeDetailsPage() {
           </IonSegmentButton>
         </IonSegment>
 
-        <StyledIngredientList>
+        <StyledIngredientList lines="none">
           {showDirections ? directions : ingredients}
         </StyledIngredientList>
       </IonContent>
@@ -86,8 +86,6 @@ export default function RecipeDetailsPage() {
   );
 }
 
-const StyledIngredientList = styled(IonList).attrs({
-  lines: "none",
-})`
+const StyledIngredientList = styled(IonList)`
   padding: 8px;
 `;

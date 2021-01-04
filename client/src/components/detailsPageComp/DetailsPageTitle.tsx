@@ -1,6 +1,6 @@
+import styled from "@emotion/styled";
 import { IonIcon } from "@ionic/react";
 import React from "react";
-import styled from "styled-components";
 import calendar from "../../assets/svg/calendar.svg";
 import pencil from "../../assets/svg/pencil.svg";
 

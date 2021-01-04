@@ -1,8 +1,8 @@
 import { useQuery } from "@apollo/client";
+import styled from "@emotion/styled";
 import { IonButton } from "@ionic/react";
 import firebase from "firebase/app";
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { auth, cloudFn } from "../../config/firebaseConfig";
 import {
   GetProfileQuery,

@@ -1,6 +1,6 @@
+import styled from "@emotion/styled";
 import { IonItem } from "@ionic/react";
 import React from "react";
-import styled from "styled-components";
 
 interface IProps {
   quantityText: string;

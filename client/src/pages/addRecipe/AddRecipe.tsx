@@ -1,4 +1,5 @@
 import { useMutation } from "@apollo/client";
+import styled from "@emotion/styled";
 import {
   IonButton,
   IonButtons,
@@ -17,7 +18,6 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React from "react";
-import styled from "styled-components";
 import AddInstructionLIstItem from "../../components/listItem/AddInstructionLIstItem";
 import DirectionsListItem from "../../components/listItem/DirectionsListItem";
 import IngredientListItem from "../../components/listItem/IngredientListItem";
@@ -141,12 +141,17 @@ export default function AddRecipe() {
   );
 }
 
-const StyledStackLabel = styled(IonLabel).attrs({
-  position: "stacked",
-})``;
+// const StyledStackLabel = styled(IonLabel).attrs({
+//   position: "stacked",
+// })``;
 
-const StyledIngredientList = styled(IonList).attrs({
-  lines: "none",
-})`
+// const StyledIngredientList = styled(IonList).attrs({
+//   lines: "none",
+// })`
+//   padding: 8px;
+// `;
+const StyledStackLabel = styled(IonLabel)``;
+
+const StyledIngredientList = styled(IonList)`
   padding: 8px;
 `;

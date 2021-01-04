@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import {
   IonButton,
   IonButtons,
@@ -11,7 +12,6 @@ import {
 } from "@ionic/react";
 import { add } from "ionicons/icons";
 import React from "react";
-import styled from "styled-components";
 import RecipeCard from "../../components/card/RecipeCard";
 
 export default function RecipePage() {

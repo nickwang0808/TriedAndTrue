@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import {
   IonCard,
   IonCardHeader,
@@ -6,7 +7,6 @@ import {
   IonIcon,
 } from "@ionic/react";
 import React from "react";
-import styled from "styled-components";
 import cookTimeCLock from "../../assets/svg/cookTimeClock.svg";
 
 export default function RecipeCard() {

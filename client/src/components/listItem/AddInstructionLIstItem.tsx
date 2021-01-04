@@ -1,6 +1,6 @@
+import styled from "@emotion/styled";
 import { IonItem, IonTextarea } from "@ionic/react";
 import React from "react";
-import styled from "styled-components/macro";
 
 interface IProps {
   index: number;
@@ -9,7 +9,7 @@ interface IProps {
 export default function AddInstructionLIstItem({ index }: IProps) {
   return (
     <StyledWrapper>
-      <StyledIndexBox>{index}</StyledIndexBox>
+      <StyledIndexBox slot="start">{index}</StyledIndexBox>
       <IonTextarea
         placeholder="Add recipe instructions here..."
         autoGrow
@@ -31,7 +31,7 @@ const StyledWrapper = styled(IonItem)`
   }
 `;
 
-const StyledIndexBox = styled.div.attrs({ slot: "start" })`
+const StyledIndexBox = styled.div`
   height: 24px;
   width: 24px;
   display: flex;
