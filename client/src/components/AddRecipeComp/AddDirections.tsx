@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
-import { IonButton, IonList, IonTextarea } from "@ionic/react";
+import { IonButton, IonItem, IonList, IonTextarea } from "@ionic/react";
 import React, { useState } from "react";
 import { Control, Controller, useFieldArray } from "react-hook-form";
-import AddDirectionListItem from "./AddDirectionListItem";
+import AddDirectionListItem, { StyledIndexBox } from "./AddDirectionListItem";
 
 interface IProps {
   control: Control<Record<string, any>>;
@@ -47,20 +47,23 @@ export default function AddDirections({ control }: IProps) {
           )}
         />
       ))}
+      <StyledIonItem>
+        <StyledIndexBox slot="start">{fields.length + 1}</StyledIndexBox>
 
-      <IonTextarea
-        value={directionRawText}
-        placeholder="add directions"
-        onIonChange={(e) =>
-          e.detail.value && setDirectionRawText(e.detail.value)
-        }
-        onKeyPress={(e) => {
-          if (e.key === "Enter") {
-            console.log(e.key);
-            handleAppendIngredient();
+        <IonTextarea
+          value={directionRawText}
+          placeholder="Add Step"
+          onIonChange={(e) =>
+            e.detail.value && setDirectionRawText(e.detail.value)
           }
-        }}
-      />
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              console.log(e.key);
+              handleAppendIngredient();
+            }
+          }}
+        />
+      </StyledIonItem>
       <IonButton
         fill="outline"
         color="secondary"
@@ -74,4 +77,15 @@ export default function AddDirections({ control }: IProps) {
 
 const StyledIngredientList = styled(IonList)`
   padding: 8px;
+`;
+
+const StyledIonItem = styled(IonItem)`
+  margin-left: -8px;
+
+  & ion-textarea {
+    margin-top: 8px;
+    --padding-start: 8px !important; // specificity problem
+    --padding-end: 8px !important;
+    border: 1px solid var(--ion-color-primary);
+  }
 `;

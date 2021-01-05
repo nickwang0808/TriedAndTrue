@@ -51,7 +51,7 @@ const StyledWrapper = styled(IonItem)<{ showBackground: boolean }>`
   }
 `;
 
-const StyledIndexBox = styled.div`
+export const StyledIndexBox = styled.div`
   height: 24px;
   width: 24px;
   display: flex;
