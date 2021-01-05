@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { IonContent, IonPage } from "@ionic/react";
 import React from "react";
+import AddCardOutLined from "../../components/card/AddCardOutLined";
 import RecipeCardSmall from "../../components/card/RecipeCardSmall";
 import BlockSeparator from "../../components/misc/BlockSeparator";
 import Header from "./Header";
@@ -18,7 +19,10 @@ export default function MealPlannerMainPage() {
                 <RecipeCardSmall />
                 <RecipeCardSmall />
                 <RecipeCardSmall />
-                {/* <AddCardOutLined /> */}
+                <RecipeCardSmall />
+                <RecipeCardSmall />
+                {/* <RecipeCardSmall /> */}
+                <AddCardOutLined />
               </StyledGrid>
             </>
           ))}
@@ -28,9 +32,14 @@ export default function MealPlannerMainPage() {
   );
 }
 const StyledGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   gap: 8px;
+  overflow-x: auto;
 
   padding: 8px;
+  // target all card and add button container in the flex box
+  & > * {
+    width: 33%;
+    flex-shrink: 0; // ion card shrink by default
+  }
 `;
