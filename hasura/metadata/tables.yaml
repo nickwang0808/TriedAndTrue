@@ -5,46 +5,14 @@
   - name: user
     using:
       foreign_key_constraint_on: owner
-  insert_permissions:
-  - role: user
-    permission:
-      check: {}
-      set:
-        owner: x-hasura-User-Id
-      columns:
-      - img
-      - ingredients
-      - title
-      - total_time
-      - yields
-      backend_only: false
-  select_permissions:
-  - role: user
-    permission:
-      columns:
-      - total_time
-      - ingredients
-      - img
-      - owner
-      - title
-      - yields
-      - id
-      filter:
-        owner:
-          _eq: X-Hasura-User-Id
-  update_permissions:
-  - role: user
-    permission:
-      columns:
-      - img
-      - ingredients
-      - title
-      - total_time
-      - yields
-      filter:
-        owner:
-          _eq: X-Hasura-User-Id
-      check: null
+  array_relationships:
+  - name: ingredients_list
+    using:
+      foreign_key_constraint_on:
+        column: recipe_id
+        table:
+          schema: public
+          name: recipe_ingredients
   delete_permissions:
   - role: user
     permission:
@@ -53,9 +21,16 @@
           _eq: X-Hasura-User-Id
 - table:
     schema: public
+    name: recipe_ingredients
+  object_relationships:
+  - name: recipe
+    using:
+      foreign_key_constraint_on: recipe_id
+- table:
+    schema: public
     name: user
   array_relationships:
-  - name: recipes
+  - name: recipes_list
     using:
       foreign_key_constraint_on:
         column: owner
