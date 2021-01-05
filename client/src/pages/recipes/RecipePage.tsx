@@ -19,10 +19,10 @@ export default function RecipePage() {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>My Recipes</IonTitle>
+          <IonTitle color="primary">My Recipes</IonTitle>
           <IonButtons slot="end">
             <IonButton>
-              <IonIcon icon={add} />
+              <IonIcon icon={add} color="secondary" />
             </IonButton>
           </IonButtons>
         </IonToolbar>

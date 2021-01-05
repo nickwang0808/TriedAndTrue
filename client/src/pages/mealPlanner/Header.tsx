@@ -17,7 +17,7 @@ export default function Header() {
   return (
     <IonHeader>
       <IonToolbar>
-        <IonTitle>Weeekly Meal Plan</IonTitle>
+        <IonTitle color="primary">Weeekly Meal Plan</IonTitle>
         <IonButtons slot="end">
           <IonButton>
             <IonIcon icon={refresh} />

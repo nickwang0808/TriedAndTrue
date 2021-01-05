@@ -182,10 +182,10 @@ function Header() {
       <IonToolbar>
         <IonButtons slot="start">
           <IonButton>
-            <IonIcon name="close" />
+            <IonIcon name="close" color="secondary" />
           </IonButton>
         </IonButtons>
-        <IonTitle>Create Recipe</IonTitle>
+        <IonTitle color="primary">Create Recipe</IonTitle>
       </IonToolbar>
     </IonHeader>
   );
