@@ -17,7 +17,7 @@ interface IProps {
 export default function MainFormArea({ control }: IProps) {
   return (
     <StyledList lines="none">
-      <IonItem>
+      <IonItem style={{ width: "100%" }}>
         <IonLabel position="stacked">Title</IonLabel>
         <Controller
           control={control}
@@ -26,6 +26,7 @@ export default function MainFormArea({ control }: IProps) {
           defaultValue=""
           render={({ onChange, ref }) => (
             <IonInput
+              color="primary"
               placeholder="Recipe Title"
               onIonChange={(e) => onChange(e.detail.value)}
               ref={ref}
@@ -43,17 +44,28 @@ export default function MainFormArea({ control }: IProps) {
           defaultValue="unset"
           render={({ onChange, value, ref }) => (
             <IonSelect
+              color="primary"
               value={value}
               placeholder="Select One"
               onIonChange={(e) => onChange(e.detail.value)}
               ref={ref}
               defaultValue="lunch"
             >
-              <IonSelectOption value="breakfast">breakfast</IonSelectOption>
-              <IonSelectOption value="lunch">lunch</IonSelectOption>
-              <IonSelectOption value="dinner">dinner</IonSelectOption>
-              <IonSelectOption value="snack">snack</IonSelectOption>
-              <IonSelectOption value="desert">desert</IonSelectOption>
+              <IonSelectOption color="primary" value="breakfast">
+                breakfast
+              </IonSelectOption>
+              <IonSelectOption color="primary" value="lunch">
+                lunch
+              </IonSelectOption>
+              <IonSelectOption color="primary" value="dinner">
+                dinner
+              </IonSelectOption>
+              <IonSelectOption color="primary" value="snack">
+                snack
+              </IonSelectOption>
+              <IonSelectOption color="primary" value="desert">
+                desert
+              </IonSelectOption>
             </IonSelect>
           )}
         />
@@ -67,6 +79,7 @@ export default function MainFormArea({ control }: IProps) {
           defaultValue={0}
           render={({ onChange, ref }) => (
             <IonInput
+              color="primary"
               type="number"
               placeholder="minutes"
               ref={ref}
@@ -85,6 +98,7 @@ export default function MainFormArea({ control }: IProps) {
           defaultValue={0}
           render={({ onChange, ref }) => (
             <IonInput
+              color="primary"
               type="number"
               placeholder="servings"
               ref={ref}
@@ -103,6 +117,7 @@ export default function MainFormArea({ control }: IProps) {
           defaultValue={0}
           render={({ onChange, ref }) => (
             <IonInput
+              color="primary"
               type="text"
               placeholder="Select Cuisine"
               ref={ref}
@@ -116,11 +131,19 @@ export default function MainFormArea({ control }: IProps) {
 }
 
 const StyledList = styled(IonList)`
+  & ion-item {
+    width: calc(50% + 16px); // using inline style to over ride this on title
+  }
   & ion-select {
     margin-top: 8px;
     --padding-start: 8px;
     --padding-end: 8px;
     border: 1px solid var(--ion-color-primary);
+  }
+
+  & ion-select::part(text) {
+    // color of the selected text color
+    color: var(--ion-color-primary);
   }
 
   & ion-input {
