@@ -47,7 +47,7 @@ export default function AddRecipe() {
   const onSubmit = (data: IRecipeForm) => console.log({ data, formState });
 
   console.log(errors);
-  console.log(watch());
+  // console.log(watch());
 
   return (
     <IonPage>

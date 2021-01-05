@@ -35,6 +35,6 @@ export const recipeFormSchema = object().shape({
   servings: number(),
   cuisine: string(),
 
-  ingredients: array(string()),
-  directions: array(string()),
+  ingredients: array(object().shape({ value: string() })),
+  directions: array(object().shape({ value: string() })),
 });
