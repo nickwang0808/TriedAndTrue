@@ -88,4 +88,7 @@ const StyledIonItem = styled(IonItem)`
     --padding-end: 8px !important;
     border: 1px solid var(--ion-color-primary);
   }
+  & .item-has-focus {
+    border: 1px solid var(--ion-color-secondary);
+  }
 `;
