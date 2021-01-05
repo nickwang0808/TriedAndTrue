@@ -26,7 +26,7 @@ export default function RecipePage() {
             </IonButton>
           </IonButtons>
         </IonToolbar>
-        <IonSearchbar />
+        <StyledSearchBar />
       </IonHeader>
 
       <IonContent fullscreen>
@@ -45,4 +45,18 @@ const StyledGrid = styled.div`
   gap: 8px;
 
   padding: 8px;
+`;
+
+const StyledSearchBar = styled(IonSearchbar)`
+  --color: var(--ion-color-primary);
+  --icon-color: var(--ion-color-primary);
+  --box-shadow: none;
+
+  .searchbar-has-focus {
+    border: 1px solid var(--ion-color-primary);
+  }
+
+  & > div {
+    border: 1px solid var(--ion-color-primary);
+  }
 `;

@@ -4,15 +4,34 @@
   /* --ion-tab-bar-color-selected: white; */
 }
 
+p {
+  /* globally set p color */
+  color: var(--ion-color-primary);
+}
+
 ion-tab-button {
   --color-selected: yellow;
   --color: black;
 }
 
 ion-item {
+  /* disable md underline on focus */
   --highlight-background: none;
 }
 
 .header-md::after {
+  /* get rid of header under line shadow thingy */
   background-image: none;
+}
+
+/* style reset */
+ion-button {
+  --box-shadow: none;
+  --border-radius: 0;
+  text-transform: none;
+
+  height: 44px;
+
+  --padding-start: 24px;
+  --padding-end: 24px;
 }

@@ -40,7 +40,7 @@ import "./theme/variables.css";
 
 const App: React.FC = () => {
   setupConfig({
-    rippleEffect: false,
+    // rippleEffect: false,
     mode: "md",
   });
 

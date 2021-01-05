@@ -8,8 +8,10 @@ export default function NoRecipe() {
       <p className="ion-text-center">
         Automatically import your favorite recipe or manually add one below.
       </p>
-      <IonButton>Import from Website</IonButton>
-      <IonButton fill="outline">Manually Add</IonButton>
+      <IonButton color="secondary">Import from Website</IonButton>
+      <IonButton fill="outline" color="secondary">
+        Manually Add
+      </IonButton>
     </StyledWrapper>
   );
 }
