@@ -29,7 +29,7 @@ export default function AddDirectionListItem({
         value={value}
         ref={inputRef}
         onIonChange={(e) => onChange(e.detail.value)}
-        mode="ios"
+        // mode="ios"
       />
 
       <IonIcon onClick={remove} size="small" slot="end" src={trash} />
@@ -45,6 +45,12 @@ const StyledWrapper = styled(IonItem)<{ showBackground: boolean }>`
   --padding-bottom: 8px;
 
   align-items: unset;
+
+  --padding-top: 0;
+
+  & ion-textarea {
+    margin-top: 0; // ion textarea has a weird top margin
+  }
 
   & ion-icon {
     margin: 0;

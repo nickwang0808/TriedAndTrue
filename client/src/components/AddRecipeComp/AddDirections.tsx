@@ -83,7 +83,7 @@ const StyledIonItem = styled(IonItem)`
   margin-left: -8px;
 
   & ion-textarea {
-    margin-top: 8px;
+    margin-top: 0;
     --padding-start: 8px !important; // specificity problem
     --padding-end: 8px !important;
     border: 1px solid var(--ion-color-primary);
