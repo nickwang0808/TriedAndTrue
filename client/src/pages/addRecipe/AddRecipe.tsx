@@ -1,4 +1,5 @@
 import { useMutation } from "@apollo/client";
+import { yupResolver } from "@hookform/resolvers/yup";
 import {
   IonButton,
   IonButtons,
@@ -21,6 +22,7 @@ import {
   AddRecipeMutationVariables,
 } from "../../generated/graphql";
 import { ADD_RECIPE } from "../../gql/mutations/addRecipe.graphql";
+import { IRecipeForm, recipeFormSchema } from "../../utils/recipeSchema";
 
 export default function AddRecipe() {
   const [addRecipe] = useMutation<
@@ -34,10 +36,17 @@ export default function AddRecipe() {
   //   });
   // };
 
-  const { register, formState, handleSubmit, watch, control } = useForm();
+  const {
+    formState,
+    handleSubmit,
+    watch,
+    control,
+    errors,
+  } = useForm<IRecipeForm>({ resolver: yupResolver(recipeFormSchema) });
 
-  const onSubmit = (data: any) => console.log({ data, formState });
+  const onSubmit = (data: IRecipeForm) => console.log({ data, formState });
 
+  console.log(errors);
   console.log(watch());
 
   return (
