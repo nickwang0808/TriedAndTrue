@@ -27,6 +27,9 @@ export default function Header() {
           </IonButton>
         </IonButtons>
       </IonToolbar>
+
+      {/* <div style={{ height: 30, background: "white" }} /> */}
+
       <IonToolbar>
         <IonSegment scrollable value="heart" color="secondary">
           <IonSegmentButton value="home">

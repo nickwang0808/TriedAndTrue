@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { IonButton, IonInput, IonList } from "@ionic/react";
+import { IonButton, IonInput, IonItem, IonList } from "@ionic/react";
 import React, { useState } from "react";
 import { Control, Controller, useFieldArray } from "react-hook-form";
 import AddIngredientListItem from "./AddIngredientListItem";
@@ -46,22 +46,27 @@ export default function AddIngredients({ control }: IProps) {
           )}
         />
       ))}
-
-      <IonInput
-        value={ingredientRawText}
-        placeholder="add ingredient"
-        onIonChange={(e) =>
-          e.detail.value && setIngredientRawText(e.detail.value)
-        }
-        type="text"
-        onKeyPress={(e) => {
-          if (e.key === "Enter") {
-            console.log(e.key);
-            handleAppendIngredient();
+      <StyledIonItem>
+        <IonInput
+          value={ingredientRawText}
+          placeholder="Enter ingredient"
+          onIonChange={(e) =>
+            e.detail.value && setIngredientRawText(e.detail.value)
           }
-        }}
-      />
-      <IonButton fill="outline" onClick={handleAppendIngredient}>
+          type="text"
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              console.log(e.key);
+              handleAppendIngredient();
+            }
+          }}
+        />
+      </StyledIonItem>
+      <IonButton
+        fill="outline"
+        color="secondary"
+        onClick={handleAppendIngredient}
+      >
         Add Ingredient
       </IonButton>
     </StyledIngredientList>
@@ -70,4 +75,15 @@ export default function AddIngredients({ control }: IProps) {
 
 const StyledIngredientList = styled(IonList)`
   padding: 8px;
+`;
+
+const StyledIonItem = styled(IonItem)`
+  margin-left: -8px;
+
+  & ion-input {
+    margin-top: 8px;
+    --padding-start: 8px !important; // specificity problem
+    --padding-end: 8px !important;
+    border: 1px solid var(--ion-color-primary);
+  }
 `;

@@ -61,7 +61,11 @@ export default function AddDirections({ control }: IProps) {
           }
         }}
       />
-      <IonButton fill="outline" onClick={handleAppendIngredient}>
+      <IonButton
+        fill="outline"
+        color="secondary"
+        onClick={handleAppendIngredient}
+      >
         Add Direction
       </IonButton>
     </StyledIngredientList>

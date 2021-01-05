@@ -6,20 +6,15 @@ import {
   IonFooter,
   IonHeader,
   IonIcon,
-  IonInput,
-  IonItem,
-  IonLabel,
-  IonList,
   IonPage,
-  IonSelect,
-  IonSelectOption,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import React from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import AddDirections from "../../components/AddRecipeComp/AddDirections";
 import AddIngredients from "../../components/AddRecipeComp/AddIngredients";
+import MainFormArea from "../../components/AddRecipeComp/MainFormArea";
 import BlockSeparator from "../../components/misc/BlockSeparator";
 import {
   AddRecipeMutation,
@@ -51,126 +46,27 @@ export default function AddRecipe() {
 
       <IonContent fullscreen>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <IonList lines="none">
-            <IonItem>
-              <IonLabel position="stacked">Title</IonLabel>
-              <Controller
-                control={control}
-                name="title"
-                rules={{ required: true }}
-                defaultValue=""
-                render={({ onChange, ref }) => (
-                  <IonInput
-                    placeholder="Recipe Title"
-                    onIonChange={(e) => onChange(e.detail.value)}
-                    ref={ref}
-                  />
-                )}
-              />
-            </IonItem>
+          <MainFormArea control={control} />
 
-            <IonItem>
-              <IonLabel position="stacked">Meal Type</IonLabel>
-              <Controller
-                control={control}
-                name="type"
-                rules={{ required: true }}
-                defaultValue="unset"
-                render={({ onChange, value, ref }) => (
-                  <IonSelect
-                    value={value}
-                    placeholder="Select One"
-                    onIonChange={(e) => onChange(e.detail.value)}
-                    ref={ref}
-                    defaultValue="lunch"
-                  >
-                    <IonSelectOption value="breakfast">
-                      breakfast
-                    </IonSelectOption>
-                    <IonSelectOption value="lunch">lunch</IonSelectOption>
-                    <IonSelectOption value="dinner">dinner</IonSelectOption>
-                    <IonSelectOption value="snack">snack</IonSelectOption>
-                    <IonSelectOption value="desert">desert</IonSelectOption>
-                  </IonSelect>
-                )}
-              />
-            </IonItem>
+          <div className="ion-margin-vertical" />
 
-            <IonItem>
-              <IonLabel position="stacked">Total Time</IonLabel>
-              <Controller
-                name="time"
-                control={control}
-                defaultValue={0}
-                render={({ onChange, ref }) => (
-                  <IonInput
-                    type="number"
-                    placeholder="minutes"
-                    ref={ref}
-                    onIonChange={(e) => onChange(e.detail.value)}
-                  />
-                )}
-              />
-            </IonItem>
+          <BlockSeparator title="Ingredients" />
+          <AddIngredients control={control} />
 
-            <IonItem>
-              <IonLabel position="stacked">Servings</IonLabel>
-
-              <Controller
-                name="serving"
-                control={control}
-                defaultValue={0}
-                render={({ onChange, ref }) => (
-                  <IonInput
-                    type="number"
-                    placeholder="servings"
-                    ref={ref}
-                    onIonChange={(e) => onChange(e.detail.value)}
-                  />
-                )}
-              />
-            </IonItem>
-
-            <IonItem>
-              <IonLabel position="stacked">Cuisine</IonLabel>
-
-              <Controller
-                name="serving"
-                control={control}
-                defaultValue={0}
-                render={({ onChange, ref }) => (
-                  <IonInput
-                    type="text"
-                    placeholder="Select Cuisine"
-                    ref={ref}
-                    onIonChange={(e) => onChange(e.detail.value)}
-                  />
-                )}
-              />
-            </IonItem>
-          </IonList>
+          <BlockSeparator title="Directions" />
+          <AddDirections control={control} />
         </form>
-
-        <div className="ion-margin-vertical" />
-
-        <BlockSeparator title="Ingredients" />
-
-        <AddIngredients control={control} />
-
-        <BlockSeparator title="Directions" />
-        <AddDirections control={control} />
       </IonContent>
 
       <IonFooter>
-        {/* <IonToolbar> */}
         <IonButton
           onClick={() => handleSubmit(onSubmit)()}
           className="ion-margin-horizontal"
           expand="full"
+          color="secondary"
         >
           Save Recipe
         </IonButton>
-        {/* </IonToolbar> */}
       </IonFooter>
     </IonPage>
   );

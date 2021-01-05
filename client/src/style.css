@@ -7,11 +7,12 @@
 ion-tab-button {
   --color-selected: yellow;
   --color: black;
-  /* font-size: 1.8rem;
-  font-weight: 600; */
-  /* --ripple-color: var(--highlight); */
 }
-/* 
-ion-icon {
-  color: red;
-} */
+
+ion-item {
+  --highlight-background: none;
+}
+
+.header-md::after {
+  background-image: none;
+}
