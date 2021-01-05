@@ -8,11 +8,13 @@
 ### recipe
 
 - id
-- owner => user.id
+- owner -> user.id
 - title
 - img
 - total_time
 - yields
+- cuisine
+- type
 - ingredients []
 - created_at
 - ratings
