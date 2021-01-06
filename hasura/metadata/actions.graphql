@@ -1,7 +1,7 @@
-type Mutation {
+type Query {
   parseIngredients (
     ingredients: [String]
-  ): [ParsedIngredients]
+  ): [ParsedIngredients!]!
 }
 
 

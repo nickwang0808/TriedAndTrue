@@ -15,8 +15,7 @@ interface IProps {
 }
 
 export default function AuthChecker({ children }: IProps) {
-  const [token, setToken] = useState("");
-
+  const [isAuthed, setIsAuthed] = useState(false);
   const { loading, error, data } = useQuery<
     GetProfileQuery,
     GetProfileQueryVariables
@@ -35,9 +34,7 @@ export default function AuthChecker({ children }: IProps) {
     if (result.data) {
       const token = await auth.currentUser?.getIdToken(true);
       console.log(token);
-      if (token) {
-        setToken(token);
-      }
+      localStorage.setItem("token", token || "");
     }
   };
 
@@ -49,25 +46,24 @@ export default function AuthChecker({ children }: IProps) {
         // update store
         const token = await auth.currentUser?.getIdToken(true);
         console.log(token);
-        if (token) {
-          setToken(token);
-        }
+        localStorage.setItem("token", token || "");
+        setIsAuthed(true);
       }
     });
   });
 
-  if (!auth.currentUser)
+  if (!isAuthed) {
     return (
       <StyledDiv>
         <IonButton size="large" onClick={handleGoogleSignIn}>
           Sign in with Google
         </IonButton>
-        <div>{token}</div>
         <IonButton size="large" color="warning" onClick={() => auth.signOut()}>
           Sign Out
         </IonButton>
       </StyledDiv>
     );
+  }
   return <>{children}</>;
 }
 

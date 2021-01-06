@@ -13,7 +13,7 @@ app.post("/ingredients", (req, res) => {
       parseIngredient(ingredient)
     );
 
-    // console.log(results);
+    console.log(results);
     res.json(results);
   } catch (err) {
     res.json(err);

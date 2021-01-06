@@ -1,9 +1,11 @@
 actions:
 - name: parseIngredients
   definition:
-    kind: synchronous
+    kind: ""
     handler: http://35.220.182.160:5001/ingredients
     forward_client_headers: true
+  permissions:
+  - role: user
 custom_types:
   enums: []
   input_objects:
