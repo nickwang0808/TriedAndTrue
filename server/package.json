@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "tsc && node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,6 +16,7 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
+    "ingredient-parser": "https://github.com/plate0/ingredient-parser#master",
     "express": "^4.17.1"
   }
 }
