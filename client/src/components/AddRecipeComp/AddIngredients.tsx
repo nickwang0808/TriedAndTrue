@@ -2,14 +2,7 @@ import styled from "@emotion/styled";
 import { IonButton, IonInput, IonItem, IonList } from "@ionic/react";
 import React, { useState } from "react";
 import { Control, Controller, useFieldArray } from "react-hook-form";
-import client from "../../config/apoloConfig";
-import {
-  ParseIngredientsQuery,
-  ParseIngredientsQueryResult,
-  ParseIngredientsQueryVariables,
-} from "../../generated/graphql";
-import { PARSE_Ingredients } from "../../gql/query/parseIngredients.graphql";
-import stringifyParsedIngredient from "../../utils/stringifyParsedIngredient";
+import parseIngredientAndStringify from "../../utils/stringifyParsedIngredient";
 import AddIngredientListItem from "./AddIngredientListItem";
 
 interface IProps {
@@ -27,20 +20,10 @@ export default function AddIngredients({ control }: IProps) {
   const handleAppendIngredient = async () => {
     if (!ingredientRawText.length) return;
 
-    const result = (await client.query<
-      ParseIngredientsQuery,
-      ParseIngredientsQueryVariables
-    >({
-      fetchPolicy: "no-cache",
-      query: PARSE_Ingredients,
-      variables: { ingredients: [ingredientRawText] },
-    })) as ParseIngredientsQueryResult;
-
-    if (result.data) {
-      console.log(result.data.parseIngredients[0]);
-      const parsdeStringIngredient = stringifyParsedIngredient(result.data);
-      append({ value: parsdeStringIngredient }, false);
-    }
+    const parsdeStringIngredient = parseIngredientAndStringify(
+      ingredientRawText
+    );
+    append({ value: parsdeStringIngredient }, false);
     setIngredientRawText("");
   };
 
