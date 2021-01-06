@@ -1,6 +1,13 @@
-actions: []
+actions:
+- name: parseIngredients
+  definition:
+    kind: synchronous
+    handler: http://35.220.182.160:5001/ingredients
+    forward_client_headers: true
 custom_types:
   enums: []
-  input_objects: []
-  objects: []
+  input_objects:
+  - name: Ingredients
+  objects:
+  - name: ParsedIngredients
   scalars: []

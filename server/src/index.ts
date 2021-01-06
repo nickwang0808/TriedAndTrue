@@ -7,14 +7,16 @@ const port = 5001;
 app.use(express.json());
 
 app.post("/ingredients", (req, res) => {
-  const ingredientRawText = req.body.ingredient as string[];
+  try {
+    const ingredientRawText = req.body.input.ingredients as string[];
+    const results = ingredientRawText.map((ingredient) =>
+      parseIngredient(ingredient)
+    );
 
-  const results = ingredientRawText.map((ingredient) =>
-    parseIngredient(ingredient)
-  );
-
-  console.log(results);
-
-  res.json(results);
+    // console.log(results);
+    res.json(results);
+  } catch (err) {
+    res.json(err);
+  }
 });
 app.listen(port, () => console.log(`server is listening on ${port}`));

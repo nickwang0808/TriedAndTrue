@@ -1,2 +1,22 @@
+type Mutation {
+  parseIngredients (
+    ingredients: [String]
+  ): [ParsedIngredients]
+}
 
+
+
+
+input Ingredients {
+  ingredients : [String]
+}
+
+type ParsedIngredients {
+  name : String
+  quantity_numerator : Int
+  quantity_denominator : Int
+  unit : String
+  preparation : String
+  optional : Boolean
+}
 
