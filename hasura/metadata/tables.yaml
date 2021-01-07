@@ -74,6 +74,19 @@
   - name: recipe
     using:
       foreign_key_constraint_on: recipe_id
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - name
+      - quantity_numerator
+      - quantity_denominator
+      - unit
+      - preparation
+      - optional
+      - recipe_id
+      filter: {}
 - table:
     schema: public
     name: user

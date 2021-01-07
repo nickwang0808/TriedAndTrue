@@ -14,12 +14,13 @@ import {
 } from "@ionic/react";
 import { add } from "ionicons/icons";
 import React, { useEffect } from "react";
+import { RouteComponentProps } from "react-router";
 import RecipeCard from "../../components/card/RecipeCard";
 import { GetAllRecipeQuery } from "../../generated/graphql";
 import { GET_ALL_RECIPES } from "../../gql/query/getAllRecipes";
 import NoRecipe from "./NoRecipe";
 
-export default function RecipePage() {
+const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
   const { error, loading, data, refetch } = useQuery<GetAllRecipeQuery>(
     GET_ALL_RECIPES
   );
@@ -52,15 +53,23 @@ export default function RecipePage() {
           <NoRecipe />
         ) : (
           <StyledGrid>
-            {data.recipe.map((props, i) => {
-              return <RecipeCard key={props.title + i} {...props} />;
+            {data.recipe.map((props) => {
+              return (
+                <RecipeCard
+                  key={props.id}
+                  {...props}
+                  onClick={() => history.push(`/recipe-details/${props.id}`)}
+                />
+              );
             })}
           </StyledGrid>
         )}
       </IonContent>
     </IonPage>
   );
-}
+};
+
+export default RecipePage;
 
 const StyledGrid = styled.div`
   display: grid;

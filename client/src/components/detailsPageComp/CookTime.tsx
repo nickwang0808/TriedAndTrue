@@ -1,21 +1,30 @@
 import styled from "@emotion/styled";
 import React from "react";
 
-export default function CookTime() {
+interface IProps {
+  total_time: number | null;
+  servings: string | null;
+}
+
+export default function CookTime({ total_time, servings }: IProps) {
   return (
     <StyledWrapper>
-      <StyledCol>
+      {/* <StyledCol>
         <div>45m</div>
         <div>Prep Time</div>
-      </StyledCol>
-      <StyledCol>
-        <div>1h 24min</div>
-        <div>Prep Time</div>
-      </StyledCol>
-      <StyledCol>
-        <div>6</div>
-        <div>Servings</div>
-      </StyledCol>
+      </StyledCol> */}
+      {total_time && (
+        <StyledCol>
+          <div>{total_time}</div>
+          <div>Total Time</div>
+        </StyledCol>
+      )}
+      {servings && (
+        <StyledCol>
+          <div>{servings}</div>
+          <div>Servings</div>
+        </StyledCol>
+      )}
     </StyledWrapper>
   );
 }

@@ -13,11 +13,17 @@ interface IProps {
   title: string;
   img?: string | null;
   total_time?: number | null;
+  onClick: () => void;
 }
 
-export default function RecipeCard({ img, title, total_time }: IProps) {
+export default function RecipeCard({
+  img,
+  title,
+  total_time,
+  onClick,
+}: IProps) {
   return (
-    <StyledCard mode="md">
+    <StyledCard onClick={onClick} mode="md">
       <StyledImg src="https://picsum.photos/200/300" />
       <StyledIonHeader mode="md">
         <IonCardTitle mode="md">{title}</IonCardTitle>

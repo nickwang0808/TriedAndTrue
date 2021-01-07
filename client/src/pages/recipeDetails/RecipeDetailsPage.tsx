@@ -1,3 +1,4 @@
+import { useLazyQuery } from "@apollo/client";
 import styled from "@emotion/styled";
 import {
   IonContent,
@@ -7,14 +8,37 @@ import {
   IonSegment,
   IonSegmentButton,
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
+import { RouteComponentProps } from "react-router";
 import CookTime from "../../components/detailsPageComp/CookTime";
 import DetailsPageTitle from "../../components/detailsPageComp/DetailsPageTitle";
 import DirectionsListItem from "../../components/listItem/DirectionsListItem";
 import IngredientListItem from "../../components/listItem/IngredientListItem";
+import {
+  GetRecipeDetailsQuery,
+  GetRecipeDetailsQueryVariables,
+} from "../../generated/graphql";
+import { GET_RECIPE_DETAILS } from "../../gql/query/getRecipeDetails";
+interface IProps
+  extends RouteComponentProps<{
+    id: string;
+  }> {}
 
-export default function RecipeDetailsPage() {
+const RecipeDetailsPage: React.FC<IProps> = ({ match }) => {
+  const [getRecipeDetails, { error, loading, data }] = useLazyQuery<
+    GetRecipeDetailsQuery,
+    GetRecipeDetailsQueryVariables
+  >(GET_RECIPE_DETAILS);
+
   const [showDirections, setShowDirections] = useState(false);
+
+  useLayoutEffect(() => {
+    console.log(match.params.id);
+    const { id } = match.params;
+    getRecipeDetails({
+      variables: { id },
+    });
+  }, [match.params.id]);
 
   const directions = [1, 2, 3, 4, 5].map((num) => (
     <DirectionsListItem
@@ -33,12 +57,21 @@ export default function RecipeDetailsPage() {
       showBackground={num % 2 === 0 ? true : false}
     />
   ));
+  if (loading || !data) return <p>loading...</p>;
+  if (error) return <p>{error.message}</p>;
+  if (!data.recipe_by_pk) return <p>404 recipe not found</p>;
   return (
     <IonPage>
       <IonContent>
-        <DetailsPageTitle />
+        <DetailsPageTitle
+          img={data.recipe_by_pk.img || null}
+          title={data.recipe_by_pk.title}
+        />
 
-        <CookTime />
+        <CookTime
+          total_time={data.recipe_by_pk.total_time || null}
+          servings={data.recipe_by_pk.yields || null}
+        />
 
         <IonSegment
           mode="md"
@@ -61,7 +94,8 @@ export default function RecipeDetailsPage() {
       </IonContent>
     </IonPage>
   );
-}
+};
+export default RecipeDetailsPage;
 
 const StyledIngredientList = styled(IonList)`
   padding: 8px;

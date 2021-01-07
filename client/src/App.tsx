@@ -60,6 +60,12 @@ const App: React.FC = () => {
                 />
                 <Route path="/lists" component={AddRecipe} />
                 <Route path="/profile" component={MealPlannerMainPage} />
+
+                <Route
+                  path="/recipe-details/:id"
+                  component={RecipeDetailsPage}
+                />
+
                 <Route
                   path="/"
                   render={() => <Redirect to="/tab1" />}

@@ -4,13 +4,18 @@ import React from "react";
 import calendar from "../../assets/svg/calendar.svg";
 import pencil from "../../assets/svg/pencil.svg";
 
-export default function DetailsPageTitle() {
+interface IProps {
+  img: string | null;
+  title: string;
+}
+
+export default function DetailsPageTitle({ title, img }: IProps) {
   return (
     <>
       <StyledImg src="https://picsum.photos/300/200" />
 
       <StyledTitleAndIconWrapper>
-        <StyledTitle>Hometown Grilled Hamburgers</StyledTitle>
+        <StyledTitle>{title}</StyledTitle>
         <StyledIconWrapper>
           <IonIcon size="large" icon={pencil} />
           <IonIcon size="large" icon={calendar} />
