@@ -36,12 +36,7 @@ export type Int_Comparison_Exp = {
 
 export type ParsedIngredients = {
   __typename?: 'ParsedIngredients';
-  name?: Maybe<Scalars['String']>;
-  optional?: Maybe<Scalars['Boolean']>;
-  preparation?: Maybe<Scalars['String']>;
-  quantity_denominator?: Maybe<Scalars['Int']>;
-  quantity_numerator?: Maybe<Scalars['Int']>;
-  unit?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
 };
 
 /** expression to compare columns of type String. All fields are combined with logical 'AND'. */
@@ -1371,7 +1366,7 @@ export type ParseIngredientsQuery = (
   { __typename?: 'query_root' }
   & { parseIngredients: Array<(
     { __typename?: 'ParsedIngredients' }
-    & Pick<ParsedIngredients, 'name' | 'optional' | 'preparation' | 'quantity_denominator' | 'quantity_numerator' | 'unit'>
+    & Pick<ParsedIngredients, 'name'>
   )> }
 );
 
@@ -1415,11 +1410,6 @@ export const ParseIngredientsDocument = gql`
     query ParseIngredients($ingredients: [String]) {
   parseIngredients(ingredients: $ingredients) {
     name
-    optional
-    preparation
-    quantity_denominator
-    quantity_numerator
-    unit
   }
 }
     `;

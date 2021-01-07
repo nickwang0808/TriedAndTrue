@@ -20,7 +20,7 @@ export default function AddIngredients({ control }: IProps) {
   const handleAppendIngredient = async () => {
     if (!ingredientRawText.length) return;
 
-    const parsdeStringIngredient = parseIngredientAndStringify(
+    const parsdeStringIngredient = await parseIngredientAndStringify(
       ingredientRawText
     );
     append({ value: parsdeStringIngredient }, false);
