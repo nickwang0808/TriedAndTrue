@@ -7,6 +7,7 @@ const mealTypeArray = [
   "snack",
   "desert",
   "uncategorized",
+  null,
 ];
 
 type mealType =
@@ -18,23 +19,23 @@ type mealType =
   | "uncategorized";
 
 export interface IRecipeForm {
-  title: string;
-  mealType: mealType;
-  totalTime: number;
-  servings: number;
-  cuisine: string;
+  title: string | null;
+  mealType: mealType | null;
+  totalTime: number | null;
+  servings: string | null;
+  cuisine: string | null;
 
-  ingredients: string[];
-  directions: string[];
+  ingredients: string[] | null;
+  directions: string[] | null;
 }
 
 export const recipeFormSchema = object().shape({
   title: string().required(),
-  mealType: mixed().oneOf(mealTypeArray as string[]),
-  totalTime: number(),
-  servings: number(),
-  cuisine: string(),
+  mealType: mixed().oneOf(mealTypeArray).nullable(),
+  totalTime: number().nullable(),
+  servings: string().nullable(),
+  cuisine: string().nullable(),
 
-  ingredients: array(object().shape({ value: string() })),
-  directions: array(object().shape({ value: string() })),
+  ingredients: array(object().shape({ value: string() })).nullable(),
+  directions: array(object().shape({ value: string() })).nullable(),
 });

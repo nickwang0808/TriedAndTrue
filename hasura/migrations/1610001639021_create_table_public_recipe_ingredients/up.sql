@@ -1,0 +1,1 @@
+CREATE TABLE "public"."recipe_ingredients"("id" uuid NOT NULL, "name" text NOT NULL, "quantity_numerator" integer, "quantity_denominator" integer, "unit" text, "preparation" text, "optional" boolean NOT NULL, "recipe_id" text NOT NULL, PRIMARY KEY ("id") , FOREIGN KEY ("recipe_id") REFERENCES "public"."recipe"("id") ON UPDATE restrict ON DELETE restrict, UNIQUE ("id"));

@@ -6,13 +6,61 @@
     using:
       foreign_key_constraint_on: owner
   array_relationships:
-  - name: ingredients_list
+  - name: recipe_ingredients_list
     using:
       foreign_key_constraint_on:
         column: recipe_id
         table:
           schema: public
           name: recipe_ingredients
+  insert_permissions:
+  - role: user
+    permission:
+      check:
+        owner:
+          _eq: X-Hasura-User-Id
+      set:
+        owner: x-hasura-User-Id
+      columns:
+      - cuisine
+      - directions
+      - img
+      - meal_type
+      - title
+      - total_time
+      - yields
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - title
+      - img
+      - total_time
+      - yields
+      - owner
+      - cuisine
+      - directions
+      - meal_type
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - cuisine
+      - directions
+      - img
+      - meal_type
+      - title
+      - total_time
+      - yields
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+      check: null
   delete_permissions:
   - role: user
     permission:

@@ -1,3 +1,4 @@
+import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   IonButton,
@@ -16,6 +17,11 @@ import AddDirections from "../../components/AddRecipeComp/AddDirections";
 import AddIngredients from "../../components/AddRecipeComp/AddIngredients";
 import MainFormArea from "../../components/AddRecipeComp/MainFormArea";
 import BlockSeparator from "../../components/misc/BlockSeparator";
+import {
+  InsertRecipeMutation,
+  InsertRecipeMutationVariables,
+} from "../../generated/graphql";
+import { INSERT_RECIPE_ONE } from "../../gql/mutations/insertRecipeOne.graphql";
 import { IRecipeForm, recipeFormSchema } from "../../utils/recipeSchema";
 
 export default function AddRecipe() {
@@ -25,13 +31,54 @@ export default function AddRecipe() {
     watch,
     control,
     errors,
-  } = useForm<IRecipeForm>({ resolver: yupResolver(recipeFormSchema) });
+  } = useForm<IRecipeForm>({
+    resolver: yupResolver(recipeFormSchema),
+    defaultValues: {
+      cuisine: null,
+      totalTime: null,
+      mealType: null,
+      servings: null,
+      title: null,
+    },
+  });
 
-  const onSubmit = (data: IRecipeForm) => console.log({ data, formState });
+  const [insertRecipeOne, { loading, data, error }] = useMutation<
+    InsertRecipeMutation,
+    InsertRecipeMutationVariables
+  >(INSERT_RECIPE_ONE);
+
+  const onSubmit = (data: IRecipeForm) => {
+    console.log({ data, formState });
+
+    const {
+      cuisine,
+      directions,
+      // ingredients,
+      mealType,
+      servings,
+      title,
+      totalTime,
+    } = data;
+
+    insertRecipeOne({
+      variables: {
+        objects: {
+          cuisine,
+          directions,
+          meal_type: mealType,
+          yields: servings,
+          title,
+          total_time: totalTime,
+        },
+      },
+    });
+  };
 
   console.log(errors);
   // console.log(watch());
 
+  if (loading) return <p>loading...</p>;
+  if (error) return <p>{error.message}</p>;
   return (
     <IonPage>
       <Header />
