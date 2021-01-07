@@ -9,15 +9,24 @@ import {
 import React from "react";
 import cookTimeCLock from "../../assets/svg/cookTimeClock.svg";
 
-export default function RecipeCard() {
+interface IProps {
+  title: string;
+  img?: string | null;
+  total_time?: number | null;
+}
+
+export default function RecipeCard({ img, title, total_time }: IProps) {
   return (
     <StyledCard mode="md">
       <StyledImg src="https://picsum.photos/200/300" />
       <StyledIonHeader mode="md">
-        <IonCardTitle mode="md">Hometown Grilled Hamburgers</IonCardTitle>
-        <IonCardSubtitle mode="md">
-          <IonIcon mode="md" icon={cookTimeCLock} /> 45min
-        </IonCardSubtitle>
+        <IonCardTitle mode="md">{title}</IonCardTitle>
+        {total_time && (
+          <IonCardSubtitle mode="md">
+            <IonIcon mode="md" icon={cookTimeCLock} />
+            {total_time}
+          </IonCardSubtitle>
+        )}
       </StyledIonHeader>
     </StyledCard>
   );

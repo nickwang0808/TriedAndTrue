@@ -1,3 +1,4 @@
+import { useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
 import {
   IonButton,
@@ -9,12 +10,29 @@ import {
   IonSearchbar,
   IonTitle,
   IonToolbar,
+  useIonViewWillEnter,
 } from "@ionic/react";
 import { add } from "ionicons/icons";
-import React from "react";
+import React, { useEffect } from "react";
+import RecipeCard from "../../components/card/RecipeCard";
+import { GetAllRecipeQuery } from "../../generated/graphql";
+import { GET_ALL_RECIPES } from "../../gql/query/getAllRecipes";
 import NoRecipe from "./NoRecipe";
 
 export default function RecipePage() {
+  const { error, loading, data, refetch } = useQuery<GetAllRecipeQuery>(
+    GET_ALL_RECIPES
+  );
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
+  // TODO: use update cache and get rid of this
+  useIonViewWillEnter(() => refetch());
+
+  if (loading) return <p>loading...</p>;
+  if (error) return <p>{error.message}</p>;
+
   return (
     <IonPage>
       <IonHeader>
@@ -26,14 +44,19 @@ export default function RecipePage() {
             </IonButton>
           </IonButtons>
         </IonToolbar>
-        <StyledSearchBar />
       </IonHeader>
 
       <IonContent fullscreen>
-        <NoRecipe />
-        {/* <StyledGrid>
-          <RecipeCard />
-        </StyledGrid> */}
+        <StyledSearchBar />
+        {!data?.recipe.length ? (
+          <NoRecipe />
+        ) : (
+          <StyledGrid>
+            {data.recipe.map((props, i) => {
+              return <RecipeCard key={props.title + i} {...props} />;
+            })}
+          </StyledGrid>
+        )}
       </IonContent>
     </IonPage>
   );

@@ -44,7 +44,7 @@
       - directions
       - meal_type
       filter:
-        id:
+        owner:
           _eq: X-Hasura-User-Id
   update_permissions:
   - role: user

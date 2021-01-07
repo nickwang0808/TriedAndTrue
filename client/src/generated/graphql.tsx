@@ -1437,6 +1437,17 @@ export type InsertRecipeMutation = (
   )> }
 );
 
+export type GetAllRecipeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllRecipeQuery = (
+  { __typename?: 'query_root' }
+  & { recipe: Array<(
+    { __typename?: 'recipe' }
+    & Pick<Recipe, 'img' | 'title' | 'total_time'>
+  )> }
+);
+
 export type GetProfileQueryVariables = Exact<{
   uid: Scalars['String'];
 }>;
@@ -1504,6 +1515,40 @@ export function useInsertRecipeMutation(baseOptions?: Apollo.MutationHookOptions
 export type InsertRecipeMutationHookResult = ReturnType<typeof useInsertRecipeMutation>;
 export type InsertRecipeMutationResult = Apollo.MutationResult<InsertRecipeMutation>;
 export type InsertRecipeMutationOptions = Apollo.BaseMutationOptions<InsertRecipeMutation, InsertRecipeMutationVariables>;
+export const GetAllRecipeDocument = gql`
+    query GetAllRecipe {
+  recipe {
+    img
+    title
+    total_time
+  }
+}
+    `;
+
+/**
+ * __useGetAllRecipeQuery__
+ *
+ * To run a query within a React component, call `useGetAllRecipeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllRecipeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllRecipeQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllRecipeQuery(baseOptions?: Apollo.QueryHookOptions<GetAllRecipeQuery, GetAllRecipeQueryVariables>) {
+        return Apollo.useQuery<GetAllRecipeQuery, GetAllRecipeQueryVariables>(GetAllRecipeDocument, baseOptions);
+      }
+export function useGetAllRecipeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllRecipeQuery, GetAllRecipeQueryVariables>) {
+          return Apollo.useLazyQuery<GetAllRecipeQuery, GetAllRecipeQueryVariables>(GetAllRecipeDocument, baseOptions);
+        }
+export type GetAllRecipeQueryHookResult = ReturnType<typeof useGetAllRecipeQuery>;
+export type GetAllRecipeLazyQueryHookResult = ReturnType<typeof useGetAllRecipeLazyQuery>;
+export type GetAllRecipeQueryResult = Apollo.QueryResult<GetAllRecipeQuery, GetAllRecipeQueryVariables>;
 export const GetProfileDocument = gql`
     query GetProfile($uid: String!) {
   user(where: {id: {_eq: $uid}}) {
