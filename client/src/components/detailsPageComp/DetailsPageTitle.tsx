@@ -1,15 +1,18 @@
 import styled from "@emotion/styled";
 import { IonIcon } from "@ionic/react";
 import React from "react";
+import { useHistory } from "react-router";
 import calendar from "../../assets/svg/calendar.svg";
 import pencil from "../../assets/svg/pencil.svg";
 
 interface IProps {
   img: string | null;
   title: string;
+  id: string;
 }
 
-export default function DetailsPageTitle({ title, img }: IProps) {
+export default function DetailsPageTitle({ title, img, id }: IProps) {
+  const history = useHistory();
   return (
     <>
       <StyledImg src="https://picsum.photos/300/200" />
@@ -17,7 +20,11 @@ export default function DetailsPageTitle({ title, img }: IProps) {
       <StyledTitleAndIconWrapper>
         <StyledTitle>{title}</StyledTitle>
         <StyledIconWrapper>
-          <IonIcon size="large" icon={pencil} />
+          <IonIcon
+            size="large"
+            icon={pencil}
+            onClick={() => history.push(`/add-recipe/${id}`)}
+          />
           <IonIcon size="large" icon={calendar} />
         </StyledIconWrapper>
       </StyledTitleAndIconWrapper>

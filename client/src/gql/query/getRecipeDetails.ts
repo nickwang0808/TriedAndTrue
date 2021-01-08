@@ -17,6 +17,7 @@ export const GET_RECIPE_DETAILS = gql`
         quantity_denominator
         quantity_numerator
         unit
+        formatted_text
       }
     }
   }

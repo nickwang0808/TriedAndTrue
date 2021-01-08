@@ -76,7 +76,7 @@ const App: React.FC = () => {
                   )}
                 />
 
-                <Route path="/add-recipe" component={AddRecipePage} />
+                <Route path="/add-recipe/:id" component={AddRecipePage} />
                 <Route
                   path="/recipe-details/:id"
                   component={RecipeDetailsPage}

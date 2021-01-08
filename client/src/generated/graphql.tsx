@@ -1510,7 +1510,7 @@ export type GetRecipeDetailsQuery = (
     & Pick<Recipe, 'cuisine' | 'directions' | 'id' | 'img' | 'meal_type' | 'owner' | 'title' | 'total_time' | 'yields'>
     & { recipe_ingredients_list: Array<(
       { __typename?: 'recipe_ingredients' }
-      & Pick<Recipe_Ingredients, 'name' | 'quantity_denominator' | 'quantity_numerator' | 'unit'>
+      & Pick<Recipe_Ingredients, 'name' | 'quantity_denominator' | 'quantity_numerator' | 'unit' | 'formatted_text'>
     )> }
   )> }
 );
@@ -1665,6 +1665,7 @@ export const GetRecipeDetailsDocument = gql`
       quantity_denominator
       quantity_numerator
       unit
+      formatted_text
     }
   }
 }

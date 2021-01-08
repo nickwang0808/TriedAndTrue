@@ -10,7 +10,7 @@ const mealTypeArray = [
   null,
 ];
 
-type mealType =
+export type mealType =
   | "breakfast"
   | "lunch"
   | "dinner"

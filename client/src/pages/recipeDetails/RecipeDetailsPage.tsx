@@ -48,6 +48,7 @@ const RecipeDetailsPage: React.FC<IProps> = ({ match }) => {
     <IonPage>
       <IonContent>
         <DetailsPageTitle
+          id={data.recipe_by_pk.id}
           img={data.recipe_by_pk.img || null}
           title={data.recipe_by_pk.title}
         />
