@@ -13,6 +13,7 @@ import {
 } from "@ionic/react";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router";
 import AddDirections from "../../components/AddRecipeComp/AddDirections";
 import AddIngredients from "../../components/AddRecipeComp/AddIngredients";
 import MainFormArea from "../../components/AddRecipeComp/MainFormArea";
@@ -109,11 +110,13 @@ export default function AddRecipePage() {
 }
 
 function Header() {
+  const history = useHistory();
+
   return (
     <IonHeader>
       <IonToolbar>
         <IonButtons slot="start">
-          <IonButton>
+          <IonButton onClick={() => history.goBack()}>
             <IonIcon icon={"close"} color="secondary" />
           </IonButton>
         </IonButtons>

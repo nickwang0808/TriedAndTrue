@@ -54,16 +54,27 @@ const App: React.FC = () => {
             <IonTabs>
               <IonRouterOutlet>
                 <Route path="/recipes" component={RecipePage} exact={true} />
-                <Route path="/meal-plan" exact={true} />
+                <Route
+                  path="/meal-plan"
+                  exact={true}
+                  component={MealPlannerMainPage}
+                />
                 <Route
                   path="/lists"
                   component={() => (
                     <IonPage>
-                      <h1>coming soon</h1>
+                      <h1>Coming Soon</h1>
                     </IonPage>
                   )}
                 />
-                <Route path="/profile" component={MealPlannerMainPage} />
+                <Route
+                  path="/profile"
+                  component={() => (
+                    <IonPage>
+                      <h1>Coming Soon</h1>
+                    </IonPage>
+                  )}
+                />
 
                 <Route path="/add-recipe" component={AddRecipePage} />
                 <Route
