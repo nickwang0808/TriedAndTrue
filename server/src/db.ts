@@ -1,6 +1,6 @@
 import { Pool } from "pg";
 const connectionString =
-  "postgres://postgres:postgrespassword@postgres:5432/postgres";
+  "postgres://postgres:postgrespassword@172.19.0.2:5432/postgres";
 const pool = new Pool({
   connectionString,
 });
