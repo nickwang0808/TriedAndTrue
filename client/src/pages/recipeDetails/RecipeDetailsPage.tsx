@@ -19,6 +19,7 @@ import {
   GetRecipeDetailsQueryVariables,
 } from "../../generated/graphql";
 import { GET_RECIPE_DETAILS } from "../../gql/query/getRecipeDetails";
+
 interface IProps
   extends RouteComponentProps<{
     id: string;
@@ -40,23 +41,6 @@ const RecipeDetailsPage: React.FC<IProps> = ({ match }) => {
     });
   }, [match.params.id]);
 
-  const directions = [1, 2, 3, 4, 5].map((num) => (
-    <DirectionsListItem
-      key={num}
-      content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quibusdam autem sapiente delectus culpa unde quas nulla consequatur enim. At accusantium velit similique optio a temporibus, nobis et! Placeat, eaque!"
-      showBackground={num % 2 === 0 ? true : false}
-      index={num}
-    />
-  ));
-
-  const ingredients = [1, 2, 3, 4, 5].map((num) => (
-    <IngredientListItem
-      key={num}
-      materialText="beef"
-      quantityText="1 1/2 lbs"
-      showBackground={num % 2 === 0 ? true : false}
-    />
-  ));
   if (loading || !data) return <p>loading...</p>;
   if (error) return <p>{error.message}</p>;
   if (!data.recipe_by_pk) return <p>404 recipe not found</p>;
@@ -89,7 +73,25 @@ const RecipeDetailsPage: React.FC<IProps> = ({ match }) => {
         </IonSegment>
 
         <StyledIngredientList lines="none">
-          {showDirections ? directions : ingredients}
+          {showDirections
+            ? (data.recipe_by_pk.directions as [
+                { value: string }
+              ]).map(({ value }, i) => (
+                <DirectionsListItem
+                  key={i}
+                  content={value}
+                  showBackground={i % 2 === 0 ? true : false}
+                  index={i + 1}
+                />
+              ))
+            : [1, 2, 3, 4, 5].map((num) => (
+                <IngredientListItem
+                  key={num}
+                  materialText="beef"
+                  quantityText="1 1/2 lbs"
+                  showBackground={num % 2 === 0 ? true : false}
+                />
+              ))}
         </StyledIngredientList>
       </IonContent>
     </IonPage>

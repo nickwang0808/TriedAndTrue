@@ -1,10 +1,15 @@
 import express from "express";
 import { parseIngredient } from "ingredient-parser";
-
+import query from "./db";
 const app = express();
 const port = 5001;
 
 app.use(express.json());
+
+(async () => {
+  const result = await query("SELECT * FROM user;");
+  console.log(result);
+})().catch((err) => console.log(err));
 
 app.post("/ingredients", (req, res) => {
   try {
@@ -40,4 +45,5 @@ app.post("/ingredients", (req, res) => {
     return res.json(err);
   }
 });
+
 app.listen(port, () => console.log(`server is listening on ${port}`));
