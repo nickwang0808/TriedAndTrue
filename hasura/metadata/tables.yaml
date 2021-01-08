@@ -74,19 +74,69 @@
   - name: recipe
     using:
       foreign_key_constraint_on: recipe_id
+  insert_permissions:
+  - role: user
+    permission:
+      check:
+        recipe:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+      columns:
+      - raw_text
+      - recipe_id
+      backend_only: false
   select_permissions:
   - role: user
     permission:
       columns:
       - id
       - name
-      - quantity_numerator
-      - quantity_denominator
-      - unit
-      - preparation
       - optional
+      - preparation
+      - quantity_denominator
+      - quantity_numerator
+      - raw_text
       - recipe_id
-      filter: {}
+      - unit
+      filter:
+        recipe:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - raw_text
+      filter:
+        recipe:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+      check: null
+  delete_permissions:
+  - role: user
+    permission:
+      filter:
+        recipe:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+  event_triggers:
+  - name: format_ingredients
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+      update:
+        columns:
+        - raw_text
+    retry_conf:
+      num_retries: 2
+      interval_sec: 10
+      timeout_sec: 60
+    webhook: http://35.220.182.160:5001/format-ingredients
 - table:
     schema: public
     name: user

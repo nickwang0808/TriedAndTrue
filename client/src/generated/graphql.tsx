@@ -51,6 +51,11 @@ export type ParsedIngredients = {
   name: Scalars['String'];
 };
 
+export type Status = {
+  __typename?: 'Status';
+  status: Scalars['Boolean'];
+};
+
 /** expression to compare columns of type String. All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
   _eq?: Maybe<Scalars['String']>;
@@ -517,11 +522,12 @@ export type Recipe_Inc_Input = {
 export type Recipe_Ingredients = {
   __typename?: 'recipe_ingredients';
   id: Scalars['uuid'];
-  name: Scalars['String'];
-  optional: Scalars['Boolean'];
+  name?: Maybe<Scalars['String']>;
+  optional?: Maybe<Scalars['Boolean']>;
   preparation?: Maybe<Scalars['String']>;
   quantity_denominator?: Maybe<Scalars['Int']>;
   quantity_numerator?: Maybe<Scalars['Int']>;
+  raw_text: Scalars['String'];
   /** An object relationship */
   recipe: Recipe;
   recipe_id: Scalars['String'];
@@ -603,6 +609,7 @@ export type Recipe_Ingredients_Bool_Exp = {
   preparation?: Maybe<String_Comparison_Exp>;
   quantity_denominator?: Maybe<Int_Comparison_Exp>;
   quantity_numerator?: Maybe<Int_Comparison_Exp>;
+  raw_text?: Maybe<String_Comparison_Exp>;
   recipe?: Maybe<Recipe_Bool_Exp>;
   recipe_id?: Maybe<String_Comparison_Exp>;
   unit?: Maybe<String_Comparison_Exp>;
@@ -610,6 +617,8 @@ export type Recipe_Ingredients_Bool_Exp = {
 
 /** unique or primary key constraints on table "recipe_ingredients" */
 export enum Recipe_Ingredients_Constraint {
+  /** unique or primary key constraint */
+  RecipeIngredientsIdKey = 'recipe_ingredients_id_key',
   /** unique or primary key constraint */
   RecipeIngredientsPkey = 'recipe_ingredients_pkey'
 }
@@ -628,6 +637,7 @@ export type Recipe_Ingredients_Insert_Input = {
   preparation?: Maybe<Scalars['String']>;
   quantity_denominator?: Maybe<Scalars['Int']>;
   quantity_numerator?: Maybe<Scalars['Int']>;
+  raw_text?: Maybe<Scalars['String']>;
   recipe?: Maybe<Recipe_Obj_Rel_Insert_Input>;
   recipe_id?: Maybe<Scalars['String']>;
   unit?: Maybe<Scalars['String']>;
@@ -641,6 +651,7 @@ export type Recipe_Ingredients_Max_Fields = {
   preparation?: Maybe<Scalars['String']>;
   quantity_denominator?: Maybe<Scalars['Int']>;
   quantity_numerator?: Maybe<Scalars['Int']>;
+  raw_text?: Maybe<Scalars['String']>;
   recipe_id?: Maybe<Scalars['String']>;
   unit?: Maybe<Scalars['String']>;
 };
@@ -652,6 +663,7 @@ export type Recipe_Ingredients_Max_Order_By = {
   preparation?: Maybe<Order_By>;
   quantity_denominator?: Maybe<Order_By>;
   quantity_numerator?: Maybe<Order_By>;
+  raw_text?: Maybe<Order_By>;
   recipe_id?: Maybe<Order_By>;
   unit?: Maybe<Order_By>;
 };
@@ -664,6 +676,7 @@ export type Recipe_Ingredients_Min_Fields = {
   preparation?: Maybe<Scalars['String']>;
   quantity_denominator?: Maybe<Scalars['Int']>;
   quantity_numerator?: Maybe<Scalars['Int']>;
+  raw_text?: Maybe<Scalars['String']>;
   recipe_id?: Maybe<Scalars['String']>;
   unit?: Maybe<Scalars['String']>;
 };
@@ -675,6 +688,7 @@ export type Recipe_Ingredients_Min_Order_By = {
   preparation?: Maybe<Order_By>;
   quantity_denominator?: Maybe<Order_By>;
   quantity_numerator?: Maybe<Order_By>;
+  raw_text?: Maybe<Order_By>;
   recipe_id?: Maybe<Order_By>;
   unit?: Maybe<Order_By>;
 };
@@ -709,6 +723,7 @@ export type Recipe_Ingredients_Order_By = {
   preparation?: Maybe<Order_By>;
   quantity_denominator?: Maybe<Order_By>;
   quantity_numerator?: Maybe<Order_By>;
+  raw_text?: Maybe<Order_By>;
   recipe?: Maybe<Recipe_Order_By>;
   recipe_id?: Maybe<Order_By>;
   unit?: Maybe<Order_By>;
@@ -734,6 +749,8 @@ export enum Recipe_Ingredients_Select_Column {
   /** column name */
   QuantityNumerator = 'quantity_numerator',
   /** column name */
+  RawText = 'raw_text',
+  /** column name */
   RecipeId = 'recipe_id',
   /** column name */
   Unit = 'unit'
@@ -747,6 +764,7 @@ export type Recipe_Ingredients_Set_Input = {
   preparation?: Maybe<Scalars['String']>;
   quantity_denominator?: Maybe<Scalars['Int']>;
   quantity_numerator?: Maybe<Scalars['Int']>;
+  raw_text?: Maybe<Scalars['String']>;
   recipe_id?: Maybe<Scalars['String']>;
   unit?: Maybe<Scalars['String']>;
 };
@@ -817,6 +835,8 @@ export enum Recipe_Ingredients_Update_Column {
   QuantityDenominator = 'quantity_denominator',
   /** column name */
   QuantityNumerator = 'quantity_numerator',
+  /** column name */
+  RawText = 'raw_text',
   /** column name */
   RecipeId = 'recipe_id',
   /** column name */
@@ -1425,7 +1445,7 @@ export type Uuid_Comparison_Exp = {
 };
 
 export type InsertRecipeMutationVariables = Exact<{
-  objects: Recipe_Insert_Input;
+  object: Recipe_Insert_Input;
 }>;
 
 
@@ -1433,7 +1453,11 @@ export type InsertRecipeMutation = (
   { __typename?: 'mutation_root' }
   & { insert_recipe_one?: Maybe<(
     { __typename?: 'recipe' }
-    & Pick<Recipe, 'id' | 'cuisine' | 'directions' | 'img' | 'meal_type' | 'owner' | 'title' | 'total_time' | 'yields'>
+    & Pick<Recipe, 'cuisine' | 'directions' | 'id' | 'img' | 'meal_type' | 'owner' | 'title' | 'total_time' | 'yields'>
+    & { recipe_ingredients_list: Array<(
+      { __typename?: 'recipe_ingredients' }
+      & Pick<Recipe_Ingredients, 'name' | 'optional' | 'preparation' | 'quantity_denominator' | 'quantity_numerator' | 'raw_text' | 'unit'>
+    )> }
   )> }
 );
 
@@ -1489,17 +1513,26 @@ export type ParseIngredientsQuery = (
 
 
 export const InsertRecipeDocument = gql`
-    mutation InsertRecipe($objects: recipe_insert_input!) {
-  insert_recipe_one(object: $objects) {
-    id
+    mutation InsertRecipe($object: recipe_insert_input!) {
+  insert_recipe_one(object: $object) {
     cuisine
     directions
+    id
     img
     meal_type
     owner
     title
     total_time
     yields
+    recipe_ingredients_list {
+      name
+      optional
+      preparation
+      quantity_denominator
+      quantity_numerator
+      raw_text
+      unit
+    }
   }
 }
     `;
@@ -1518,7 +1551,7 @@ export type InsertRecipeMutationFn = Apollo.MutationFunction<InsertRecipeMutatio
  * @example
  * const [insertRecipeMutation, { data, loading, error }] = useInsertRecipeMutation({
  *   variables: {
- *      objects: // value for 'objects'
+ *      object: // value for 'object'
  *   },
  * });
  */

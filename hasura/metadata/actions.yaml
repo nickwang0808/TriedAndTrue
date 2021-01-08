@@ -12,4 +12,5 @@ custom_types:
   - name: Ingredients
   objects:
   - name: ParsedIngredients
+  - name: Status
   scalars: []

@@ -25,8 +25,8 @@ export interface IRecipeForm {
   servings: string | null;
   cuisine: string | null;
 
-  ingredients: string[] | null;
-  directions: string[] | null;
+  ingredients: Array<{ value: string }> | null;
+  directions: Array<{ value: string }> | null;
 }
 
 export const recipeFormSchema = object().shape({

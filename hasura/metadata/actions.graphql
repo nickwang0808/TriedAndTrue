@@ -15,3 +15,7 @@ type ParsedIngredients {
   name : String!
 }
 
+type Status {
+  status : Boolean!
+}
+

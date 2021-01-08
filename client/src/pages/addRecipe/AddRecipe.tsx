@@ -53,22 +53,31 @@ export default function AddRecipe() {
     const {
       cuisine,
       directions,
-      // ingredients,
+      ingredients,
       mealType,
       servings,
       title,
       totalTime,
     } = data;
+    let mappedIngredients: Array<{ raw_text: string }> | [] = [];
+    if (ingredients) {
+      mappedIngredients = ingredients.map((ing) => {
+        return { raw_text: ing.value };
+      });
+    }
 
     insertRecipeOne({
       variables: {
-        objects: {
+        object: {
           cuisine,
           directions,
           meal_type: mealType,
           yields: servings,
           title,
           total_time: totalTime,
+          recipe_ingredients_list: {
+            data: mappedIngredients,
+          },
         },
       },
     });
