@@ -3,6 +3,7 @@ import {
   IonApp,
   IonIcon,
   IonLabel,
+  IonPage,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
@@ -30,7 +31,7 @@ import mealPlanIcon from "./assets/svg/mealPlanIcon.svg";
 import profileIcon from "./assets/svg/profileIcon.svg";
 import recipeIcon from "./assets/svg/recipeIcon.svg";
 import client from "./config/apoloConfig";
-import AddRecipe from "./pages/addRecipe/AddRecipe";
+import AddRecipePage from "./pages/addRecipe/AddRecipePage";
 import AuthChecker from "./pages/auth/AuthChecker";
 import MealPlannerMainPage from "./pages/mealPlanner/MealPlannerMainPage";
 import RecipeDetailsPage from "./pages/recipeDetails/RecipeDetailsPage";
@@ -53,14 +54,18 @@ const App: React.FC = () => {
             <IonTabs>
               <IonRouterOutlet>
                 <Route path="/recipes" component={RecipePage} exact={true} />
+                <Route path="/meal-plan" exact={true} />
                 <Route
-                  path="/meal-plan"
-                  component={RecipeDetailsPage}
-                  exact={true}
+                  path="/lists"
+                  component={() => (
+                    <IonPage>
+                      <h1>coming soon</h1>
+                    </IonPage>
+                  )}
                 />
-                <Route path="/lists" component={AddRecipe} />
                 <Route path="/profile" component={MealPlannerMainPage} />
 
+                <Route path="/add-recipe" component={AddRecipePage} />
                 <Route
                   path="/recipe-details/:id"
                   component={RecipeDetailsPage}

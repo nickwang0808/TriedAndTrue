@@ -40,7 +40,7 @@ const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
         <IonToolbar>
           <IonTitle color="primary">My Recipes</IonTitle>
           <IonButtons slot="end">
-            <IonButton>
+            <IonButton onClick={() => history.push("/add-recipe")}>
               <IonIcon icon={add} color="secondary" />
             </IonButton>
           </IonButtons>

@@ -40,7 +40,7 @@ export default function MainFormArea({ control }: IProps) {
         <IonLabel position="stacked">Meal Type</IonLabel>
         <Controller
           control={control}
-          name="mealType"
+          name="meal_type"
           // defaultValue={null}
           rules={{ required: true }}
           render={({ onChange, value, ref }) => (
@@ -75,7 +75,7 @@ export default function MainFormArea({ control }: IProps) {
       <IonItem>
         <IonLabel position="stacked">Total Time</IonLabel>
         <Controller
-          name="totalTime"
+          name="total_time"
           control={control}
           // defaultValue={null}
           render={({ onChange, ref }) => (
@@ -94,7 +94,7 @@ export default function MainFormArea({ control }: IProps) {
         <IonLabel position="stacked">Servings</IonLabel>
 
         <Controller
-          name="servings"
+          name="yields"
           control={control}
           // defaultValue={null}
           render={({ onChange, ref }) => (

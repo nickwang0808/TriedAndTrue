@@ -95,6 +95,7 @@ const RecipeDetailsPage: React.FC<IProps> = ({ match }) => {
                     quantityText={
                       quantity_denominator && quantity_numerator
                         ? String(quantity_numerator / quantity_denominator) +
+                          " " +
                           (unit || "")
                         : ""
                     }

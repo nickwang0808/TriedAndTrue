@@ -24,7 +24,7 @@ import {
 import { INSERT_RECIPE_ONE } from "../../gql/mutations/insertRecipeOne.graphql";
 import { IRecipeForm, recipeFormSchema } from "../../utils/recipeSchema";
 
-export default function AddRecipe() {
+export default function AddRecipePage() {
   const {
     formState,
     handleSubmit,
@@ -35,9 +35,9 @@ export default function AddRecipe() {
     resolver: yupResolver(recipeFormSchema),
     defaultValues: {
       cuisine: null,
-      totalTime: null,
-      mealType: null,
-      servings: null,
+      total_time: null,
+      meal_type: null,
+      yields: null,
       title: null,
     },
   });
@@ -50,15 +50,8 @@ export default function AddRecipe() {
   const onSubmit = (data: IRecipeForm) => {
     console.log({ data, formState });
 
-    const {
-      cuisine,
-      directions,
-      ingredients,
-      mealType,
-      servings,
-      title,
-      totalTime,
-    } = data;
+    // amp ingredient out to write to raw_text column
+    const { ingredients, ...dataWIthOutIngredients } = data;
     let mappedIngredients: Array<{ raw_text: string }> | [] = [];
     if (ingredients) {
       mappedIngredients = ingredients.map((ing) => {
@@ -69,12 +62,7 @@ export default function AddRecipe() {
     insertRecipeOne({
       variables: {
         object: {
-          cuisine,
-          directions,
-          meal_type: mealType,
-          yields: servings,
-          title,
-          total_time: totalTime,
+          ...dataWIthOutIngredients,
           recipe_ingredients_list: {
             data: mappedIngredients,
           },

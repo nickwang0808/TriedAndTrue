@@ -20,9 +20,9 @@ type mealType =
 
 export interface IRecipeForm {
   title: string | null;
-  mealType: mealType | null;
-  totalTime: number | null;
-  servings: string | null;
+  meal_type: mealType | null;
+  total_time: number | null;
+  yields: string | null;
   cuisine: string | null;
 
   ingredients: Array<{ value: string }> | null;
@@ -31,9 +31,9 @@ export interface IRecipeForm {
 
 export const recipeFormSchema = object().shape({
   title: string().required(),
-  mealType: mixed().oneOf(mealTypeArray).nullable(),
-  totalTime: number().nullable(),
-  servings: string().nullable(),
+  meal_type: mixed().oneOf(mealTypeArray).nullable(),
+  total_time: number().nullable(),
+  yields: string().nullable(),
   cuisine: string().nullable(),
 
   ingredients: array(object().shape({ value: string() })).nullable(),
