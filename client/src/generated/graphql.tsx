@@ -521,6 +521,7 @@ export type Recipe_Inc_Input = {
 /** columns and relationships of "recipe_ingredients" */
 export type Recipe_Ingredients = {
   __typename?: 'recipe_ingredients';
+  formatted_text?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
   name?: Maybe<Scalars['String']>;
   optional?: Maybe<Scalars['Boolean']>;
@@ -603,6 +604,7 @@ export type Recipe_Ingredients_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Recipe_Ingredients_Bool_Exp>>>;
   _not?: Maybe<Recipe_Ingredients_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Recipe_Ingredients_Bool_Exp>>>;
+  formatted_text?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   optional?: Maybe<Boolean_Comparison_Exp>;
@@ -631,6 +633,7 @@ export type Recipe_Ingredients_Inc_Input = {
 
 /** input type for inserting data into table "recipe_ingredients" */
 export type Recipe_Ingredients_Insert_Input = {
+  formatted_text?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   optional?: Maybe<Scalars['Boolean']>;
@@ -646,6 +649,7 @@ export type Recipe_Ingredients_Insert_Input = {
 /** aggregate max on columns */
 export type Recipe_Ingredients_Max_Fields = {
   __typename?: 'recipe_ingredients_max_fields';
+  formatted_text?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   preparation?: Maybe<Scalars['String']>;
@@ -658,6 +662,7 @@ export type Recipe_Ingredients_Max_Fields = {
 
 /** order by max() on columns of table "recipe_ingredients" */
 export type Recipe_Ingredients_Max_Order_By = {
+  formatted_text?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   preparation?: Maybe<Order_By>;
@@ -671,6 +676,7 @@ export type Recipe_Ingredients_Max_Order_By = {
 /** aggregate min on columns */
 export type Recipe_Ingredients_Min_Fields = {
   __typename?: 'recipe_ingredients_min_fields';
+  formatted_text?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   preparation?: Maybe<Scalars['String']>;
@@ -683,6 +689,7 @@ export type Recipe_Ingredients_Min_Fields = {
 
 /** order by min() on columns of table "recipe_ingredients" */
 export type Recipe_Ingredients_Min_Order_By = {
+  formatted_text?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   preparation?: Maybe<Order_By>;
@@ -717,6 +724,7 @@ export type Recipe_Ingredients_On_Conflict = {
 
 /** ordering options when selecting data from "recipe_ingredients" */
 export type Recipe_Ingredients_Order_By = {
+  formatted_text?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   optional?: Maybe<Order_By>;
@@ -736,6 +744,8 @@ export type Recipe_Ingredients_Pk_Columns_Input = {
 
 /** select columns of table "recipe_ingredients" */
 export enum Recipe_Ingredients_Select_Column {
+  /** column name */
+  FormattedText = 'formatted_text',
   /** column name */
   Id = 'id',
   /** column name */
@@ -758,6 +768,7 @@ export enum Recipe_Ingredients_Select_Column {
 
 /** input type for updating data in table "recipe_ingredients" */
 export type Recipe_Ingredients_Set_Input = {
+  formatted_text?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   optional?: Maybe<Scalars['Boolean']>;
@@ -823,6 +834,8 @@ export type Recipe_Ingredients_Sum_Order_By = {
 
 /** update columns of table "recipe_ingredients" */
 export enum Recipe_Ingredients_Update_Column {
+  /** column name */
+  FormattedText = 'formatted_text',
   /** column name */
   Id = 'id',
   /** column name */
@@ -1495,6 +1508,10 @@ export type GetRecipeDetailsQuery = (
   & { recipe_by_pk?: Maybe<(
     { __typename?: 'recipe' }
     & Pick<Recipe, 'cuisine' | 'directions' | 'id' | 'img' | 'meal_type' | 'owner' | 'title' | 'total_time' | 'yields'>
+    & { recipe_ingredients_list: Array<(
+      { __typename?: 'recipe_ingredients' }
+      & Pick<Recipe_Ingredients, 'name' | 'quantity_denominator' | 'quantity_numerator' | 'unit'>
+    )> }
   )> }
 );
 
@@ -1643,6 +1660,12 @@ export const GetRecipeDetailsDocument = gql`
     title
     total_time
     yields
+    recipe_ingredients_list {
+      name
+      quantity_denominator
+      quantity_numerator
+      unit
+    }
   }
 }
     `;

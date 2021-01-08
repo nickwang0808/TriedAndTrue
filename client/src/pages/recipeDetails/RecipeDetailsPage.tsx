@@ -84,14 +84,24 @@ const RecipeDetailsPage: React.FC<IProps> = ({ match }) => {
                   index={i + 1}
                 />
               ))
-            : [1, 2, 3, 4, 5].map((num) => (
-                <IngredientListItem
-                  key={num}
-                  materialText="beef"
-                  quantityText="1 1/2 lbs"
-                  showBackground={num % 2 === 0 ? true : false}
-                />
-              ))}
+            : data.recipe_by_pk.recipe_ingredients_list.map(
+                (
+                  { name, quantity_denominator, quantity_numerator, unit },
+                  i
+                ) => (
+                  <IngredientListItem
+                    key={(name || "") + i}
+                    materialText={name || ""}
+                    quantityText={
+                      quantity_denominator && quantity_numerator
+                        ? String(quantity_numerator / quantity_denominator) +
+                          (unit || "")
+                        : ""
+                    }
+                    showBackground={i % 2 === 0 ? true : false}
+                  />
+                )
+              )}
         </StyledIngredientList>
       </IonContent>
     </IonPage>

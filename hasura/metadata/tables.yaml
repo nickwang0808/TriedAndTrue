@@ -92,13 +92,14 @@
       columns:
       - id
       - name
-      - optional
-      - preparation
-      - quantity_denominator
       - quantity_numerator
-      - raw_text
-      - recipe_id
+      - quantity_denominator
       - unit
+      - preparation
+      - optional
+      - recipe_id
+      - raw_text
+      - formatted_text
       filter:
         recipe:
           user:

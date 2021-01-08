@@ -8,4 +8,5 @@ export interface IIngredientsTableType {
   quantity_denominator: null | number;
   unit: null | string;
   optional: null | boolean;
+  formated_text: string;
 }

@@ -11,13 +11,15 @@ console.log("format ingredient mounted");
 formatIngredients.post("/", async (req, res) => {
   const {
     event: { op, data },
-    table,
   } = req.body as Payload<IIngredientsTableType>;
 
   try {
     if (op === "INSERT") {
       console.log(data.new);
       // parse the raw text
+
+      const parseResult = parseIngredient(data.new.raw_text);
+
       const {
         name,
         preparation,
@@ -25,7 +27,7 @@ formatIngredients.post("/", async (req, res) => {
         quantity_numerator,
         unit,
         optional,
-      } = parseIngredient(data.new.raw_text);
+      } = parseResult;
 
       // update the db
       await query(
@@ -38,7 +40,7 @@ formatIngredients.post("/", async (req, res) => {
     unit = $5,
     preparation = $6
     
-    WHERE recipe_id = $7;`,
+    WHERE id = $7;`,
         [
           quantity_denominator,
           quantity_numerator,
@@ -46,7 +48,7 @@ formatIngredients.post("/", async (req, res) => {
           optional,
           unit,
           preparation,
-          data.new.recipe_id,
+          data.new.id,
         ]
       );
     }

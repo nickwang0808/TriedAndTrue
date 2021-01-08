@@ -3016,6 +3016,18 @@
         "description": "columns and relationships of \"recipe_ingredients\"",
         "fields": [
           {
+            "name": "formatted_text",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "args": [],
@@ -3651,6 +3663,16 @@
             "defaultValue": null
           },
           {
+            "name": "formatted_text",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "String_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "id",
             "description": null,
             "type": {
@@ -3816,6 +3838,16 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "formatted_text",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "id",
             "description": null,
             "type": {
@@ -3926,6 +3958,18 @@
         "description": "aggregate max on columns",
         "fields": [
           {
+            "name": "formatted_text",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "args": [],
@@ -4034,6 +4078,16 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "formatted_text",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "id",
             "description": null,
             "type": {
@@ -4123,6 +4177,18 @@
         "name": "recipe_ingredients_min_fields",
         "description": "aggregate min on columns",
         "fields": [
+          {
+            "name": "formatted_text",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "id",
             "description": null,
@@ -4231,6 +4297,16 @@
         "description": "order by min() on columns of table \"recipe_ingredients\"",
         "fields": null,
         "inputFields": [
+          {
+            "name": "formatted_text",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
           {
             "name": "id",
             "description": null,
@@ -4466,6 +4542,16 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "formatted_text",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "id",
             "description": null,
             "type": {
@@ -4604,6 +4690,12 @@
         "interfaces": null,
         "enumValues": [
           {
+            "name": "formatted_text",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": "column name",
             "isDeprecated": false,
@@ -4666,6 +4758,16 @@
         "description": "input type for updating data in table \"recipe_ingredients\"",
         "fields": null,
         "inputFields": [
+          {
+            "name": "formatted_text",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
           {
             "name": "id",
             "description": null,
@@ -5033,6 +5135,12 @@
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
+          {
+            "name": "formatted_text",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "id",
             "description": "column name",

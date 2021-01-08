@@ -1,34 +1,15 @@
 import { Router } from "express";
 import { parseIngredient } from "ingredient-parser";
+import stringifyFormattedIngredients from "../helper/stringifyFormatedIngredients";
 
-const parseIngredientToString = Router()
+const parseIngredientToString = Router();
 
-parseIngredientToString.post('/', (req, res) => {
+parseIngredientToString.post("/", (req, res) => {
   try {
     const ingredientRawText = req.body.input.ingredients as string[];
+    console.log(ingredientRawText);
     const results = ingredientRawText.map((ingredient) => {
-      // stringify
-      const {
-        quantity_denominator,
-        quantity_numerator,
-        name,
-        unit,
-        optional,
-        preparation,
-      } = parseIngredient(ingredient);
-
-      let quantity: number | string;
-      if (!quantity_numerator || !quantity_denominator) {
-        quantity = "";
-      } else {
-        quantity = quantity_numerator / quantity_denominator;
-      }
-
-      return {
-        name: `${quantity} ${unit || ""} ${name || ""} ${preparation || ""} ${
-          optional ? "optional" : ""
-        }`,
-      };
+      return stringifyFormattedIngredients(parseIngredient(ingredient));
     });
 
     console.log(results);
@@ -36,7 +17,6 @@ parseIngredientToString.post('/', (req, res) => {
   } catch (err) {
     return res.json(err);
   }
-})
+});
 
-
-export default parseIngredientToString
+export default parseIngredientToString;

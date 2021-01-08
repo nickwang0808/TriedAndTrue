@@ -39,7 +39,7 @@ export default function AuthChecker({ children }: IProps) {
   };
 
   useEffect(() => {
-    auth.onAuthStateChanged(async (user) => {
+    auth.onIdTokenChanged(async (user) => {
       if (!user) {
         console.log("no user logged in");
       } else {

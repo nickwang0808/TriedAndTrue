@@ -12,6 +12,12 @@ export const GET_RECIPE_DETAILS = gql`
       title
       total_time
       yields
+      recipe_ingredients_list {
+        name
+        quantity_denominator
+        quantity_numerator
+        unit
+      }
     }
   }
 `;
