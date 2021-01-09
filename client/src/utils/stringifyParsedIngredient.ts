@@ -15,7 +15,7 @@ export default async function parseIngredientAndStringify(
   >({
     fetchPolicy: "no-cache",
     query: PARSE_Ingredients,
-    variables: { ingredients: [ingredientRawText] },
+    variables: { ingredientsArray: [ingredientRawText] },
   })) as ParseIngredientsQueryResult;
 
   if (error) throw new Error(error.message);

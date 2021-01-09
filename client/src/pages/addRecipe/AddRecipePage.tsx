@@ -53,6 +53,7 @@ export default function AddRecipePage({
     <IonPage>
       <Header isNew={id === "null" ? true : false} />
       <AddRecipeChild
+        id={id}
         isCreateNew={id === "null" ? true : false}
         defaultValues={
           id === "null"

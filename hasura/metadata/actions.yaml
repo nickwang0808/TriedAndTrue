@@ -1,4 +1,11 @@
 actions:
+- name: overRideIngredients
+  definition:
+    kind: asynchronous
+    handler: http://35.220.182.160:5001/overwrite-ingredients
+    forward_client_headers: true
+  permissions:
+  - role: user
 - name: parseIngredients
   definition:
     kind: ""
@@ -13,4 +20,5 @@ custom_types:
   objects:
   - name: ParsedIngredients
   - name: Status
+  - name: ingredients
   scalars: []

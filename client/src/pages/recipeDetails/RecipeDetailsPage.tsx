@@ -26,10 +26,12 @@ interface IProps
   }> {}
 
 const RecipeDetailsPage: React.FC<IProps> = ({ match }) => {
-  const [getRecipeDetails, { error, loading, data }] = useLazyQuery<
-    GetRecipeDetailsQuery,
-    GetRecipeDetailsQueryVariables
-  >(GET_RECIPE_DETAILS);
+  const [
+    getRecipeDetails,
+    { error, loading, data: { recipe_by_pk } = {} as GetRecipeDetailsQuery },
+  ] = useLazyQuery<GetRecipeDetailsQuery, GetRecipeDetailsQueryVariables>(
+    GET_RECIPE_DETAILS
+  );
 
   const [showDirections, setShowDirections] = useState(false);
 
@@ -41,21 +43,21 @@ const RecipeDetailsPage: React.FC<IProps> = ({ match }) => {
     });
   }, [match.params.id]);
 
-  if (loading || !data) return <p>loading...</p>;
+  if (loading) return <p>loading...</p>;
   if (error) return <p>{error.message}</p>;
-  if (!data.recipe_by_pk) return <p>404 recipe not found</p>;
+  if (!recipe_by_pk) return <p>404 recipe not found</p>;
   return (
     <IonPage>
       <IonContent>
         <DetailsPageTitle
-          id={data.recipe_by_pk.id}
-          img={data.recipe_by_pk.img || null}
-          title={data.recipe_by_pk.title}
+          id={recipe_by_pk.id}
+          img={recipe_by_pk.img || null}
+          title={recipe_by_pk.title}
         />
 
         <CookTime
-          total_time={data.recipe_by_pk.total_time || null}
-          servings={data.recipe_by_pk.yields || null}
+          total_time={recipe_by_pk.total_time || null}
+          servings={recipe_by_pk.yields || null}
         />
 
         <IonSegment
@@ -75,7 +77,8 @@ const RecipeDetailsPage: React.FC<IProps> = ({ match }) => {
 
         <StyledIngredientList lines="none">
           {showDirections
-            ? (data.recipe_by_pk.directions as [
+            ? recipe_by_pk.directions &&
+              (recipe_by_pk.directions as [
                 { value: string }
               ]).map(({ value }, i) => (
                 <DirectionsListItem
@@ -85,7 +88,8 @@ const RecipeDetailsPage: React.FC<IProps> = ({ match }) => {
                   index={i + 1}
                 />
               ))
-            : data.recipe_by_pk.recipe_ingredients_list.map(
+            : recipe_by_pk.recipe_ingredients_list &&
+              recipe_by_pk.recipe_ingredients_list.map(
                 (
                   { name, quantity_denominator, quantity_numerator, unit },
                   i

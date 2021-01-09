@@ -1,3 +1,11 @@
+type Mutation {
+  overRideIngredients (
+    ingredientsStrings: [String]!
+    recipe_id: String!
+  ): Status!
+}
+
+
 type Query {
   parseIngredients (
     ingredients: [String]
@@ -16,6 +24,10 @@ type ParsedIngredients {
 }
 
 type Status {
-  status : Boolean!
+  status : String!
+}
+
+type ingredients {
+  id : String!
 }
 

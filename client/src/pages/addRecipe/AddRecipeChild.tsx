@@ -10,16 +10,24 @@ import BlockSeparator from "../../components/misc/BlockSeparator";
 import {
   InsertRecipeMutation,
   InsertRecipeMutationVariables,
+  UpdateRecipeDetailMutation,
+  UpdateRecipeDetailMutationVariables,
 } from "../../generated/graphql";
 import { INSERT_RECIPE_ONE } from "../../gql/mutations/insertRecipeOne.graphql";
+import { UPDATE_RECIPE_DETAILS } from "../../gql/mutations/updateRecipeDetails.graphql";
 import { IRecipeForm, recipeFormSchema } from "../../utils/recipeSchema";
 
 interface IProps {
   isCreateNew: boolean;
   defaultValues: IRecipeForm;
+  id: string | null;
 }
 
-export default function AddRecipeChild({ defaultValues, isCreateNew }: IProps) {
+export default function AddRecipeChild({
+  defaultValues,
+  isCreateNew,
+  id,
+}: IProps) {
   console.log(defaultValues);
   const {
     formState,
@@ -33,7 +41,7 @@ export default function AddRecipeChild({ defaultValues, isCreateNew }: IProps) {
     defaultValues,
   });
 
-  const { isDirty } = formState;
+  const { isDirty, dirtyFields } = formState;
 
   useEffect(() => {
     console.log(formState);
@@ -43,13 +51,23 @@ export default function AddRecipeChild({ defaultValues, isCreateNew }: IProps) {
     reset(defaultValues);
   }, [defaultValues]);
 
-  const [insertRecipeOne, { loading, data, error }] = useMutation<
-    InsertRecipeMutation,
-    InsertRecipeMutationVariables
-  >(INSERT_RECIPE_ONE);
+  const [
+    insertRecipeOne,
+    { loading: loading_insert, data: data_insert, error: error_insert },
+  ] = useMutation<InsertRecipeMutation, InsertRecipeMutationVariables>(
+    INSERT_RECIPE_ONE
+  );
+
+  const [
+    updateRecipeDetails,
+    { loading: loading_update, data: data_update, error: error_pdate },
+  ] = useMutation<
+    UpdateRecipeDetailMutation,
+    UpdateRecipeDetailMutationVariables
+  >(UPDATE_RECIPE_DETAILS);
 
   const onSubmit = (data: IRecipeForm) => {
-    console.log({ data, formState });
+    console.log({ data });
 
     // amp ingredient out to write to raw_text column
     const { ingredients, ...dataWIthOutIngredients } = data;
@@ -72,15 +90,26 @@ export default function AddRecipeChild({ defaultValues, isCreateNew }: IProps) {
         },
       });
     } else {
-      // perform update recipe
+      if (isDirty && id) {
+        // perform update recipe
+        updateRecipeDetails({
+          variables: {
+            _set: {
+              ...dataWIthOutIngredients,
+            },
+            id,
+            ingredientsStrings: ingredients?.map((ing) => ing.value) || [],
+          },
+        });
+      } else return;
     }
   };
 
   console.log(errors);
   // console.log(watch());
 
-  if (loading) return <p>loading...</p>;
-  if (error) return <p>{error.message}</p>;
+  if (loading_insert) return <p>loading...</p>;
+  if (error_insert) return <p>{error_insert.message}</p>;
   return (
     <>
       <IonContent fullscreen>

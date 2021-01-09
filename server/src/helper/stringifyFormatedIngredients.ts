@@ -21,9 +21,8 @@ export default function stringifyFormattedIngredients(
     quantity = quantity_numerator / quantity_denominator;
   }
 
-  return {
-    name: `${quantity} ${unit || ""} ${name || ""} ${preparation || ""} ${
-      optional ? "optional" : ""
-    }`,
-  };
+  return `${quantity} ${unit || ""} ${name || ""} ${preparation || ""} ${
+    optional ? "optional" : ""
+  }
+    `;
 }
