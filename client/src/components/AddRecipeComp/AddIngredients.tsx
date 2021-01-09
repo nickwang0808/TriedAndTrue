@@ -56,7 +56,7 @@ export default function AddIngredients({ control }: IProps) {
           type="text"
           onKeyPress={(e) => {
             if (e.key === "Enter") {
-              console.log(e.key);
+              // console.log(e.key);
               handleAppendIngredient();
             }
           }}

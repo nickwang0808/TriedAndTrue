@@ -28,7 +28,7 @@ export default function AddRecipeChild({
   isCreateNew,
   id,
 }: IProps) {
-  console.log(defaultValues);
+  // console.log(defaultValues);
   const {
     formState,
     handleSubmit,
@@ -44,7 +44,7 @@ export default function AddRecipeChild({
   const { isDirty, dirtyFields } = formState;
 
   useEffect(() => {
-    console.log(formState);
+    // console.log(formState);
   }, [formState]);
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function AddRecipeChild({
   >(UPDATE_RECIPE_DETAILS);
 
   const onSubmit = (data: IRecipeForm) => {
-    console.log({ data });
+    // console.log({ data });
 
     // amp ingredient out to write to raw_text column
     const { ingredients, ...dataWIthOutIngredients } = data;
@@ -105,8 +105,8 @@ export default function AddRecipeChild({
     }
   };
 
-  console.log(errors);
-  // console.log(watch());
+  // console.log(errors);
+  // // console.log(watch());
 
   if (loading_insert) return <p>loading...</p>;
   if (error_insert) return <p>{error_insert.message}</p>;

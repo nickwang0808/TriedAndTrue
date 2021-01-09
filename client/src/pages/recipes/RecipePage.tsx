@@ -25,7 +25,7 @@ const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
     GET_ALL_RECIPES
   );
   useEffect(() => {
-    console.log(data);
+    // console.log(data);
   }, [data]);
 
   // TODO: use update cache and get rid of this

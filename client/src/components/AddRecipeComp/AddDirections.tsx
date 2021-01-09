@@ -58,7 +58,7 @@ export default function AddDirections({ control }: IProps) {
           }
           onKeyPress={(e) => {
             if (e.key === "Enter") {
-              console.log(e.key);
+              // console.log(e.key);
               handleAppendIngredient();
             }
           }}
