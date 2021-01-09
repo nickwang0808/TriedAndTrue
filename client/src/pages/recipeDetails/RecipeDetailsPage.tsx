@@ -1,4 +1,4 @@
-import { useLazyQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
 import {
   IonContent,
@@ -7,8 +7,9 @@ import {
   IonPage,
   IonSegment,
   IonSegmentButton,
+  useIonViewWillEnter,
 } from "@ionic/react";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 import { RouteComponentProps } from "react-router";
 import CookTime from "../../components/detailsPageComp/CookTime";
 import DetailsPageTitle from "../../components/detailsPageComp/DetailsPageTitle";
@@ -25,23 +26,24 @@ interface IProps
     id: string;
   }> {}
 
-const RecipeDetailsPage: React.FC<IProps> = ({ match }) => {
-  const [
-    getRecipeDetails,
-    { error, loading, data: { recipe_by_pk } = {} as GetRecipeDetailsQuery },
-  ] = useLazyQuery<GetRecipeDetailsQuery, GetRecipeDetailsQueryVariables>(
-    GET_RECIPE_DETAILS
+const RecipeDetailsPage: React.FC<IProps> = ({
+  match: {
+    params: { id },
+  },
+}) => {
+  const {
+    error,
+    loading,
+    data: { recipe_by_pk } = {} as GetRecipeDetailsQuery,
+    refetch,
+  } = useQuery<GetRecipeDetailsQuery, GetRecipeDetailsQueryVariables>(
+    GET_RECIPE_DETAILS,
+    { variables: { id } }
   );
 
   const [showDirections, setShowDirections] = useState(false);
 
-  useLayoutEffect(() => {
-    console.log(match.params.id);
-    const { id } = match.params;
-    getRecipeDetails({
-      variables: { id },
-    });
-  }, [match.params.id]);
+  useIonViewWillEnter(() => refetch());
 
   if (loading) return <p>loading...</p>;
   if (error) return <p>{error.message}</p>;
