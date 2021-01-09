@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { parseIngredient } from "ingredient-parser";
 import query from "../db";
+import stringifyFormattedIngredients from "../helper/stringifyFormatedIngredients";
 import { IIngredientsTableType } from "../types/IngredientsTableType";
 import { Payload } from "../types/triggerHeaderType";
 
@@ -19,6 +20,7 @@ formatIngredients.post("/", async (req, res) => {
       // parse the raw text
 
       const parseResult = parseIngredient(data.new.raw_text);
+      const stringifyResult = stringifyFormattedIngredients(parseResult);
 
       const {
         name,
@@ -38,7 +40,8 @@ formatIngredients.post("/", async (req, res) => {
     name = $3,
     optional = $4,
     unit = $5,
-    preparation = $6
+    preparation = $6,
+    formatted_text = $8
     
     WHERE id = $7;`,
         [
@@ -49,6 +52,7 @@ formatIngredients.post("/", async (req, res) => {
           unit,
           preparation,
           data.new.id,
+          stringifyResult,
         ]
       );
     }

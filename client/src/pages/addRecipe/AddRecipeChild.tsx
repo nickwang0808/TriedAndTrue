@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IonButton, IonContent, IonFooter } from "@ionic/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import AddDirections from "../../components/AddRecipeComp/AddDirections";
 import AddIngredients from "../../components/AddRecipeComp/AddIngredients";
@@ -16,28 +16,26 @@ import { IRecipeForm, recipeFormSchema } from "../../utils/recipeSchema";
 
 interface IProps {
   isCreateNew: boolean;
-  defaultValue: IRecipeForm;
+  defaultValues: IRecipeForm;
 }
 
-export default function AddRecipeChild({ defaultValue, isCreateNew }: IProps) {
-  console.log(defaultValue);
+export default function AddRecipeChild({ defaultValues, isCreateNew }: IProps) {
+  console.log(defaultValues);
   const {
     formState,
     handleSubmit,
     watch,
     control,
     errors,
+    reset,
   } = useForm<IRecipeForm>({
     resolver: yupResolver(recipeFormSchema),
-    defaultValues: {
-      cuisine: null,
-      total_time: null,
-      meal_type: null,
-      yields: null,
-      title: null,
-      directions: [{ value: "step 1" }, { value: "step 2" }],
-    },
+    defaultValues,
   });
+
+  useEffect(() => {
+    reset(defaultValues);
+  }, [defaultValues]);
 
   const [insertRecipeOne, { loading, data, error }] = useMutation<
     InsertRecipeMutation,

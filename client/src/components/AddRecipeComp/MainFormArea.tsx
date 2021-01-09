@@ -24,10 +24,11 @@ export default function MainFormArea({ control }: IProps) {
           name="title"
           rules={{ required: true }}
           // defaultValue={null}
-          render={({ onChange, ref }) => (
+          render={({ onChange, ref, value }) => (
             <IonInput
               color="primary"
               type="text"
+              value={value}
               placeholder="Recipe Title"
               onIonChange={(e) => onChange(e.detail.value)}
               ref={ref}
@@ -78,10 +79,11 @@ export default function MainFormArea({ control }: IProps) {
           name="total_time"
           control={control}
           // defaultValue={null}
-          render={({ onChange, ref }) => (
+          render={({ onChange, ref, value }) => (
             <IonInput
               color="primary"
               type="number"
+              value={value}
               placeholder="minutes"
               ref={ref}
               onIonChange={(e) => onChange(e.detail.value)}
@@ -97,10 +99,11 @@ export default function MainFormArea({ control }: IProps) {
           name="yields"
           control={control}
           // defaultValue={null}
-          render={({ onChange, ref }) => (
+          render={({ onChange, ref, value }) => (
             <IonInput
               color="primary"
               type="text"
+              value={value}
               placeholder="servings"
               ref={ref}
               onIonChange={(e) => onChange(e.detail.value)}
@@ -116,10 +119,11 @@ export default function MainFormArea({ control }: IProps) {
           name="cuisine"
           control={control}
           // defaultValue={null}
-          render={({ onChange, ref }) => (
+          render={({ onChange, ref, value }) => (
             <IonInput
               color="primary"
               type="text"
+              value={value}
               placeholder="Select Cuisine"
               ref={ref}
               onIonChange={(e) => onChange(e.detail.value)}

@@ -21,8 +21,8 @@ const emptyDefaultValue: IRecipeForm = {
   meal_type: null,
   yields: null,
   title: null,
-  directions: null,
-  ingredients: null,
+  directions: [],
+  ingredients: [],
 };
 
 interface IProps
@@ -51,11 +51,10 @@ export default function AddRecipePage({
   if (error) return <p>{error.message}</p>;
   return (
     <IonPage>
-      <Header />
-
+      <Header isNew={id === "null" ? true : false} />
       <AddRecipeChild
-        isCreateNew={id !== "null" ? true : false}
-        defaultValue={
+        isCreateNew={id === "null" ? true : false}
+        defaultValues={
           id === "null"
             ? emptyDefaultValue
             : {
@@ -65,12 +64,11 @@ export default function AddRecipePage({
                 yields: recipe_by_pk?.yields || null,
                 title: recipe_by_pk?.title || null,
                 directions:
-                  (recipe_by_pk?.directions as Array<{ value: string }>) ||
-                  null,
+                  (recipe_by_pk?.directions as Array<{ value: string }>) || [],
                 ingredients:
                   recipe_by_pk?.recipe_ingredients_list.map((ing) => ({
                     value: ing.formatted_text as string,
-                  })) || null,
+                  })) || [],
               }
         }
       />
@@ -78,7 +76,7 @@ export default function AddRecipePage({
   );
 }
 
-function Header() {
+function Header({ isNew }: { isNew: boolean }) {
   const history = useHistory();
 
   return (
@@ -89,7 +87,9 @@ function Header() {
             <IonIcon icon={"close"} color="secondary" />
           </IonButton>
         </IonButtons>
-        <IonTitle color="primary">Create Recipe</IonTitle>
+        <IonTitle color="primary">
+          {isNew ? "Create Recipe" : "Edit Recipe"}
+        </IonTitle>
       </IonToolbar>
     </IonHeader>
   );
