@@ -15,10 +15,8 @@ actions:
   - role: user
 custom_types:
   enums: []
-  input_objects:
-  - name: Ingredients
+  input_objects: []
   objects:
   - name: ParsedIngredients
   - name: Status
-  - name: ingredients
   scalars: []

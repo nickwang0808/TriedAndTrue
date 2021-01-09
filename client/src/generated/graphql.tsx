@@ -1,13 +1,9 @@
-import * as Apollo from "@apollo/client";
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -22,76 +18,76 @@ export type Scalars = {
 
 /** expression to compare columns of type Boolean. All fields are combined with logical 'AND'. */
 export type Boolean_Comparison_Exp = {
-  _eq?: Maybe<Scalars["Boolean"]>;
-  _gt?: Maybe<Scalars["Boolean"]>;
-  _gte?: Maybe<Scalars["Boolean"]>;
-  _in?: Maybe<Array<Scalars["Boolean"]>>;
-  _is_null?: Maybe<Scalars["Boolean"]>;
-  _lt?: Maybe<Scalars["Boolean"]>;
-  _lte?: Maybe<Scalars["Boolean"]>;
-  _neq?: Maybe<Scalars["Boolean"]>;
-  _nin?: Maybe<Array<Scalars["Boolean"]>>;
-};
-
-export type Ingredients = {
-  ingredients?: Maybe<Array<Maybe<Scalars["String"]>>>;
+  _eq?: Maybe<Scalars['Boolean']>;
+  _gt?: Maybe<Scalars['Boolean']>;
+  _gte?: Maybe<Scalars['Boolean']>;
+  _in?: Maybe<Array<Scalars['Boolean']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['Boolean']>;
+  _lte?: Maybe<Scalars['Boolean']>;
+  _neq?: Maybe<Scalars['Boolean']>;
+  _nin?: Maybe<Array<Scalars['Boolean']>>;
 };
 
 /** expression to compare columns of type Int. All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
-  _eq?: Maybe<Scalars["Int"]>;
-  _gt?: Maybe<Scalars["Int"]>;
-  _gte?: Maybe<Scalars["Int"]>;
-  _in?: Maybe<Array<Scalars["Int"]>>;
-  _is_null?: Maybe<Scalars["Boolean"]>;
-  _lt?: Maybe<Scalars["Int"]>;
-  _lte?: Maybe<Scalars["Int"]>;
-  _neq?: Maybe<Scalars["Int"]>;
-  _nin?: Maybe<Array<Scalars["Int"]>>;
+  _eq?: Maybe<Scalars['Int']>;
+  _gt?: Maybe<Scalars['Int']>;
+  _gte?: Maybe<Scalars['Int']>;
+  _in?: Maybe<Array<Scalars['Int']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['Int']>;
+  _lte?: Maybe<Scalars['Int']>;
+  _neq?: Maybe<Scalars['Int']>;
+  _nin?: Maybe<Array<Scalars['Int']>>;
 };
 
 export type ParsedIngredients = {
-  name: Scalars["String"];
+  __typename?: 'ParsedIngredients';
+  name: Scalars['String'];
 };
 
 export type Status = {
-  status: Scalars["String"];
+  __typename?: 'Status';
+  status: Scalars['String'];
 };
 
 /** expression to compare columns of type String. All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
-  _eq?: Maybe<Scalars["String"]>;
-  _gt?: Maybe<Scalars["String"]>;
-  _gte?: Maybe<Scalars["String"]>;
-  _ilike?: Maybe<Scalars["String"]>;
-  _in?: Maybe<Array<Scalars["String"]>>;
-  _is_null?: Maybe<Scalars["Boolean"]>;
-  _like?: Maybe<Scalars["String"]>;
-  _lt?: Maybe<Scalars["String"]>;
-  _lte?: Maybe<Scalars["String"]>;
-  _neq?: Maybe<Scalars["String"]>;
-  _nilike?: Maybe<Scalars["String"]>;
-  _nin?: Maybe<Array<Scalars["String"]>>;
-  _nlike?: Maybe<Scalars["String"]>;
-  _nsimilar?: Maybe<Scalars["String"]>;
-  _similar?: Maybe<Scalars["String"]>;
+  _eq?: Maybe<Scalars['String']>;
+  _gt?: Maybe<Scalars['String']>;
+  _gte?: Maybe<Scalars['String']>;
+  _ilike?: Maybe<Scalars['String']>;
+  _in?: Maybe<Array<Scalars['String']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _like?: Maybe<Scalars['String']>;
+  _lt?: Maybe<Scalars['String']>;
+  _lte?: Maybe<Scalars['String']>;
+  _neq?: Maybe<Scalars['String']>;
+  _nilike?: Maybe<Scalars['String']>;
+  _nin?: Maybe<Array<Scalars['String']>>;
+  _nlike?: Maybe<Scalars['String']>;
+  _nsimilar?: Maybe<Scalars['String']>;
+  _similar?: Maybe<Scalars['String']>;
 };
+
 
 /** expression to compare columns of type json. All fields are combined with logical 'AND'. */
 export type Json_Comparison_Exp = {
-  _eq?: Maybe<Scalars["json"]>;
-  _gt?: Maybe<Scalars["json"]>;
-  _gte?: Maybe<Scalars["json"]>;
-  _in?: Maybe<Array<Scalars["json"]>>;
-  _is_null?: Maybe<Scalars["Boolean"]>;
-  _lt?: Maybe<Scalars["json"]>;
-  _lte?: Maybe<Scalars["json"]>;
-  _neq?: Maybe<Scalars["json"]>;
-  _nin?: Maybe<Array<Scalars["json"]>>;
+  _eq?: Maybe<Scalars['json']>;
+  _gt?: Maybe<Scalars['json']>;
+  _gte?: Maybe<Scalars['json']>;
+  _in?: Maybe<Array<Scalars['json']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['json']>;
+  _lte?: Maybe<Scalars['json']>;
+  _neq?: Maybe<Scalars['json']>;
+  _nin?: Maybe<Array<Scalars['json']>>;
 };
 
 /** mutation root */
 export type Mutation_Root = {
+  __typename?: 'mutation_root';
   /** delete data from the table: "recipe" */
   delete_recipe?: Maybe<Recipe_Mutation_Response>;
   /** delete single row from the table: "recipe" */
@@ -117,7 +113,7 @@ export type Mutation_Root = {
   /** insert a single row into the table: "user" */
   insert_user_one?: Maybe<User>;
   /** perform the action: "overRideIngredients" */
-  overRideIngredients: Scalars["uuid"];
+  overRideIngredients: Scalars['uuid'];
   /** update data of the table: "recipe" */
   update_recipe?: Maybe<Recipe_Mutation_Response>;
   /** update single row of the table: "recipe" */
@@ -132,35 +128,42 @@ export type Mutation_Root = {
   update_user_by_pk?: Maybe<User>;
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_RecipeArgs = {
   where: Recipe_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_Recipe_By_PkArgs = {
-  id: Scalars["String"];
+  id: Scalars['String'];
 };
+
 
 /** mutation root */
 export type Mutation_RootDelete_Recipe_IngredientsArgs = {
   where: Recipe_Ingredients_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_Recipe_Ingredients_By_PkArgs = {
-  id: Scalars["uuid"];
+  id: Scalars['uuid'];
 };
+
 
 /** mutation root */
 export type Mutation_RootDelete_UserArgs = {
   where: User_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_User_By_PkArgs = {
-  id: Scalars["String"];
+  id: Scalars['String'];
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_RecipeArgs = {
@@ -168,11 +171,13 @@ export type Mutation_RootInsert_RecipeArgs = {
   on_conflict?: Maybe<Recipe_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_Recipe_IngredientsArgs = {
   objects: Array<Recipe_Ingredients_Insert_Input>;
   on_conflict?: Maybe<Recipe_Ingredients_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_Recipe_Ingredients_OneArgs = {
@@ -180,11 +185,13 @@ export type Mutation_RootInsert_Recipe_Ingredients_OneArgs = {
   on_conflict?: Maybe<Recipe_Ingredients_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_Recipe_OneArgs = {
   object: Recipe_Insert_Input;
   on_conflict?: Maybe<Recipe_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_UserArgs = {
@@ -192,17 +199,20 @@ export type Mutation_RootInsert_UserArgs = {
   on_conflict?: Maybe<User_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_User_OneArgs = {
   object: User_Insert_Input;
   on_conflict?: Maybe<User_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootOverRideIngredientsArgs = {
-  ingredientsStrings: Array<Maybe<Scalars["String"]>>;
-  recipe_id: Scalars["String"];
+  ingredientsStrings: Array<Maybe<Scalars['String']>>;
+  recipe_id: Scalars['String'];
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_RecipeArgs = {
@@ -211,12 +221,14 @@ export type Mutation_RootUpdate_RecipeArgs = {
   where: Recipe_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_By_PkArgs = {
   _inc?: Maybe<Recipe_Inc_Input>;
   _set?: Maybe<Recipe_Set_Input>;
   pk_columns: Recipe_Pk_Columns_Input;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_IngredientsArgs = {
@@ -225,6 +237,7 @@ export type Mutation_RootUpdate_Recipe_IngredientsArgs = {
   where: Recipe_Ingredients_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_Ingredients_By_PkArgs = {
   _inc?: Maybe<Recipe_Ingredients_Inc_Input>;
@@ -232,11 +245,13 @@ export type Mutation_RootUpdate_Recipe_Ingredients_By_PkArgs = {
   pk_columns: Recipe_Ingredients_Pk_Columns_Input;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_UserArgs = {
   _set?: Maybe<User_Set_Input>;
   where: User_Bool_Exp;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_User_By_PkArgs = {
@@ -247,33 +262,35 @@ export type Mutation_RootUpdate_User_By_PkArgs = {
 /** column ordering options */
 export enum Order_By {
   /** in the ascending order, nulls last */
-  Asc = "asc",
+  Asc = 'asc',
   /** in the ascending order, nulls first */
-  AscNullsFirst = "asc_nulls_first",
+  AscNullsFirst = 'asc_nulls_first',
   /** in the ascending order, nulls last */
-  AscNullsLast = "asc_nulls_last",
+  AscNullsLast = 'asc_nulls_last',
   /** in the descending order, nulls first */
-  Desc = "desc",
+  Desc = 'desc',
   /** in the descending order, nulls first */
-  DescNullsFirst = "desc_nulls_first",
+  DescNullsFirst = 'desc_nulls_first',
   /** in the descending order, nulls last */
-  DescNullsLast = "desc_nulls_last",
+  DescNullsLast = 'desc_nulls_last'
 }
 
 /** fields of action: "overRideIngredients" */
 export type OverRideIngredients = {
+  __typename?: 'overRideIngredients';
   /** the time at which this action was created */
-  created_at?: Maybe<Scalars["timestamptz"]>;
+  created_at?: Maybe<Scalars['timestamptz']>;
   /** errors related to the invocation */
-  errors?: Maybe<Scalars["json"]>;
+  errors?: Maybe<Scalars['json']>;
   /** the unique id of an action */
-  id?: Maybe<Scalars["uuid"]>;
+  id?: Maybe<Scalars['uuid']>;
   /** the output fields of this action */
   output: Status;
 };
 
 /** query root */
 export type Query_Root = {
+  __typename?: 'query_root';
   /** retrieve the result of action: "overRideIngredients" */
   overRideIngredients?: Maybe<OverRideIngredients>;
   /** perform the action: "parseIngredients" */
@@ -298,137 +315,154 @@ export type Query_Root = {
   user_by_pk?: Maybe<User>;
 };
 
+
 /** query root */
 export type Query_RootOverRideIngredientsArgs = {
-  id: Scalars["uuid"];
+  id: Scalars['uuid'];
 };
+
 
 /** query root */
 export type Query_RootParseIngredientsArgs = {
-  ingredients?: Maybe<Array<Maybe<Scalars["String"]>>>;
+  ingredientsToParse?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
+
 
 /** query root */
 export type Query_RootRecipeArgs = {
   distinct_on?: Maybe<Array<Recipe_Select_Column>>;
-  limit?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Recipe_Order_By>>;
   where?: Maybe<Recipe_Bool_Exp>;
 };
+
 
 /** query root */
 export type Query_RootRecipe_AggregateArgs = {
   distinct_on?: Maybe<Array<Recipe_Select_Column>>;
-  limit?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Recipe_Order_By>>;
   where?: Maybe<Recipe_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootRecipe_By_PkArgs = {
-  id: Scalars["String"];
+  id: Scalars['String'];
 };
+
 
 /** query root */
 export type Query_RootRecipe_IngredientsArgs = {
   distinct_on?: Maybe<Array<Recipe_Ingredients_Select_Column>>;
-  limit?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Recipe_Ingredients_Order_By>>;
   where?: Maybe<Recipe_Ingredients_Bool_Exp>;
 };
+
 
 /** query root */
 export type Query_RootRecipe_Ingredients_AggregateArgs = {
   distinct_on?: Maybe<Array<Recipe_Ingredients_Select_Column>>;
-  limit?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Recipe_Ingredients_Order_By>>;
   where?: Maybe<Recipe_Ingredients_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootRecipe_Ingredients_By_PkArgs = {
-  id: Scalars["uuid"];
+  id: Scalars['uuid'];
 };
+
 
 /** query root */
 export type Query_RootUserArgs = {
   distinct_on?: Maybe<Array<User_Select_Column>>;
-  limit?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<User_Order_By>>;
   where?: Maybe<User_Bool_Exp>;
 };
+
 
 /** query root */
 export type Query_RootUser_AggregateArgs = {
   distinct_on?: Maybe<Array<User_Select_Column>>;
-  limit?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<User_Order_By>>;
   where?: Maybe<User_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootUser_By_PkArgs = {
-  id: Scalars["String"];
+  id: Scalars['String'];
 };
 
 /** columns and relationships of "recipe" */
 export type Recipe = {
-  cuisine?: Maybe<Scalars["String"]>;
-  directions?: Maybe<Scalars["json"]>;
-  id: Scalars["String"];
-  img?: Maybe<Scalars["String"]>;
-  meal_type?: Maybe<Scalars["String"]>;
-  owner: Scalars["String"];
+  __typename?: 'recipe';
+  cuisine?: Maybe<Scalars['String']>;
+  directions?: Maybe<Scalars['json']>;
+  id: Scalars['String'];
+  img?: Maybe<Scalars['String']>;
+  meal_type?: Maybe<Scalars['String']>;
+  owner: Scalars['String'];
   /** An array relationship */
   recipe_ingredients_list: Array<Recipe_Ingredients>;
   /** An aggregated array relationship */
   recipe_ingredients_list_aggregate: Recipe_Ingredients_Aggregate;
-  title: Scalars["String"];
-  total_time?: Maybe<Scalars["Int"]>;
+  title: Scalars['String'];
+  total_time?: Maybe<Scalars['Int']>;
   /** An object relationship */
   user: User;
-  yields?: Maybe<Scalars["String"]>;
+  yields?: Maybe<Scalars['String']>;
 };
+
 
 /** columns and relationships of "recipe" */
 export type RecipeDirectionsArgs = {
-  path?: Maybe<Scalars["String"]>;
+  path?: Maybe<Scalars['String']>;
 };
+
 
 /** columns and relationships of "recipe" */
 export type RecipeRecipe_Ingredients_ListArgs = {
   distinct_on?: Maybe<Array<Recipe_Ingredients_Select_Column>>;
-  limit?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Recipe_Ingredients_Order_By>>;
   where?: Maybe<Recipe_Ingredients_Bool_Exp>;
 };
 
+
 /** columns and relationships of "recipe" */
 export type RecipeRecipe_Ingredients_List_AggregateArgs = {
   distinct_on?: Maybe<Array<Recipe_Ingredients_Select_Column>>;
-  limit?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Recipe_Ingredients_Order_By>>;
   where?: Maybe<Recipe_Ingredients_Bool_Exp>;
 };
 
 /** aggregated selection of "recipe" */
 export type Recipe_Aggregate = {
+  __typename?: 'recipe_aggregate';
   aggregate?: Maybe<Recipe_Aggregate_Fields>;
   nodes: Array<Recipe>;
 };
 
 /** aggregate fields of "recipe" */
 export type Recipe_Aggregate_Fields = {
+  __typename?: 'recipe_aggregate_fields';
   avg?: Maybe<Recipe_Avg_Fields>;
-  count?: Maybe<Scalars["Int"]>;
+  count?: Maybe<Scalars['Int']>;
   max?: Maybe<Recipe_Max_Fields>;
   min?: Maybe<Recipe_Min_Fields>;
   stddev?: Maybe<Recipe_Stddev_Fields>;
@@ -440,10 +474,11 @@ export type Recipe_Aggregate_Fields = {
   variance?: Maybe<Recipe_Variance_Fields>;
 };
 
+
 /** aggregate fields of "recipe" */
 export type Recipe_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Recipe_Select_Column>>;
-  distinct?: Maybe<Scalars["Boolean"]>;
+  distinct?: Maybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "recipe" */
@@ -469,7 +504,8 @@ export type Recipe_Arr_Rel_Insert_Input = {
 
 /** aggregate avg on columns */
 export type Recipe_Avg_Fields = {
-  total_time?: Maybe<Scalars["Float"]>;
+  __typename?: 'recipe_avg_fields';
+  total_time?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "recipe" */
@@ -498,42 +534,45 @@ export type Recipe_Bool_Exp = {
 /** unique or primary key constraints on table "recipe" */
 export enum Recipe_Constraint {
   /** unique or primary key constraint */
-  RecipeIdKey = "recipe_id_key",
+  RecipeIdKey = 'recipe_id_key',
   /** unique or primary key constraint */
-  RecipePkey = "recipe_pkey",
+  RecipePkey = 'recipe_pkey'
 }
 
 /** input type for incrementing integer column in table "recipe" */
 export type Recipe_Inc_Input = {
-  total_time?: Maybe<Scalars["Int"]>;
+  total_time?: Maybe<Scalars['Int']>;
 };
 
 /** columns and relationships of "recipe_ingredients" */
 export type Recipe_Ingredients = {
-  formatted_text?: Maybe<Scalars["String"]>;
-  id: Scalars["uuid"];
-  name?: Maybe<Scalars["String"]>;
-  optional?: Maybe<Scalars["Boolean"]>;
-  preparation?: Maybe<Scalars["String"]>;
-  quantity_denominator?: Maybe<Scalars["Int"]>;
-  quantity_numerator?: Maybe<Scalars["Int"]>;
-  raw_text: Scalars["String"];
+  __typename?: 'recipe_ingredients';
+  formatted_text?: Maybe<Scalars['String']>;
+  id: Scalars['uuid'];
+  name?: Maybe<Scalars['String']>;
+  optional?: Maybe<Scalars['Boolean']>;
+  preparation?: Maybe<Scalars['String']>;
+  quantity_denominator?: Maybe<Scalars['Int']>;
+  quantity_numerator?: Maybe<Scalars['Int']>;
+  raw_text: Scalars['String'];
   /** An object relationship */
   recipe: Recipe;
-  recipe_id: Scalars["String"];
-  unit?: Maybe<Scalars["String"]>;
+  recipe_id: Scalars['String'];
+  unit?: Maybe<Scalars['String']>;
 };
 
 /** aggregated selection of "recipe_ingredients" */
 export type Recipe_Ingredients_Aggregate = {
+  __typename?: 'recipe_ingredients_aggregate';
   aggregate?: Maybe<Recipe_Ingredients_Aggregate_Fields>;
   nodes: Array<Recipe_Ingredients>;
 };
 
 /** aggregate fields of "recipe_ingredients" */
 export type Recipe_Ingredients_Aggregate_Fields = {
+  __typename?: 'recipe_ingredients_aggregate_fields';
   avg?: Maybe<Recipe_Ingredients_Avg_Fields>;
-  count?: Maybe<Scalars["Int"]>;
+  count?: Maybe<Scalars['Int']>;
   max?: Maybe<Recipe_Ingredients_Max_Fields>;
   min?: Maybe<Recipe_Ingredients_Min_Fields>;
   stddev?: Maybe<Recipe_Ingredients_Stddev_Fields>;
@@ -545,10 +584,11 @@ export type Recipe_Ingredients_Aggregate_Fields = {
   variance?: Maybe<Recipe_Ingredients_Variance_Fields>;
 };
 
+
 /** aggregate fields of "recipe_ingredients" */
 export type Recipe_Ingredients_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Recipe_Ingredients_Select_Column>>;
-  distinct?: Maybe<Scalars["Boolean"]>;
+  distinct?: Maybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "recipe_ingredients" */
@@ -574,8 +614,9 @@ export type Recipe_Ingredients_Arr_Rel_Insert_Input = {
 
 /** aggregate avg on columns */
 export type Recipe_Ingredients_Avg_Fields = {
-  quantity_denominator?: Maybe<Scalars["Float"]>;
-  quantity_numerator?: Maybe<Scalars["Float"]>;
+  __typename?: 'recipe_ingredients_avg_fields';
+  quantity_denominator?: Maybe<Scalars['Float']>;
+  quantity_numerator?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "recipe_ingredients" */
@@ -605,43 +646,44 @@ export type Recipe_Ingredients_Bool_Exp = {
 /** unique or primary key constraints on table "recipe_ingredients" */
 export enum Recipe_Ingredients_Constraint {
   /** unique or primary key constraint */
-  RecipeIngredientsIdKey = "recipe_ingredients_id_key",
+  RecipeIngredientsIdKey = 'recipe_ingredients_id_key',
   /** unique or primary key constraint */
-  RecipeIngredientsPkey = "recipe_ingredients_pkey",
+  RecipeIngredientsPkey = 'recipe_ingredients_pkey'
 }
 
 /** input type for incrementing integer column in table "recipe_ingredients" */
 export type Recipe_Ingredients_Inc_Input = {
-  quantity_denominator?: Maybe<Scalars["Int"]>;
-  quantity_numerator?: Maybe<Scalars["Int"]>;
+  quantity_denominator?: Maybe<Scalars['Int']>;
+  quantity_numerator?: Maybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "recipe_ingredients" */
 export type Recipe_Ingredients_Insert_Input = {
-  formatted_text?: Maybe<Scalars["String"]>;
-  id?: Maybe<Scalars["uuid"]>;
-  name?: Maybe<Scalars["String"]>;
-  optional?: Maybe<Scalars["Boolean"]>;
-  preparation?: Maybe<Scalars["String"]>;
-  quantity_denominator?: Maybe<Scalars["Int"]>;
-  quantity_numerator?: Maybe<Scalars["Int"]>;
-  raw_text?: Maybe<Scalars["String"]>;
+  formatted_text?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  name?: Maybe<Scalars['String']>;
+  optional?: Maybe<Scalars['Boolean']>;
+  preparation?: Maybe<Scalars['String']>;
+  quantity_denominator?: Maybe<Scalars['Int']>;
+  quantity_numerator?: Maybe<Scalars['Int']>;
+  raw_text?: Maybe<Scalars['String']>;
   recipe?: Maybe<Recipe_Obj_Rel_Insert_Input>;
-  recipe_id?: Maybe<Scalars["String"]>;
-  unit?: Maybe<Scalars["String"]>;
+  recipe_id?: Maybe<Scalars['String']>;
+  unit?: Maybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
 export type Recipe_Ingredients_Max_Fields = {
-  formatted_text?: Maybe<Scalars["String"]>;
-  id?: Maybe<Scalars["uuid"]>;
-  name?: Maybe<Scalars["String"]>;
-  preparation?: Maybe<Scalars["String"]>;
-  quantity_denominator?: Maybe<Scalars["Int"]>;
-  quantity_numerator?: Maybe<Scalars["Int"]>;
-  raw_text?: Maybe<Scalars["String"]>;
-  recipe_id?: Maybe<Scalars["String"]>;
-  unit?: Maybe<Scalars["String"]>;
+  __typename?: 'recipe_ingredients_max_fields';
+  formatted_text?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  name?: Maybe<Scalars['String']>;
+  preparation?: Maybe<Scalars['String']>;
+  quantity_denominator?: Maybe<Scalars['Int']>;
+  quantity_numerator?: Maybe<Scalars['Int']>;
+  raw_text?: Maybe<Scalars['String']>;
+  recipe_id?: Maybe<Scalars['String']>;
+  unit?: Maybe<Scalars['String']>;
 };
 
 /** order by max() on columns of table "recipe_ingredients" */
@@ -659,15 +701,16 @@ export type Recipe_Ingredients_Max_Order_By = {
 
 /** aggregate min on columns */
 export type Recipe_Ingredients_Min_Fields = {
-  formatted_text?: Maybe<Scalars["String"]>;
-  id?: Maybe<Scalars["uuid"]>;
-  name?: Maybe<Scalars["String"]>;
-  preparation?: Maybe<Scalars["String"]>;
-  quantity_denominator?: Maybe<Scalars["Int"]>;
-  quantity_numerator?: Maybe<Scalars["Int"]>;
-  raw_text?: Maybe<Scalars["String"]>;
-  recipe_id?: Maybe<Scalars["String"]>;
-  unit?: Maybe<Scalars["String"]>;
+  __typename?: 'recipe_ingredients_min_fields';
+  formatted_text?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  name?: Maybe<Scalars['String']>;
+  preparation?: Maybe<Scalars['String']>;
+  quantity_denominator?: Maybe<Scalars['Int']>;
+  quantity_numerator?: Maybe<Scalars['Int']>;
+  raw_text?: Maybe<Scalars['String']>;
+  recipe_id?: Maybe<Scalars['String']>;
+  unit?: Maybe<Scalars['String']>;
 };
 
 /** order by min() on columns of table "recipe_ingredients" */
@@ -685,8 +728,9 @@ export type Recipe_Ingredients_Min_Order_By = {
 
 /** response of any mutation on the table "recipe_ingredients" */
 export type Recipe_Ingredients_Mutation_Response = {
+  __typename?: 'recipe_ingredients_mutation_response';
   /** number of affected rows by the mutation */
-  affected_rows: Scalars["Int"];
+  affected_rows: Scalars['Int'];
   /** data of the affected rows by the mutation */
   returning: Array<Recipe_Ingredients>;
 };
@@ -721,51 +765,52 @@ export type Recipe_Ingredients_Order_By = {
 
 /** primary key columns input for table: "recipe_ingredients" */
 export type Recipe_Ingredients_Pk_Columns_Input = {
-  id: Scalars["uuid"];
+  id: Scalars['uuid'];
 };
 
 /** select columns of table "recipe_ingredients" */
 export enum Recipe_Ingredients_Select_Column {
   /** column name */
-  FormattedText = "formatted_text",
+  FormattedText = 'formatted_text',
   /** column name */
-  Id = "id",
+  Id = 'id',
   /** column name */
-  Name = "name",
+  Name = 'name',
   /** column name */
-  Optional = "optional",
+  Optional = 'optional',
   /** column name */
-  Preparation = "preparation",
+  Preparation = 'preparation',
   /** column name */
-  QuantityDenominator = "quantity_denominator",
+  QuantityDenominator = 'quantity_denominator',
   /** column name */
-  QuantityNumerator = "quantity_numerator",
+  QuantityNumerator = 'quantity_numerator',
   /** column name */
-  RawText = "raw_text",
+  RawText = 'raw_text',
   /** column name */
-  RecipeId = "recipe_id",
+  RecipeId = 'recipe_id',
   /** column name */
-  Unit = "unit",
+  Unit = 'unit'
 }
 
 /** input type for updating data in table "recipe_ingredients" */
 export type Recipe_Ingredients_Set_Input = {
-  formatted_text?: Maybe<Scalars["String"]>;
-  id?: Maybe<Scalars["uuid"]>;
-  name?: Maybe<Scalars["String"]>;
-  optional?: Maybe<Scalars["Boolean"]>;
-  preparation?: Maybe<Scalars["String"]>;
-  quantity_denominator?: Maybe<Scalars["Int"]>;
-  quantity_numerator?: Maybe<Scalars["Int"]>;
-  raw_text?: Maybe<Scalars["String"]>;
-  recipe_id?: Maybe<Scalars["String"]>;
-  unit?: Maybe<Scalars["String"]>;
+  formatted_text?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  name?: Maybe<Scalars['String']>;
+  optional?: Maybe<Scalars['Boolean']>;
+  preparation?: Maybe<Scalars['String']>;
+  quantity_denominator?: Maybe<Scalars['Int']>;
+  quantity_numerator?: Maybe<Scalars['Int']>;
+  raw_text?: Maybe<Scalars['String']>;
+  recipe_id?: Maybe<Scalars['String']>;
+  unit?: Maybe<Scalars['String']>;
 };
 
 /** aggregate stddev on columns */
 export type Recipe_Ingredients_Stddev_Fields = {
-  quantity_denominator?: Maybe<Scalars["Float"]>;
-  quantity_numerator?: Maybe<Scalars["Float"]>;
+  __typename?: 'recipe_ingredients_stddev_fields';
+  quantity_denominator?: Maybe<Scalars['Float']>;
+  quantity_numerator?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "recipe_ingredients" */
@@ -776,8 +821,9 @@ export type Recipe_Ingredients_Stddev_Order_By = {
 
 /** aggregate stddev_pop on columns */
 export type Recipe_Ingredients_Stddev_Pop_Fields = {
-  quantity_denominator?: Maybe<Scalars["Float"]>;
-  quantity_numerator?: Maybe<Scalars["Float"]>;
+  __typename?: 'recipe_ingredients_stddev_pop_fields';
+  quantity_denominator?: Maybe<Scalars['Float']>;
+  quantity_numerator?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "recipe_ingredients" */
@@ -788,8 +834,9 @@ export type Recipe_Ingredients_Stddev_Pop_Order_By = {
 
 /** aggregate stddev_samp on columns */
 export type Recipe_Ingredients_Stddev_Samp_Fields = {
-  quantity_denominator?: Maybe<Scalars["Float"]>;
-  quantity_numerator?: Maybe<Scalars["Float"]>;
+  __typename?: 'recipe_ingredients_stddev_samp_fields';
+  quantity_denominator?: Maybe<Scalars['Float']>;
+  quantity_numerator?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "recipe_ingredients" */
@@ -800,8 +847,9 @@ export type Recipe_Ingredients_Stddev_Samp_Order_By = {
 
 /** aggregate sum on columns */
 export type Recipe_Ingredients_Sum_Fields = {
-  quantity_denominator?: Maybe<Scalars["Int"]>;
-  quantity_numerator?: Maybe<Scalars["Int"]>;
+  __typename?: 'recipe_ingredients_sum_fields';
+  quantity_denominator?: Maybe<Scalars['Int']>;
+  quantity_numerator?: Maybe<Scalars['Int']>;
 };
 
 /** order by sum() on columns of table "recipe_ingredients" */
@@ -813,31 +861,32 @@ export type Recipe_Ingredients_Sum_Order_By = {
 /** update columns of table "recipe_ingredients" */
 export enum Recipe_Ingredients_Update_Column {
   /** column name */
-  FormattedText = "formatted_text",
+  FormattedText = 'formatted_text',
   /** column name */
-  Id = "id",
+  Id = 'id',
   /** column name */
-  Name = "name",
+  Name = 'name',
   /** column name */
-  Optional = "optional",
+  Optional = 'optional',
   /** column name */
-  Preparation = "preparation",
+  Preparation = 'preparation',
   /** column name */
-  QuantityDenominator = "quantity_denominator",
+  QuantityDenominator = 'quantity_denominator',
   /** column name */
-  QuantityNumerator = "quantity_numerator",
+  QuantityNumerator = 'quantity_numerator',
   /** column name */
-  RawText = "raw_text",
+  RawText = 'raw_text',
   /** column name */
-  RecipeId = "recipe_id",
+  RecipeId = 'recipe_id',
   /** column name */
-  Unit = "unit",
+  Unit = 'unit'
 }
 
 /** aggregate var_pop on columns */
 export type Recipe_Ingredients_Var_Pop_Fields = {
-  quantity_denominator?: Maybe<Scalars["Float"]>;
-  quantity_numerator?: Maybe<Scalars["Float"]>;
+  __typename?: 'recipe_ingredients_var_pop_fields';
+  quantity_denominator?: Maybe<Scalars['Float']>;
+  quantity_numerator?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "recipe_ingredients" */
@@ -848,8 +897,9 @@ export type Recipe_Ingredients_Var_Pop_Order_By = {
 
 /** aggregate var_samp on columns */
 export type Recipe_Ingredients_Var_Samp_Fields = {
-  quantity_denominator?: Maybe<Scalars["Float"]>;
-  quantity_numerator?: Maybe<Scalars["Float"]>;
+  __typename?: 'recipe_ingredients_var_samp_fields';
+  quantity_denominator?: Maybe<Scalars['Float']>;
+  quantity_numerator?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "recipe_ingredients" */
@@ -860,8 +910,9 @@ export type Recipe_Ingredients_Var_Samp_Order_By = {
 
 /** aggregate variance on columns */
 export type Recipe_Ingredients_Variance_Fields = {
-  quantity_denominator?: Maybe<Scalars["Float"]>;
-  quantity_numerator?: Maybe<Scalars["Float"]>;
+  __typename?: 'recipe_ingredients_variance_fields';
+  quantity_denominator?: Maybe<Scalars['Float']>;
+  quantity_numerator?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "recipe_ingredients" */
@@ -872,29 +923,30 @@ export type Recipe_Ingredients_Variance_Order_By = {
 
 /** input type for inserting data into table "recipe" */
 export type Recipe_Insert_Input = {
-  cuisine?: Maybe<Scalars["String"]>;
-  directions?: Maybe<Scalars["json"]>;
-  id?: Maybe<Scalars["String"]>;
-  img?: Maybe<Scalars["String"]>;
-  meal_type?: Maybe<Scalars["String"]>;
-  owner?: Maybe<Scalars["String"]>;
+  cuisine?: Maybe<Scalars['String']>;
+  directions?: Maybe<Scalars['json']>;
+  id?: Maybe<Scalars['String']>;
+  img?: Maybe<Scalars['String']>;
+  meal_type?: Maybe<Scalars['String']>;
+  owner?: Maybe<Scalars['String']>;
   recipe_ingredients_list?: Maybe<Recipe_Ingredients_Arr_Rel_Insert_Input>;
-  title?: Maybe<Scalars["String"]>;
-  total_time?: Maybe<Scalars["Int"]>;
+  title?: Maybe<Scalars['String']>;
+  total_time?: Maybe<Scalars['Int']>;
   user?: Maybe<User_Obj_Rel_Insert_Input>;
-  yields?: Maybe<Scalars["String"]>;
+  yields?: Maybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
 export type Recipe_Max_Fields = {
-  cuisine?: Maybe<Scalars["String"]>;
-  id?: Maybe<Scalars["String"]>;
-  img?: Maybe<Scalars["String"]>;
-  meal_type?: Maybe<Scalars["String"]>;
-  owner?: Maybe<Scalars["String"]>;
-  title?: Maybe<Scalars["String"]>;
-  total_time?: Maybe<Scalars["Int"]>;
-  yields?: Maybe<Scalars["String"]>;
+  __typename?: 'recipe_max_fields';
+  cuisine?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  img?: Maybe<Scalars['String']>;
+  meal_type?: Maybe<Scalars['String']>;
+  owner?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  total_time?: Maybe<Scalars['Int']>;
+  yields?: Maybe<Scalars['String']>;
 };
 
 /** order by max() on columns of table "recipe" */
@@ -911,14 +963,15 @@ export type Recipe_Max_Order_By = {
 
 /** aggregate min on columns */
 export type Recipe_Min_Fields = {
-  cuisine?: Maybe<Scalars["String"]>;
-  id?: Maybe<Scalars["String"]>;
-  img?: Maybe<Scalars["String"]>;
-  meal_type?: Maybe<Scalars["String"]>;
-  owner?: Maybe<Scalars["String"]>;
-  title?: Maybe<Scalars["String"]>;
-  total_time?: Maybe<Scalars["Int"]>;
-  yields?: Maybe<Scalars["String"]>;
+  __typename?: 'recipe_min_fields';
+  cuisine?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  img?: Maybe<Scalars['String']>;
+  meal_type?: Maybe<Scalars['String']>;
+  owner?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  total_time?: Maybe<Scalars['Int']>;
+  yields?: Maybe<Scalars['String']>;
 };
 
 /** order by min() on columns of table "recipe" */
@@ -935,8 +988,9 @@ export type Recipe_Min_Order_By = {
 
 /** response of any mutation on the table "recipe" */
 export type Recipe_Mutation_Response = {
+  __typename?: 'recipe_mutation_response';
   /** number of affected rows by the mutation */
-  affected_rows: Scalars["Int"];
+  affected_rows: Scalars['Int'];
   /** data of the affected rows by the mutation */
   returning: Array<Recipe>;
 };
@@ -971,47 +1025,48 @@ export type Recipe_Order_By = {
 
 /** primary key columns input for table: "recipe" */
 export type Recipe_Pk_Columns_Input = {
-  id: Scalars["String"];
+  id: Scalars['String'];
 };
 
 /** select columns of table "recipe" */
 export enum Recipe_Select_Column {
   /** column name */
-  Cuisine = "cuisine",
+  Cuisine = 'cuisine',
   /** column name */
-  Directions = "directions",
+  Directions = 'directions',
   /** column name */
-  Id = "id",
+  Id = 'id',
   /** column name */
-  Img = "img",
+  Img = 'img',
   /** column name */
-  MealType = "meal_type",
+  MealType = 'meal_type',
   /** column name */
-  Owner = "owner",
+  Owner = 'owner',
   /** column name */
-  Title = "title",
+  Title = 'title',
   /** column name */
-  TotalTime = "total_time",
+  TotalTime = 'total_time',
   /** column name */
-  Yields = "yields",
+  Yields = 'yields'
 }
 
 /** input type for updating data in table "recipe" */
 export type Recipe_Set_Input = {
-  cuisine?: Maybe<Scalars["String"]>;
-  directions?: Maybe<Scalars["json"]>;
-  id?: Maybe<Scalars["String"]>;
-  img?: Maybe<Scalars["String"]>;
-  meal_type?: Maybe<Scalars["String"]>;
-  owner?: Maybe<Scalars["String"]>;
-  title?: Maybe<Scalars["String"]>;
-  total_time?: Maybe<Scalars["Int"]>;
-  yields?: Maybe<Scalars["String"]>;
+  cuisine?: Maybe<Scalars['String']>;
+  directions?: Maybe<Scalars['json']>;
+  id?: Maybe<Scalars['String']>;
+  img?: Maybe<Scalars['String']>;
+  meal_type?: Maybe<Scalars['String']>;
+  owner?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  total_time?: Maybe<Scalars['Int']>;
+  yields?: Maybe<Scalars['String']>;
 };
 
 /** aggregate stddev on columns */
 export type Recipe_Stddev_Fields = {
-  total_time?: Maybe<Scalars["Float"]>;
+  __typename?: 'recipe_stddev_fields';
+  total_time?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "recipe" */
@@ -1021,7 +1076,8 @@ export type Recipe_Stddev_Order_By = {
 
 /** aggregate stddev_pop on columns */
 export type Recipe_Stddev_Pop_Fields = {
-  total_time?: Maybe<Scalars["Float"]>;
+  __typename?: 'recipe_stddev_pop_fields';
+  total_time?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "recipe" */
@@ -1031,7 +1087,8 @@ export type Recipe_Stddev_Pop_Order_By = {
 
 /** aggregate stddev_samp on columns */
 export type Recipe_Stddev_Samp_Fields = {
-  total_time?: Maybe<Scalars["Float"]>;
+  __typename?: 'recipe_stddev_samp_fields';
+  total_time?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "recipe" */
@@ -1041,7 +1098,8 @@ export type Recipe_Stddev_Samp_Order_By = {
 
 /** aggregate sum on columns */
 export type Recipe_Sum_Fields = {
-  total_time?: Maybe<Scalars["Int"]>;
+  __typename?: 'recipe_sum_fields';
+  total_time?: Maybe<Scalars['Int']>;
 };
 
 /** order by sum() on columns of table "recipe" */
@@ -1052,28 +1110,29 @@ export type Recipe_Sum_Order_By = {
 /** update columns of table "recipe" */
 export enum Recipe_Update_Column {
   /** column name */
-  Cuisine = "cuisine",
+  Cuisine = 'cuisine',
   /** column name */
-  Directions = "directions",
+  Directions = 'directions',
   /** column name */
-  Id = "id",
+  Id = 'id',
   /** column name */
-  Img = "img",
+  Img = 'img',
   /** column name */
-  MealType = "meal_type",
+  MealType = 'meal_type',
   /** column name */
-  Owner = "owner",
+  Owner = 'owner',
   /** column name */
-  Title = "title",
+  Title = 'title',
   /** column name */
-  TotalTime = "total_time",
+  TotalTime = 'total_time',
   /** column name */
-  Yields = "yields",
+  Yields = 'yields'
 }
 
 /** aggregate var_pop on columns */
 export type Recipe_Var_Pop_Fields = {
-  total_time?: Maybe<Scalars["Float"]>;
+  __typename?: 'recipe_var_pop_fields';
+  total_time?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "recipe" */
@@ -1083,7 +1142,8 @@ export type Recipe_Var_Pop_Order_By = {
 
 /** aggregate var_samp on columns */
 export type Recipe_Var_Samp_Fields = {
-  total_time?: Maybe<Scalars["Float"]>;
+  __typename?: 'recipe_var_samp_fields';
+  total_time?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "recipe" */
@@ -1093,7 +1153,8 @@ export type Recipe_Var_Samp_Order_By = {
 
 /** aggregate variance on columns */
 export type Recipe_Variance_Fields = {
-  total_time?: Maybe<Scalars["Float"]>;
+  __typename?: 'recipe_variance_fields';
+  total_time?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "recipe" */
@@ -1103,6 +1164,7 @@ export type Recipe_Variance_Order_By = {
 
 /** subscription root */
 export type Subscription_Root = {
+  __typename?: 'subscription_root';
   /** retrieve the result of action: "overRideIngredients" */
   overRideIngredients?: Maybe<OverRideIngredients>;
   /** perform the action: "parseIngredients" */
@@ -1127,132 +1189,150 @@ export type Subscription_Root = {
   user_by_pk?: Maybe<User>;
 };
 
+
 /** subscription root */
 export type Subscription_RootOverRideIngredientsArgs = {
-  id: Scalars["uuid"];
+  id: Scalars['uuid'];
 };
+
 
 /** subscription root */
 export type Subscription_RootParseIngredientsArgs = {
-  ingredients?: Maybe<Array<Maybe<Scalars["String"]>>>;
+  ingredientsToParse?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
+
 
 /** subscription root */
 export type Subscription_RootRecipeArgs = {
   distinct_on?: Maybe<Array<Recipe_Select_Column>>;
-  limit?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Recipe_Order_By>>;
   where?: Maybe<Recipe_Bool_Exp>;
 };
+
 
 /** subscription root */
 export type Subscription_RootRecipe_AggregateArgs = {
   distinct_on?: Maybe<Array<Recipe_Select_Column>>;
-  limit?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Recipe_Order_By>>;
   where?: Maybe<Recipe_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootRecipe_By_PkArgs = {
-  id: Scalars["String"];
+  id: Scalars['String'];
 };
+
 
 /** subscription root */
 export type Subscription_RootRecipe_IngredientsArgs = {
   distinct_on?: Maybe<Array<Recipe_Ingredients_Select_Column>>;
-  limit?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Recipe_Ingredients_Order_By>>;
   where?: Maybe<Recipe_Ingredients_Bool_Exp>;
 };
+
 
 /** subscription root */
 export type Subscription_RootRecipe_Ingredients_AggregateArgs = {
   distinct_on?: Maybe<Array<Recipe_Ingredients_Select_Column>>;
-  limit?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Recipe_Ingredients_Order_By>>;
   where?: Maybe<Recipe_Ingredients_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootRecipe_Ingredients_By_PkArgs = {
-  id: Scalars["uuid"];
+  id: Scalars['uuid'];
 };
+
 
 /** subscription root */
 export type Subscription_RootUserArgs = {
   distinct_on?: Maybe<Array<User_Select_Column>>;
-  limit?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<User_Order_By>>;
   where?: Maybe<User_Bool_Exp>;
 };
+
 
 /** subscription root */
 export type Subscription_RootUser_AggregateArgs = {
   distinct_on?: Maybe<Array<User_Select_Column>>;
-  limit?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<User_Order_By>>;
   where?: Maybe<User_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootUser_By_PkArgs = {
-  id: Scalars["String"];
+  id: Scalars['String'];
 };
+
 
 /** columns and relationships of "user" */
 export type User = {
-  email: Scalars["String"];
-  id: Scalars["String"];
-  img?: Maybe<Scalars["String"]>;
-  name: Scalars["String"];
+  __typename?: 'user';
+  email: Scalars['String'];
+  id: Scalars['String'];
+  img?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   /** An array relationship */
   recipes_list: Array<Recipe>;
   /** An aggregated array relationship */
   recipes_list_aggregate: Recipe_Aggregate;
 };
 
+
 /** columns and relationships of "user" */
 export type UserRecipes_ListArgs = {
   distinct_on?: Maybe<Array<Recipe_Select_Column>>;
-  limit?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Recipe_Order_By>>;
   where?: Maybe<Recipe_Bool_Exp>;
 };
 
+
 /** columns and relationships of "user" */
 export type UserRecipes_List_AggregateArgs = {
   distinct_on?: Maybe<Array<Recipe_Select_Column>>;
-  limit?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Recipe_Order_By>>;
   where?: Maybe<Recipe_Bool_Exp>;
 };
 
 /** aggregated selection of "user" */
 export type User_Aggregate = {
+  __typename?: 'user_aggregate';
   aggregate?: Maybe<User_Aggregate_Fields>;
   nodes: Array<User>;
 };
 
 /** aggregate fields of "user" */
 export type User_Aggregate_Fields = {
-  count?: Maybe<Scalars["Int"]>;
+  __typename?: 'user_aggregate_fields';
+  count?: Maybe<Scalars['Int']>;
   max?: Maybe<User_Max_Fields>;
   min?: Maybe<User_Min_Fields>;
 };
 
+
 /** aggregate fields of "user" */
 export type User_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<User_Select_Column>>;
-  distinct?: Maybe<Scalars["Boolean"]>;
+  distinct?: Maybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "user" */
@@ -1283,24 +1363,25 @@ export type User_Bool_Exp = {
 /** unique or primary key constraints on table "user" */
 export enum User_Constraint {
   /** unique or primary key constraint */
-  UserPkey = "user_pkey",
+  UserPkey = 'user_pkey'
 }
 
 /** input type for inserting data into table "user" */
 export type User_Insert_Input = {
-  email?: Maybe<Scalars["String"]>;
-  id?: Maybe<Scalars["String"]>;
-  img?: Maybe<Scalars["String"]>;
-  name?: Maybe<Scalars["String"]>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  img?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
   recipes_list?: Maybe<Recipe_Arr_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
 export type User_Max_Fields = {
-  email?: Maybe<Scalars["String"]>;
-  id?: Maybe<Scalars["String"]>;
-  img?: Maybe<Scalars["String"]>;
-  name?: Maybe<Scalars["String"]>;
+  __typename?: 'user_max_fields';
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  img?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
 /** order by max() on columns of table "user" */
@@ -1313,10 +1394,11 @@ export type User_Max_Order_By = {
 
 /** aggregate min on columns */
 export type User_Min_Fields = {
-  email?: Maybe<Scalars["String"]>;
-  id?: Maybe<Scalars["String"]>;
-  img?: Maybe<Scalars["String"]>;
-  name?: Maybe<Scalars["String"]>;
+  __typename?: 'user_min_fields';
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  img?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
 /** order by min() on columns of table "user" */
@@ -1329,8 +1411,9 @@ export type User_Min_Order_By = {
 
 /** response of any mutation on the table "user" */
 export type User_Mutation_Response = {
+  __typename?: 'user_mutation_response';
   /** number of affected rows by the mutation */
-  affected_rows: Scalars["Int"];
+  affected_rows: Scalars['Int'];
   /** data of the affected rows by the mutation */
   returning: Array<User>;
 };
@@ -1359,198 +1442,168 @@ export type User_Order_By = {
 
 /** primary key columns input for table: "user" */
 export type User_Pk_Columns_Input = {
-  id: Scalars["String"];
+  id: Scalars['String'];
 };
 
 /** select columns of table "user" */
 export enum User_Select_Column {
   /** column name */
-  Email = "email",
+  Email = 'email',
   /** column name */
-  Id = "id",
+  Id = 'id',
   /** column name */
-  Img = "img",
+  Img = 'img',
   /** column name */
-  Name = "name",
+  Name = 'name'
 }
 
 /** input type for updating data in table "user" */
 export type User_Set_Input = {
-  email?: Maybe<Scalars["String"]>;
-  id?: Maybe<Scalars["String"]>;
-  img?: Maybe<Scalars["String"]>;
-  name?: Maybe<Scalars["String"]>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  img?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
 /** update columns of table "user" */
 export enum User_Update_Column {
   /** column name */
-  Email = "email",
+  Email = 'email',
   /** column name */
-  Id = "id",
+  Id = 'id',
   /** column name */
-  Img = "img",
+  Img = 'img',
   /** column name */
-  Name = "name",
+  Name = 'name'
 }
+
 
 /** expression to compare columns of type uuid. All fields are combined with logical 'AND'. */
 export type Uuid_Comparison_Exp = {
-  _eq?: Maybe<Scalars["uuid"]>;
-  _gt?: Maybe<Scalars["uuid"]>;
-  _gte?: Maybe<Scalars["uuid"]>;
-  _in?: Maybe<Array<Scalars["uuid"]>>;
-  _is_null?: Maybe<Scalars["Boolean"]>;
-  _lt?: Maybe<Scalars["uuid"]>;
-  _lte?: Maybe<Scalars["uuid"]>;
-  _neq?: Maybe<Scalars["uuid"]>;
-  _nin?: Maybe<Array<Scalars["uuid"]>>;
+  _eq?: Maybe<Scalars['uuid']>;
+  _gt?: Maybe<Scalars['uuid']>;
+  _gte?: Maybe<Scalars['uuid']>;
+  _in?: Maybe<Array<Scalars['uuid']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['uuid']>;
+  _lte?: Maybe<Scalars['uuid']>;
+  _neq?: Maybe<Scalars['uuid']>;
+  _nin?: Maybe<Array<Scalars['uuid']>>;
 };
 
 export type InsertRecipeMutationVariables = Exact<{
   object: Recipe_Insert_Input;
 }>;
 
-export type InsertRecipeMutation = {
-  insert_recipe_one?: Maybe<
-    Pick<
-      Recipe,
-      | "cuisine"
-      | "directions"
-      | "id"
-      | "img"
-      | "meal_type"
-      | "owner"
-      | "title"
-      | "total_time"
-      | "yields"
-    > & {
-      recipe_ingredients_list: Array<
-        Pick<
-          Recipe_Ingredients,
-          | "name"
-          | "optional"
-          | "preparation"
-          | "quantity_denominator"
-          | "quantity_numerator"
-          | "raw_text"
-          | "unit"
-        >
-      >;
-    }
-  >;
-};
+
+export type InsertRecipeMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_recipe_one?: Maybe<(
+    { __typename?: 'recipe' }
+    & Pick<Recipe, 'cuisine' | 'directions' | 'id' | 'img' | 'meal_type' | 'owner' | 'title' | 'total_time' | 'yields'>
+    & { recipe_ingredients_list: Array<(
+      { __typename?: 'recipe_ingredients' }
+      & Pick<Recipe_Ingredients, 'name' | 'optional' | 'preparation' | 'quantity_denominator' | 'quantity_numerator' | 'raw_text' | 'unit'>
+    )> }
+  )> }
+);
 
 export type UpdateRecipeDetailMutationVariables = Exact<{
-  id: Scalars["String"];
+  id: Scalars['String'];
   _set: Recipe_Set_Input;
-  ingredientsStrings: Array<Scalars["String"]> | Scalars["String"];
+  ingredientsStrings: Array<Scalars['String']> | Scalars['String'];
 }>;
 
-export type UpdateRecipeDetailMutation = Pick<
-  Mutation_Root,
-  "overRideIngredients"
-> & {
-  update_recipe_by_pk?: Maybe<
-    Pick<
-      Recipe,
-      | "cuisine"
-      | "directions"
-      | "id"
-      | "img"
-      | "meal_type"
-      | "owner"
-      | "title"
-      | "total_time"
-      | "yields"
-    >
-  >;
-};
 
-export type GetAllRecipeQueryVariables = Exact<{ [key: string]: never }>;
+export type UpdateRecipeDetailMutation = (
+  { __typename?: 'mutation_root' }
+  & Pick<Mutation_Root, 'overRideIngredients'>
+  & { update_recipe_by_pk?: Maybe<(
+    { __typename?: 'recipe' }
+    & Pick<Recipe, 'cuisine' | 'directions' | 'id' | 'img' | 'meal_type' | 'owner' | 'title' | 'total_time' | 'yields'>
+  )> }
+);
 
-export type GetAllRecipeQuery = {
-  recipe: Array<Pick<Recipe, "id" | "img" | "title" | "total_time">>;
-};
+export type GetAllRecipeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllRecipeQuery = (
+  { __typename?: 'query_root' }
+  & { recipe: Array<(
+    { __typename?: 'recipe' }
+    & Pick<Recipe, 'id' | 'img' | 'title' | 'total_time'>
+  )> }
+);
 
 export type GetProfileQueryVariables = Exact<{
-  uid: Scalars["String"];
+  uid: Scalars['String'];
 }>;
 
-export type GetProfileQuery = {
-  user: Array<Pick<User, "email" | "name" | "img">>;
-};
+
+export type GetProfileQuery = (
+  { __typename?: 'query_root' }
+  & { user: Array<(
+    { __typename?: 'user' }
+    & Pick<User, 'email' | 'name' | 'img'>
+  )> }
+);
 
 export type GetRecipeDetailsQueryVariables = Exact<{
-  id: Scalars["String"];
+  id: Scalars['String'];
 }>;
 
-export type GetRecipeDetailsQuery = {
-  recipe_by_pk?: Maybe<
-    Pick<
-      Recipe,
-      | "cuisine"
-      | "directions"
-      | "id"
-      | "img"
-      | "meal_type"
-      | "owner"
-      | "title"
-      | "total_time"
-      | "yields"
-    > & {
-      recipe_ingredients_list: Array<
-        Pick<
-          Recipe_Ingredients,
-          | "name"
-          | "quantity_denominator"
-          | "quantity_numerator"
-          | "unit"
-          | "formatted_text"
-        >
-      >;
-    }
-  >;
-};
+
+export type GetRecipeDetailsQuery = (
+  { __typename?: 'query_root' }
+  & { recipe_by_pk?: Maybe<(
+    { __typename?: 'recipe' }
+    & Pick<Recipe, 'cuisine' | 'directions' | 'id' | 'img' | 'meal_type' | 'owner' | 'title' | 'total_time' | 'yields'>
+    & { recipe_ingredients_list: Array<(
+      { __typename?: 'recipe_ingredients' }
+      & Pick<Recipe_Ingredients, 'name' | 'quantity_denominator' | 'quantity_numerator' | 'unit' | 'formatted_text'>
+    )> }
+  )> }
+);
 
 export type ParseIngredientsQueryVariables = Exact<{
-  ingredientsArray?: Maybe<
-    Array<Maybe<Scalars["String"]>> | Maybe<Scalars["String"]>
-  >;
+  ingredientsArray?: Maybe<Array<Maybe<Scalars['String']>> | Maybe<Scalars['String']>>;
 }>;
 
-export type ParseIngredientsQuery = {
-  parseIngredients: Array<Pick<ParsedIngredients, "name">>;
-};
+
+export type ParseIngredientsQuery = (
+  { __typename?: 'query_root' }
+  & { parseIngredients: Array<(
+    { __typename?: 'ParsedIngredients' }
+    & Pick<ParsedIngredients, 'name'>
+  )> }
+);
+
 
 export const InsertRecipeDocument = gql`
-  mutation InsertRecipe($object: recipe_insert_input!) {
-    insert_recipe_one(object: $object) {
-      cuisine
-      directions
-      id
-      img
-      meal_type
-      owner
-      title
-      total_time
-      yields
-      recipe_ingredients_list {
-        name
-        optional
-        preparation
-        quantity_denominator
-        quantity_numerator
-        raw_text
-        unit
-      }
+    mutation InsertRecipe($object: recipe_insert_input!) {
+  insert_recipe_one(object: $object) {
+    cuisine
+    directions
+    id
+    img
+    meal_type
+    owner
+    title
+    total_time
+    yields
+    recipe_ingredients_list {
+      name
+      optional
+      preparation
+      quantity_denominator
+      quantity_numerator
+      raw_text
+      unit
     }
   }
-`;
-export type InsertRecipeMutationFn = Apollo.MutationFunction<
-  InsertRecipeMutation,
-  InsertRecipeMutationVariables
->;
+}
+    `;
+export type InsertRecipeMutationFn = Apollo.MutationFunction<InsertRecipeMutation, InsertRecipeMutationVariables>;
 
 /**
  * __useInsertRecipeMutation__
@@ -1569,49 +1622,29 @@ export type InsertRecipeMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useInsertRecipeMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    InsertRecipeMutation,
-    InsertRecipeMutationVariables
-  >
-) {
-  return Apollo.useMutation<
-    InsertRecipeMutation,
-    InsertRecipeMutationVariables
-  >(InsertRecipeDocument, baseOptions);
-}
-export type InsertRecipeMutationHookResult = ReturnType<
-  typeof useInsertRecipeMutation
->;
+export function useInsertRecipeMutation(baseOptions?: Apollo.MutationHookOptions<InsertRecipeMutation, InsertRecipeMutationVariables>) {
+        return Apollo.useMutation<InsertRecipeMutation, InsertRecipeMutationVariables>(InsertRecipeDocument, baseOptions);
+      }
+export type InsertRecipeMutationHookResult = ReturnType<typeof useInsertRecipeMutation>;
 export type InsertRecipeMutationResult = Apollo.MutationResult<InsertRecipeMutation>;
-export type InsertRecipeMutationOptions = Apollo.BaseMutationOptions<
-  InsertRecipeMutation,
-  InsertRecipeMutationVariables
->;
+export type InsertRecipeMutationOptions = Apollo.BaseMutationOptions<InsertRecipeMutation, InsertRecipeMutationVariables>;
 export const UpdateRecipeDetailDocument = gql`
-  mutation UpdateRecipeDetail(
-    $id: String!
-    $_set: recipe_set_input!
-    $ingredientsStrings: [String!]!
-  ) {
-    update_recipe_by_pk(pk_columns: { id: $id }, _set: $_set) {
-      cuisine
-      directions
-      id
-      img
-      meal_type
-      owner
-      title
-      total_time
-      yields
-    }
-    overRideIngredients(ingredientsStrings: $ingredientsStrings, recipe_id: $id)
+    mutation UpdateRecipeDetail($id: String!, $_set: recipe_set_input!, $ingredientsStrings: [String!]!) {
+  update_recipe_by_pk(pk_columns: {id: $id}, _set: $_set) {
+    cuisine
+    directions
+    id
+    img
+    meal_type
+    owner
+    title
+    total_time
+    yields
   }
-`;
-export type UpdateRecipeDetailMutationFn = Apollo.MutationFunction<
-  UpdateRecipeDetailMutation,
-  UpdateRecipeDetailMutationVariables
->;
+  overRideIngredients(ingredientsStrings: $ingredientsStrings, recipe_id: $id)
+}
+    `;
+export type UpdateRecipeDetailMutationFn = Apollo.MutationFunction<UpdateRecipeDetailMutation, UpdateRecipeDetailMutationVariables>;
 
 /**
  * __useUpdateRecipeDetailMutation__
@@ -1632,35 +1665,22 @@ export type UpdateRecipeDetailMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useUpdateRecipeDetailMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    UpdateRecipeDetailMutation,
-    UpdateRecipeDetailMutationVariables
-  >
-) {
-  return Apollo.useMutation<
-    UpdateRecipeDetailMutation,
-    UpdateRecipeDetailMutationVariables
-  >(UpdateRecipeDetailDocument, baseOptions);
-}
-export type UpdateRecipeDetailMutationHookResult = ReturnType<
-  typeof useUpdateRecipeDetailMutation
->;
+export function useUpdateRecipeDetailMutation(baseOptions?: Apollo.MutationHookOptions<UpdateRecipeDetailMutation, UpdateRecipeDetailMutationVariables>) {
+        return Apollo.useMutation<UpdateRecipeDetailMutation, UpdateRecipeDetailMutationVariables>(UpdateRecipeDetailDocument, baseOptions);
+      }
+export type UpdateRecipeDetailMutationHookResult = ReturnType<typeof useUpdateRecipeDetailMutation>;
 export type UpdateRecipeDetailMutationResult = Apollo.MutationResult<UpdateRecipeDetailMutation>;
-export type UpdateRecipeDetailMutationOptions = Apollo.BaseMutationOptions<
-  UpdateRecipeDetailMutation,
-  UpdateRecipeDetailMutationVariables
->;
+export type UpdateRecipeDetailMutationOptions = Apollo.BaseMutationOptions<UpdateRecipeDetailMutation, UpdateRecipeDetailMutationVariables>;
 export const GetAllRecipeDocument = gql`
-  query GetAllRecipe {
-    recipe {
-      id
-      img
-      title
-      total_time
-    }
+    query GetAllRecipe {
+  recipe {
+    id
+    img
+    title
+    total_time
   }
-`;
+}
+    `;
 
 /**
  * __useGetAllRecipeQuery__
@@ -1677,47 +1697,24 @@ export const GetAllRecipeDocument = gql`
  *   },
  * });
  */
-export function useGetAllRecipeQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    GetAllRecipeQuery,
-    GetAllRecipeQueryVariables
-  >
-) {
-  return Apollo.useQuery<GetAllRecipeQuery, GetAllRecipeQueryVariables>(
-    GetAllRecipeDocument,
-    baseOptions
-  );
-}
-export function useGetAllRecipeLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetAllRecipeQuery,
-    GetAllRecipeQueryVariables
-  >
-) {
-  return Apollo.useLazyQuery<GetAllRecipeQuery, GetAllRecipeQueryVariables>(
-    GetAllRecipeDocument,
-    baseOptions
-  );
-}
-export type GetAllRecipeQueryHookResult = ReturnType<
-  typeof useGetAllRecipeQuery
->;
-export type GetAllRecipeLazyQueryHookResult = ReturnType<
-  typeof useGetAllRecipeLazyQuery
->;
-export type GetAllRecipeQueryResult = Apollo.QueryResult<
-  GetAllRecipeQuery,
-  GetAllRecipeQueryVariables
->;
+export function useGetAllRecipeQuery(baseOptions?: Apollo.QueryHookOptions<GetAllRecipeQuery, GetAllRecipeQueryVariables>) {
+        return Apollo.useQuery<GetAllRecipeQuery, GetAllRecipeQueryVariables>(GetAllRecipeDocument, baseOptions);
+      }
+export function useGetAllRecipeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllRecipeQuery, GetAllRecipeQueryVariables>) {
+          return Apollo.useLazyQuery<GetAllRecipeQuery, GetAllRecipeQueryVariables>(GetAllRecipeDocument, baseOptions);
+        }
+export type GetAllRecipeQueryHookResult = ReturnType<typeof useGetAllRecipeQuery>;
+export type GetAllRecipeLazyQueryHookResult = ReturnType<typeof useGetAllRecipeLazyQuery>;
+export type GetAllRecipeQueryResult = Apollo.QueryResult<GetAllRecipeQuery, GetAllRecipeQueryVariables>;
 export const GetProfileDocument = gql`
-  query GetProfile($uid: String!) {
-    user(where: { id: { _eq: $uid } }) {
-      email
-      name
-      img
-    }
+    query GetProfile($uid: String!) {
+  user(where: {id: {_eq: $uid}}) {
+    email
+    name
+    img
   }
-`;
+}
+    `;
 
 /**
  * __useGetProfileQuery__
@@ -1735,58 +1732,37 @@ export const GetProfileDocument = gql`
  *   },
  * });
  */
-export function useGetProfileQuery(
-  baseOptions: Apollo.QueryHookOptions<
-    GetProfileQuery,
-    GetProfileQueryVariables
-  >
-) {
-  return Apollo.useQuery<GetProfileQuery, GetProfileQueryVariables>(
-    GetProfileDocument,
-    baseOptions
-  );
-}
-export function useGetProfileLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetProfileQuery,
-    GetProfileQueryVariables
-  >
-) {
-  return Apollo.useLazyQuery<GetProfileQuery, GetProfileQueryVariables>(
-    GetProfileDocument,
-    baseOptions
-  );
-}
-export type GetProfileQueryHookResult = ReturnType<typeof useGetProfileQuery>;
-export type GetProfileLazyQueryHookResult = ReturnType<
-  typeof useGetProfileLazyQuery
->;
-export type GetProfileQueryResult = Apollo.QueryResult<
-  GetProfileQuery,
-  GetProfileQueryVariables
->;
-export const GetRecipeDetailsDocument = gql`
-  query GetRecipeDetails($id: String!) {
-    recipe_by_pk(id: $id) {
-      cuisine
-      directions
-      id
-      img
-      meal_type
-      owner
-      title
-      total_time
-      yields
-      recipe_ingredients_list {
-        name
-        quantity_denominator
-        quantity_numerator
-        unit
-        formatted_text
+export function useGetProfileQuery(baseOptions: Apollo.QueryHookOptions<GetProfileQuery, GetProfileQueryVariables>) {
+        return Apollo.useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, baseOptions);
       }
+export function useGetProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProfileQuery, GetProfileQueryVariables>) {
+          return Apollo.useLazyQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, baseOptions);
+        }
+export type GetProfileQueryHookResult = ReturnType<typeof useGetProfileQuery>;
+export type GetProfileLazyQueryHookResult = ReturnType<typeof useGetProfileLazyQuery>;
+export type GetProfileQueryResult = Apollo.QueryResult<GetProfileQuery, GetProfileQueryVariables>;
+export const GetRecipeDetailsDocument = gql`
+    query GetRecipeDetails($id: String!) {
+  recipe_by_pk(id: $id) {
+    cuisine
+    directions
+    id
+    img
+    meal_type
+    owner
+    title
+    total_time
+    yields
+    recipe_ingredients_list {
+      name
+      quantity_denominator
+      quantity_numerator
+      unit
+      formatted_text
     }
   }
-`;
+}
+    `;
 
 /**
  * __useGetRecipeDetailsQuery__
@@ -1804,45 +1780,22 @@ export const GetRecipeDetailsDocument = gql`
  *   },
  * });
  */
-export function useGetRecipeDetailsQuery(
-  baseOptions: Apollo.QueryHookOptions<
-    GetRecipeDetailsQuery,
-    GetRecipeDetailsQueryVariables
-  >
-) {
-  return Apollo.useQuery<GetRecipeDetailsQuery, GetRecipeDetailsQueryVariables>(
-    GetRecipeDetailsDocument,
-    baseOptions
-  );
-}
-export function useGetRecipeDetailsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetRecipeDetailsQuery,
-    GetRecipeDetailsQueryVariables
-  >
-) {
-  return Apollo.useLazyQuery<
-    GetRecipeDetailsQuery,
-    GetRecipeDetailsQueryVariables
-  >(GetRecipeDetailsDocument, baseOptions);
-}
-export type GetRecipeDetailsQueryHookResult = ReturnType<
-  typeof useGetRecipeDetailsQuery
->;
-export type GetRecipeDetailsLazyQueryHookResult = ReturnType<
-  typeof useGetRecipeDetailsLazyQuery
->;
-export type GetRecipeDetailsQueryResult = Apollo.QueryResult<
-  GetRecipeDetailsQuery,
-  GetRecipeDetailsQueryVariables
->;
+export function useGetRecipeDetailsQuery(baseOptions: Apollo.QueryHookOptions<GetRecipeDetailsQuery, GetRecipeDetailsQueryVariables>) {
+        return Apollo.useQuery<GetRecipeDetailsQuery, GetRecipeDetailsQueryVariables>(GetRecipeDetailsDocument, baseOptions);
+      }
+export function useGetRecipeDetailsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetRecipeDetailsQuery, GetRecipeDetailsQueryVariables>) {
+          return Apollo.useLazyQuery<GetRecipeDetailsQuery, GetRecipeDetailsQueryVariables>(GetRecipeDetailsDocument, baseOptions);
+        }
+export type GetRecipeDetailsQueryHookResult = ReturnType<typeof useGetRecipeDetailsQuery>;
+export type GetRecipeDetailsLazyQueryHookResult = ReturnType<typeof useGetRecipeDetailsLazyQuery>;
+export type GetRecipeDetailsQueryResult = Apollo.QueryResult<GetRecipeDetailsQuery, GetRecipeDetailsQueryVariables>;
 export const ParseIngredientsDocument = gql`
-  query ParseIngredients($ingredientsArray: [String]) {
-    parseIngredients(ingredients: $ingredientsArray) {
-      name
-    }
+    query ParseIngredients($ingredientsArray: [String]) {
+  parseIngredients(ingredientsToParse: $ingredientsArray) {
+    name
   }
-`;
+}
+    `;
 
 /**
  * __useParseIngredientsQuery__
@@ -1860,35 +1813,12 @@ export const ParseIngredientsDocument = gql`
  *   },
  * });
  */
-export function useParseIngredientsQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    ParseIngredientsQuery,
-    ParseIngredientsQueryVariables
-  >
-) {
-  return Apollo.useQuery<ParseIngredientsQuery, ParseIngredientsQueryVariables>(
-    ParseIngredientsDocument,
-    baseOptions
-  );
-}
-export function useParseIngredientsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    ParseIngredientsQuery,
-    ParseIngredientsQueryVariables
-  >
-) {
-  return Apollo.useLazyQuery<
-    ParseIngredientsQuery,
-    ParseIngredientsQueryVariables
-  >(ParseIngredientsDocument, baseOptions);
-}
-export type ParseIngredientsQueryHookResult = ReturnType<
-  typeof useParseIngredientsQuery
->;
-export type ParseIngredientsLazyQueryHookResult = ReturnType<
-  typeof useParseIngredientsLazyQuery
->;
-export type ParseIngredientsQueryResult = Apollo.QueryResult<
-  ParseIngredientsQuery,
-  ParseIngredientsQueryVariables
->;
+export function useParseIngredientsQuery(baseOptions?: Apollo.QueryHookOptions<ParseIngredientsQuery, ParseIngredientsQueryVariables>) {
+        return Apollo.useQuery<ParseIngredientsQuery, ParseIngredientsQueryVariables>(ParseIngredientsDocument, baseOptions);
+      }
+export function useParseIngredientsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ParseIngredientsQuery, ParseIngredientsQueryVariables>) {
+          return Apollo.useLazyQuery<ParseIngredientsQuery, ParseIngredientsQueryVariables>(ParseIngredientsDocument, baseOptions);
+        }
+export type ParseIngredientsQueryHookResult = ReturnType<typeof useParseIngredientsQuery>;
+export type ParseIngredientsLazyQueryHookResult = ReturnType<typeof useParseIngredientsLazyQuery>;
+export type ParseIngredientsQueryResult = Apollo.QueryResult<ParseIngredientsQuery, ParseIngredientsQueryVariables>;

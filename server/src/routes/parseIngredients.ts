@@ -6,7 +6,7 @@ const parseIngredientToString = Router();
 
 parseIngredientToString.post("/", (req, res) => {
   try {
-    const ingredientRawText = req.body.input.ingredients as string[];
+    const ingredientRawText = req.body.input.ingredientsToParse as string[];
     // console.log(ingredientRawText);
     const results = ingredientRawText.map((ingredient) => {
       return {

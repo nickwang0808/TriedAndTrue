@@ -8,16 +8,12 @@ type Mutation {
 
 type Query {
   parseIngredients (
-    ingredients: [String]
+    ingredientsToParse: [String]
   ): [ParsedIngredients!]!
 }
 
 
 
-
-input Ingredients {
-  ingredients : [String]
-}
 
 type ParsedIngredients {
   name : String!
@@ -25,9 +21,5 @@ type ParsedIngredients {
 
 type Status {
   status : String!
-}
-
-type ingredients {
-  id : String!
 }
 
