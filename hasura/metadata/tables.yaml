@@ -17,8 +17,9 @@
   - role: user
     permission:
       check:
-        owner:
-          _eq: X-Hasura-User-Id
+        user:
+          id:
+            _eq: X-Hasura-User-Id
       set:
         owner: x-hasura-User-Id
       columns:
@@ -44,8 +45,9 @@
       - directions
       - meal_type
       filter:
-        owner:
-          _eq: X-Hasura-User-Id
+        user:
+          id:
+            _eq: X-Hasura-User-Id
   update_permissions:
   - role: user
     permission:
@@ -58,15 +60,17 @@
       - total_time
       - yields
       filter:
-        id:
-          _eq: X-Hasura-User-Id
+        user:
+          id:
+            _eq: X-Hasura-User-Id
       check: null
   delete_permissions:
   - role: user
     permission:
       filter:
-        owner:
-          _eq: X-Hasura-User-Id
+        user:
+          id:
+            _eq: X-Hasura-User-Id
 - table:
     schema: public
     name: recipe_ingredients

@@ -20,7 +20,9 @@ formatIngredients.post("/", async (req, res) => {
       // parse the raw text
 
       const parseResult = parseIngredient(data.new.raw_text);
-      const stringifyResult = stringifyFormattedIngredients(parseResult);
+      const { name: formatted_text } = stringifyFormattedIngredients(
+        parseResult
+      );
 
       const {
         name,
@@ -52,7 +54,7 @@ formatIngredients.post("/", async (req, res) => {
           unit,
           preparation,
           data.new.id,
-          stringifyResult,
+          formatted_text,
         ]
       );
     }

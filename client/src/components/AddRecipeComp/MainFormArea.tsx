@@ -30,7 +30,7 @@ export default function MainFormArea({ control }: IProps) {
               type="text"
               value={value}
               placeholder="Recipe Title"
-              onIonChange={(e) => onChange(e.detail.value)}
+              onIonChange={(e) => onChange(e.detail.value!)}
               ref={ref}
             />
           )}

@@ -33,6 +33,12 @@ export default function AddRecipeChild({ defaultValues, isCreateNew }: IProps) {
     defaultValues,
   });
 
+  const { isDirty } = formState;
+
+  useEffect(() => {
+    console.log(formState);
+  }, [formState]);
+
   useEffect(() => {
     reset(defaultValues);
   }, [defaultValues]);
@@ -54,16 +60,20 @@ export default function AddRecipeChild({ defaultValues, isCreateNew }: IProps) {
       });
     }
 
-    insertRecipeOne({
-      variables: {
-        object: {
-          ...dataWIthOutIngredients,
-          recipe_ingredients_list: {
-            data: mappedIngredients,
+    if (isCreateNew) {
+      insertRecipeOne({
+        variables: {
+          object: {
+            ...dataWIthOutIngredients,
+            recipe_ingredients_list: {
+              data: mappedIngredients,
+            },
           },
         },
-      },
-    });
+      });
+    } else {
+      // perform update recipe
+    }
   };
 
   console.log(errors);
