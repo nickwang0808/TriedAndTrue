@@ -14,13 +14,16 @@ import {
 } from "@ionic/react";
 import { add } from "ionicons/icons";
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import RecipeCard from "../../components/card/RecipeCard";
 import { GetAllRecipeQuery } from "../../generated/graphql";
 import { GET_ALL_RECIPES } from "../../gql/query/getAllRecipes";
+import { setShowAddOrEditRecipe } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
 import NoRecipe from "./NoRecipe";
 
 const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
+  const dispatch = useDispatch();
   const { error, loading, data, refetch } = useQuery<GetAllRecipeQuery>(
     GET_ALL_RECIPES
   );
@@ -33,14 +36,13 @@ const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
 
   if (loading) return <p>loading...</p>;
   if (error) return <p>{error.message}</p>;
-
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
           <IonTitle color="primary">My Recipes</IonTitle>
           <IonButtons slot="end">
-            <IonButton onClick={() => history.push("/add-recipe/null")}>
+            <IonButton onClick={() => dispatch(setShowAddOrEditRecipe(true))}>
               <IonIcon icon={add} color="secondary" />
             </IonButton>
           </IonButtons>

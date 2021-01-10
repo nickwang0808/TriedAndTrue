@@ -1,58 +1,53 @@
-import { useLazyQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import {
   IonButton,
   IonButtons,
   IonHeader,
   IonIcon,
-  IonPage,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import React, { useLayoutEffect } from "react";
-import { RouteComponentProps, useHistory } from "react-router";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { StyledFullScreenModal } from "../../components/modals/fullScreenModalBase";
 import { GetRecipeDetailsQuery } from "../../generated/graphql";
 import { GET_RECIPE_DETAILS } from "../../gql/query/getRecipeDetails";
-import { IRecipeForm, mealType } from "../../utils/recipeSchema";
-import AddRecipeChild from "./AddRecipeChild";
+import { resetAddOrEditRecipe } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
+import { IAppState } from "../../redux/store";
+import { emptyDefaultValue, mealType } from "../../utils/recipeSchema";
+import AddOrEditRecipeChild from "./AddOrEditRecipeChild";
 
-const emptyDefaultValue: IRecipeForm = {
-  cuisine: null,
-  total_time: null,
-  meal_type: null,
-  yields: null,
-  title: null,
-  directions: [],
-  ingredients: [],
-};
+export default function AddOrEditRecipeModal() {
+  const dispatch = useDispatch();
 
-interface IProps
-  extends RouteComponentProps<{
-    // if "null" then it's not create new recipe
-    id: string;
-  }> {}
+  const { id, showAddOrEditRecipe } = useSelector(
+    (state: IAppState) => state.addOrEditRecipeSlice
+  );
 
-export default function AddRecipePage({
-  match: {
-    params: { id },
-  },
-}: IProps) {
-  const [
-    getRecipeDetails,
-    { loading, error, data: { recipe_by_pk } = {} as GetRecipeDetailsQuery },
-  ] = useLazyQuery<GetRecipeDetailsQuery>(GET_RECIPE_DETAILS);
+  const {
+    loading,
+    error,
+    data: { recipe_by_pk } = {} as GetRecipeDetailsQuery,
+  } = useQuery<GetRecipeDetailsQuery>(GET_RECIPE_DETAILS, {
+    skip: !showAddOrEditRecipe || !id,
+    variables: { id },
+  });
 
-  useLayoutEffect(() => {
-    if (id !== "null") {
-      getRecipeDetails({ variables: { id } });
-    }
-  }, [id]);
+  // useEffect(() => {
+  //   if (id !== "null") {
+  //     getRecipeDetails({ variables: { id } });
+  //   }
+  // }, [id]);
 
   if (loading) return <p>loading ...</p>;
   if (error) return <p>{error.message}</p>;
   return (
-    <IonPage>
+    <StyledFullScreenModal
+      isOpen={showAddOrEditRecipe}
+      onDidDismiss={() => dispatch(resetAddOrEditRecipe())}
+    >
       <Header isNew={id === "null" ? true : false} />
-      <AddRecipeChild
+      <AddOrEditRecipeChild
         id={id}
         isCreateNew={id === "null" ? true : false}
         defaultValues={
@@ -73,18 +68,18 @@ export default function AddRecipePage({
               }
         }
       />
-    </IonPage>
+    </StyledFullScreenModal>
   );
 }
 
 function Header({ isNew }: { isNew: boolean }) {
-  const history = useHistory();
+  const dispatch = useDispatch();
 
   return (
     <IonHeader>
       <IonToolbar>
         <IonButtons slot="start">
-          <IonButton onClick={() => history.goBack()}>
+          <IonButton onClick={() => dispatch(resetAddOrEditRecipe())}>
             <IonIcon icon={"close"} color="secondary" />
           </IonButton>
         </IonButtons>

@@ -23,7 +23,7 @@ interface IProps {
   id: string | null;
 }
 
-export default function AddRecipeChild({
+export default function AddOrEditRecipeChild({
   defaultValues,
   isCreateNew,
   id,

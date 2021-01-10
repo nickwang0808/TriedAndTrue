@@ -19,8 +19,15 @@
 - created_at
 - ratings
 
+### recipe_ingredient
+
+- id
+- recipe_id
+- index <!-- need a index here too i guess -->
+
 ### planner
 
 - id => user.id
-- start_date
--
+- data
+- recipe_id
+- index
