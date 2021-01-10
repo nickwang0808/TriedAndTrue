@@ -91,7 +91,7 @@ const App: React.FC = () => {
 
               <IonTabBar slot="bottom">
                 <IonTabButton tab="recipes" href="/recipes">
-                  <IonIcon src={recipeIcon} color="primary" />
+                  <IonIcon src={recipeIcon} />
                   <IonLabel>Recipes</IonLabel>
                 </IonTabButton>
                 <IonTabButton tab="meal-plan" href="/meal-plan">

@@ -12,7 +12,7 @@ import {
   IonToolbar,
   useIonViewWillEnter,
 } from "@ionic/react";
-import { add } from "ionicons/icons";
+import addnew from "../../assets/svg/addnew.svg";
 import React, { useEffect } from "react";
 import { RouteComponentProps } from "react-router";
 import RecipeCard from "../../components/card/RecipeCard";
@@ -41,7 +41,7 @@ const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
           <IonTitle color="primary">My Recipes</IonTitle>
           <IonButtons slot="end">
             <IonButton onClick={() => history.push("/add-recipe/null")}>
-              <IonIcon icon={add} color="secondary" />
+              <IonIcon icon={addnew} color="secondary" />
             </IonButton>
           </IonButtons>
         </IonToolbar>

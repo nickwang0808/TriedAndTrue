@@ -8,7 +8,7 @@ export default function NoRecipe() {
 
   return (
     <StyledWrapper>
-      <p className="ion-text-center">
+      <p className="ion-padding-bottom">
         Automatically import your favorite recipe or manually add one below.
       </p>
       <IonButton color="secondary">Import from Website</IonButton>
@@ -27,4 +27,5 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 24px 24px 24px;
 `;
