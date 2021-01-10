@@ -40,6 +40,8 @@ export default function AddOrEditRecipeChild({
     defaultValues,
   });
 
+  console.log(watch());
+
   useEffect(() => {
     reset(defaultValues);
   }, [defaultValues]);
