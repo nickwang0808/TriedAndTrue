@@ -10,10 +10,9 @@ import {
   IonSearchbar,
   IonTitle,
   IonToolbar,
-  useIonViewWillEnter,
 } from "@ionic/react";
 import { add } from "ionicons/icons";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import RecipeCard from "../../components/card/RecipeCard";
@@ -24,15 +23,7 @@ import NoRecipe from "./NoRecipe";
 
 const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
   const dispatch = useDispatch();
-  const { error, loading, data, refetch } = useQuery<GetAllRecipeQuery>(
-    GET_ALL_RECIPES
-  );
-  useEffect(() => {
-    // console.log(data);
-  }, [data]);
-
-  // TODO: use update cache and get rid of this
-  useIonViewWillEnter(() => refetch());
+  const { error, loading, data } = useQuery<GetAllRecipeQuery>(GET_ALL_RECIPES);
 
   if (loading) return <p>loading...</p>;
   if (error) return <p>{error.message}</p>;

@@ -28,7 +28,6 @@ export default function AddOrEditRecipeChild({
   isCreateNew,
   id,
 }: IProps) {
-  // console.log(defaultValues);
   const {
     formState,
     handleSubmit,
@@ -41,12 +40,6 @@ export default function AddOrEditRecipeChild({
     defaultValues,
   });
 
-  const { isDirty, dirtyFields } = formState;
-
-  useEffect(() => {
-    // console.log(formState);
-  }, [formState]);
-
   useEffect(() => {
     reset(defaultValues);
   }, [defaultValues]);
@@ -55,7 +48,21 @@ export default function AddOrEditRecipeChild({
     insertRecipeOne,
     { loading: loading_insert, data: data_insert, error: error_insert },
   ] = useMutation<InsertRecipeMutation, InsertRecipeMutationVariables>(
-    INSERT_RECIPE_ONE
+    INSERT_RECIPE_ONE,
+    {
+      update(cache, { data }) {
+        if (!data || !data.insert_recipe_one) return null;
+        const { insert_recipe_one } = data;
+        const id = cache.identify(insert_recipe_one!)!;
+        cache.modify({
+          fields: {
+            recipe(existingRecipes: any = [], { toReference }) {
+              return [toReference(id), ...existingRecipes];
+            },
+          },
+        });
+      },
+    }
   );
 
   const [
@@ -64,8 +71,13 @@ export default function AddOrEditRecipeChild({
   ] = useMutation<
     UpdateRecipeDetailMutation,
     UpdateRecipeDetailMutationVariables
-  >(UPDATE_RECIPE_DETAILS);
+  >(
+    UPDATE_RECIPE_DETAILS /* , {
+    refetchQueries: [{ query: GET_RECIPE_DETAILS, variables: { id } }],
+  } */
+  );
 
+  const { isDirty, dirtyFields } = formState;
   const onSubmit = (data: IRecipeForm) => {
     // console.log({ data });
 
