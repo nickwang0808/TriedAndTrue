@@ -79,6 +79,7 @@ export default function AddOrEditRecipeChild({
     }
 
     if (isCreateNew) {
+      console.log("submit");
       insertRecipeOne({
         variables: {
           object: {

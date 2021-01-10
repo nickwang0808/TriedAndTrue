@@ -49,7 +49,7 @@ export default function AddOrEditRecipeModal() {
       <Header isNew={id === "null" ? true : false} />
       <AddOrEditRecipeChild
         id={id}
-        isCreateNew={id === "null" ? true : false}
+        isCreateNew={id === null ? true : false}
         defaultValues={
           id === "null"
             ? emptyDefaultValue
