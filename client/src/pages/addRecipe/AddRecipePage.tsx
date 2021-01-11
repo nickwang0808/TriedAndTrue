@@ -14,6 +14,8 @@ import { GetRecipeDetailsQuery } from "../../generated/graphql";
 import { GET_RECIPE_DETAILS } from "../../gql/query/getRecipeDetails";
 import { IRecipeForm, mealType } from "../../utils/recipeSchema";
 import AddRecipeChild from "./AddRecipeChild";
+import xclose from "../../assets/svg/close-x.svg";
+
 
 const emptyDefaultValue: IRecipeForm = {
   cuisine: null,
@@ -85,7 +87,7 @@ function Header({ isNew }: { isNew: boolean }) {
       <IonToolbar>
         <IonButtons slot="start">
           <IonButton onClick={() => history.goBack()}>
-            <IonIcon icon={"close"} color="secondary" />
+            <IonIcon icon={xclose} color="secondary" />
           </IonButton>
         </IonButtons>
         <IonTitle color="primary">

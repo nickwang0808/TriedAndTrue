@@ -10,7 +10,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React from "react";
-import listIconForHeader from "../../assets/svg/listIconForHeader.svg";
+import listIconForHeader from "../../assets/svg/addtoList.svg";
 import refresh from "../../assets/svg/refresh.svg";
 
 export default function Header() {

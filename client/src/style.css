@@ -23,6 +23,19 @@ ion-searchbar {
   font-family: SuraRegular;
 }
 
+ion-segment {
+  font-family: SuraBold;
+}
+
+ion-segment-button {
+  letter-spacing: 0;
+  --indicator-height: 4px;
+}
+
+ion-label {
+  text-transform: capitalize;
+}
+
 ion-title {
   font-family: SuraBold;
   font-size: 20px;
@@ -38,12 +51,24 @@ ion-tab-button {
   --color: rgba(255, 255, 255, 0.4);
 }
 
+ion-card-title {
+  font-size: 14px;
+}
+
 ion-tab-bar {
   height: 64px;
 }
 
-ion-icon {
+ion-tab-button ion-icon {
   font-size: 32px !important;
+}
+
+ion-toolbar ion-icon,
+ion-content ion-icon {
+  font-size: 40px !important;
+  width: 40px;
+  height: 40px;
+  fill: var(--ion-color-secondary);
 }
 
 ion-item {
@@ -51,11 +76,9 @@ ion-item {
   --highlight-background: none;
 }
 
-.header-md::after {
-  /* get rid of header under line shadow thingy */
-  background-image: none;
+ion-segment {
+  border-bottom: 1px solid #dcdcdc;
 }
-
 ion-button {
   --box-shadow: none;
   --border-radius: 0;
@@ -69,6 +92,11 @@ ion-button {
   text-align: center;
   letter-spacing: 0.15px;
   --ripple-color: transparent;
+}
+
+.header-md::after {
+  /* get rid of header under line shadow thingy */
+  background-image: none;
 }
 
 @font-face {
