@@ -87,8 +87,15 @@
             id:
               _eq: X-Hasura-User-Id
       columns:
+      - formatted_text
+      - name
+      - optional
+      - preparation
+      - quantity_denominator
+      - quantity_numerator
       - raw_text
       - recipe_id
+      - unit
       backend_only: false
   select_permissions:
   - role: user

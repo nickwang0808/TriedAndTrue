@@ -15,6 +15,7 @@ import {
 } from "../../generated/graphql";
 import { INSERT_RECIPE_ONE } from "../../gql/mutations/insertRecipeOne.graphql";
 import { UPDATE_RECIPE_DETAILS } from "../../gql/mutations/updateRecipeDetails.graphql";
+import { GET_RECIPE_DETAILS } from "../../gql/query/getRecipeDetails";
 import { IRecipeForm, recipeFormSchema } from "../../utils/recipeSchema";
 
 interface IProps {
@@ -73,14 +74,14 @@ export default function AddOrEditRecipeChild({
   ] = useMutation<
     UpdateRecipeDetailMutation,
     UpdateRecipeDetailMutationVariables
-  >(
-    UPDATE_RECIPE_DETAILS /* , {
+  >(UPDATE_RECIPE_DETAILS, {
     refetchQueries: [{ query: GET_RECIPE_DETAILS, variables: { id } }],
-  } */
-  );
+    awaitRefetchQueries: true,
+  });
 
   const { isDirty, dirtyFields } = formState;
   const onSubmit = (data: IRecipeForm) => {
+    s;
     // console.log({ data });
 
     // amp ingredient out to write to raw_text column
