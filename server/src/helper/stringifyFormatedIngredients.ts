@@ -23,6 +23,5 @@ export default function stringifyFormattedIngredients(
 
   return `${quantity} ${unit || ""} ${name || ""} ${preparation || ""} ${
     optional ? "optional" : ""
-  }
-    `;
+  }`.trim();
 }

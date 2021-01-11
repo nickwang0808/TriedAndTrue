@@ -23,12 +23,11 @@ interface IProps {
   id: string | null;
 }
 
-export default function AddRecipeChild({
+export default function AddOrEditRecipeChild({
   defaultValues,
   isCreateNew,
   id,
 }: IProps) {
-  console.log(defaultValues);
   const {
     formState,
     handleSubmit,
@@ -41,11 +40,7 @@ export default function AddRecipeChild({
     defaultValues,
   });
 
-  const { isDirty, dirtyFields } = formState;
-
-  useEffect(() => {
-    console.log(formState);
-  }, [formState]);
+  console.log(watch());
 
   useEffect(() => {
     reset(defaultValues);
@@ -55,7 +50,21 @@ export default function AddRecipeChild({
     insertRecipeOne,
     { loading: loading_insert, data: data_insert, error: error_insert },
   ] = useMutation<InsertRecipeMutation, InsertRecipeMutationVariables>(
-    INSERT_RECIPE_ONE
+    INSERT_RECIPE_ONE,
+    {
+      update(cache, { data }) {
+        if (!data || !data.insert_recipe_one) return null;
+        const { insert_recipe_one } = data;
+        const id = cache.identify(insert_recipe_one!)!;
+        cache.modify({
+          fields: {
+            recipe(existingRecipes: any = [], { toReference }) {
+              return [toReference(id), ...existingRecipes];
+            },
+          },
+        });
+      },
+    }
   );
 
   const [
@@ -64,10 +73,15 @@ export default function AddRecipeChild({
   ] = useMutation<
     UpdateRecipeDetailMutation,
     UpdateRecipeDetailMutationVariables
-  >(UPDATE_RECIPE_DETAILS);
+  >(
+    UPDATE_RECIPE_DETAILS /* , {
+    refetchQueries: [{ query: GET_RECIPE_DETAILS, variables: { id } }],
+  } */
+  );
 
+  const { isDirty, dirtyFields } = formState;
   const onSubmit = (data: IRecipeForm) => {
-    console.log({ data });
+    // console.log({ data });
 
     // amp ingredient out to write to raw_text column
     const { ingredients, ...dataWIthOutIngredients } = data;
@@ -79,6 +93,7 @@ export default function AddRecipeChild({
     }
 
     if (isCreateNew) {
+      console.log("submit");
       insertRecipeOne({
         variables: {
           object: {
@@ -105,8 +120,8 @@ export default function AddRecipeChild({
     }
   };
 
-  console.log(errors);
-  // console.log(watch());
+  // console.log(errors);
+  // // console.log(watch());
 
   if (loading_insert) return <p>loading...</p>;
   if (error_insert) return <p>{error_insert.message}</p>;

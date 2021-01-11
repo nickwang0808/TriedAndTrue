@@ -25,17 +25,19 @@ import "@ionic/react/css/text-alignment.css";
 import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/typography.css";
 import React from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { Route } from "react-router-dom";
 import listIcon from "./assets/svg/listIcon.svg";
 import mealPlanIcon from "./assets/svg/mealPlanIcon.svg";
 import profileIcon from "./assets/svg/profileIcon.svg";
 import recipeIcon from "./assets/svg/recipeIcon.svg";
 import client from "./config/apoloConfig";
-import AddRecipePage from "./pages/addRecipe/AddRecipePage";
+import AddOrEditRecipeModal from "./pages/addOrEditRecipeModal/AddOrEditRecipeModal";
 import AuthChecker from "./pages/auth/AuthChecker";
 import MealPlannerMainPage from "./pages/mealPlanner/MealPlannerMainPage";
 import RecipeDetailsPage from "./pages/recipeDetails/RecipeDetailsPage";
 import RecipePage from "./pages/recipes/RecipePage";
+import { store } from "./redux/store";
 import "./style.css";
 /* Theme variables */
 import "./theme/variables.css";
@@ -48,69 +50,67 @@ const App: React.FC = () => {
 
   return (
     <ApolloProvider client={client}>
-      <AuthChecker>
-        <IonApp>
-          <IonReactRouter>
-            <IonTabs>
-              <IonRouterOutlet>
-                <Route path="/recipes" component={RecipePage} exact={true} />
-                <Route
-                  path="/meal-plan"
-                  exact={true}
-                  component={MealPlannerMainPage}
-                />
-                <Route
-                  path="/lists"
-                  component={() => (
-                    <IonPage>
-                      <h1>Coming Soon</h1>
-                    </IonPage>
-                  )}
-                />
-                <Route
-                  path="/profile"
-                  component={() => (
-                    <IonPage>
-                      <h1>Coming Soon</h1>
-                    </IonPage>
-                  )}
-                />
+      <Provider store={store}>
+        <AuthChecker>
+          <IonApp>
+            <AddOrEditRecipeModal />
 
-                <Route path="/add-recipe/:id" component={AddRecipePage} />
-                <Route
-                  path="/recipe-details/:id"
-                  component={RecipeDetailsPage}
-                />
+            <IonReactRouter>
+              <IonTabs>
+                <IonRouterOutlet>
+                  <Route path="/recipes" component={RecipePage} exact={true} />
+                  <Route
+                    path="/meal-plan"
+                    exact={true}
+                    component={MealPlannerMainPage}
+                  />
+                  <Route
+                    path="/lists"
+                    component={() => (
+                      <IonPage>
+                        <h1>Coming Soon</h1>
+                      </IonPage>
+                    )}
+                  />
+                  <Route
+                    path="/profile"
+                    component={() => (
+                      <IonPage>
+                        <h1>Coming Soon</h1>
+                      </IonPage>
+                    )}
+                  />
 
-                <Route
-                  path="/"
-                  render={() => <Redirect to="/tab1" />}
-                  exact={true}
-                />
-              </IonRouterOutlet>
+                  {/* <Route path="/add-recipe/:id" component={AddRecipePage} /> */}
+                  <Route
+                    path="/recipe-details/:id"
+                    component={RecipeDetailsPage}
+                  />
+                </IonRouterOutlet>
 
-              <IonTabBar slot="bottom">
-                <IonTabButton tab="recipes" href="/recipes">
-                  <IonIcon src={recipeIcon} />
-                  <IonLabel>Recipes</IonLabel>
-                </IonTabButton>
-                <IonTabButton tab="meal-plan" href="/meal-plan">
-                  <IonIcon src={mealPlanIcon} />
-                  <IonLabel>Meal Plan</IonLabel>
-                </IonTabButton>
-                <IonTabButton tab="lists" href="/lists">
-                  <IonIcon src={listIcon} />
-                  <IonLabel>Lists</IonLabel>
-                </IonTabButton>
-                <IonTabButton tab="profile" href="/profile">
-                  <IonIcon src={profileIcon} />
-                  <IonLabel>Profile</IonLabel>
-                </IonTabButton>
-              </IonTabBar>
-            </IonTabs>
-          </IonReactRouter>
-        </IonApp>
-      </AuthChecker>
+                <IonTabBar slot="bottom">
+                  <IonTabButton tab="recipes" href="/recipes">
+                    <IonIcon src={recipeIcon} />
+                    <IonLabel>Recipes</IonLabel>
+                  </IonTabButton>
+                  <IonTabButton tab="meal-plan" href="/meal-plan">
+                    <IonIcon src={mealPlanIcon} />
+                    <IonLabel>Meal Plan</IonLabel>
+                  </IonTabButton>
+                  <IonTabButton tab="lists" href="/lists">
+                    <IonIcon src={listIcon} />
+                    <IonLabel>Lists</IonLabel>
+                  </IonTabButton>
+                  <IonTabButton tab="profile" href="/profile">
+                    <IonIcon src={profileIcon} />
+                    <IonLabel>Profile</IonLabel>
+                  </IonTabButton>
+                </IonTabBar>
+              </IonTabs>
+            </IonReactRouter>
+          </IonApp>
+        </AuthChecker>
+      </Provider>
     </ApolloProvider>
   );
 };

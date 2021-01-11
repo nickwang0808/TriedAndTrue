@@ -10,37 +10,30 @@ import {
   IonSearchbar,
   IonTitle,
   IonToolbar,
-  useIonViewWillEnter,
 } from "@ionic/react";
-import addnew from "../../assets/svg/addnew.svg";
-import React, { useEffect } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { RouteComponentProps } from "react-router";
+import addnew from "../../assets/svg/addnew.svg";
 import RecipeCard from "../../components/card/RecipeCard";
 import { GetAllRecipeQuery } from "../../generated/graphql";
 import { GET_ALL_RECIPES } from "../../gql/query/getAllRecipes";
+import { setShowAddOrEditRecipe } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
 import NoRecipe from "./NoRecipe";
 
 const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
-  const { error, loading, data, refetch } = useQuery<GetAllRecipeQuery>(
-    GET_ALL_RECIPES
-  );
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
-  // TODO: use update cache and get rid of this
-  useIonViewWillEnter(() => refetch());
+  const dispatch = useDispatch();
+  const { error, loading, data } = useQuery<GetAllRecipeQuery>(GET_ALL_RECIPES);
 
   if (loading) return <p>loading...</p>;
   if (error) return <p>{error.message}</p>;
-
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
           <IonTitle color="primary">My Recipes</IonTitle>
           <IonButtons slot="end">
-            <IonButton onClick={() => history.push("/add-recipe/null")}>
+            <IonButton onClick={() => dispatch(setShowAddOrEditRecipe(true))}>
               <IonIcon icon={addnew} color="secondary" />
             </IonButton>
           </IonButtons>

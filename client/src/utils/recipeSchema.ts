@@ -39,3 +39,13 @@ export const recipeFormSchema = object().shape({
   ingredients: array(object().shape({ value: string() })).nullable(),
   directions: array(object().shape({ value: string() })).nullable(),
 });
+
+export const emptyDefaultValue: IRecipeForm = {
+  cuisine: null,
+  total_time: null,
+  meal_type: null,
+  yields: null,
+  title: null,
+  directions: [],
+  ingredients: [],
+};

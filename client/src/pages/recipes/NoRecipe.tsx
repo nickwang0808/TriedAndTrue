@@ -1,10 +1,11 @@
 import styled from "@emotion/styled";
 import { IonButton } from "@ionic/react";
 import React from "react";
-import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { setShowAddOrEditRecipe } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
 
 export default function NoRecipe() {
-  const history = useHistory();
+  const dispatch = useDispatch();
 
   return (
     <StyledWrapper>
@@ -15,7 +16,7 @@ export default function NoRecipe() {
       <IonButton
         fill="outline"
         color="secondary"
-        onClick={() => history.push("/add-recipe/null")}
+        onClick={() => dispatch(setShowAddOrEditRecipe(true))}
       >
         Manually Add
       </IonButton>

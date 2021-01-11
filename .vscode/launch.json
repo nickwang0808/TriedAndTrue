@@ -6,9 +6,10 @@
   "configurations": [
     {
       "type": "pwa-chrome",
-      "request": "launch",
-      "name": "Launch Chrome against localhost",
-      "url": "http://localhost:8100",
+      "request": "attach",
+      "name": "attach to chrome",
+      "url": "http://localhost:8100/recipes",
+      "port": 9222,
       "webRoot": "${workspaceFolder}"
     }
   ]

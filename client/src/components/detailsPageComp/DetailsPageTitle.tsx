@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 import { IonIcon } from "@ionic/react";
 import React from "react";
-import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
 import calendar from "../../assets/svg/calendar.svg";
 import pencil from "../../assets/svg/pencil.svg";
+import { setRecipeId } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
 
 interface IProps {
   img: string | null;
@@ -12,7 +13,8 @@ interface IProps {
 }
 
 export default function DetailsPageTitle({ title, img, id }: IProps) {
-  const history = useHistory();
+  const dispatch = useDispatch();
+
   return (
     <>
       <StyledImg src="https://picsum.photos/300/200" />
@@ -23,7 +25,7 @@ export default function DetailsPageTitle({ title, img, id }: IProps) {
           <IonIcon
             size="large"
             icon={pencil}
-            onClick={() => history.push(`/add-recipe/${id}`)}
+            onClick={() => dispatch(setRecipeId(id))}
           />
           <IonIcon size="large" icon={calendar} />
         </StyledIconWrapper>
