@@ -26,7 +26,7 @@ import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/typography.css";
 import React from "react";
 import { Provider } from "react-redux";
-import { Redirect, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import listIcon from "./assets/svg/listIcon.svg";
 import mealPlanIcon from "./assets/svg/mealPlanIcon.svg";
 import profileIcon from "./assets/svg/profileIcon.svg";
@@ -86,17 +86,11 @@ const App: React.FC = () => {
                     path="/recipe-details/:id"
                     component={RecipeDetailsPage}
                   />
-
-                  <Route
-                    path="/"
-                    render={() => <Redirect to="/recipes" />}
-                    exact={true}
-                  />
                 </IonRouterOutlet>
 
                 <IonTabBar slot="bottom">
                   <IonTabButton tab="recipes" href="/recipes">
-                    <IonIcon src={recipeIcon} color="primary" />
+                    <IonIcon src={recipeIcon} />
                     <IonLabel>Recipes</IonLabel>
                   </IonTabButton>
                   <IonTabButton tab="meal-plan" href="/meal-plan">

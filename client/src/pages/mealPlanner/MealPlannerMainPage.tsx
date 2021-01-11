@@ -21,7 +21,6 @@ export default function MealPlannerMainPage() {
                 <RecipeCardSmall />
                 <RecipeCardSmall />
                 <RecipeCardSmall />
-                {/* <RecipeCardSmall /> */}
                 <AddCardOutLined />
               </StyledGrid>
             </>
@@ -36,10 +35,10 @@ const StyledGrid = styled.div`
   gap: 8px;
   overflow-x: auto;
 
-  padding: 8px;
+  padding: 16px 8px;
   // target all card and add button container in the flex box
   & > * {
-    width: 33%;
+    width: 30%;
     flex-shrink: 0; // ion card shrink by default
   }
 `;

@@ -9,6 +9,7 @@ import {
 } from "@ionic/react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import xclose from "../../assets/svg/close-x.svg";
 import { StyledFullScreenModal } from "../../components/modals/fullScreenModalBase";
 import { GetRecipeDetailsQuery } from "../../generated/graphql";
 import { GET_RECIPE_DETAILS } from "../../gql/query/getRecipeDetails";
@@ -80,7 +81,7 @@ function Header({ isNew }: { isNew: boolean }) {
       <IonToolbar>
         <IonButtons slot="start">
           <IonButton onClick={() => dispatch(resetAddOrEditRecipe())}>
-            <IonIcon icon={"close"} color="secondary" />
+            <IonIcon icon={xclose} color="secondary" />
           </IonButton>
         </IonButtons>
         <IonTitle color="primary">
