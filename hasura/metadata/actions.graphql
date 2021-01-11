@@ -9,7 +9,7 @@ type Mutation {
   overRideIngredients (
     ingredientsStrings: [String]!
     recipe_id: String!
-  ): Status!
+  ): UpdatedRecipeIngredients!
 }
 
 
@@ -221,5 +221,9 @@ type InsertRecipeOneDerivedOutput {
   title : String!
   total_time : Int
   yields : String
+}
+
+type UpdatedRecipeIngredients {
+  id : String!
 }
 

@@ -35,15 +35,16 @@
   - role: user
     permission:
       columns:
-      - id
-      - title
-      - img
-      - total_time
-      - yields
-      - owner
+      - created_at
       - cuisine
       - directions
+      - id
+      - img
       - meal_type
+      - owner
+      - title
+      - total_time
+      - yields
       filter:
         user:
           id:

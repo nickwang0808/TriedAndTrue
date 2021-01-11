@@ -8,7 +8,7 @@ actions:
   - role: user
 - name: overRideIngredients
   definition:
-    kind: asynchronous
+    kind: synchronous
     handler: http://35.220.182.160:5001/overwrite-ingredients
     forward_client_headers: true
   permissions:
@@ -85,4 +85,5 @@ custom_types:
   - name: ParsedIngredients
   - name: Status
   - name: InsertRecipeOneDerivedOutput
+  - name: UpdatedRecipeIngredients
   scalars: []

@@ -17,6 +17,11 @@ export const UPDATE_RECIPE_DETAILS = gql`
       total_time
       yields
     }
-    overRideIngredients(ingredientsStrings: $ingredientsStrings, recipe_id: $id)
+    overRideIngredients(
+      ingredientsStrings: $ingredientsStrings
+      recipe_id: $id
+    ) {
+      id
+    }
   }
 `;
