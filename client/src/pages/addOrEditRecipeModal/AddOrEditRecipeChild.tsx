@@ -69,7 +69,6 @@ export default function AddOrEditRecipeChild({
 
   const { isDirty, dirtyFields } = formState;
   const onSubmit = (data: IRecipeForm) => {
-    s;
     // console.log({ data });
 
     // amp ingredient out to write to raw_text column
