@@ -1,0 +1,1 @@
+CREATE TABLE "public"."planner"("user_id" text NOT NULL, "recipe_id" text NOT NULL, "date" date NOT NULL, "index" integer NOT NULL, PRIMARY KEY ("recipe_id","date") , FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON UPDATE cascade ON DELETE cascade, FOREIGN KEY ("recipe_id") REFERENCES "public"."recipe"("id") ON UPDATE cascade ON DELETE cascade);
