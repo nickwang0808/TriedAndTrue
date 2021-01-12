@@ -15,6 +15,8 @@ import {
 } from "../../generated/graphql";
 import { INSERT_RECIPE_ONE } from "../../gql/mutations/insertRecipeOne.graphql";
 import { UPDATE_RECIPE_DETAILS } from "../../gql/mutations/updateRecipeDetails.graphql";
+import { GET_ALL_RECIPES } from "../../gql/query/getAllRecipes";
+import { GET_RECIPE_DETAILS } from "../../gql/query/getRecipeDetails";
 import { IRecipeForm, recipeFormSchema } from "../../utils/recipeSchema";
 
 interface IProps {
@@ -51,20 +53,7 @@ export default function AddOrEditRecipeChild({
     { loading: loading_insert, data: data_insert, error: error_insert },
   ] = useMutation<InsertRecipeMutation, InsertRecipeMutationVariables>(
     INSERT_RECIPE_ONE,
-    {
-      update(cache, { data }) {
-        if (!data || !data.insert_recipe_one) return null;
-        const { insert_recipe_one } = data;
-        const id = cache.identify(insert_recipe_one!)!;
-        cache.modify({
-          fields: {
-            recipe(existingRecipes: any = [], { toReference }) {
-              return [toReference(id), ...existingRecipes];
-            },
-          },
-        });
-      },
-    }
+    { refetchQueries: [{ query: GET_ALL_RECIPES }] }
   );
 
   const [
@@ -73,11 +62,10 @@ export default function AddOrEditRecipeChild({
   ] = useMutation<
     UpdateRecipeDetailMutation,
     UpdateRecipeDetailMutationVariables
-  >(
-    UPDATE_RECIPE_DETAILS /* , {
+  >(UPDATE_RECIPE_DETAILS, {
     refetchQueries: [{ query: GET_RECIPE_DETAILS, variables: { id } }],
-  } */
-  );
+    // awaitRefetchQueries: true,
+  });
 
   const { isDirty, dirtyFields } = formState;
   const onSubmit = (data: IRecipeForm) => {

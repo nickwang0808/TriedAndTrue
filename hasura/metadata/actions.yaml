@@ -1,7 +1,14 @@
 actions:
+- name: InsertRecipeOneDerived
+  definition:
+    kind: synchronous
+    handler: http://35.220.182.160:5001/InsertRecipeOneDerived
+    forward_client_headers: true
+  permissions:
+  - role: user
 - name: overRideIngredients
   definition:
-    kind: asynchronous
+    kind: synchronous
     handler: http://35.220.182.160:5001/overwrite-ingredients
     forward_client_headers: true
   permissions:
@@ -14,9 +21,77 @@ actions:
   permissions:
   - role: user
 custom_types:
-  enums: []
-  input_objects: []
+  enums:
+  - name: InsertRecipeOneDerivedRecipeConstraint
+    values:
+    - description: unique or primary key constraint
+      is_deprecated: null
+      value: recipe_id_key
+    - description: unique or primary key constraint
+      is_deprecated: null
+      value: recipe_pkey
+  - name: InsertRecipeOneDerivedRecipeUpdateColumn
+    values:
+    - description: column name
+      is_deprecated: null
+      value: cuisine
+    - description: column name
+      is_deprecated: null
+      value: directions
+    - description: column name
+      is_deprecated: null
+      value: img
+    - description: column name
+      is_deprecated: null
+      value: meal_type
+    - description: column name
+      is_deprecated: null
+      value: title
+    - description: column name
+      is_deprecated: null
+      value: total_time
+    - description: column name
+      is_deprecated: null
+      value: yields
+  - name: InsertRecipeOneDerivedRecipeIngredientsConstraint
+    values:
+    - description: unique or primary key constraint
+      is_deprecated: null
+      value: recipe_ingredients_id_key
+    - description: unique or primary key constraint
+      is_deprecated: null
+      value: recipe_ingredients_pkey
+  - name: InsertRecipeOneDerivedRecipeIngredientsUpdateColumn
+    values:
+    - description: column name
+      is_deprecated: null
+      value: raw_text
+  input_objects:
+  - name: InsertRecipeOneDerivedRecipeInsertInput
+  - name: InsertRecipeOneDerivedRecipeIngredientsArrRelInsertInput
+  - name: InsertRecipeOneDerivedRecipeIngredientsInsertInput
+  - name: InsertRecipeOneDerivedRecipeObjRelInsertInput
+  - name: InsertRecipeOneDerivedRecipeOnConflict
+  - name: InsertRecipeOneDerivedRecipeBoolExp
+  - name: InsertRecipeOneDerivedStringComparisonExp
+  - name: InsertRecipeOneDerivedJsonComparisonExp
+  - name: InsertRecipeOneDerivedRecipeIngredientsBoolExp
+  - name: InsertRecipeOneDerivedUuidComparisonExp
+  - name: InsertRecipeOneDerivedBooleanComparisonExp
+  - name: InsertRecipeOneDerivedIntComparisonExp
+  - name: InsertRecipeOneDerivedUserBoolExp
+  - name: InsertRecipeOneDerivedRecipeIngredientsOnConflict
   objects:
   - name: ParsedIngredients
   - name: Status
+  - name: InsertRecipeOneDerivedOutput
+  - name: UpdatedRecipeIngredients
+    relationships:
+    - remote_table:
+        schema: public
+        name: recipe_ingredients
+      name: newIngredients
+      type: array
+      field_mapping:
+        id: id
   scalars: []

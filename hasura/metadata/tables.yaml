@@ -35,15 +35,16 @@
   - role: user
     permission:
       columns:
-      - id
-      - title
-      - img
-      - total_time
-      - yields
-      - owner
+      - created_at
       - cuisine
       - directions
+      - id
+      - img
       - meal_type
+      - owner
+      - title
+      - total_time
+      - yields
       filter:
         user:
           id:
@@ -87,8 +88,15 @@
             id:
               _eq: X-Hasura-User-Id
       columns:
+      - formatted_text
+      - name
+      - optional
+      - preparation
+      - quantity_denominator
+      - quantity_numerator
       - raw_text
       - recipe_id
+      - unit
       backend_only: false
   select_permissions:
   - role: user
@@ -128,20 +136,6 @@
           user:
             id:
               _eq: X-Hasura-User-Id
-  event_triggers:
-  - name: format_ingredients
-    definition:
-      enable_manual: false
-      insert:
-        columns: '*'
-      update:
-        columns:
-        - raw_text
-    retry_conf:
-      num_retries: 2
-      interval_sec: 10
-      timeout_sec: 60
-    webhook: http://35.220.182.160:5001/format-ingredients
 - table:
     schema: public
     name: user
