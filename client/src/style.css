@@ -6,8 +6,8 @@
 }
 
 p {
-  color: var(--ion-color-primary);
-  font-family: Sura;
+  color: var(--ion-color-dark);
+  font-family: OpenSansRegular;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;

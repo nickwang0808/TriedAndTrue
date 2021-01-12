@@ -23,8 +23,9 @@ export default function IngredientListItem({
 
 const StyledWrapper = styled(IonItem)<{ showBackground: boolean }>`
   --background: ${(props) =>
-    props.showBackground ? "rgba(227, 236, 240, 0.25)" : "none"};
-  --padding-start: 8px;
+    props.showBackground ? "rgba(227, 236, 240, 0.5)" : "none"};
+  --padding-start: 0px;
+  font-size: 14px;
 `;
 
 const StyledTitle = styled.div`
