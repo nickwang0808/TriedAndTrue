@@ -1,5 +1,7 @@
 import { Router } from "express";
+import { parseIngredient } from "ingredient-parser";
 import query from "../db";
+import stringifyFormattedIngredients from "../helper/stringifyFormatedIngredients";
 
 const overWriteIngredient = Router();
 
@@ -22,17 +24,53 @@ overWriteIngredient.post("/", async (req, res) => {
     );
 
     // re insert all the new ingredients
-    await Promise.all(
+    const result = await Promise.all(
       ingredientsStrings.map(async (ingredient) => {
-        return await query(
+        const parseResult = parseIngredient(ingredient);
+
+        const formatted_text = stringifyFormattedIngredients(parseResult);
+
+        const {
+          name,
+          preparation,
+          quantity_denominator,
+          quantity_numerator,
+          unit,
+          optional,
+        } = parseResult;
+
+        const { rows } = await query(
           `
-      INSERT INTO recipe_ingredients(recipe_id ,raw_text)
-      VALUES ($1, $2);
+      INSERT INTO recipe_ingredients(
+        recipe_id,
+        raw_text,
+        quantity_denominator,
+        quantity_numerator,
+        name,
+        optional,
+        unit,
+        preparation,
+        formatted_text
+        )
+      VALUES ($1, $2, $3,$4,$5,$6,$7,$8,$9)
+      RETURNING *;
       `,
-          [recipe_id, ingredient]
+          [
+            recipe_id,
+            ingredient,
+            quantity_denominator,
+            quantity_numerator,
+            name,
+            optional,
+            unit,
+            preparation,
+            formatted_text,
+          ]
         );
+        return { /*  newIngredients: rows[0], */ id: rows[0].id };
       })
     );
+    return res.json(result);
   } catch (error) {
     return res.status(400).json({
       message: error.message,
@@ -40,9 +78,6 @@ overWriteIngredient.post("/", async (req, res) => {
   }
 
   // success
-  return res.json({
-    status: "complete",
-  });
 });
 
 export default overWriteIngredient;

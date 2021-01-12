@@ -136,20 +136,6 @@
           user:
             id:
               _eq: X-Hasura-User-Id
-  event_triggers:
-  - name: format_ingredients
-    definition:
-      enable_manual: false
-      insert:
-        columns: '*'
-      update:
-        columns:
-        - raw_text
-    retry_conf:
-      num_retries: 2
-      interval_sec: 10
-      timeout_sec: 60
-    webhook: http://35.220.182.160:5001/format-ingredients
 - table:
     schema: public
     name: user

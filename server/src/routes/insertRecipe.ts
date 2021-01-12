@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 import { parseIngredient } from "ingredient-parser";
 import fetch, { Headers } from "node-fetch";
+import stringifyFormattedIngredients from "../helper/stringifyFormatedIngredients";
 const HASURA_OPERATION = `mutation ($object: recipe_insert_input!) {
   insert_recipe_one(object: $object) {
     id
@@ -48,9 +49,13 @@ InsertRecipeOneDerivedRoute.post("/", async (req: Request, res: Response) => {
   const parseIngredientResults = object.recipe_ingredients_list?.data?.map(
     ({ raw_text }) => {
       const result = parseIngredient(raw_text);
+      const formatted_text = stringifyFormattedIngredients(result);
+
       // raw_text is non nullable so put it in there just because
       //@ts-ignore
       result.raw_text = raw_text;
+      //@ts-ignore
+      result.formatted_text = formatted_text;
       return result;
     }
   );

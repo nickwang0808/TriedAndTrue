@@ -64,7 +64,7 @@ export default function AddOrEditRecipeChild({
     UpdateRecipeDetailMutationVariables
   >(UPDATE_RECIPE_DETAILS, {
     refetchQueries: [{ query: GET_RECIPE_DETAILS, variables: { id } }],
-    awaitRefetchQueries: true,
+    // awaitRefetchQueries: true,
   });
 
   const { isDirty, dirtyFields } = formState;

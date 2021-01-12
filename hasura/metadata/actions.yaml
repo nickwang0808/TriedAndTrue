@@ -86,4 +86,12 @@ custom_types:
   - name: Status
   - name: InsertRecipeOneDerivedOutput
   - name: UpdatedRecipeIngredients
+    relationships:
+    - remote_table:
+        schema: public
+        name: recipe_ingredients
+      name: newIngredients
+      type: array
+      field_mapping:
+        id: id
   scalars: []
