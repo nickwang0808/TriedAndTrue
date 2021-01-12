@@ -64,6 +64,7 @@ const RecipeDetailsPage: React.FC<IProps> = ({
 
         <IonSegment
           mode="md"
+          color="secondary"
           value={showDirections ? "directions" : "ingredients"}
           onIonChange={(e) =>
             setShowDirections(e.detail.value === "ingredients" ? false : true)

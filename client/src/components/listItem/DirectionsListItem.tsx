@@ -23,11 +23,13 @@ export default function DirectionsListItem({
 
 const StyledWrapper = styled(IonItem)<{ showBackground: boolean }>`
   --background: ${(props) =>
-    props.showBackground ? "rgba(227, 236, 240, 0.25)" : "none"};
+    props.showBackground ? "rgba(227, 236, 240, 0.5)" : "none"};
   --padding-start: 8px;
   --padding-top: 8px;
   --padding-bottom: 8px;
-
+  font-size: 14px;
+  color: var(--ion-color-dark);
+  
   align-items: unset;
 
   & ion-icon {

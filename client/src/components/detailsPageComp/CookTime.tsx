@@ -9,20 +9,16 @@ interface IProps {
 export default function CookTime({ total_time, servings }: IProps) {
   return (
     <StyledWrapper>
-      {/* <StyledCol>
-        <div>45m</div>
-        <div>Prep Time</div>
-      </StyledCol> */}
       {total_time && (
         <StyledCol>
-          <div>{total_time}</div>
-          <div>Total Time</div>
+          <StyledTitle>{total_time}</StyledTitle>
+          <StyledSubtitle>Total Time</StyledSubtitle>
         </StyledCol>
       )}
       {servings && (
         <StyledCol>
-          <div>{servings}</div>
-          <div>Servings</div>
+          <StyledTitle>{servings}</StyledTitle>
+          <StyledSubtitle>Servings</StyledSubtitle>
         </StyledCol>
       )}
     </StyledWrapper>
@@ -32,6 +28,17 @@ export default function CookTime({ total_time, servings }: IProps) {
 const StyledWrapper = styled.div`
   display: flex;
   padding-left: 16px;
+  padding-bottom: 16px;
+`;
+
+const StyledTitle = styled.div`
+  font-family: SuraRegular;
+  font-size: 22px;
+`;
+
+const StyledSubtitle = styled.div`
+  font-size: 13px;
+  opacity: 0.75;
 `;
 
 const StyledCol = styled.div`
