@@ -27,7 +27,7 @@ export const GET_RECIPE_DETAILS = gql`
   }
 `;
 
-export default function useGetRecipeDetails(id: string) {
+export default function useGetRecipeDetails(id: string | null) {
   const {
     error,
     loading,
@@ -35,7 +35,10 @@ export default function useGetRecipeDetails(id: string) {
     refetch,
   } = useQuery<GetRecipeDetailsQuery, GetRecipeDetailsQueryVariables>(
     GET_RECIPE_DETAILS,
-    { variables: { id } }
+    {
+      skip: !id,
+      variables: { id: id as string },
+    }
   );
 
   return {
