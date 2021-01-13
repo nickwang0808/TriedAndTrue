@@ -46,8 +46,6 @@ const StyledWrapper = styled(IonItem)<{ showBackground: boolean }>`
 
   align-items: unset;
 
-  --padding-top: 0;
-
   & ion-textarea {
     margin-top: 0; // ion textarea has a weird top margin
   }
@@ -63,10 +61,10 @@ export const StyledIndexBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: SuraBold;
+  size: 16px;
   /* margin-right: 8px; */
 
-  border: 1px solid black;
-  font-weight: 700;
-
+  border: 1px solid var(--ion-color-primary);
   margin-inline: 0px 8px;
 `;

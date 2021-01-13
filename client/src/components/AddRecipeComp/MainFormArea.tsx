@@ -18,7 +18,7 @@ export default function MainFormArea({ control }: IProps) {
   return (
     <StyledList lines="none">
       <IonItem style={{ width: "100%" }}>
-        <IonLabel position="stacked">Title</IonLabel>
+        <IonLabel position="stacked">Title*</IonLabel>
         <Controller
           control={control}
           name="title"
@@ -48,25 +48,25 @@ export default function MainFormArea({ control }: IProps) {
             <IonSelect
               color="primary"
               value={value}
-              placeholder="Select One"
+              placeholder="Meal Type"
               onIonChange={(e) => onChange(e.detail.value)}
               ref={ref}
               // defaultValue="lunch"
             >
               <IonSelectOption color="primary" value="breakfast">
-                breakfast
+                Breakfast
               </IonSelectOption>
               <IonSelectOption color="primary" value="lunch">
-                lunch
+                Lunch
               </IonSelectOption>
               <IonSelectOption color="primary" value="dinner">
-                dinner
+                Dinner
               </IonSelectOption>
               <IonSelectOption color="primary" value="snack">
-                snack
+                Snack
               </IonSelectOption>
               <IonSelectOption color="primary" value="desert">
-                desert
+                Dessert
               </IonSelectOption>
             </IonSelect>
           )}
@@ -84,7 +84,7 @@ export default function MainFormArea({ control }: IProps) {
               color="primary"
               type="number"
               value={value}
-              placeholder="minutes"
+              placeholder="Hours / Minutes"
               ref={ref}
               onIonChange={(e) => onChange(e.detail.value)}
             />
@@ -104,7 +104,7 @@ export default function MainFormArea({ control }: IProps) {
               color="primary"
               type="text"
               value={value}
-              placeholder="servings"
+              placeholder="Servings"
               ref={ref}
               onIonChange={(e) => onChange(e.detail.value)}
             />
@@ -124,7 +124,7 @@ export default function MainFormArea({ control }: IProps) {
               color="primary"
               type="text"
               value={value}
-              placeholder="Select Cuisine"
+              placeholder="Cuisine"
               ref={ref}
               onIonChange={(e) => onChange(e.detail.value)}
             />
@@ -135,7 +135,8 @@ export default function MainFormArea({ control }: IProps) {
   );
 }
 
-const StyledList = styled(IonList)`
+const StyledList = styled(IonList)` 
+padding-bottom: 32px;
   & ion-item {
     width: calc(50% + 16px); // using inline style to over ride this on title
   }

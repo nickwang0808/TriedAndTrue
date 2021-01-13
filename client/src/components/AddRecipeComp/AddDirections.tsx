@@ -64,28 +64,36 @@ export default function AddDirections({ control }: IProps) {
           }}
         />
       </StyledIonItem>
-      <IonButton
+      <IonButtonPadded
         fill="outline"
         color="secondary"
         onClick={handleAppendIngredient}
       >
         Add Direction
-      </IonButton>
+      </IonButtonPadded>
     </StyledIngredientList>
   );
 }
 
+const IonButtonPadded = styled(IonButton)`
+  padding-left: 8px;
+`;
+
 const StyledIngredientList = styled(IonList)`
-  padding: 8px;
+  padding: 8px 0 40px 8px;
 `;
 
 const StyledIonItem = styled(IonItem)`
   margin-left: -8px;
+  margin-bottom: 16px;
+  margin-top: 8px;
 
   & ion-textarea {
-    margin-top: 0;
     --padding-start: 8px !important; // specificity problem
     --padding-end: 8px !important;
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+
     border: 1px solid var(--ion-color-primary);
   }
   & .item-has-focus {
