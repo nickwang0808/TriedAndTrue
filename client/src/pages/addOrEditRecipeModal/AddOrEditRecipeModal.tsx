@@ -34,12 +34,6 @@ export default function AddOrEditRecipeModal() {
     variables: { id },
   });
 
-  // useEffect(() => {
-  //   if (id !== "null") {
-  //     getRecipeDetails({ variables: { id } });
-  //   }
-  // }, [id]);
-
   if (loading) return <p>loading ...</p>;
   if (error) return <p>{error.message}</p>;
   return (

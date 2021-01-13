@@ -6,7 +6,6 @@ import {
   IonPage,
   IonSegment,
   IonSegmentButton,
-  useIonViewWillEnter,
 } from "@ionic/react";
 import React, { useState } from "react";
 import { RouteComponentProps } from "react-router";
@@ -26,11 +25,9 @@ const RecipeDetailsPage: React.FC<IProps> = ({
     params: { id },
   },
 }) => {
-  const { error, loading, recipe_by_pk, refetch } = useGetRecipeDetails(id);
+  const { error, loading, recipe_by_pk } = useGetRecipeDetails(id);
 
   const [showDirections, setShowDirections] = useState(false);
-
-  useIonViewWillEnter(() => refetch());
 
   if (loading) return <p>loading...</p>;
   if (error) return <p>{error.message}</p>;
