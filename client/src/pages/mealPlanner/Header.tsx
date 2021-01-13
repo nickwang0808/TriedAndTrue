@@ -61,7 +61,7 @@ export default function Header({ weeks }: IProps) {
         >
           {monAndFris.map(([mon, sun]) => {
             return (
-              <IonSegmentButton value={mon} id={mon}>
+              <IonSegmentButton value={mon} id={mon} key={mon}>
                 <IonLabel>
                   {`${format(new Date(mon), "MMM-d")} - ${format(
                     new Date(sun),

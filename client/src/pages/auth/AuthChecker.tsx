@@ -24,7 +24,7 @@ export default function AuthChecker({ children }: IProps) {
   });
 
   const handleGoogleSignIn = async () => {
-    console.log("sign in window");
+    // console.log("sign in window");
     const provider = new firebase.auth.GoogleAuthProvider();
     const { user } = await auth.signInWithPopup(provider);
     if (!user) throw new Error("something wrong");
@@ -33,7 +33,7 @@ export default function AuthChecker({ children }: IProps) {
     const result = await cloudFn.httpsCallable("customClaims")();
     if (result.data) {
       const token = await auth.currentUser?.getIdToken(true);
-      console.log(token);
+      // console.log(token);
       localStorage.setItem("token", token || "");
     }
   };
@@ -50,7 +50,9 @@ export default function AuthChecker({ children }: IProps) {
         setIsAuthed(true);
       }
     });
-  });
+  }, []);
+
+  // console.log("auth render");
 
   if (!isAuthed) {
     return (

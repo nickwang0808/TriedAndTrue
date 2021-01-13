@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import {
   IonButton,
   IonButtons,
@@ -6,7 +5,6 @@ import {
   IonHeader,
   IonIcon,
   IonPage,
-  IonSearchbar,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -15,6 +13,8 @@ import { useDispatch } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import addnew from "../../assets/svg/addnew.svg";
 import RecipeCard from "../../components/card/RecipeCard";
+import StyledRecipeGrid from "../../components/layout/StyledRecipeGrid";
+import StyledSearchBar from "../../components/misc/SearchBar";
 import useGetAllRecipes from "../../gql/query/useGetAllRecipes";
 import { setShowAddOrEditRecipe } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
 import NoRecipe from "./NoRecipe";
@@ -43,7 +43,7 @@ const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
         {!data?.recipe.length ? (
           <NoRecipe />
         ) : (
-          <StyledGrid>
+          <StyledRecipeGrid>
             {data.recipe.map((props) => {
               return (
                 <RecipeCard
@@ -53,7 +53,7 @@ const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
                 />
               );
             })}
-          </StyledGrid>
+          </StyledRecipeGrid>
         )}
       </IonContent>
     </IonPage>
@@ -61,25 +61,3 @@ const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
 };
 
 export default RecipePage;
-
-const StyledGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-
-  padding: 8px;
-`;
-
-const StyledSearchBar = styled(IonSearchbar)`
-  --color: var(--ion-color-primary);
-  --icon-color: var(--ion-color-primary);
-  --box-shadow: none;
-
-  .searchbar-has-focus {
-    border: 1px solid var(--ion-color-primary);
-  }
-
-  & > div {
-    border: 1px solid var(--ion-color-primary);
-  }
-`;
