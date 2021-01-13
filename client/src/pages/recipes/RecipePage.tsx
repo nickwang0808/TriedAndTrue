@@ -1,4 +1,3 @@
-import { useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
 import {
   IonButton,
@@ -16,14 +15,13 @@ import { useDispatch } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import addnew from "../../assets/svg/addnew.svg";
 import RecipeCard from "../../components/card/RecipeCard";
-import { GetAllRecipeQuery } from "../../generated/graphql";
-import { GET_ALL_RECIPES } from "../../gql/query/getAllRecipes";
+import useGetAllRecipes from "../../gql/query/useGetAllRecipes";
 import { setShowAddOrEditRecipe } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
 import NoRecipe from "./NoRecipe";
 
 const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
   const dispatch = useDispatch();
-  const { error, loading, data } = useQuery<GetAllRecipeQuery>(GET_ALL_RECIPES);
+  const { error, loading, data } = useGetAllRecipes();
 
   if (loading) return <p>loading...</p>;
   if (error) return <p>{error.message}</p>;

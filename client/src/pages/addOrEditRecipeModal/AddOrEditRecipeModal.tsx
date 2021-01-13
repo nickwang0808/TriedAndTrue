@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import xclose from "../../assets/svg/close-x.svg";
 import { StyledFullScreenModal } from "../../components/modals/fullScreenModalBase";
 import { GetRecipeDetailsQuery } from "../../generated/graphql";
-import { GET_RECIPE_DETAILS } from "../../gql/query/getRecipeDetails";
+import { GET_RECIPE_DETAILS } from "../../gql/query/useGetRecipeDetails";
 import { resetAddOrEditRecipe } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
 import { IAppState } from "../../redux/store";
 import { emptyDefaultValue, mealType } from "../../utils/recipeSchema";

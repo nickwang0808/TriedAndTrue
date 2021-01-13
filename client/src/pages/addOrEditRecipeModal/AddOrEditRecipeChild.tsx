@@ -1,4 +1,3 @@
-import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IonButton, IonContent, IonFooter } from "@ionic/react";
 import React, { useEffect } from "react";
@@ -7,16 +6,8 @@ import AddDirections from "../../components/AddRecipeComp/AddDirections";
 import AddIngredients from "../../components/AddRecipeComp/AddIngredients";
 import MainFormArea from "../../components/AddRecipeComp/MainFormArea";
 import BlockSeparator from "../../components/misc/BlockSeparator";
-import {
-  InsertRecipeMutation,
-  InsertRecipeMutationVariables,
-  UpdateRecipeDetailMutation,
-  UpdateRecipeDetailMutationVariables,
-} from "../../generated/graphql";
-import { INSERT_RECIPE_ONE } from "../../gql/mutations/insertRecipeOne.graphql";
-import { UPDATE_RECIPE_DETAILS } from "../../gql/mutations/updateRecipeDetails.graphql";
-import { GET_ALL_RECIPES } from "../../gql/query/getAllRecipes";
-import { GET_RECIPE_DETAILS } from "../../gql/query/getRecipeDetails";
+import useUpdateRecipeDetails from "../../gql/mutations/updateRecipeDetails.graphql";
+import useInsertRecipeOne from "../../gql/mutations/useInsertRecipeOne.graphql";
 import { IRecipeForm, recipeFormSchema } from "../../utils/recipeSchema";
 
 interface IProps {
@@ -48,24 +39,19 @@ export default function AddOrEditRecipeChild({
     reset(defaultValues);
   }, [defaultValues]);
 
-  const [
+  const {
+    data_insert,
+    error_insert,
     insertRecipeOne,
-    { loading: loading_insert, data: data_insert, error: error_insert },
-  ] = useMutation<InsertRecipeMutation, InsertRecipeMutationVariables>(
-    INSERT_RECIPE_ONE,
-    { refetchQueries: [{ query: GET_ALL_RECIPES }] }
-  );
+    loading_insert,
+  } = useInsertRecipeOne();
 
-  const [
+  const {
     updateRecipeDetails,
-    { loading: loading_update, data: data_update, error: error_pdate },
-  ] = useMutation<
-    UpdateRecipeDetailMutation,
-    UpdateRecipeDetailMutationVariables
-  >(UPDATE_RECIPE_DETAILS, {
-    refetchQueries: [{ query: GET_RECIPE_DETAILS, variables: { id } }],
-    // awaitRefetchQueries: true,
-  });
+    loading_update,
+    data_update,
+    error_update,
+  } = useUpdateRecipeDetails(id);
 
   const { isDirty, dirtyFields } = formState;
   const onSubmit = (data: IRecipeForm) => {
@@ -82,28 +68,36 @@ export default function AddOrEditRecipeChild({
 
     if (isCreateNew) {
       console.log("submit");
-      insertRecipeOne({
-        variables: {
-          object: {
-            ...dataWIthOutIngredients,
-            recipe_ingredients_list: {
-              data: mappedIngredients,
+      try {
+        insertRecipeOne({
+          variables: {
+            object: {
+              ...dataWIthOutIngredients,
+              recipe_ingredients_list: {
+                data: mappedIngredients,
+              },
             },
           },
-        },
-      });
+        });
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       if (isDirty && id) {
         // perform update recipe
-        updateRecipeDetails({
-          variables: {
-            _set: {
-              ...dataWIthOutIngredients,
+        try {
+          updateRecipeDetails({
+            variables: {
+              _set: {
+                ...dataWIthOutIngredients,
+              },
+              id,
+              ingredientsStrings: ingredients?.map((ing) => ing.value) || [],
             },
-            id,
-            ingredientsStrings: ingredients?.map((ing) => ing.value) || [],
-          },
-        });
+          });
+        } catch (error) {
+          console.log(error);
+        }
       } else return;
     }
   };
