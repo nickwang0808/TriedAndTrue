@@ -24,7 +24,7 @@ export default function RecipeCard({
 }: IProps) {
   return (
     <StyledCard onClick={onClick} mode="md">
-      <StyledImg src="https://picsum.photos/200/300" />
+      <StyledImg src="https://loremflickr.com/320/240/recipe" />
       <StyledIonHeader mode="md">
         <IonCardTitle color="primary" mode="md">{title}</IonCardTitle>
         {/* {total_time && (

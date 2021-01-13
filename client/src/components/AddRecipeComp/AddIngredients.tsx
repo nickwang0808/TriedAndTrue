@@ -62,19 +62,23 @@ export default function AddIngredients({ control }: IProps) {
           }}
         />
       </StyledIonItem>
-      <IonButton
+      <IonButtonPadded
         fill="outline"
         color="secondary"
         onClick={handleAppendIngredient}
       >
         Add Ingredient
-      </IonButton>
+      </IonButtonPadded>
     </StyledIngredientList>
   );
 }
 
 const StyledIngredientList = styled(IonList)`
-  padding: 8px;
+  padding: 8px 0 40px 8px;
+`;
+
+const IonButtonPadded = styled(IonButton)`
+  padding-left: 8px;
 `;
 
 const StyledIonItem = styled(IonItem)`
@@ -82,8 +86,9 @@ const StyledIonItem = styled(IonItem)`
 
   & ion-input {
     margin-top: 8px;
+    margin-bottom: 16px;
     --padding-start: 8px !important; // specificity problem
-    --padding-end: 8px !important;
+    /* --padding-end: 8px !important; */
     border: 1px solid var(--ion-color-primary);
   }
 

@@ -132,7 +132,7 @@ export default function AddOrEditRecipeChild({
       <IonFooter>
         <IonButton
           onClick={() => handleSubmit(onSubmit)()}
-          className="ion-margin-horizontal"
+          className="ion-margin-horizontal ion-margin-top ion-margin-bottom"
           expand="full"
           color="secondary"
         >

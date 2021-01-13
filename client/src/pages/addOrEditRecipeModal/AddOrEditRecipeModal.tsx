@@ -79,14 +79,14 @@ function Header({ isNew }: { isNew: boolean }) {
   return (
     <IonHeader>
       <IonToolbar>
+        <IonTitle color="primary">
+          {isNew ? "Create Recipe" : "Edit Recipe"}
+        </IonTitle>
         <IonButtons slot="start">
           <IonButton onClick={() => dispatch(resetAddOrEditRecipe())}>
             <IonIcon icon={xclose} color="secondary" />
           </IonButton>
         </IonButtons>
-        <IonTitle color="primary">
-          {isNew ? "Create Recipe" : "Edit Recipe"}
-        </IonTitle>
       </IonToolbar>
     </IonHeader>
   );
