@@ -18,7 +18,7 @@ export default function DetailsPageTitle({ title, img, id }: IProps) {
 
   return (
     <>
-      <StyledImg src="https://loremflickr.com/640/480/dinner" />
+      <StyledImg height="215" src="https://loremflickr.com/640/480/dinner" />
 
       <StyledTitleAndIconWrapper>
         <StyledTitle>{title}</StyledTitle>
@@ -40,7 +40,6 @@ export default function DetailsPageTitle({ title, img, id }: IProps) {
 const StyledImg = styled.img`
   width: 100%;
   height: 215;
-
   object-fit: cover;
 `;
 

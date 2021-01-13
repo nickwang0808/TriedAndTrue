@@ -19,10 +19,18 @@ h1,
 h2,
 h3,
 h4,
-ion-searchbar {
-  font-family: SuraRegular;
+ion-searchbar,
+ion-select,
+ion-input,
+ion-textarea {
+  font-family: SuraRegular !important;
+  color: var(--ion-color-dark) !important;
 }
 
+ion-select,
+ion-input {
+  min-height: 48px;
+}
 ion-segment {
   font-family: SuraBold;
 }
@@ -34,6 +42,14 @@ ion-segment-button {
 
 ion-label {
   text-transform: capitalize;
+}
+
+/* For Input Fields */
+.label-stacked {
+  text-transform: capitalize;
+  font-size: 14pt !important;
+  color: var(--ion-color-dark) !important;
+  padding-bottom: 4px;
 }
 
 ion-title {
@@ -94,6 +110,10 @@ ion-button {
   --ripple-color: transparent;
 }
 
+ion-footer {
+  background-color: white;
+  border-top: 1px solid #dcdcdc;
+}
 .header-md::after {
   /* get rid of header under line shadow thingy */
   background-image: none;

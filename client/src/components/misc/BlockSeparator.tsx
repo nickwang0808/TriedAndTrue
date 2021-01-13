@@ -19,6 +19,7 @@ const StyledDiv = styled.div`
   height: 3rem;
   width: 100vw;
   background-color: rgba(227, 236, 240, 0.5);
+  border-bottom: 1px solid #dcdcdc;
   padding: 0 16px;
   font-size: 14px;
   display: flex;
