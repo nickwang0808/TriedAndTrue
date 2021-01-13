@@ -2,12 +2,18 @@ import styled from "@emotion/styled";
 import { IonCard, IonCardHeader, IonCardTitle } from "@ionic/react";
 import React from "react";
 
-export default function RecipeCardSmall() {
+interface IProps {
+  title: string;
+  img: string | null | undefined;
+  id: string;
+}
+
+export default function RecipeCardSmall({ title, img, id }: IProps) {
   return (
     <StyledCard>
-      <StyledImg src="https://picsum.photos/200/300" />
+      <StyledImg src={img || "https://picsum.photos/200/300"} />
       <StyledIonHeader mode="md">
-        <IonCardTitle color="primary">Hometown Grilled Hamburgers</IonCardTitle>
+        <IonCardTitle color="primary">{title}</IonCardTitle>
       </StyledIonHeader>
     </StyledCard>
   );

@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@types/pg": "^7.14.7",
+    "date-fns": "^2.16.1",
     "express": "^4.17.1",
     "ingredient-parser": "https://github.com/plate0/ingredient-parser#master",
     "node-fetch": "^2.6.1",
