@@ -1,10 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { IonButton, IonContent, IonFooter } from "@ionic/react";
+import { IonContent } from "@ionic/react";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import AddDirections from "../../components/AddRecipeComp/AddDirections";
 import AddIngredients from "../../components/AddRecipeComp/AddIngredients";
 import MainFormArea from "../../components/AddRecipeComp/MainFormArea";
+import SaveFooterButton from "../../components/layout/SaveFooterButton";
 import BlockSeparator from "../../components/misc/BlockSeparator";
 import useUpdateRecipeDetails from "../../gql/mutations/updateRecipeDetails.graphql";
 import useInsertRecipeOne from "../../gql/mutations/useInsertRecipeOne.graphql";
@@ -123,16 +124,10 @@ export default function AddOrEditRecipeChild({
         </form>
       </IonContent>
 
-      <IonFooter>
-        <IonButton
-          onClick={() => handleSubmit(onSubmit)()}
-          className="ion-margin-horizontal ion-margin-top ion-margin-bottom"
-          expand="full"
-          color="secondary"
-        >
-          Save Recipe
-        </IonButton>
-      </IonFooter>
+      <SaveFooterButton
+        text="Save Recipe"
+        action={() => handleSubmit(onSubmit)()}
+      />
     </>
   );
 }

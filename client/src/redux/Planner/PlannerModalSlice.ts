@@ -28,6 +28,9 @@ const plannerModalSlice = createSlice({
         ...state.selectedRecipes.filter((elem) => elem !== action.payload),
       ];
     },
+    clearSelectedRecipe: (state) => {
+      state.selectedRecipes = [];
+    },
   },
 });
 
@@ -36,5 +39,6 @@ export const {
   openPlannerModal,
   appendSelectedRecipe,
   deSelectRecipe,
+  clearSelectedRecipe,
 } = plannerModalSlice.actions;
 export default plannerModalSlice.reducer;

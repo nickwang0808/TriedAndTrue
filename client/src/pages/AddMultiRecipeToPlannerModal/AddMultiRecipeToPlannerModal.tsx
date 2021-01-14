@@ -2,6 +2,7 @@ import { IonContent } from "@ionic/react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RecipeCard from "../../components/card/RecipeCard";
+import SaveFooterButton from "../../components/layout/SaveFooterButton";
 import StyledRecipeGrid from "../../components/layout/StyledRecipeGrid";
 import StyledSearchBar from "../../components/misc/SearchBar";
 import { StyledFullScreenModal } from "../../components/modals/fullScreenModalBase";
@@ -50,6 +51,11 @@ export default function AddMultiRecipeToPlannerModal() {
           })}
         </StyledRecipeGrid>
       </IonContent>
+      <SaveFooterButton
+        text={`Add ${selectedRecipes.length} Recipe to List`}
+        action={() => {}}
+        disabled={selectedRecipes.length === 0}
+      />
     </StyledFullScreenModal>
   );
 }
