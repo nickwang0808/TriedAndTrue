@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { format } from "date-fns";
 import React from "react";
 import { useDispatch } from "react-redux";
 import AddCardOutLined from "../../components/card/AddCardOutLined";
@@ -12,19 +13,24 @@ interface IProps {
 }
 
 export default function PlannerRow({ date }: IProps) {
-  const { planner, loading, error } = useGetPlannerRecipeByDate(date);
+  const { planner, loading, error } = useGetPlannerRecipeByDate(
+    format(new Date(date), "yyyy-MM-dd")
+  );
   const dispatch = useDispatch();
 
   if (loading) return <p>loading ...</p>;
   if (error) return <p>{error.message}</p>;
   return (
     <>
-      <BlockSeparator title="Monday" subTitle="(23rd)" />
+      <BlockSeparator
+        title={format(new Date(date), "EEEE")}
+        subTitle={format(new Date(date), "do")}
+      />
       <StyledContainer>
-        {planner.map(({ date, index, recipe: { title, img, id } }) => (
+        {planner.map(({ recipe: { title, img, id } }) => (
           <RecipeCardSmall title={title} img={img} id={id} key={id} />
         ))}
-        <AddCardOutLined onClick={() => dispatch(openPlannerModal())} />
+        <AddCardOutLined onClick={() => dispatch(openPlannerModal(date))} />
       </StyledContainer>
     </>
   );

@@ -5,30 +5,22 @@ import { IAppState } from "../../redux/store";
 import Header from "./Header";
 import PlannerRow from "./PlannerRow";
 
-const dates = [
-  "2021-01-13",
-  "2021-01-14",
-  "2021-01-15",
-  "2021-01-16",
-  "2021-01-17",
-  "2021-01-18",
-  "2021-01-19",
-];
-
 export default function MealPlannerMainPage() {
-  const weeks = useSelector(
-    (state: IAppState) => state.plannerDateRangeSlice.dateRange as string[][]
+  const { dateRange, selectedWeek } = useSelector(
+    (state: IAppState) => state.plannerDateRangeSlice
   );
 
   return (
     <>
       <IonPage>
-        <Header weeks={weeks} />
+        <Header weeks={dateRange as string[][]} />
         <IonContent>
           {/* pass in the dates */}
-          {dates.map((date) => (
-            <PlannerRow date={date} key={date} />
-          ))}
+          {(dateRange as string[][])
+            .find((elem) => String(elem[0]) === String(selectedWeek))!
+            .map((date) => (
+              <PlannerRow date={String(date)} key={String(date)} />
+            ))}
         </IonContent>
       </IonPage>
     </>

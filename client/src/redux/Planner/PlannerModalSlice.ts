@@ -3,22 +3,28 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface IState {
   showModal: boolean;
   selectedRecipes: string[];
+  dateToModify: string;
 }
 
 const initialState: IState = {
   selectedRecipes: [],
   showModal: true,
+  dateToModify: String(new Date()),
 };
 
 const plannerModalSlice = createSlice({
   name: "planner-modal",
   initialState,
   reducers: {
-    openPlannerModal: (state) => {
+    openPlannerModal: (state, action: PayloadAction<string>) => {
       state.showModal = true;
+      if (action.payload) {
+        state.dateToModify = action.payload;
+      }
     },
     closePlannerModal: (state) => {
       state.showModal = false;
+      state.dateToModify = String(new Date());
     },
     appendSelectedRecipe: (state, action: PayloadAction<string>) => {
       state.selectedRecipes = [...state.selectedRecipes, action.payload];

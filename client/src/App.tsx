@@ -34,6 +34,7 @@ import recipeIcon from "./assets/svg/recipeIcon.svg";
 import client from "./config/apoloConfig";
 import AddMultiRecipeToPlannerModal from "./pages/AddMultiRecipeToPlannerModal/AddMultiRecipeToPlannerModal";
 import AddOrEditRecipeModal from "./pages/addOrEditRecipeModal/AddOrEditRecipeModal";
+import AuthChecker from "./pages/auth/AuthChecker";
 import MealPlannerMainPage from "./pages/mealPlanner/MealPlannerMainPage";
 import RecipeDetailsPage from "./pages/recipeDetails/RecipeDetailsPage";
 import RecipePage from "./pages/recipes/RecipePage";
@@ -58,63 +59,66 @@ const App: React.FC = () => {
 
   return (
     <ApolloProvider client={client}>
-      {/* <AuthChecker> */}
-      <IonApp>
-        <AddOrEditRecipeModal />
-        <AddMultiRecipeToPlannerModal />
+      <AuthChecker>
+        <IonApp>
+          <AddOrEditRecipeModal />
+          <AddMultiRecipeToPlannerModal />
 
-        <IonReactRouter>
-          <IonTabs>
-            <IonRouterOutlet>
-              <Route path="/recipes" component={RecipePage} exact={true} />
-              <Route
-                path="/meal-plan"
-                exact={true}
-                component={MealPlannerMainPage}
-              />
-              <Route
-                path="/lists"
-                component={() => (
-                  <IonPage>
-                    <h1>Coming Soon</h1>
-                  </IonPage>
-                )}
-              />
-              <Route
-                path="/profile"
-                component={() => (
-                  <IonPage>
-                    <h1>Coming Soon</h1>
-                  </IonPage>
-                )}
-              />
+          <IonReactRouter>
+            <IonTabs>
+              <IonRouterOutlet>
+                <Route path="/recipes" component={RecipePage} exact={true} />
+                <Route
+                  path="/meal-plan"
+                  exact={true}
+                  component={MealPlannerMainPage}
+                />
+                <Route
+                  path="/lists"
+                  component={() => (
+                    <IonPage>
+                      <h1>Coming Soon</h1>
+                    </IonPage>
+                  )}
+                />
+                <Route
+                  path="/profile"
+                  component={() => (
+                    <IonPage>
+                      <h1>Coming Soon</h1>
+                    </IonPage>
+                  )}
+                />
 
-              {/* <Route path="/add-recipe/:id" component={AddRecipePage} /> */}
-              <Route path="/recipe-details/:id" component={RecipeDetailsPage} />
-            </IonRouterOutlet>
+                {/* <Route path="/add-recipe/:id" component={AddRecipePage} /> */}
+                <Route
+                  path="/recipe-details/:id"
+                  component={RecipeDetailsPage}
+                />
+              </IonRouterOutlet>
 
-            <IonTabBar slot="bottom">
-              <IonTabButton tab="recipes" href="/recipes">
-                <IonIcon src={recipeIcon} />
-                <IonLabel>Recipes</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="meal-plan" href="/meal-plan">
-                <IonIcon src={mealPlanIcon} />
-                <IonLabel>Meal Plan</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="lists" href="/lists">
-                <IonIcon src={listIcon} />
-                <IonLabel>Lists</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="profile" href="/profile">
-                <IonIcon src={profileIcon} />
-                <IonLabel>Profile</IonLabel>
-              </IonTabButton>
-            </IonTabBar>
-          </IonTabs>
-        </IonReactRouter>
-      </IonApp>
-      {/* </AuthChecker> */}
+              <IonTabBar slot="bottom">
+                <IonTabButton tab="recipes" href="/recipes">
+                  <IonIcon src={recipeIcon} />
+                  <IonLabel>Recipes</IonLabel>
+                </IonTabButton>
+                <IonTabButton tab="meal-plan" href="/meal-plan">
+                  <IonIcon src={mealPlanIcon} />
+                  <IonLabel>Meal Plan</IonLabel>
+                </IonTabButton>
+                <IonTabButton tab="lists" href="/lists">
+                  <IonIcon src={listIcon} />
+                  <IonLabel>Lists</IonLabel>
+                </IonTabButton>
+                <IonTabButton tab="profile" href="/profile">
+                  <IonIcon src={profileIcon} />
+                  <IonLabel>Profile</IonLabel>
+                </IonTabButton>
+              </IonTabBar>
+            </IonTabs>
+          </IonReactRouter>
+        </IonApp>
+      </AuthChecker>
     </ApolloProvider>
   );
 };
