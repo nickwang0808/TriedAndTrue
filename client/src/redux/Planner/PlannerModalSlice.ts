@@ -8,7 +8,7 @@ interface IState {
 
 const initialState: IState = {
   selectedRecipes: [],
-  showModal: true,
+  showModal: false,
   dateToModify: String(new Date()),
 };
 

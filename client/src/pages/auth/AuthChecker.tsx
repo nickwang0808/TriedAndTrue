@@ -39,7 +39,7 @@ export default function AuthChecker({ children }: IProps) {
   };
 
   useEffect(() => {
-    auth.onIdTokenChanged(async (user) => {
+    const cleanUp = auth.onIdTokenChanged(async (user) => {
       if (!user) {
         console.log("no user logged in");
       } else {
@@ -50,6 +50,8 @@ export default function AuthChecker({ children }: IProps) {
         setIsAuthed(true);
       }
     });
+
+    return () => cleanUp();
   }, []);
 
   // console.log("auth render");
