@@ -27,7 +27,7 @@ export default function MealPlannerMainPage() {
         <IonContent>
           {/* pass in the dates */}
           {dates.map((date) => (
-            <PlannerRow date={date} />
+            <PlannerRow date={date} key={date} />
           ))}
         </IonContent>
       </IonPage>

@@ -6,7 +6,11 @@ import StyledRecipeGrid from "../../components/layout/StyledRecipeGrid";
 import StyledSearchBar from "../../components/misc/SearchBar";
 import { StyledFullScreenModal } from "../../components/modals/fullScreenModalBase";
 import useGetAllRecipes from "../../gql/query/useGetAllRecipes";
-import { closePlannerModal } from "../../redux/Planner/PlannerModalSlice";
+import {
+  appendSelectedRecipe,
+  closePlannerModal,
+  deSelectRecipe,
+} from "../../redux/Planner/PlannerModalSlice";
 import { IAppState } from "../../redux/store";
 import Header from "./Header";
 
@@ -17,6 +21,11 @@ export default function AddMultiRecipeToPlannerModal() {
   );
 
   const dispatch = useDispatch();
+
+  const handleSelect = (recipe_id: string) =>
+    selectedRecipes.find((e) => e === recipe_id)
+      ? dispatch(deSelectRecipe(recipe_id))
+      : dispatch(appendSelectedRecipe(recipe_id));
 
   if (loading) return <p>loading...</p>;
   if (error) return <p>{error.message}</p>;
@@ -31,7 +40,12 @@ export default function AddMultiRecipeToPlannerModal() {
         <StyledRecipeGrid>
           {data?.recipe.map((recipe) => {
             return (
-              <RecipeCard key={recipe.id} {...recipe} onClick={() => {}} />
+              <RecipeCard
+                key={recipe.id}
+                {...recipe}
+                onClick={() => handleSelect(recipe.id)}
+                showOverlay={!!selectedRecipes.find((e) => e === recipe.id)}
+              />
             );
           })}
         </StyledRecipeGrid>

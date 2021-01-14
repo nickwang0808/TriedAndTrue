@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { startOfWeek } from "date-fns";
 
-interface IPlannerDateRange {
+interface IState {
   dateRange: null | string[][];
   selectedWeek: string;
 }
 
-const initialState: IPlannerDateRange = {
+const initialState: IState = {
   dateRange: null,
   selectedWeek: String(startOfWeek(new Date(), { weekStartsOn: 1 })),
 };
@@ -15,17 +15,11 @@ const plannerDateRangeSlice = createSlice({
   name: "plannerDateRange",
   initialState,
   reducers: {
-    setDateRange: (
-      state,
-      action: PayloadAction<IPlannerDateRange["dateRange"]>
-    ) => {
+    setDateRange: (state, action: PayloadAction<IState["dateRange"]>) => {
       state.dateRange = action.payload;
     },
 
-    setSelectedWeek: (
-      state,
-      action: PayloadAction<IPlannerDateRange["selectedWeek"]>
-    ) => {
+    setSelectedWeek: (state, action: PayloadAction<IState["selectedWeek"]>) => {
       state.selectedWeek = String(action.payload);
     },
   },
