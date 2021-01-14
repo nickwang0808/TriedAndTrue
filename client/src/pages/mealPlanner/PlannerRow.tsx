@@ -27,9 +27,10 @@ export default function PlannerRow({ date }: IProps) {
         subTitle={format(new Date(date), "do")}
       />
       <StyledContainer>
-        {planner.map(({ recipe: { title, img, id } }) => (
-          <RecipeCardSmall title={title} img={img} id={id} key={id} />
-        ))}
+        {planner &&
+          planner.map(({ recipe: { title, img, id }, index }) => (
+            <RecipeCardSmall title={title} img={img} id={id} key={id + index} />
+          ))}
         <AddCardOutLined onClick={() => dispatch(openPlannerModal(date))} />
       </StyledContainer>
     </>

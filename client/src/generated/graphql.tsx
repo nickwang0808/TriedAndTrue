@@ -1288,7 +1288,7 @@ export type AddRecipesToPlannerMutation = (
       & Pick<Planner, 'date' | 'index'>
       & { recipe: (
         { __typename?: 'recipe' }
-        & Pick<Recipe, 'id' | 'img' | 'title'>
+        & Pick<Recipe, 'id'>
       ) }
     )> }
   )> }
@@ -1459,8 +1459,6 @@ export const AddRecipesToPlannerDocument = gql`
       index
       recipe {
         id
-        img
-        title
       }
     }
   }

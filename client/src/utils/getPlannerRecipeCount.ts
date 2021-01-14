@@ -26,5 +26,5 @@ export default function getPlannerRecipeCount(date: string) {
     variables: { date },
   });
 
-  return getPlanner!.planner.length;
+  return getPlanner?.planner?.length || 0;
 }

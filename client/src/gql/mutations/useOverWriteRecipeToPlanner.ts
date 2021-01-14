@@ -15,8 +15,6 @@ export const ADD_RECIPES_TO_PLANNER = gql`
         index
         recipe {
           id
-          img
-          title
         }
       }
     }
@@ -24,7 +22,7 @@ export const ADD_RECIPES_TO_PLANNER = gql`
 `;
 
 export default function useAddRecipesToPlanner() {
-  const { dateToModify } = useSelector(
+  const { dateToModify, selectedRecipes } = useSelector(
     (state: IAppState) => state.plannerModalSlice
   );
   const [
@@ -34,6 +32,23 @@ export default function useAddRecipesToPlanner() {
     AddRecipesToPlannerMutation,
     AddRecipesToPlannerMutationVariables
   >(ADD_RECIPES_TO_PLANNER, {
+    optimisticResponse: {
+      __typename: "mutation_root",
+      insert_planner: {
+        returning: selectedRecipes.map((id, index) => {
+          const indexOffset = getPlannerRecipeCount(dateToModify);
+          // const cacheResult = getRecipeDetailfromCache(id);
+          return {
+            date: dateToModify,
+            index: index + indexOffset,
+            recipe: {
+              __typename: "recipe",
+              id,
+            },
+          };
+        }),
+      },
+    },
     update: (cache, { data }) => {
       cache.modify({
         fields: {
