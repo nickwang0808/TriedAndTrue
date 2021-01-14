@@ -15,7 +15,7 @@ export default function MealPlannerMainPage() {
       <IonPage>
         <Header weeks={dateRange as string[][]} />
         <IonContent>
-          {/* pass in the dates */}
+          {/* find the current selected week and then map out the days */}
           {(dateRange as string[][])
             .find((elem) => String(elem[0]) === String(selectedWeek))!
             .map((date) => (

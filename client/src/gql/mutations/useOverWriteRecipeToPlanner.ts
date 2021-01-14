@@ -1,19 +1,14 @@
 import { gql, useMutation } from "@apollo/client";
 import { useSelector } from "react-redux";
 import {
-  OverWriteRecipeToPlannerMutation,
-  OverWriteRecipeToPlannerMutationVariables,
+  AddRecipesToPlannerMutation,
+  AddRecipesToPlannerMutationVariables,
 } from "../../generated/graphql";
 import { IAppState } from "../../redux/store";
+import getPlannerRecipeCount from "../../utils/getPlannerRecipeCount";
 
-export const OVER_WRITE_RECIPE_TO_PLANNER = gql`
-  mutation OverWriteRecipeToPlanner(
-    $date: date!
-    $objects: [planner_insert_input!]!
-  ) {
-    delete_planner(where: { date: { _eq: $date } }) {
-      affected_rows
-    }
+export const ADD_RECIPES_TO_PLANNER = gql`
+  mutation addRecipesToPlanner($objects: [planner_insert_input!]!) {
     insert_planner(objects: $objects) {
       returning {
         date
@@ -28,32 +23,33 @@ export const OVER_WRITE_RECIPE_TO_PLANNER = gql`
   }
 `;
 
-export default function useOverWriteRecipeToPlanner() {
+export default function useAddRecipesToPlanner() {
   const { dateToModify } = useSelector(
     (state: IAppState) => state.plannerModalSlice
   );
   const [
-    overWriteRecipeToPlanner,
+    addRecipesToPlanner,
     { loading: loading_m, error: error_m },
   ] = useMutation<
-    OverWriteRecipeToPlannerMutation,
-    OverWriteRecipeToPlannerMutationVariables
-  >(OVER_WRITE_RECIPE_TO_PLANNER, {
+    AddRecipesToPlannerMutation,
+    AddRecipesToPlannerMutationVariables
+  >(ADD_RECIPES_TO_PLANNER, {
     update: (cache, { data }) => {
       cache.modify({
         fields: {
-          planner: (_, { toReference }) => {
+          planner: (curr, { toReference }) => {
             const recipes = data?.insert_planner?.returning.map(
               ({ recipe, index, date }) => {
+                const indexOffset = getPlannerRecipeCount(date);
                 return {
                   __typename: "planner",
                   date,
-                  index,
+                  index: index + indexOffset,
                   recipe: toReference(recipe.id),
                 };
               }
             );
-            return recipes;
+            return [...curr, ...recipes!];
           },
         },
       });
@@ -61,7 +57,7 @@ export default function useOverWriteRecipeToPlanner() {
   });
 
   return {
-    overWriteRecipeToPlanner,
+    addRecipesToPlanner,
     loading_m,
     error_m,
   };

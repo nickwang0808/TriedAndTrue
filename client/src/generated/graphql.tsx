@@ -1274,18 +1274,14 @@ export type InsertRecipeMutation = (
   )> }
 );
 
-export type OverWriteRecipeToPlannerMutationVariables = Exact<{
-  date: Scalars['date'];
+export type AddRecipesToPlannerMutationVariables = Exact<{
   objects: Array<Planner_Insert_Input> | Planner_Insert_Input;
 }>;
 
 
-export type OverWriteRecipeToPlannerMutation = (
+export type AddRecipesToPlannerMutation = (
   { __typename?: 'mutation_root' }
-  & { delete_planner?: Maybe<(
-    { __typename?: 'planner_mutation_response' }
-    & Pick<Planner_Mutation_Response, 'affected_rows'>
-  )>, insert_planner?: Maybe<(
+  & { insert_planner?: Maybe<(
     { __typename?: 'planner_mutation_response' }
     & { returning: Array<(
       { __typename?: 'planner' }
@@ -1455,11 +1451,8 @@ export function useInsertRecipeMutation(baseOptions?: Apollo.MutationHookOptions
 export type InsertRecipeMutationHookResult = ReturnType<typeof useInsertRecipeMutation>;
 export type InsertRecipeMutationResult = Apollo.MutationResult<InsertRecipeMutation>;
 export type InsertRecipeMutationOptions = Apollo.BaseMutationOptions<InsertRecipeMutation, InsertRecipeMutationVariables>;
-export const OverWriteRecipeToPlannerDocument = gql`
-    mutation OverWriteRecipeToPlanner($date: date!, $objects: [planner_insert_input!]!) {
-  delete_planner(where: {date: {_eq: $date}}) {
-    affected_rows
-  }
+export const AddRecipesToPlannerDocument = gql`
+    mutation addRecipesToPlanner($objects: [planner_insert_input!]!) {
   insert_planner(objects: $objects) {
     returning {
       date
@@ -1473,32 +1466,31 @@ export const OverWriteRecipeToPlannerDocument = gql`
   }
 }
     `;
-export type OverWriteRecipeToPlannerMutationFn = Apollo.MutationFunction<OverWriteRecipeToPlannerMutation, OverWriteRecipeToPlannerMutationVariables>;
+export type AddRecipesToPlannerMutationFn = Apollo.MutationFunction<AddRecipesToPlannerMutation, AddRecipesToPlannerMutationVariables>;
 
 /**
- * __useOverWriteRecipeToPlannerMutation__
+ * __useAddRecipesToPlannerMutation__
  *
- * To run a mutation, you first call `useOverWriteRecipeToPlannerMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useOverWriteRecipeToPlannerMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useAddRecipesToPlannerMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddRecipesToPlannerMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [overWriteRecipeToPlannerMutation, { data, loading, error }] = useOverWriteRecipeToPlannerMutation({
+ * const [addRecipesToPlannerMutation, { data, loading, error }] = useAddRecipesToPlannerMutation({
  *   variables: {
- *      date: // value for 'date'
  *      objects: // value for 'objects'
  *   },
  * });
  */
-export function useOverWriteRecipeToPlannerMutation(baseOptions?: Apollo.MutationHookOptions<OverWriteRecipeToPlannerMutation, OverWriteRecipeToPlannerMutationVariables>) {
-        return Apollo.useMutation<OverWriteRecipeToPlannerMutation, OverWriteRecipeToPlannerMutationVariables>(OverWriteRecipeToPlannerDocument, baseOptions);
+export function useAddRecipesToPlannerMutation(baseOptions?: Apollo.MutationHookOptions<AddRecipesToPlannerMutation, AddRecipesToPlannerMutationVariables>) {
+        return Apollo.useMutation<AddRecipesToPlannerMutation, AddRecipesToPlannerMutationVariables>(AddRecipesToPlannerDocument, baseOptions);
       }
-export type OverWriteRecipeToPlannerMutationHookResult = ReturnType<typeof useOverWriteRecipeToPlannerMutation>;
-export type OverWriteRecipeToPlannerMutationResult = Apollo.MutationResult<OverWriteRecipeToPlannerMutation>;
-export type OverWriteRecipeToPlannerMutationOptions = Apollo.BaseMutationOptions<OverWriteRecipeToPlannerMutation, OverWriteRecipeToPlannerMutationVariables>;
+export type AddRecipesToPlannerMutationHookResult = ReturnType<typeof useAddRecipesToPlannerMutation>;
+export type AddRecipesToPlannerMutationResult = Apollo.MutationResult<AddRecipesToPlannerMutation>;
+export type AddRecipesToPlannerMutationOptions = Apollo.BaseMutationOptions<AddRecipesToPlannerMutation, AddRecipesToPlannerMutationVariables>;
 export const GetProfileDocument = gql`
     query GetProfile($uid: String!) {
   user(where: {id: {_eq: $uid}}) {

@@ -7,8 +7,7 @@ import SaveFooterButton from "../../components/layout/SaveFooterButton";
 import StyledRecipeGrid from "../../components/layout/StyledRecipeGrid";
 import StyledSearchBar from "../../components/misc/SearchBar";
 import { StyledFullScreenModal } from "../../components/modals/fullScreenModalBase";
-import { Planner_Insert_Input } from "../../generated/graphql";
-import useOverWriteRecipeToPlanner from "../../gql/mutations/useOverWriteRecipeToPlanner";
+import useAddRecipesToPlanner from "../../gql/mutations/useOverWriteRecipeToPlanner";
 import useGetAllRecipes from "../../gql/query/useGetAllRecipes";
 import {
   appendSelectedRecipe,
@@ -17,11 +16,12 @@ import {
   deSelectRecipe,
 } from "../../redux/Planner/PlannerModalSlice";
 import { IAppState } from "../../redux/store";
+import getPlannerRecipeCount from "../../utils/getPlannerRecipeCount";
 import Header from "./Header";
 
 export default function AddMultiRecipeToPlannerModal() {
   const { data, loading, error } = useGetAllRecipes();
-  const { overWriteRecipeToPlanner, error_m } = useOverWriteRecipeToPlanner();
+  const { addRecipesToPlanner, error_m } = useAddRecipesToPlanner();
 
   const { selectedRecipes, showModal, dateToModify } = useSelector(
     (state: IAppState) => state.plannerModalSlice
@@ -36,10 +36,11 @@ export default function AddMultiRecipeToPlannerModal() {
 
   const handleSubmit = async () => {
     const date = format(new Date(dateToModify as string), "yyyy-MM-dd");
-    const objects: Planner_Insert_Input[] = selectedRecipes.map((id, index) => {
-      return { date, index, recipe_id: id };
+    const indexOffset = getPlannerRecipeCount(date);
+    const objects = selectedRecipes.map((id, index) => {
+      return { date, index: index + indexOffset, recipe_id: id };
     });
-    await overWriteRecipeToPlanner({ variables: { date, objects } });
+    await addRecipesToPlanner({ variables: { objects } });
 
     dispatch(clearSelectedRecipe());
     dispatch(closePlannerModal());
