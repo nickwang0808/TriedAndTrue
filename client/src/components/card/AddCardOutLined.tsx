@@ -1,11 +1,15 @@
 import styled from "@emotion/styled";
 import { IonIcon } from "@ionic/react";
-import addnew from "../../assets/svg/addnew.svg";
 import React from "react";
+import addnew from "../../assets/svg/addnew.svg";
 
-export default function AddCardOutLined() {
+interface IProps {
+  onClick: () => void;
+}
+
+export default function AddCardOutLined({ onClick }: IProps) {
   return (
-    <StyledFlexBox>
+    <StyledFlexBox onClick={onClick}>
       <StyledIonIcon icon={addnew} size="large" color="secondary" />
     </StyledFlexBox>
   );

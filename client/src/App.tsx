@@ -38,7 +38,7 @@ import AuthChecker from "./pages/auth/AuthChecker";
 import MealPlannerMainPage from "./pages/mealPlanner/MealPlannerMainPage";
 import RecipeDetailsPage from "./pages/recipeDetails/RecipeDetailsPage";
 import RecipePage from "./pages/recipes/RecipePage";
-import { setDateRange } from "./redux/PlannerDateRange/PlannerDateRangeSlice";
+import { setDateRange } from "./redux/Planner/PlannerDateRangeSlice";
 import "./style.css";
 /* Theme variables */
 import "./theme/variables.css";

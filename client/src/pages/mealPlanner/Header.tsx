@@ -15,7 +15,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import listIconForHeader from "../../assets/svg/addtoList.svg";
 import refresh from "../../assets/svg/refresh.svg";
-import { setSelectedWeek } from "../../redux/PlannerDateRange/PlannerDateRangeSlice";
+import { setSelectedWeek } from "../../redux/Planner/PlannerDateRangeSlice";
 import { IAppState } from "../../redux/store";
 
 interface IProps {
