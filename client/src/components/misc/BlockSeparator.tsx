@@ -4,13 +4,19 @@ import React from "react";
 interface IProps {
   title?: string;
   subTitle?: string;
+  showTodayTag?: boolean;
 }
 
-export default function BlockSeparator({ subTitle, title }: IProps) {
+export default function BlockSeparator({
+  subTitle,
+  title,
+  showTodayTag = false,
+}: IProps) {
   return (
     <StyledDiv>
       <StyledTitle>{title}</StyledTitle>
       {subTitle && <div>{subTitle}</div>}
+      {showTodayTag && <StyledTodayTag>Today</StyledTodayTag>}
     </StyledDiv>
   );
 }
@@ -24,9 +30,14 @@ const StyledDiv = styled.div`
   font-size: 14px;
   display: flex;
   align-items: center;
+  gap: 4px;
 `;
 
 const StyledTitle = styled.div`
   font-weight: 700;
-  margin-right: 4px; /* separator between 2 titles */
+`;
+
+const StyledTodayTag = styled.div`
+  color: var(--ion-color-secondary);
+  font-weight: 700;
 `;
