@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import {
   IonButton,
   IonButtons,
@@ -10,7 +11,7 @@ import {
   IonToolbar,
   useIonViewDidEnter,
 } from "@ionic/react";
-import { isSameWeek } from "date-fns";
+import { isPast, isSameWeek } from "date-fns";
 import { format } from "date-fns/esm";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -58,11 +59,17 @@ export default function Header({ weeks }: IProps) {
           scrollable
           value={selectedWeek}
           onIonChange={(e) => dispatch(setSelectedWeek(e.detail.value!))}
-          color="secondary"
+          // color="secondary"
+          // color={isPast(new Date(selectedWeek[1])) ? "medium" : "secondary"}
         >
           {monAndFris.map(([mon, sun]) => {
             return (
-              <IonSegmentButton value={mon} id={mon} key={mon}>
+              <StyledSegmentButton
+                isGrey={isPast(new Date(sun))}
+                value={mon}
+                id={mon}
+                key={mon}
+              >
                 <IonLabel>
                   {`${format(new Date(mon), "MMM-d")} - ${format(
                     new Date(sun),
@@ -70,7 +77,7 @@ export default function Header({ weeks }: IProps) {
                   )}`}
                   {isSameWeek(new Date(), new Date(mon)) && " Today"}
                 </IonLabel>
-              </IonSegmentButton>
+              </StyledSegmentButton>
             );
           })}
         </IonSegment>
@@ -78,3 +85,11 @@ export default function Header({ weeks }: IProps) {
     </IonHeader>
   );
 }
+
+const StyledSegmentButton = styled(IonSegmentButton)<{ isGrey: boolean }>`
+  /* follow this template to style other properties */
+  --color: ${(props) => (props.isGrey ? "grey" : "var(--ion-color-secondary)")};
+  --color-checked: ${(props) =>
+    props.isGrey ? "grey" : "var(--ion-color-secondary)"};
+  --ripple-color: transparent !important;
+`;
