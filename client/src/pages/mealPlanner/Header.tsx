@@ -91,5 +91,4 @@ const StyledSegmentButton = styled(IonSegmentButton)<{ isGrey: boolean }>`
   --color: ${(props) => (props.isGrey ? "grey" : "var(--ion-color-secondary)")};
   --color-checked: ${(props) =>
     props.isGrey ? "grey" : "var(--ion-color-secondary)"};
-  --ripple-color: transparent !important;
 `;

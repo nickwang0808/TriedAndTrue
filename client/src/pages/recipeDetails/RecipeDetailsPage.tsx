@@ -47,19 +47,18 @@ const RecipeDetailsPage: React.FC<IProps> = ({
         />
 
         <IonSegment
-          mode="md"
-          color="secondary"
+          // color="secondary"
           value={showDirections ? "directions" : "ingredients"}
           onIonChange={(e) =>
             setShowDirections(e.detail.value === "ingredients" ? false : true)
           }
         >
-          <IonSegmentButton value="ingredients">
+          <StyledSegmentButton value="ingredients">
             <IonLabel>Ingredients</IonLabel>
-          </IonSegmentButton>
-          <IonSegmentButton value="directions">
+          </StyledSegmentButton>
+          <StyledSegmentButton value="directions">
             <IonLabel>Directions</IonLabel>
-          </IonSegmentButton>
+          </StyledSegmentButton>
         </IonSegment>
 
         <StyledIngredientList lines="none">
@@ -104,4 +103,9 @@ export default RecipeDetailsPage;
 
 const StyledIngredientList = styled(IonList)`
   padding: 8px;
+`;
+
+const StyledSegmentButton = styled(IonSegmentButton)`
+  /* had to took off segment color to disable ripple */
+  --color-checked: var(--ion-color-secondary);
 `;
