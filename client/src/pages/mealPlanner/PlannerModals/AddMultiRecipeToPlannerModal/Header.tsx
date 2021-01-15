@@ -8,9 +8,9 @@ import {
 } from "@ionic/react";
 import React from "react";
 import { useDispatch } from "react-redux";
-import xclose from "../../assets/svg/close-x.svg";
-import filter from "../../assets/svg/filter.svg";
-import { closePlannerModal } from "../../redux/Planner/PlannerModalSlice";
+import xclose from "../../../../assets/svg/close-x.svg";
+import filter from "../../../../assets/svg/filter.svg";
+import { closePlannerModal } from "../../../../redux/Planner/PlannerModalSlice";
 
 export default function Header() {
   const dispatch = useDispatch();
