@@ -26,7 +26,7 @@ import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/typography.css";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import listIcon from "./assets/svg/listIcon.svg";
 import mealPlanIcon from "./assets/svg/mealPlanIcon.svg";
 import profileIcon from "./assets/svg/profileIcon.svg";
@@ -94,6 +94,12 @@ const App: React.FC = () => {
                 <Route
                   path="/recipe-details/:id"
                   component={RecipeDetailsPage}
+                />
+
+                <Route
+                  exact
+                  path="/"
+                  component={() => <Redirect to="/recipes" />}
                 />
               </IonRouterOutlet>
 

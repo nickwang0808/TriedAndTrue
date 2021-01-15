@@ -26,7 +26,9 @@ export default function useGetPlannerRecipeByDate(date: string) {
   } = useQuery<
     GetPlannerRecipeByDateQuery,
     GetPlannerRecipeByDateQueryVariables
-  >(GET_PLANNER_RECIPE_BY_DATE, { variables: { date } });
+  >(GET_PLANNER_RECIPE_BY_DATE, {
+    variables: { date },
+  });
 
   return { planner, loading, error };
 }

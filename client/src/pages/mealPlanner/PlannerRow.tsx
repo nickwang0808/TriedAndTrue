@@ -18,6 +18,8 @@ export default function PlannerRow({ date }: IProps) {
   );
   const dispatch = useDispatch();
 
+  console.log("row rendered");
+
   if (loading) return <p>loading ...</p>;
   if (error) return <p>{error.message}</p>;
   return (

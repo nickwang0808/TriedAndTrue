@@ -24,7 +24,7 @@ const plannerModalSlice = createSlice({
     },
     closePlannerModal: (state) => {
       state.showModal = false;
-      state.dateToModify = String(new Date());
+      // state.dateToModify = String(new Date());
     },
     appendSelectedRecipe: (state, action: PayloadAction<string>) => {
       state.selectedRecipes = [...state.selectedRecipes, action.payload];
