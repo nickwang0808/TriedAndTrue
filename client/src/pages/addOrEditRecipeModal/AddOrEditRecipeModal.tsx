@@ -32,7 +32,7 @@ export default function AddOrEditRecipeModal() {
       isOpen={showAddOrEditRecipe}
       onDidDismiss={() => dispatch(resetAddOrEditRecipe())}
     >
-      <Header isNew={id === "null" ? true : false} />
+      <Header isNew={id === null ? true : false} />
       <AddOrEditRecipeChild
         id={id}
         isCreateNew={id === null ? true : false}
