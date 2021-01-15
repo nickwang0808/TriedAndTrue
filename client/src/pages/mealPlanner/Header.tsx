@@ -8,16 +8,40 @@ import {
   IonSegmentButton,
   IonTitle,
   IonToolbar,
+  useIonViewDidEnter,
 } from "@ionic/react";
+import { format } from "date-fns/esm";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import listIconForHeader from "../../assets/svg/addtoList.svg";
 import refresh from "../../assets/svg/refresh.svg";
+import { setSelectedWeek } from "../../redux/Planner/PlannerDateRangeSlice";
+import { IAppState } from "../../redux/store";
 
-export default function Header() {
+interface IProps {
+  weeks: string[][];
+}
+
+export default function Header({ weeks }: IProps) {
+  const monAndFris = weeks.map((week) => [week[0], week.slice(-1)[0]]);
+  // the monday that represent the week
+  const { selectedWeek } = useSelector(
+    (state: IAppState) => state.plannerDateRangeSlice
+  );
+  const dispatch = useDispatch();
+
+  useIonViewDidEnter(() => {
+    document.getElementById(selectedWeek)?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+      inline: "center",
+    });
+  }, [selectedWeek]);
+
   return (
     <IonHeader>
       <IonToolbar>
-        <IonTitle color="primary">Weeekly Meal Plan</IonTitle>
+        <IonTitle color="primary">Weekly Meal Plan</IonTitle>
         <IonButtons slot="end">
           <IonButton>
             <IonIcon icon={refresh} />
@@ -28,19 +52,25 @@ export default function Header() {
         </IonButtons>
       </IonToolbar>
 
-      {/* <div style={{ height: 30, background: "white" }} /> */}
-
       <IonToolbar>
-        <IonSegment scrollable value="heart" color="secondary">
-          <IonSegmentButton value="home">
-            <IonLabel>Nov 23 - Dec 17</IonLabel>
-          </IonSegmentButton>
-          <IonSegmentButton value="heart">
-            <IonLabel>Nov 23 - Dec 17</IonLabel>
-          </IonSegmentButton>
-          <IonSegmentButton value="pin">
-            <IonLabel>Nov 23 - Dec 17</IonLabel>
-          </IonSegmentButton>
+        <IonSegment
+          scrollable
+          value={selectedWeek}
+          onIonChange={(e) => dispatch(setSelectedWeek(e.detail.value!))}
+          color="secondary"
+        >
+          {monAndFris.map(([mon, sun]) => {
+            return (
+              <IonSegmentButton value={mon} id={mon} key={mon}>
+                <IonLabel>
+                  {`${format(new Date(mon), "MMM-d")} - ${format(
+                    new Date(sun),
+                    "MMM-d"
+                  )}`}
+                </IonLabel>
+              </IonSegmentButton>
+            );
+          })}
         </IonSegment>
       </IonToolbar>
     </IonHeader>

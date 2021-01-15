@@ -11,6 +11,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  date: any;
   json: any;
   timestamptz: any;
   uuid: any;
@@ -73,6 +74,7 @@ export type InsertRecipeOneDerivedOutput = {
   img?: Maybe<Scalars['String']>;
   meal_type?: Maybe<Scalars['String']>;
   owner: Scalars['String'];
+  recipe_ingredients_list?: Maybe<Array<Maybe<Recipe_Ingredients>>>;
   title: Scalars['String'];
   total_time?: Maybe<Scalars['Int']>;
   yields?: Maybe<Scalars['String']>;
@@ -280,6 +282,21 @@ export type String_Comparison_Exp = {
 export type UpdatedRecipeIngredients = {
   __typename?: 'UpdatedRecipeIngredients';
   id: Scalars['String'];
+  newIngredients?: Maybe<Array<Maybe<Recipe_Ingredients>>>;
+};
+
+
+/** expression to compare columns of type date. All fields are combined with logical 'AND'. */
+export type Date_Comparison_Exp = {
+  _eq?: Maybe<Scalars['date']>;
+  _gt?: Maybe<Scalars['date']>;
+  _gte?: Maybe<Scalars['date']>;
+  _in?: Maybe<Array<Scalars['date']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['date']>;
+  _lte?: Maybe<Scalars['date']>;
+  _neq?: Maybe<Scalars['date']>;
+  _nin?: Maybe<Array<Scalars['date']>>;
 };
 
 
@@ -301,6 +318,10 @@ export type Mutation_Root = {
   __typename?: 'mutation_root';
   /** perform the action: "InsertRecipeOneDerived" */
   InsertRecipeOneDerived?: Maybe<InsertRecipeOneDerivedOutput>;
+  /** delete data from the table: "planner" */
+  delete_planner?: Maybe<Planner_Mutation_Response>;
+  /** delete single row from the table: "planner" */
+  delete_planner_by_pk?: Maybe<Planner>;
   /** delete data from the table: "recipe" */
   delete_recipe?: Maybe<Recipe_Mutation_Response>;
   /** delete single row from the table: "recipe" */
@@ -309,6 +330,10 @@ export type Mutation_Root = {
   delete_recipe_ingredients?: Maybe<Recipe_Ingredients_Mutation_Response>;
   /** delete single row from the table: "recipe_ingredients" */
   delete_recipe_ingredients_by_pk?: Maybe<Recipe_Ingredients>;
+  /** insert data into the table: "planner" */
+  insert_planner?: Maybe<Planner_Mutation_Response>;
+  /** insert a single row into the table: "planner" */
+  insert_planner_one?: Maybe<Planner>;
   /** insert data into the table: "recipe" */
   insert_recipe?: Maybe<Recipe_Mutation_Response>;
   /** insert data into the table: "recipe_ingredients" */
@@ -341,6 +366,19 @@ export type Mutation_RootInsertRecipeOneDerivedArgs = {
 
 
 /** mutation root */
+export type Mutation_RootDelete_PlannerArgs = {
+  where: Planner_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Planner_By_PkArgs = {
+  date: Scalars['date'];
+  recipe_id: Scalars['String'];
+};
+
+
+/** mutation root */
 export type Mutation_RootDelete_RecipeArgs = {
   where: Recipe_Bool_Exp;
 };
@@ -361,6 +399,18 @@ export type Mutation_RootDelete_Recipe_IngredientsArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Recipe_Ingredients_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_PlannerArgs = {
+  objects: Array<Planner_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Planner_OneArgs = {
+  object: Planner_Insert_Input;
 };
 
 
@@ -458,11 +508,96 @@ export enum Order_By {
   DescNullsLast = 'desc_nulls_last'
 }
 
+/** columns and relationships of "planner" */
+export type Planner = {
+  __typename?: 'planner';
+  date: Scalars['date'];
+  index: Scalars['Int'];
+  /** An object relationship */
+  recipe: Recipe;
+  recipe_id: Scalars['String'];
+  /** An object relationship */
+  user: User;
+  user_id: Scalars['String'];
+};
+
+/** input type for inserting array relation for remote table "planner" */
+export type Planner_Arr_Rel_Insert_Input = {
+  data: Array<Planner_Insert_Input>;
+};
+
+/** Boolean expression to filter rows from the table "planner". All fields are combined with a logical 'AND'. */
+export type Planner_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Planner_Bool_Exp>>>;
+  _not?: Maybe<Planner_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Planner_Bool_Exp>>>;
+  date?: Maybe<Date_Comparison_Exp>;
+  index?: Maybe<Int_Comparison_Exp>;
+  recipe?: Maybe<Recipe_Bool_Exp>;
+  recipe_id?: Maybe<String_Comparison_Exp>;
+  user?: Maybe<User_Bool_Exp>;
+  user_id?: Maybe<String_Comparison_Exp>;
+};
+
+/** input type for inserting data into table "planner" */
+export type Planner_Insert_Input = {
+  date?: Maybe<Scalars['date']>;
+  index?: Maybe<Scalars['Int']>;
+  recipe?: Maybe<Recipe_Obj_Rel_Insert_Input>;
+  recipe_id?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "planner" */
+export type Planner_Mutation_Response = {
+  __typename?: 'planner_mutation_response';
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<Planner>;
+};
+
+/** input type for inserting object relation for remote table "planner" */
+export type Planner_Obj_Rel_Insert_Input = {
+  data: Planner_Insert_Input;
+};
+
+/** ordering options when selecting data from "planner" */
+export type Planner_Order_By = {
+  date?: Maybe<Order_By>;
+  index?: Maybe<Order_By>;
+  recipe?: Maybe<Recipe_Order_By>;
+  recipe_id?: Maybe<Order_By>;
+  user?: Maybe<User_Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: "planner" */
+export type Planner_Pk_Columns_Input = {
+  date: Scalars['date'];
+  recipe_id: Scalars['String'];
+};
+
+/** select columns of table "planner" */
+export enum Planner_Select_Column {
+  /** column name */
+  Date = 'date',
+  /** column name */
+  Index = 'index',
+  /** column name */
+  RecipeId = 'recipe_id',
+  /** column name */
+  UserId = 'user_id'
+}
+
 /** query root */
 export type Query_Root = {
   __typename?: 'query_root';
   /** perform the action: "parseIngredients" */
   parseIngredients: Array<ParsedIngredients>;
+  /** fetch data from the table: "planner" */
+  planner: Array<Planner>;
+  /** fetch data from the table: "planner" using primary key columns */
+  planner_by_pk?: Maybe<Planner>;
   /** fetch data from the table: "recipe" */
   recipe: Array<Recipe>;
   /** fetch data from the table: "recipe" using primary key columns */
@@ -481,6 +616,23 @@ export type Query_Root = {
 /** query root */
 export type Query_RootParseIngredientsArgs = {
   ingredientsToParse?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+
+/** query root */
+export type Query_RootPlannerArgs = {
+  distinct_on?: Maybe<Array<Planner_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Planner_Order_By>>;
+  where?: Maybe<Planner_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootPlanner_By_PkArgs = {
+  date: Scalars['date'];
+  recipe_id: Scalars['String'];
 };
 
 
@@ -542,6 +694,8 @@ export type Recipe = {
   meal_type?: Maybe<Scalars['String']>;
   owner: Scalars['String'];
   /** An array relationship */
+  planners: Array<Planner>;
+  /** An array relationship */
   recipe_ingredients_list: Array<Recipe_Ingredients>;
   title: Scalars['String'];
   total_time?: Maybe<Scalars['Int']>;
@@ -554,6 +708,16 @@ export type Recipe = {
 /** columns and relationships of "recipe" */
 export type RecipeDirectionsArgs = {
   path?: Maybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "recipe" */
+export type RecipePlannersArgs = {
+  distinct_on?: Maybe<Array<Planner_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Planner_Order_By>>;
+  where?: Maybe<Planner_Bool_Exp>;
 };
 
 
@@ -584,6 +748,7 @@ export type Recipe_Bool_Exp = {
   img?: Maybe<String_Comparison_Exp>;
   meal_type?: Maybe<String_Comparison_Exp>;
   owner?: Maybe<String_Comparison_Exp>;
+  planners?: Maybe<Planner_Bool_Exp>;
   recipe_ingredients_list?: Maybe<Recipe_Ingredients_Bool_Exp>;
   title?: Maybe<String_Comparison_Exp>;
   total_time?: Maybe<Int_Comparison_Exp>;
@@ -750,6 +915,7 @@ export type Recipe_Insert_Input = {
   directions?: Maybe<Scalars['json']>;
   img?: Maybe<Scalars['String']>;
   meal_type?: Maybe<Scalars['String']>;
+  planners?: Maybe<Planner_Arr_Rel_Insert_Input>;
   recipe_ingredients_list?: Maybe<Recipe_Ingredients_Arr_Rel_Insert_Input>;
   title?: Maybe<Scalars['String']>;
   total_time?: Maybe<Scalars['Int']>;
@@ -856,6 +1022,10 @@ export type Subscription_Root = {
   __typename?: 'subscription_root';
   /** perform the action: "parseIngredients" */
   parseIngredients: Array<ParsedIngredients>;
+  /** fetch data from the table: "planner" */
+  planner: Array<Planner>;
+  /** fetch data from the table: "planner" using primary key columns */
+  planner_by_pk?: Maybe<Planner>;
   /** fetch data from the table: "recipe" */
   recipe: Array<Recipe>;
   /** fetch data from the table: "recipe" using primary key columns */
@@ -874,6 +1044,23 @@ export type Subscription_Root = {
 /** subscription root */
 export type Subscription_RootParseIngredientsArgs = {
   ingredientsToParse?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+
+/** subscription root */
+export type Subscription_RootPlannerArgs = {
+  distinct_on?: Maybe<Array<Planner_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Planner_Order_By>>;
+  where?: Maybe<Planner_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootPlanner_By_PkArgs = {
+  date: Scalars['date'];
+  recipe_id: Scalars['String'];
 };
 
 
@@ -946,7 +1133,19 @@ export type User = {
   img?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   /** An array relationship */
+  planners: Array<Planner>;
+  /** An array relationship */
   recipes_list: Array<Recipe>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserPlannersArgs = {
+  distinct_on?: Maybe<Array<Planner_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Planner_Order_By>>;
+  where?: Maybe<Planner_Bool_Exp>;
 };
 
 
@@ -968,6 +1167,7 @@ export type User_Bool_Exp = {
   id?: Maybe<String_Comparison_Exp>;
   img?: Maybe<String_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
+  planners?: Maybe<Planner_Bool_Exp>;
   recipes_list?: Maybe<Recipe_Bool_Exp>;
 };
 
@@ -1043,19 +1243,6 @@ export type Uuid_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['uuid']>>;
 };
 
-export type InsertRecipeMutationVariables = Exact<{
-  object: InsertRecipeOneDerivedRecipeInsertInput;
-}>;
-
-
-export type InsertRecipeMutation = (
-  { __typename?: 'mutation_root' }
-  & { InsertRecipeOneDerived?: Maybe<(
-    { __typename?: 'InsertRecipeOneDerivedOutput' }
-    & Pick<InsertRecipeOneDerivedOutput, 'id' | 'title' | 'directions' | 'owner' | 'meal_type' | 'img' | 'yields' | 'total_time' | 'cuisine'>
-  )> }
-);
-
 export type UpdateRecipeDetailMutationVariables = Exact<{
   id: Scalars['String'];
   _set: Recipe_Set_Input;
@@ -1074,14 +1261,36 @@ export type UpdateRecipeDetailMutation = (
   )>> }
 );
 
-export type GetAllRecipeQueryVariables = Exact<{ [key: string]: never; }>;
+export type InsertRecipeMutationVariables = Exact<{
+  object: InsertRecipeOneDerivedRecipeInsertInput;
+}>;
 
 
-export type GetAllRecipeQuery = (
-  { __typename?: 'query_root' }
-  & { recipe: Array<(
-    { __typename?: 'recipe' }
-    & Pick<Recipe, 'id' | 'img' | 'title' | 'total_time'>
+export type InsertRecipeMutation = (
+  { __typename?: 'mutation_root' }
+  & { InsertRecipeOneDerived?: Maybe<(
+    { __typename?: 'InsertRecipeOneDerivedOutput' }
+    & Pick<InsertRecipeOneDerivedOutput, 'id' | 'title' | 'directions' | 'owner' | 'meal_type' | 'img' | 'yields' | 'total_time' | 'cuisine'>
+  )> }
+);
+
+export type AddRecipesToPlannerMutationVariables = Exact<{
+  objects: Array<Planner_Insert_Input> | Planner_Insert_Input;
+}>;
+
+
+export type AddRecipesToPlannerMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_planner?: Maybe<(
+    { __typename?: 'planner_mutation_response' }
+    & { returning: Array<(
+      { __typename?: 'planner' }
+      & Pick<Planner, 'date' | 'index'>
+      & { recipe: (
+        { __typename?: 'recipe' }
+        & Pick<Recipe, 'id'>
+      ) }
+    )> }
   )> }
 );
 
@@ -1095,6 +1304,47 @@ export type GetProfileQuery = (
   & { user: Array<(
     { __typename?: 'user' }
     & Pick<User, 'email' | 'name' | 'img'>
+  )> }
+);
+
+export type ParseIngredientsQueryVariables = Exact<{
+  ingredientsArray?: Maybe<Array<Maybe<Scalars['String']>> | Maybe<Scalars['String']>>;
+}>;
+
+
+export type ParseIngredientsQuery = (
+  { __typename?: 'query_root' }
+  & { parseIngredients: Array<(
+    { __typename?: 'ParsedIngredients' }
+    & Pick<ParsedIngredients, 'name'>
+  )> }
+);
+
+export type GetAllRecipeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllRecipeQuery = (
+  { __typename?: 'query_root' }
+  & { recipe: Array<(
+    { __typename?: 'recipe' }
+    & Pick<Recipe, 'id' | 'img' | 'title' | 'total_time'>
+  )> }
+);
+
+export type GetPlannerRecipeByDateQueryVariables = Exact<{
+  date?: Maybe<Scalars['date']>;
+}>;
+
+
+export type GetPlannerRecipeByDateQuery = (
+  { __typename?: 'query_root' }
+  & { planner: Array<(
+    { __typename?: 'planner' }
+    & Pick<Planner, 'date' | 'index'>
+    & { recipe: (
+      { __typename?: 'recipe' }
+      & Pick<Recipe, 'id' | 'img' | 'title'>
+    ) }
   )> }
 );
 
@@ -1115,60 +1365,7 @@ export type GetRecipeDetailsQuery = (
   )> }
 );
 
-export type ParseIngredientsQueryVariables = Exact<{
-  ingredientsArray?: Maybe<Array<Maybe<Scalars['String']>> | Maybe<Scalars['String']>>;
-}>;
 
-
-export type ParseIngredientsQuery = (
-  { __typename?: 'query_root' }
-  & { parseIngredients: Array<(
-    { __typename?: 'ParsedIngredients' }
-    & Pick<ParsedIngredients, 'name'>
-  )> }
-);
-
-
-export const InsertRecipeDocument = gql`
-    mutation InsertRecipe($object: InsertRecipeOneDerivedRecipeInsertInput!) {
-  InsertRecipeOneDerived(object: $object) {
-    id
-    title
-    directions
-    owner
-    meal_type
-    img
-    yields
-    total_time
-    cuisine
-  }
-}
-    `;
-export type InsertRecipeMutationFn = Apollo.MutationFunction<InsertRecipeMutation, InsertRecipeMutationVariables>;
-
-/**
- * __useInsertRecipeMutation__
- *
- * To run a mutation, you first call `useInsertRecipeMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useInsertRecipeMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [insertRecipeMutation, { data, loading, error }] = useInsertRecipeMutation({
- *   variables: {
- *      object: // value for 'object'
- *   },
- * });
- */
-export function useInsertRecipeMutation(baseOptions?: Apollo.MutationHookOptions<InsertRecipeMutation, InsertRecipeMutationVariables>) {
-        return Apollo.useMutation<InsertRecipeMutation, InsertRecipeMutationVariables>(InsertRecipeDocument, baseOptions);
-      }
-export type InsertRecipeMutationHookResult = ReturnType<typeof useInsertRecipeMutation>;
-export type InsertRecipeMutationResult = Apollo.MutationResult<InsertRecipeMutation>;
-export type InsertRecipeMutationOptions = Apollo.BaseMutationOptions<InsertRecipeMutation, InsertRecipeMutationVariables>;
 export const UpdateRecipeDetailDocument = gql`
     mutation UpdateRecipeDetail($id: String!, $_set: recipe_set_input!, $ingredientsStrings: [String!]!) {
   update_recipe_by_pk(pk_columns: {id: $id}, _set: $_set) {
@@ -1214,41 +1411,84 @@ export function useUpdateRecipeDetailMutation(baseOptions?: Apollo.MutationHookO
 export type UpdateRecipeDetailMutationHookResult = ReturnType<typeof useUpdateRecipeDetailMutation>;
 export type UpdateRecipeDetailMutationResult = Apollo.MutationResult<UpdateRecipeDetailMutation>;
 export type UpdateRecipeDetailMutationOptions = Apollo.BaseMutationOptions<UpdateRecipeDetailMutation, UpdateRecipeDetailMutationVariables>;
-export const GetAllRecipeDocument = gql`
-    query GetAllRecipe {
-  recipe(order_by: {created_at: desc_nulls_last}) {
+export const InsertRecipeDocument = gql`
+    mutation InsertRecipe($object: InsertRecipeOneDerivedRecipeInsertInput!) {
+  InsertRecipeOneDerived(object: $object) {
     id
-    img
     title
+    directions
+    owner
+    meal_type
+    img
+    yields
     total_time
+    cuisine
   }
 }
     `;
+export type InsertRecipeMutationFn = Apollo.MutationFunction<InsertRecipeMutation, InsertRecipeMutationVariables>;
 
 /**
- * __useGetAllRecipeQuery__
+ * __useInsertRecipeMutation__
  *
- * To run a query within a React component, call `useGetAllRecipeQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetAllRecipeQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
+ * To run a mutation, you first call `useInsertRecipeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertRecipeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
  *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const { data, loading, error } = useGetAllRecipeQuery({
+ * const [insertRecipeMutation, { data, loading, error }] = useInsertRecipeMutation({
  *   variables: {
+ *      object: // value for 'object'
  *   },
  * });
  */
-export function useGetAllRecipeQuery(baseOptions?: Apollo.QueryHookOptions<GetAllRecipeQuery, GetAllRecipeQueryVariables>) {
-        return Apollo.useQuery<GetAllRecipeQuery, GetAllRecipeQueryVariables>(GetAllRecipeDocument, baseOptions);
+export function useInsertRecipeMutation(baseOptions?: Apollo.MutationHookOptions<InsertRecipeMutation, InsertRecipeMutationVariables>) {
+        return Apollo.useMutation<InsertRecipeMutation, InsertRecipeMutationVariables>(InsertRecipeDocument, baseOptions);
       }
-export function useGetAllRecipeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllRecipeQuery, GetAllRecipeQueryVariables>) {
-          return Apollo.useLazyQuery<GetAllRecipeQuery, GetAllRecipeQueryVariables>(GetAllRecipeDocument, baseOptions);
-        }
-export type GetAllRecipeQueryHookResult = ReturnType<typeof useGetAllRecipeQuery>;
-export type GetAllRecipeLazyQueryHookResult = ReturnType<typeof useGetAllRecipeLazyQuery>;
-export type GetAllRecipeQueryResult = Apollo.QueryResult<GetAllRecipeQuery, GetAllRecipeQueryVariables>;
+export type InsertRecipeMutationHookResult = ReturnType<typeof useInsertRecipeMutation>;
+export type InsertRecipeMutationResult = Apollo.MutationResult<InsertRecipeMutation>;
+export type InsertRecipeMutationOptions = Apollo.BaseMutationOptions<InsertRecipeMutation, InsertRecipeMutationVariables>;
+export const AddRecipesToPlannerDocument = gql`
+    mutation addRecipesToPlanner($objects: [planner_insert_input!]!) {
+  insert_planner(objects: $objects) {
+    returning {
+      date
+      index
+      recipe {
+        id
+      }
+    }
+  }
+}
+    `;
+export type AddRecipesToPlannerMutationFn = Apollo.MutationFunction<AddRecipesToPlannerMutation, AddRecipesToPlannerMutationVariables>;
+
+/**
+ * __useAddRecipesToPlannerMutation__
+ *
+ * To run a mutation, you first call `useAddRecipesToPlannerMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddRecipesToPlannerMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addRecipesToPlannerMutation, { data, loading, error }] = useAddRecipesToPlannerMutation({
+ *   variables: {
+ *      objects: // value for 'objects'
+ *   },
+ * });
+ */
+export function useAddRecipesToPlannerMutation(baseOptions?: Apollo.MutationHookOptions<AddRecipesToPlannerMutation, AddRecipesToPlannerMutationVariables>) {
+        return Apollo.useMutation<AddRecipesToPlannerMutation, AddRecipesToPlannerMutationVariables>(AddRecipesToPlannerDocument, baseOptions);
+      }
+export type AddRecipesToPlannerMutationHookResult = ReturnType<typeof useAddRecipesToPlannerMutation>;
+export type AddRecipesToPlannerMutationResult = Apollo.MutationResult<AddRecipesToPlannerMutation>;
+export type AddRecipesToPlannerMutationOptions = Apollo.BaseMutationOptions<AddRecipesToPlannerMutation, AddRecipesToPlannerMutationVariables>;
 export const GetProfileDocument = gql`
     query GetProfile($uid: String!) {
   user(where: {id: {_eq: $uid}}) {
@@ -1284,6 +1524,113 @@ export function useGetProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type GetProfileQueryHookResult = ReturnType<typeof useGetProfileQuery>;
 export type GetProfileLazyQueryHookResult = ReturnType<typeof useGetProfileLazyQuery>;
 export type GetProfileQueryResult = Apollo.QueryResult<GetProfileQuery, GetProfileQueryVariables>;
+export const ParseIngredientsDocument = gql`
+    query ParseIngredients($ingredientsArray: [String]) {
+  parseIngredients(ingredientsToParse: $ingredientsArray) {
+    name
+  }
+}
+    `;
+
+/**
+ * __useParseIngredientsQuery__
+ *
+ * To run a query within a React component, call `useParseIngredientsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useParseIngredientsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useParseIngredientsQuery({
+ *   variables: {
+ *      ingredientsArray: // value for 'ingredientsArray'
+ *   },
+ * });
+ */
+export function useParseIngredientsQuery(baseOptions?: Apollo.QueryHookOptions<ParseIngredientsQuery, ParseIngredientsQueryVariables>) {
+        return Apollo.useQuery<ParseIngredientsQuery, ParseIngredientsQueryVariables>(ParseIngredientsDocument, baseOptions);
+      }
+export function useParseIngredientsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ParseIngredientsQuery, ParseIngredientsQueryVariables>) {
+          return Apollo.useLazyQuery<ParseIngredientsQuery, ParseIngredientsQueryVariables>(ParseIngredientsDocument, baseOptions);
+        }
+export type ParseIngredientsQueryHookResult = ReturnType<typeof useParseIngredientsQuery>;
+export type ParseIngredientsLazyQueryHookResult = ReturnType<typeof useParseIngredientsLazyQuery>;
+export type ParseIngredientsQueryResult = Apollo.QueryResult<ParseIngredientsQuery, ParseIngredientsQueryVariables>;
+export const GetAllRecipeDocument = gql`
+    query GetAllRecipe {
+  recipe(order_by: {created_at: desc_nulls_last}) {
+    id
+    img
+    title
+    total_time
+  }
+}
+    `;
+
+/**
+ * __useGetAllRecipeQuery__
+ *
+ * To run a query within a React component, call `useGetAllRecipeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllRecipeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllRecipeQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllRecipeQuery(baseOptions?: Apollo.QueryHookOptions<GetAllRecipeQuery, GetAllRecipeQueryVariables>) {
+        return Apollo.useQuery<GetAllRecipeQuery, GetAllRecipeQueryVariables>(GetAllRecipeDocument, baseOptions);
+      }
+export function useGetAllRecipeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllRecipeQuery, GetAllRecipeQueryVariables>) {
+          return Apollo.useLazyQuery<GetAllRecipeQuery, GetAllRecipeQueryVariables>(GetAllRecipeDocument, baseOptions);
+        }
+export type GetAllRecipeQueryHookResult = ReturnType<typeof useGetAllRecipeQuery>;
+export type GetAllRecipeLazyQueryHookResult = ReturnType<typeof useGetAllRecipeLazyQuery>;
+export type GetAllRecipeQueryResult = Apollo.QueryResult<GetAllRecipeQuery, GetAllRecipeQueryVariables>;
+export const GetPlannerRecipeByDateDocument = gql`
+    query GetPlannerRecipeByDate($date: date) {
+  planner(where: {date: {_eq: $date}}) {
+    date
+    index
+    recipe {
+      id
+      img
+      title
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetPlannerRecipeByDateQuery__
+ *
+ * To run a query within a React component, call `useGetPlannerRecipeByDateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPlannerRecipeByDateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPlannerRecipeByDateQuery({
+ *   variables: {
+ *      date: // value for 'date'
+ *   },
+ * });
+ */
+export function useGetPlannerRecipeByDateQuery(baseOptions?: Apollo.QueryHookOptions<GetPlannerRecipeByDateQuery, GetPlannerRecipeByDateQueryVariables>) {
+        return Apollo.useQuery<GetPlannerRecipeByDateQuery, GetPlannerRecipeByDateQueryVariables>(GetPlannerRecipeByDateDocument, baseOptions);
+      }
+export function useGetPlannerRecipeByDateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPlannerRecipeByDateQuery, GetPlannerRecipeByDateQueryVariables>) {
+          return Apollo.useLazyQuery<GetPlannerRecipeByDateQuery, GetPlannerRecipeByDateQueryVariables>(GetPlannerRecipeByDateDocument, baseOptions);
+        }
+export type GetPlannerRecipeByDateQueryHookResult = ReturnType<typeof useGetPlannerRecipeByDateQuery>;
+export type GetPlannerRecipeByDateLazyQueryHookResult = ReturnType<typeof useGetPlannerRecipeByDateLazyQuery>;
+export type GetPlannerRecipeByDateQueryResult = Apollo.QueryResult<GetPlannerRecipeByDateQuery, GetPlannerRecipeByDateQueryVariables>;
 export const GetRecipeDetailsDocument = gql`
     query GetRecipeDetails($id: String!) {
   recipe_by_pk(id: $id) {
@@ -1332,36 +1679,3 @@ export function useGetRecipeDetailsLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type GetRecipeDetailsQueryHookResult = ReturnType<typeof useGetRecipeDetailsQuery>;
 export type GetRecipeDetailsLazyQueryHookResult = ReturnType<typeof useGetRecipeDetailsLazyQuery>;
 export type GetRecipeDetailsQueryResult = Apollo.QueryResult<GetRecipeDetailsQuery, GetRecipeDetailsQueryVariables>;
-export const ParseIngredientsDocument = gql`
-    query ParseIngredients($ingredientsArray: [String]) {
-  parseIngredients(ingredientsToParse: $ingredientsArray) {
-    name
-  }
-}
-    `;
-
-/**
- * __useParseIngredientsQuery__
- *
- * To run a query within a React component, call `useParseIngredientsQuery` and pass it any options that fit your needs.
- * When your component renders, `useParseIngredientsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useParseIngredientsQuery({
- *   variables: {
- *      ingredientsArray: // value for 'ingredientsArray'
- *   },
- * });
- */
-export function useParseIngredientsQuery(baseOptions?: Apollo.QueryHookOptions<ParseIngredientsQuery, ParseIngredientsQueryVariables>) {
-        return Apollo.useQuery<ParseIngredientsQuery, ParseIngredientsQueryVariables>(ParseIngredientsDocument, baseOptions);
-      }
-export function useParseIngredientsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ParseIngredientsQuery, ParseIngredientsQueryVariables>) {
-          return Apollo.useLazyQuery<ParseIngredientsQuery, ParseIngredientsQueryVariables>(ParseIngredientsDocument, baseOptions);
-        }
-export type ParseIngredientsQueryHookResult = ReturnType<typeof useParseIngredientsQuery>;
-export type ParseIngredientsLazyQueryHookResult = ReturnType<typeof useParseIngredientsLazyQuery>;
-export type ParseIngredientsQueryResult = Apollo.QueryResult<ParseIngredientsQuery, ParseIngredientsQueryVariables>;

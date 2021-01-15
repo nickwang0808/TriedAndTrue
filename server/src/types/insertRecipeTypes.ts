@@ -211,7 +211,7 @@ type parseIngredientsArgs = {
   ingredientsToParse?: Maybe<Array<Maybe<string>>>;
 };
 
-type InsertRecipeOneDerivedArgs = {
+export type InsertRecipeOneDerivedArgs = {
   object: InsertRecipeOneDerivedRecipeInsertInput;
 };
 

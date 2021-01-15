@@ -1,4 +1,3 @@
-import { useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
 import {
   IonContent,
@@ -7,7 +6,6 @@ import {
   IonPage,
   IonSegment,
   IonSegmentButton,
-  useIonViewWillEnter,
 } from "@ionic/react";
 import React, { useState } from "react";
 import { RouteComponentProps } from "react-router";
@@ -15,11 +13,7 @@ import CookTime from "../../components/detailsPageComp/CookTime";
 import DetailsPageTitle from "../../components/detailsPageComp/DetailsPageTitle";
 import DirectionsListItem from "../../components/listItem/DirectionsListItem";
 import IngredientListItem from "../../components/listItem/IngredientListItem";
-import {
-  GetRecipeDetailsQuery,
-  GetRecipeDetailsQueryVariables,
-} from "../../generated/graphql";
-import { GET_RECIPE_DETAILS } from "../../gql/query/getRecipeDetails";
+import useGetRecipeDetails from "../../gql/query/useGetRecipeDetails";
 
 interface IProps
   extends RouteComponentProps<{
@@ -31,19 +25,9 @@ const RecipeDetailsPage: React.FC<IProps> = ({
     params: { id },
   },
 }) => {
-  const {
-    error,
-    loading,
-    data: { recipe_by_pk } = {} as GetRecipeDetailsQuery,
-    refetch,
-  } = useQuery<GetRecipeDetailsQuery, GetRecipeDetailsQueryVariables>(
-    GET_RECIPE_DETAILS,
-    { variables: { id } }
-  );
+  const { error, loading, recipe_by_pk } = useGetRecipeDetails(id);
 
   const [showDirections, setShowDirections] = useState(false);
-
-  useIonViewWillEnter(() => refetch());
 
   if (loading) return <p>loading...</p>;
   if (error) return <p>{error.message}</p>;

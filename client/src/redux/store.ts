@@ -1,12 +1,15 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import addOrEditRecipeSlice from "./AddOrEditRecipe/AddOrEditRecipeSlice";
-
-const rootReducer = combineReducers({
-  addOrEditRecipeSlice,
-});
+import { configureStore } from "@reduxjs/toolkit";
+import rootReducer from "./rootReducer";
 
 export const store = configureStore({
   reducer: rootReducer,
 });
+
+if (process.env.NODE_ENV === 'development' && module.hot) {
+  module.hot.accept('./rootReducer', () => {
+    const newRootReducer = require('./rootReducer').default
+    store.replaceReducer(newRootReducer)
+  })
+}
 
 export type IAppState = ReturnType<typeof store.getState>;

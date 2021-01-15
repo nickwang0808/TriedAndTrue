@@ -1,4 +1,3 @@
-import { useQuery } from "@apollo/client";
 import {
   IonButton,
   IonButtons,
@@ -11,8 +10,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import xclose from "../../assets/svg/close-x.svg";
 import { StyledFullScreenModal } from "../../components/modals/fullScreenModalBase";
-import { GetRecipeDetailsQuery } from "../../generated/graphql";
-import { GET_RECIPE_DETAILS } from "../../gql/query/getRecipeDetails";
+import useGetRecipeDetails from "../../gql/query/useGetRecipeDetails";
 import { resetAddOrEditRecipe } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
 import { IAppState } from "../../redux/store";
 import { emptyDefaultValue, mealType } from "../../utils/recipeSchema";
@@ -25,20 +23,7 @@ export default function AddOrEditRecipeModal() {
     (state: IAppState) => state.addOrEditRecipeSlice
   );
 
-  const {
-    loading,
-    error,
-    data: { recipe_by_pk } = {} as GetRecipeDetailsQuery,
-  } = useQuery<GetRecipeDetailsQuery>(GET_RECIPE_DETAILS, {
-    skip: !showAddOrEditRecipe || !id,
-    variables: { id },
-  });
-
-  // useEffect(() => {
-  //   if (id !== "null") {
-  //     getRecipeDetails({ variables: { id } });
-  //   }
-  // }, [id]);
+  const { error, loading, recipe_by_pk } = useGetRecipeDetails(id);
 
   if (loading) return <p>loading ...</p>;
   if (error) return <p>{error.message}</p>;
@@ -55,6 +40,7 @@ export default function AddOrEditRecipeModal() {
           id === "null"
             ? emptyDefaultValue
             : {
+                // sorry for the messy object mapping
                 cuisine: recipe_by_pk?.cuisine || null,
                 total_time: recipe_by_pk?.total_time || null,
                 meal_type: (recipe_by_pk?.meal_type as mealType) || null,

@@ -1,44 +1,28 @@
-import styled from "@emotion/styled";
 import { IonContent, IonPage } from "@ionic/react";
 import React from "react";
-import AddCardOutLined from "../../components/card/AddCardOutLined";
-import RecipeCardSmall from "../../components/card/RecipeCardSmall";
-import BlockSeparator from "../../components/misc/BlockSeparator";
+import { useSelector } from "react-redux";
+import { IAppState } from "../../redux/store";
 import Header from "./Header";
+import PlannerRow from "./PlannerRow";
 
 export default function MealPlannerMainPage() {
+  const { dateRange, selectedWeek } = useSelector(
+    (state: IAppState) => state.plannerDateRangeSlice
+  );
+
   return (
     <>
       <IonPage>
-        <Header />
+        <Header weeks={dateRange as string[][]} />
         <IonContent>
-          {[1, 2, 3, 4, 5, 6, 7].map((num) => (
-            <>
-              <BlockSeparator title="Monday" subTitle="(23rd)" />
-              <StyledGrid key={num}>
-                <RecipeCardSmall />
-                <RecipeCardSmall />
-                <RecipeCardSmall />
-                <RecipeCardSmall />
-                <RecipeCardSmall />
-                <AddCardOutLined />
-              </StyledGrid>
-            </>
-          ))}
+          {/* find the current selected week and then map out the days */}
+          {(dateRange as string[][])
+            .find((elem) => String(elem[0]) === String(selectedWeek))!
+            .map((date) => (
+              <PlannerRow date={String(date)} key={String(date)} />
+            ))}
         </IonContent>
       </IonPage>
     </>
   );
 }
-const StyledGrid = styled.div`
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-
-  padding: 16px 8px;
-  // target all card and add button container in the flex box
-  & > * {
-    width: 30%;
-    flex-shrink: 0; // ion card shrink by default
-  }
-`;

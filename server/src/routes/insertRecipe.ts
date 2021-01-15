@@ -2,6 +2,7 @@ import { Request, Response, Router } from "express";
 import { parseIngredient } from "ingredient-parser";
 import fetch, { Headers } from "node-fetch";
 import stringifyFormattedIngredients from "../helper/stringifyFormatedIngredients";
+import { InsertRecipeOneDerivedArgs } from "../types/insertRecipeTypes";
 const HASURA_OPERATION = `mutation ($object: recipe_insert_input!) {
   insert_recipe_one(object: $object) {
     id

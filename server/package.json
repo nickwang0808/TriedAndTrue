@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc && node dist/index.js",
+    "dev": "ts-node-dev src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,6 +19,7 @@
   },
   "dependencies": {
     "@types/pg": "^7.14.7",
+    "date-fns": "^2.16.1",
     "express": "^4.17.1",
     "ingredient-parser": "https://github.com/plate0/ingredient-parser#master",
     "node-fetch": "^2.6.1",

@@ -27,7 +27,7 @@
 
 ### planner
 
-- id => user.id
-- data
+- user_id
 - recipe_id
 - index
+- date
