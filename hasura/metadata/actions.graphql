@@ -1,7 +1,7 @@
 type Mutation {
   InsertRecipeOneDerived (
     object: InsertRecipeOneDerivedRecipeInsertInput!
-  ): InsertRecipeOneDerivedOutput
+  ): InsertRecipeOneDerivedOutput!
 }
 
 
@@ -212,15 +212,7 @@ type Status {
 }
 
 type InsertRecipeOneDerivedOutput {
-  cuisine : String
-  directions : json
   id : String!
-  img : String
-  meal_type : String
-  owner : String!
-  title : String!
-  total_time : Int
-  yields : String
 }
 
 type UpdatedRecipeIngredients {

@@ -72,7 +72,8 @@ InsertRecipeOneDerivedRoute.post("/", async (req: Request, res: Response) => {
   if (errors) return res.status(400).json(errors[0]);
 
   // success
-  return res.json({ ...data.insert_recipe_one });
+  // return res.json({ ...data.insert_recipe_one });
+  return res.json({ id: data.insert_recipe_one.id });
 });
 
 export default InsertRecipeOneDerivedRoute;
