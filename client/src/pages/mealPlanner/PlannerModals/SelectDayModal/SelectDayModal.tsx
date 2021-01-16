@@ -53,7 +53,7 @@ export default function SelectDayModal() {
     ];
     // combine 2 groups of recipes
     // run query
-    await overWritePlannerByDates({
+    overWritePlannerByDates({
       variables: { dates: [fromDate, toDate], objects },
       optimisticResponse: {
         delete_planner: {
@@ -117,6 +117,8 @@ export default function SelectDayModal() {
         });
       },
     });
+
+    handleDismiss();
   };
 
   return (
