@@ -3,29 +3,28 @@ import {
   IonContent,
   IonLabel,
   IonList,
-  IonPage,
   IonSegment,
   IonSegmentButton,
 } from "@ionic/react";
 import React, { useState } from "react";
-import { RouteComponentProps } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 import CookTime from "../../components/detailsPageComp/CookTime";
 import DetailsPageTitle from "../../components/detailsPageComp/DetailsPageTitle";
 import DirectionsListItem from "../../components/listItem/DirectionsListItem";
 import IngredientListItem from "../../components/listItem/IngredientListItem";
+import { StyledFullScreenModal } from "../../components/modals/fullScreenModalBase";
 import useGetRecipeDetails from "../../gql/query/useGetRecipeDetails";
+import { setRecipeDetailsId } from "../../redux/RecipeDetailsSlice/recipeDetailsSlice";
+import { IAppState } from "../../redux/store";
 
-interface IProps
-  extends RouteComponentProps<{
-    id: string;
-  }> {}
-
-const RecipeDetailsPage: React.FC<IProps> = ({
-  match: {
-    params: { id },
-  },
-}) => {
+const RecipeDetailsPage: React.FC = () => {
+  const { id } = useSelector(
+    ({ recipeDetailsSlice }: IAppState) => recipeDetailsSlice
+  );
   const { error, loading, recipe_by_pk } = useGetRecipeDetails(id);
+
+  const dispatch = useDispatch();
+  const handleDismiss = () => dispatch(setRecipeDetailsId(null));
 
   const [showDirections, setShowDirections] = useState(false);
 
@@ -33,7 +32,7 @@ const RecipeDetailsPage: React.FC<IProps> = ({
   if (error) return <p>{error.message}</p>;
   if (!recipe_by_pk) return <p>404 recipe not found</p>;
   return (
-    <IonPage>
+    <StyledFullScreenModal isOpen onDidDismiss={handleDismiss}>
       <IonContent>
         <DetailsPageTitle
           id={recipe_by_pk.id}
@@ -96,7 +95,7 @@ const RecipeDetailsPage: React.FC<IProps> = ({
               )}
         </StyledIngredientList>
       </IonContent>
-    </IonPage>
+    </StyledFullScreenModal>
   );
 };
 export default RecipeDetailsPage;

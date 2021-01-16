@@ -66,7 +66,9 @@ const App: React.FC = () => {
       <AuthChecker>
         <IonApp>
           <AddOrEditRecipeModal />
+          <RecipeDetailsPage />
           <AddMultiRecipeToPlannerModal />
+
           <EditPlannerItemModal />
           <ReCreatePlannerModal />
           <SelectWeekModal />
@@ -96,12 +98,6 @@ const App: React.FC = () => {
                       <h1>Coming Soon</h1>
                     </IonPage>
                   )}
-                />
-
-                {/* <Route path="/add-recipe/:id" component={AddRecipePage} /> */}
-                <Route
-                  path="/recipe-details/:id"
-                  component={RecipeDetailsPage}
                 />
 
                 <Route
