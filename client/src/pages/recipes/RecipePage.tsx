@@ -8,7 +8,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import addnew from "../../assets/svg/addnew.svg";
@@ -22,9 +22,10 @@ import NoRecipe from "./NoRecipe";
 
 const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
   const dispatch = useDispatch();
-  const { error, loading, data } = useGetAllRecipes();
+  const [keyword, setKeyword] = useState<string>();
+  const { error, loading, data } = useGetAllRecipes(keyword);
 
-  if (loading) return <p>loading...</p>;
+  // if (loading) return <p>loading...</p>;
   if (error) return <p>{error.message}</p>;
   return (
     <IonPage>
@@ -40,7 +41,17 @@ const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
       </IonHeader>
 
       <IonContent fullscreen>
-        <StyledSearchBar />
+        <StyledSearchBar
+          animated
+          debounce={500}
+          value={keyword?.slice(1, -1)}
+          onIonChange={(e) => {
+            const { value } = e.detail;
+            console.log(value);
+            if (value === keyword) return;
+            setKeyword(`%${value}%`);
+          }}
+        />
         {!data?.recipe.length ? (
           <NoRecipe />
         ) : (

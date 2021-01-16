@@ -1362,7 +1362,9 @@ export type ParseIngredientsQuery = (
   )> }
 );
 
-export type GetAllRecipeQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetAllRecipeQueryVariables = Exact<{
+  _like?: Maybe<Scalars['String']>;
+}>;
 
 
 export type GetAllRecipeQuery = (
@@ -1675,8 +1677,8 @@ export type ParseIngredientsQueryHookResult = ReturnType<typeof useParseIngredie
 export type ParseIngredientsLazyQueryHookResult = ReturnType<typeof useParseIngredientsLazyQuery>;
 export type ParseIngredientsQueryResult = Apollo.QueryResult<ParseIngredientsQuery, ParseIngredientsQueryVariables>;
 export const GetAllRecipeDocument = gql`
-    query GetAllRecipe {
-  recipe(order_by: {created_at: desc_nulls_last}) {
+    query GetAllRecipe($_like: String = "%") {
+  recipe(order_by: {created_at: desc_nulls_last}, where: {title: {_like: $_like}}) {
     id
     img
     title
@@ -1697,6 +1699,7 @@ export const GetAllRecipeDocument = gql`
  * @example
  * const { data, loading, error } = useGetAllRecipeQuery({
  *   variables: {
+ *      _like: // value for '_like'
  *   },
  * });
  */
