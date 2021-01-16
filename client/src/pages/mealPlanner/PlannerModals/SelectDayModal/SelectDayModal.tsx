@@ -55,6 +55,67 @@ export default function SelectDayModal() {
     // run query
     await overWritePlannerByDates({
       variables: { dates: [fromDate, toDate], objects },
+      optimisticResponse: {
+        delete_planner: {
+          affected_rows: 0,
+          __typename: "planner_mutation_response",
+        },
+        insert_planner: {
+          returning: objects.map(({ date, index, recipe_id }) => {
+            return {
+              date,
+              index: index!,
+              recipe: {
+                id: recipe_id!,
+                __typename: "recipe",
+              },
+              __typename: "planner",
+            };
+          }),
+          __typename: "planner_mutation_response",
+        },
+        __typename: "mutation_root",
+      },
+      update: (cache, { data }) => {
+        if (!data || !data.insert_planner) return;
+        const {
+          insert_planner: { returning },
+        } = data;
+        cache.modify({
+          fields: {
+            [`planner({"where":{"date":{"_eq":"${toDate}"}}})`]: (
+              curr,
+              { toReference }
+            ) => {
+              return [
+                ...returning
+                  .filter((elem) => elem.date === toDate)
+                  .map((elem) => {
+                    return {
+                      ...elem,
+                      recipe: toReference(elem.recipe),
+                    };
+                  }),
+              ];
+            },
+            [`planner({"where":{"date":{"_eq":"${fromDate}"}}})`]: (
+              curr,
+              { toReference }
+            ) => {
+              return [
+                ...returning
+                  .filter((elem) => elem.date === fromDate)
+                  .map((elem) => {
+                    return {
+                      ...elem,
+                      recipe: toReference(elem.recipe),
+                    };
+                  }),
+              ];
+            },
+          },
+        });
+      },
     });
   };
 
