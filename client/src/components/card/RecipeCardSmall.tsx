@@ -6,11 +6,12 @@ interface IProps {
   title: string;
   img: string | null | undefined;
   id: string;
+  onClick: () => void;
 }
 
-export default function RecipeCardSmall({ title, img, id }: IProps) {
+export default function RecipeCardSmall({ title, img, id, onClick }: IProps) {
   return (
-    <StyledCard>
+    <StyledCard onClick={onClick}>
       <StyledImg src={img || "https://picsum.photos/200/300"} />
       <StyledIonHeader mode="md">
         <IonCardTitle color="primary">{title}</IonCardTitle>

@@ -37,6 +37,9 @@ import AuthChecker from "./pages/auth/AuthChecker";
 import MealPlannerMainPage from "./pages/mealPlanner/MealPlannerMainPage";
 import AddMultiRecipeToPlannerModal from "./pages/mealPlanner/PlannerModals/AddMultiRecipeToPlannerModal/AddMultiRecipeToPlannerModal";
 import EditPlannerItemModal from "./pages/mealPlanner/PlannerModals/EditPlannerItemModal/EditPlannerItemModal";
+import ReCreatePlannerModal from "./pages/mealPlanner/PlannerModals/ReCreatePlannerModal/ReCreatePlannerModal";
+import SelectDayModal from "./pages/mealPlanner/PlannerModals/SelectDayModal/SelectDayModal";
+import SelectWeekModal from "./pages/mealPlanner/PlannerModals/SelectWeekModal/SelectWeekModal";
 import RecipeDetailsPage from "./pages/recipeDetails/RecipeDetailsPage";
 import RecipePage from "./pages/recipes/RecipePage";
 import { setDateRange } from "./redux/Planner/PlannerDateRangeSlice";
@@ -65,6 +68,9 @@ const App: React.FC = () => {
           <AddOrEditRecipeModal />
           <AddMultiRecipeToPlannerModal />
           <EditPlannerItemModal />
+          <ReCreatePlannerModal />
+          <SelectWeekModal />
+          <SelectDayModal />
 
           <IonReactRouter>
             <IonTabs>

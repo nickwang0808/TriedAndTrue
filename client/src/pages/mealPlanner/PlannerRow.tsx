@@ -6,6 +6,7 @@ import AddCardOutLined from "../../components/card/AddCardOutLined";
 import RecipeCardSmall from "../../components/card/RecipeCardSmall";
 import BlockSeparator from "../../components/misc/BlockSeparator";
 import useGetPlannerRecipeByDate from "../../gql/query/useGetPlannerRecipeByDate";
+import { setShowModifyModal } from "../../redux/Planner/PlannerItemModalSlice";
 import { openPlannerModal } from "../../redux/Planner/PlannerModalSlice";
 
 interface IProps {
@@ -32,7 +33,13 @@ export default function PlannerRow({ date }: IProps) {
       <StyledContainer id={`row-${format(new Date(date), "yyyy-MM-dd")}`}>
         {planner &&
           planner.map(({ recipe: { title, img, id }, index }) => (
-            <RecipeCardSmall title={title} img={img} id={id} key={id + index} />
+            <RecipeCardSmall
+              title={title}
+              img={img}
+              id={id}
+              key={id + index}
+              onClick={() => dispatch(setShowModifyModal(id))}
+            />
           ))}
         <AddCardOutLined onClick={() => dispatch(openPlannerModal(date))} />
       </StyledContainer>
