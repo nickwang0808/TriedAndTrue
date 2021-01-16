@@ -18,7 +18,7 @@ export const GET_ALL_RECIPES = gql`
   }
 `;
 
-export default function useGetAllRecipes(_like: string | null = null) {
+export default function useGetAllRecipes(_like: string | null = "%%") {
   const { error, loading, data } = useQuery<
     GetAllRecipeQuery,
     GetAllRecipeQueryVariables
