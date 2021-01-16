@@ -1,10 +1,10 @@
 import { gql, useMutation } from "@apollo/client";
-import { useSelector } from "react-redux";
+import { format } from "date-fns";
 import {
   AddRecipesToPlannerMutation,
   AddRecipesToPlannerMutationVariables,
 } from "../../generated/graphql";
-import { IAppState } from "../../redux/store";
+import { store } from "../../redux/store";
 import getPlannerRecipeCount from "../../utils/getPlannerRecipeCount";
 
 export const ADD_RECIPES_TO_PLANNER = gql`
@@ -22,9 +22,6 @@ export const ADD_RECIPES_TO_PLANNER = gql`
 `;
 
 export default function useAddRecipesToPlanner() {
-  const { dateToModify, selectedRecipes } = useSelector(
-    (state: IAppState) => state.plannerModalSlice
-  );
   const [
     addRecipesToPlanner,
     { loading: loading_m, error: error_m },
@@ -35,35 +32,44 @@ export default function useAddRecipesToPlanner() {
     optimisticResponse: {
       __typename: "mutation_root",
       insert_planner: {
-        returning: selectedRecipes.map((id, index) => {
-          const indexOffset = getPlannerRecipeCount(dateToModify);
-          // const cacheResult = getRecipeDetailfromCache(id);
-          return {
-            date: dateToModify,
-            index: index + indexOffset,
-            recipe: {
-              __typename: "recipe",
-              id,
-            },
-          };
-        }),
+        returning: store
+          .getState()
+          .plannerModalSlice.selectedRecipes.map((id, index) => {
+            const { dateToModify } = store.getState().plannerModalSlice;
+            const indexOffset = getPlannerRecipeCount(dateToModify);
+            return {
+              __typename: "planner",
+              date: dateToModify,
+              index: index + indexOffset,
+              recipe: {
+                __typename: "recipe",
+                id,
+              },
+            };
+          }),
       },
     },
     update: (cache, { data }) => {
+      const { dateToModify } = store.getState().plannerModalSlice;
+      const date = format(new Date(dateToModify), "yyyy-MM-dd");
       cache.modify({
         fields: {
-          planner: (curr, { toReference }) => {
+          [`planner({"where":{"date":{"_eq":"${date}"}}})`]: (
+            curr,
+            { toReference }
+          ) => {
             const recipes = data?.insert_planner?.returning.map(
-              ({ recipe, index, date }) => {
+              ({ __typename, recipe }, i) => {
                 const indexOffset = getPlannerRecipeCount(date);
                 return {
-                  __typename: "planner",
+                  __typename,
                   date,
-                  index: index + indexOffset,
-                  recipe: toReference(recipe.id),
+                  index: i + indexOffset,
+                  recipe: toReference(recipe),
                 };
               }
             );
+            console.log(curr);
             return [...curr, ...recipes!];
           },
         },

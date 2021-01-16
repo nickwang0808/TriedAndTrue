@@ -1,4 +1,5 @@
-import { IonContent, IonPage } from "@ionic/react";
+import { IonContent, IonPage, useIonViewDidEnter } from "@ionic/react";
+import { format } from "date-fns";
 import React from "react";
 import { useSelector } from "react-redux";
 import { IAppState } from "../../redux/store";
@@ -9,6 +10,17 @@ export default function MealPlannerMainPage() {
   const { dateRange, selectedWeek } = useSelector(
     (state: IAppState) => state.plannerDateRangeSlice
   );
+
+  useIonViewDidEnter(() => {
+    console.log("scroll to today");
+    document
+      .getElementById(`row-${format(new Date(), "yyyy-MM-dd")}`)
+      ?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center",
+      });
+  }, []);
 
   return (
     <>

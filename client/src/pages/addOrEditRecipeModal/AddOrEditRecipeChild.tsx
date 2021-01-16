@@ -22,39 +22,20 @@ export default function AddOrEditRecipeChild({
   isCreateNew,
   id,
 }: IProps) {
-  const {
-    formState,
-    handleSubmit,
-    watch,
-    control,
-    errors,
-    reset,
-  } = useForm<IRecipeForm>({
+  const { formState, handleSubmit, control, reset } = useForm<IRecipeForm>({
     resolver: yupResolver(recipeFormSchema),
     defaultValues,
   });
-
-  console.log(watch());
 
   useEffect(() => {
     reset(defaultValues);
   }, [defaultValues]);
 
-  const {
-    data_insert,
-    error_insert,
-    insertRecipeOne,
-    loading_insert,
-  } = useInsertRecipeOne();
+  // prettier-ignore
+  const { error_insert, insertRecipeOne, loading_insert } = useInsertRecipeOne();
+  const { updateRecipeDetails } = useUpdateRecipeDetails(id);
 
-  const {
-    updateRecipeDetails,
-    loading_update,
-    data_update,
-    error_update,
-  } = useUpdateRecipeDetails(id);
-
-  const { isDirty, dirtyFields } = formState;
+  const { isDirty } = formState;
   const onSubmit = (data: IRecipeForm) => {
     // console.log({ data });
 
@@ -79,6 +60,18 @@ export default function AddOrEditRecipeChild({
               },
             },
           },
+          // TODO: use optimistic ui
+          // optimisticResponse: {
+          //   __typename: "mutation_root",
+          //   InsertRecipeOneDerived: {
+          //     __typename: "InsertRecipeOneDerivedOutput",
+          //     recipe: {
+          //       __typename: "recipe",
+          //       ...dataWIthOutIngredients!,
+          //       id: "dwad",
+          //     },
+          //   },
+          // },
         });
       } catch (error) {
         console.log(error);
@@ -102,9 +95,6 @@ export default function AddOrEditRecipeChild({
       } else return;
     }
   };
-
-  // console.log(errors);
-  // // console.log(watch());
 
   if (loading_insert) return <p>loading...</p>;
   if (error_insert) return <p>{error_insert.message}</p>;

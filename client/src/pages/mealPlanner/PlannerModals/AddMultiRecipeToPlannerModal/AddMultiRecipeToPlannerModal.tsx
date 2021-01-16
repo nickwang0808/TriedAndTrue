@@ -2,21 +2,21 @@ import { IonContent } from "@ionic/react";
 import { format } from "date-fns";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import RecipeCard from "../../components/card/RecipeCard";
-import SaveFooterButton from "../../components/layout/SaveFooterButton";
-import StyledRecipeGrid from "../../components/layout/StyledRecipeGrid";
-import StyledSearchBar from "../../components/misc/SearchBar";
-import { StyledFullScreenModal } from "../../components/modals/fullScreenModalBase";
-import useAddRecipesToPlanner from "../../gql/mutations/useOverWriteRecipeToPlanner";
-import useGetAllRecipes from "../../gql/query/useGetAllRecipes";
+import RecipeCard from "../../../../components/card/RecipeCard";
+import SaveFooterButton from "../../../../components/layout/SaveFooterButton";
+import StyledRecipeGrid from "../../../../components/layout/StyledRecipeGrid";
+import StyledSearchBar from "../../../../components/misc/SearchBar";
+import { StyledFullScreenModal } from "../../../../components/modals/fullScreenModalBase";
+import useAddRecipesToPlanner from "../../../../gql/mutations/useInsertRecipeToPlanner";
+import useGetAllRecipes from "../../../../gql/query/useGetAllRecipes";
 import {
   appendSelectedRecipe,
   clearSelectedRecipe,
   closePlannerModal,
   deSelectRecipe,
-} from "../../redux/Planner/PlannerModalSlice";
-import { IAppState } from "../../redux/store";
-import getPlannerRecipeCount from "../../utils/getPlannerRecipeCount";
+} from "../../../../redux/Planner/PlannerModalSlice";
+import { IAppState } from "../../../../redux/store";
+import getPlannerRecipeCount from "../../../../utils/getPlannerRecipeCount";
 import Header from "./Header";
 
 export default function AddMultiRecipeToPlannerModal() {
@@ -40,10 +40,10 @@ export default function AddMultiRecipeToPlannerModal() {
     const objects = selectedRecipes.map((id, index) => {
       return { date, index: index + indexOffset, recipe_id: id };
     });
-    await addRecipesToPlanner({ variables: { objects } });
 
-    dispatch(clearSelectedRecipe());
     dispatch(closePlannerModal());
+    await addRecipesToPlanner({ variables: { objects } });
+    dispatch(clearSelectedRecipe());
     return;
   };
 

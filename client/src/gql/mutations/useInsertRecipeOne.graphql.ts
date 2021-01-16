@@ -3,20 +3,16 @@ import {
   InsertRecipeMutation,
   InsertRecipeMutationVariables,
 } from "../../generated/graphql";
-import { GET_ALL_RECIPES } from "../query/useGetAllRecipes";
 
 export const INSERT_RECIPE_ONE = gql`
   mutation InsertRecipe($object: InsertRecipeOneDerivedRecipeInsertInput!) {
     InsertRecipeOneDerived(object: $object) {
-      id
-      title
-      directions
-      owner
-      meal_type
-      img
-      yields
-      total_time
-      cuisine
+      recipe {
+        id
+        title
+        img
+        total_time
+      }
     }
   }
 `;
@@ -27,7 +23,24 @@ export default function useInsertRecipeOne() {
     { loading: loading_insert, data: data_insert, error: error_insert },
   ] = useMutation<InsertRecipeMutation, InsertRecipeMutationVariables>(
     INSERT_RECIPE_ONE,
-    { refetchQueries: [{ query: GET_ALL_RECIPES }] }
+    {
+      update: (cache, { data }) => {
+        if (!data) return;
+        cache.modify({
+          fields: {
+            [`recipe({"order_by":{"created_at":"desc_nulls_last"}})`]: (
+              curr,
+              { toReference }
+            ) => {
+              return [
+                ...curr,
+                toReference(data.InsertRecipeOneDerived!.recipe!),
+              ];
+            },
+          },
+        });
+      },
+    }
   );
 
   return {

@@ -17,6 +17,7 @@ import StyledRecipeGrid from "../../components/layout/StyledRecipeGrid";
 import StyledSearchBar from "../../components/misc/SearchBar";
 import useGetAllRecipes from "../../gql/query/useGetAllRecipes";
 import { setShowAddOrEditRecipe } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
+import { setRecipeDetailsId } from "../../redux/RecipeDetailsSlice/recipeDetailsSlice";
 import NoRecipe from "./NoRecipe";
 
 const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
@@ -49,7 +50,7 @@ const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
                 <RecipeCard
                   key={props.id}
                   {...props}
-                  onClick={() => history.push(`/recipe-details/${props.id}`)}
+                  onClick={() => dispatch(setRecipeDetailsId(props.id))}
                 />
               );
             })}

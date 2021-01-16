@@ -93,6 +93,13 @@ custom_types:
       type: array
       field_mapping:
         id: recipe_id
+    - remote_table:
+        schema: public
+        name: recipe
+      name: recipe
+      type: object
+      field_mapping:
+        id: id
   - name: UpdatedRecipeIngredients
     relationships:
     - remote_table:

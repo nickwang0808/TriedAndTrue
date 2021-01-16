@@ -26,16 +26,20 @@ import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/typography.css";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import listIcon from "./assets/svg/listIcon.svg";
 import mealPlanIcon from "./assets/svg/mealPlanIcon.svg";
 import profileIcon from "./assets/svg/profileIcon.svg";
 import recipeIcon from "./assets/svg/recipeIcon.svg";
 import client from "./config/apoloConfig";
-import AddMultiRecipeToPlannerModal from "./pages/AddMultiRecipeToPlannerModal/AddMultiRecipeToPlannerModal";
 import AddOrEditRecipeModal from "./pages/addOrEditRecipeModal/AddOrEditRecipeModal";
 import AuthChecker from "./pages/auth/AuthChecker";
 import MealPlannerMainPage from "./pages/mealPlanner/MealPlannerMainPage";
+import AddMultiRecipeToPlannerModal from "./pages/mealPlanner/PlannerModals/AddMultiRecipeToPlannerModal/AddMultiRecipeToPlannerModal";
+import EditPlannerItemModal from "./pages/mealPlanner/PlannerModals/EditPlannerItemModal/EditPlannerItemModal";
+import ReCreatePlannerModal from "./pages/mealPlanner/PlannerModals/ReCreatePlannerModal/ReCreatePlannerModal";
+import SelectDayModal from "./pages/mealPlanner/PlannerModals/SelectDayModal/SelectDayModal";
+import SelectWeekModal from "./pages/mealPlanner/PlannerModals/SelectWeekModal/SelectWeekModal";
 import RecipeDetailsPage from "./pages/recipeDetails/RecipeDetailsPage";
 import RecipePage from "./pages/recipes/RecipePage";
 import { setDateRange } from "./redux/Planner/PlannerDateRangeSlice";
@@ -62,7 +66,13 @@ const App: React.FC = () => {
       <AuthChecker>
         <IonApp>
           <AddOrEditRecipeModal />
+          <RecipeDetailsPage />
           <AddMultiRecipeToPlannerModal />
+
+          <EditPlannerItemModal />
+          <ReCreatePlannerModal />
+          <SelectWeekModal />
+          <SelectDayModal />
 
           <IonReactRouter>
             <IonTabs>
@@ -90,10 +100,10 @@ const App: React.FC = () => {
                   )}
                 />
 
-                {/* <Route path="/add-recipe/:id" component={AddRecipePage} /> */}
                 <Route
-                  path="/recipe-details/:id"
-                  component={RecipeDetailsPage}
+                  exact
+                  path="/"
+                  component={() => <Redirect to="/recipes" />}
                 />
               </IonRouterOutlet>
 

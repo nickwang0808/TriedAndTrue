@@ -68,16 +68,9 @@ export type InsertRecipeOneDerivedJsonComparisonExp = {
 
 export type InsertRecipeOneDerivedOutput = {
   __typename?: 'InsertRecipeOneDerivedOutput';
-  cuisine?: Maybe<Scalars['String']>;
-  directions?: Maybe<Scalars['json']>;
   id: Scalars['String'];
-  img?: Maybe<Scalars['String']>;
-  meal_type?: Maybe<Scalars['String']>;
-  owner: Scalars['String'];
+  recipe?: Maybe<Recipe>;
   recipe_ingredients_list?: Maybe<Array<Maybe<Recipe_Ingredients>>>;
-  title: Scalars['String'];
-  total_time?: Maybe<Scalars['Int']>;
-  yields?: Maybe<Scalars['String']>;
 };
 
 export type InsertRecipeOneDerivedRecipeBoolExp = {
@@ -317,7 +310,7 @@ export type Json_Comparison_Exp = {
 export type Mutation_Root = {
   __typename?: 'mutation_root';
   /** perform the action: "InsertRecipeOneDerived" */
-  InsertRecipeOneDerived?: Maybe<InsertRecipeOneDerivedOutput>;
+  InsertRecipeOneDerived: InsertRecipeOneDerivedOutput;
   /** delete data from the table: "planner" */
   delete_planner?: Maybe<Planner_Mutation_Response>;
   /** delete single row from the table: "planner" */
@@ -374,6 +367,7 @@ export type Mutation_RootDelete_PlannerArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Planner_By_PkArgs = {
   date: Scalars['date'];
+  index: Scalars['Int'];
   recipe_id: Scalars['String'];
 };
 
@@ -574,6 +568,7 @@ export type Planner_Order_By = {
 /** primary key columns input for table: "planner" */
 export type Planner_Pk_Columns_Input = {
   date: Scalars['date'];
+  index: Scalars['Int'];
   recipe_id: Scalars['String'];
 };
 
@@ -632,6 +627,7 @@ export type Query_RootPlannerArgs = {
 /** query root */
 export type Query_RootPlanner_By_PkArgs = {
   date: Scalars['date'];
+  index: Scalars['Int'];
   recipe_id: Scalars['String'];
 };
 
@@ -1060,6 +1056,7 @@ export type Subscription_RootPlannerArgs = {
 /** subscription root */
 export type Subscription_RootPlanner_By_PkArgs = {
   date: Scalars['date'];
+  index: Scalars['Int'];
   recipe_id: Scalars['String'];
 };
 
@@ -1268,10 +1265,13 @@ export type InsertRecipeMutationVariables = Exact<{
 
 export type InsertRecipeMutation = (
   { __typename?: 'mutation_root' }
-  & { InsertRecipeOneDerived?: Maybe<(
+  & { InsertRecipeOneDerived: (
     { __typename?: 'InsertRecipeOneDerivedOutput' }
-    & Pick<InsertRecipeOneDerivedOutput, 'id' | 'title' | 'directions' | 'owner' | 'meal_type' | 'img' | 'yields' | 'total_time' | 'cuisine'>
-  )> }
+    & { recipe?: Maybe<(
+      { __typename?: 'recipe' }
+      & Pick<Recipe, 'id' | 'title' | 'img' | 'total_time'>
+    )> }
+  ) }
 );
 
 export type AddRecipesToPlannerMutationVariables = Exact<{
@@ -1282,6 +1282,30 @@ export type AddRecipesToPlannerMutationVariables = Exact<{
 export type AddRecipesToPlannerMutation = (
   { __typename?: 'mutation_root' }
   & { insert_planner?: Maybe<(
+    { __typename?: 'planner_mutation_response' }
+    & { returning: Array<(
+      { __typename?: 'planner' }
+      & Pick<Planner, 'date' | 'index'>
+      & { recipe: (
+        { __typename?: 'recipe' }
+        & Pick<Recipe, 'id'>
+      ) }
+    )> }
+  )> }
+);
+
+export type OverWritePlannerByDatesMutationVariables = Exact<{
+  dates: Array<Scalars['date']> | Scalars['date'];
+  objects: Array<Planner_Insert_Input> | Planner_Insert_Input;
+}>;
+
+
+export type OverWritePlannerByDatesMutation = (
+  { __typename?: 'mutation_root' }
+  & { delete_planner?: Maybe<(
+    { __typename?: 'planner_mutation_response' }
+    & Pick<Planner_Mutation_Response, 'affected_rows'>
+  )>, insert_planner?: Maybe<(
     { __typename?: 'planner_mutation_response' }
     & { returning: Array<(
       { __typename?: 'planner' }
@@ -1414,15 +1438,12 @@ export type UpdateRecipeDetailMutationOptions = Apollo.BaseMutationOptions<Updat
 export const InsertRecipeDocument = gql`
     mutation InsertRecipe($object: InsertRecipeOneDerivedRecipeInsertInput!) {
   InsertRecipeOneDerived(object: $object) {
-    id
-    title
-    directions
-    owner
-    meal_type
-    img
-    yields
-    total_time
-    cuisine
+    recipe {
+      id
+      title
+      img
+      total_time
+    }
   }
 }
     `;
@@ -1489,6 +1510,48 @@ export function useAddRecipesToPlannerMutation(baseOptions?: Apollo.MutationHook
 export type AddRecipesToPlannerMutationHookResult = ReturnType<typeof useAddRecipesToPlannerMutation>;
 export type AddRecipesToPlannerMutationResult = Apollo.MutationResult<AddRecipesToPlannerMutation>;
 export type AddRecipesToPlannerMutationOptions = Apollo.BaseMutationOptions<AddRecipesToPlannerMutation, AddRecipesToPlannerMutationVariables>;
+export const OverWritePlannerByDatesDocument = gql`
+    mutation OverWritePlannerByDates($dates: [date!]!, $objects: [planner_insert_input!]!) {
+  delete_planner(where: {date: {_in: $dates}}) {
+    affected_rows
+  }
+  insert_planner(objects: $objects) {
+    returning {
+      date
+      index
+      recipe {
+        id
+      }
+    }
+  }
+}
+    `;
+export type OverWritePlannerByDatesMutationFn = Apollo.MutationFunction<OverWritePlannerByDatesMutation, OverWritePlannerByDatesMutationVariables>;
+
+/**
+ * __useOverWritePlannerByDatesMutation__
+ *
+ * To run a mutation, you first call `useOverWritePlannerByDatesMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useOverWritePlannerByDatesMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [overWritePlannerByDatesMutation, { data, loading, error }] = useOverWritePlannerByDatesMutation({
+ *   variables: {
+ *      dates: // value for 'dates'
+ *      objects: // value for 'objects'
+ *   },
+ * });
+ */
+export function useOverWritePlannerByDatesMutation(baseOptions?: Apollo.MutationHookOptions<OverWritePlannerByDatesMutation, OverWritePlannerByDatesMutationVariables>) {
+        return Apollo.useMutation<OverWritePlannerByDatesMutation, OverWritePlannerByDatesMutationVariables>(OverWritePlannerByDatesDocument, baseOptions);
+      }
+export type OverWritePlannerByDatesMutationHookResult = ReturnType<typeof useOverWritePlannerByDatesMutation>;
+export type OverWritePlannerByDatesMutationResult = Apollo.MutationResult<OverWritePlannerByDatesMutation>;
+export type OverWritePlannerByDatesMutationOptions = Apollo.BaseMutationOptions<OverWritePlannerByDatesMutation, OverWritePlannerByDatesMutationVariables>;
 export const GetProfileDocument = gql`
     query GetProfile($uid: String!) {
   user(where: {id: {_eq: $uid}}) {

@@ -6,6 +6,7 @@ import AddCardOutLined from "../../components/card/AddCardOutLined";
 import RecipeCardSmall from "../../components/card/RecipeCardSmall";
 import BlockSeparator from "../../components/misc/BlockSeparator";
 import useGetPlannerRecipeByDate from "../../gql/query/useGetPlannerRecipeByDate";
+import { setShowModifyModal } from "../../redux/Planner/PlannerItemModalSlice";
 import { openPlannerModal } from "../../redux/Planner/PlannerModalSlice";
 
 interface IProps {
@@ -18,6 +19,8 @@ export default function PlannerRow({ date }: IProps) {
   );
   const dispatch = useDispatch();
 
+  console.log("row rendered");
+
   if (loading) return <p>loading ...</p>;
   if (error) return <p>{error.message}</p>;
   return (
@@ -25,12 +28,18 @@ export default function PlannerRow({ date }: IProps) {
       <BlockSeparator
         title={format(new Date(date), "EEEE")}
         subTitle={format(new Date(date), "do")}
+        showTodayTag={String(new Date()).slice(0, 15) === date.slice(0, 15)}
       />
-      <StyledContainer>
-        {planner &&
-          planner.map(({ recipe: { title, img, id }, index }) => (
-            <RecipeCardSmall title={title} img={img} id={id} key={id + index} />
-          ))}
+      <StyledContainer id={`row-${format(new Date(date), "yyyy-MM-dd")}`}>
+        {planner?.map(({ recipe: { title, img, id }, index }) => (
+          <RecipeCardSmall
+            title={title}
+            img={img}
+            id={id}
+            key={id + index}
+            onClick={() => dispatch(setShowModifyModal({ id, date, index }))}
+          />
+        ))}
         <AddCardOutLined onClick={() => dispatch(openPlannerModal(date))} />
       </StyledContainer>
     </>

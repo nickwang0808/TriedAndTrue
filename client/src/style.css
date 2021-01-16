@@ -94,7 +94,13 @@ ion-item {
 
 ion-segment {
   border-bottom: 1px solid #dcdcdc;
+  --ripple-color: transparent !important;
 }
+
+ion-segment-button {
+  --ripple-color: transparent !important;
+}
+
 ion-button {
   --box-shadow: none;
   --border-radius: 0;
