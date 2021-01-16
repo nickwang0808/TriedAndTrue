@@ -1,10 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+export interface IRecipeToModify {
+  id: string;
+  date: string;
+  index: number;
+}
+
 interface IState {
   showModifyModal: string | null;
   showRecreateModal: string | null;
   showSelectWeekModal: string | null;
   showSelectDayModal: string | null;
+  recipeToModify: null | IRecipeToModify;
 }
 
 const initialState: IState = {
@@ -12,32 +19,55 @@ const initialState: IState = {
   showRecreateModal: null,
   showSelectWeekModal: null,
   showSelectDayModal: null,
+  recipeToModify: null,
 };
 
 const PlannerItemModalSlice = createSlice({
   name: "plannerItemModal",
   initialState,
   reducers: {
-    setShowModifyModal: (state, { payload }: PayloadAction<string | null>) => {
-      state = { ...initialState, showModifyModal: payload };
+    setShowModifyModal: (
+      { recipeToModify },
+      { payload }: PayloadAction<IRecipeToModify>
+    ) => {
+      return {
+        ...initialState,
+        showModifyModal: payload.id,
+        recipeToModify: payload,
+      };
     },
     setShowRecreateModal: (
-      state,
+      { recipeToModify },
       { payload }: PayloadAction<string | null>
     ) => {
-      state = { ...initialState, showRecreateModal: payload };
+      return {
+        ...initialState,
+        showRecreateModal: payload,
+        recipeToModify,
+      };
     },
     setShowSelectWeekModal: (
-      state,
+      { recipeToModify },
       { payload }: PayloadAction<string | null>
     ) => {
-      state = { ...initialState, showSelectWeekModal: payload };
+      return { ...initialState, showSelectWeekModal: payload, recipeToModify };
     },
     setShowSelectDayModal: (
-      state,
+      { recipeToModify },
       { payload }: PayloadAction<string | null>
     ) => {
-      state = { ...initialState, showSelectDayModal: payload };
+      return { ...initialState, showSelectDayModal: payload, recipeToModify };
+    },
+
+    closePlannerItemModal: (
+      state,
+      { payload }: PayloadAction<keyof IState>
+    ) => {
+      if (payload === "recipeToModify") {
+        return state;
+      }
+      //@ts-ignore
+      state[payload] = null;
     },
   },
 });
@@ -47,5 +77,6 @@ export const {
   setShowRecreateModal,
   setShowSelectDayModal,
   setShowSelectWeekModal,
+  closePlannerItemModal,
 } = PlannerItemModalSlice.actions;
 export default PlannerItemModalSlice.reducer;

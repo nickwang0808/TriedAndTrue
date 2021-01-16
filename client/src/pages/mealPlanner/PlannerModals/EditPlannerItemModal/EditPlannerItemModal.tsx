@@ -3,16 +3,20 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ModalHeader from "../../../../components/headers/ModalHeader";
 import { StyledFullScreenModal } from "../../../../components/modals/fullScreenModalBase";
-import { setShowModifyModal } from "../../../../redux/Planner/PlannerItemModalSlice";
+import {
+  closePlannerItemModal,
+  setShowSelectWeekModal,
+} from "../../../../redux/Planner/PlannerItemModalSlice";
 import { IAppState } from "../../../../redux/store";
 
 export default function EditPlannerItemModal() {
-  const { showModifyModal } = useSelector(
+  const { showModifyModal, recipeToModify } = useSelector(
     ({ PlannerItemModalSlice }: IAppState) => PlannerItemModalSlice
   );
   const dispatch = useDispatch();
 
-  const handleDismiss = () => dispatch(setShowModifyModal(null));
+  const handleDismiss = () =>
+    dispatch(closePlannerItemModal("showModifyModal"));
 
   return (
     <StyledFullScreenModal
@@ -25,7 +29,9 @@ export default function EditPlannerItemModal() {
 
       <IonContent>
         <IonList lines="full">
-          <IonItem>
+          <IonItem
+            onClick={() => dispatch(setShowSelectWeekModal(showModifyModal))}
+          >
             <IonLabel color="primary">Move to Another Day</IonLabel>
           </IonItem>
           <IonItem>

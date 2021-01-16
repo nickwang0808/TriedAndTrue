@@ -19,13 +19,14 @@ import listIconForHeader from "../../assets/svg/addtoList.svg";
 import refresh from "../../assets/svg/refresh.svg";
 import { setSelectedWeek } from "../../redux/Planner/PlannerDateRangeSlice";
 import { IAppState } from "../../redux/store";
+import getMonAndSun from "../../utils/getMonAndFri";
 
 interface IProps {
   weeks: string[][];
 }
 
 export default function Header({ weeks }: IProps) {
-  const monAndFris = weeks.map((week) => [week[0], week.slice(-1)[0]]);
+  const monAndSuns = getMonAndSun();
   // the monday that represent the week
   const { selectedWeek } = useSelector(
     (state: IAppState) => state.plannerDateRangeSlice
@@ -62,7 +63,7 @@ export default function Header({ weeks }: IProps) {
           // color="secondary"
           // color={isPast(new Date(selectedWeek[1])) ? "medium" : "secondary"}
         >
-          {monAndFris.map(([mon, sun]) => {
+          {monAndSuns.map(([mon, sun]) => {
             return (
               <StyledSegmentButton
                 isGrey={isPast(new Date(sun))}

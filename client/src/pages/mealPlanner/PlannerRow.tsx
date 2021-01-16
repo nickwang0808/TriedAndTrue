@@ -31,16 +31,15 @@ export default function PlannerRow({ date }: IProps) {
         showTodayTag={String(new Date()).slice(0, 15) === date.slice(0, 15)}
       />
       <StyledContainer id={`row-${format(new Date(date), "yyyy-MM-dd")}`}>
-        {planner &&
-          planner.map(({ recipe: { title, img, id }, index }) => (
-            <RecipeCardSmall
-              title={title}
-              img={img}
-              id={id}
-              key={id + index}
-              onClick={() => dispatch(setShowModifyModal(id))}
-            />
-          ))}
+        {planner?.map(({ recipe: { title, img, id }, index }) => (
+          <RecipeCardSmall
+            title={title}
+            img={img}
+            id={id}
+            key={id + index}
+            onClick={() => dispatch(setShowModifyModal({ id, date, index }))}
+          />
+        ))}
         <AddCardOutLined onClick={() => dispatch(openPlannerModal(date))} />
       </StyledContainer>
     </>

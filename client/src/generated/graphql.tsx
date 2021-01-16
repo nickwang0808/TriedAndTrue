@@ -1294,6 +1294,30 @@ export type AddRecipesToPlannerMutation = (
   )> }
 );
 
+export type OverWritePlannerByDatesMutationVariables = Exact<{
+  dates: Array<Scalars['date']> | Scalars['date'];
+  objects: Array<Planner_Insert_Input> | Planner_Insert_Input;
+}>;
+
+
+export type OverWritePlannerByDatesMutation = (
+  { __typename?: 'mutation_root' }
+  & { delete_planner?: Maybe<(
+    { __typename?: 'planner_mutation_response' }
+    & Pick<Planner_Mutation_Response, 'affected_rows'>
+  )>, insert_planner?: Maybe<(
+    { __typename?: 'planner_mutation_response' }
+    & { returning: Array<(
+      { __typename?: 'planner' }
+      & Pick<Planner, 'date' | 'index'>
+      & { recipe: (
+        { __typename?: 'recipe' }
+        & Pick<Recipe, 'id'>
+      ) }
+    )> }
+  )> }
+);
+
 export type GetProfileQueryVariables = Exact<{
   uid: Scalars['String'];
 }>;
@@ -1486,6 +1510,48 @@ export function useAddRecipesToPlannerMutation(baseOptions?: Apollo.MutationHook
 export type AddRecipesToPlannerMutationHookResult = ReturnType<typeof useAddRecipesToPlannerMutation>;
 export type AddRecipesToPlannerMutationResult = Apollo.MutationResult<AddRecipesToPlannerMutation>;
 export type AddRecipesToPlannerMutationOptions = Apollo.BaseMutationOptions<AddRecipesToPlannerMutation, AddRecipesToPlannerMutationVariables>;
+export const OverWritePlannerByDatesDocument = gql`
+    mutation OverWritePlannerByDates($dates: [date!]!, $objects: [planner_insert_input!]!) {
+  delete_planner(where: {date: {_in: $dates}}) {
+    affected_rows
+  }
+  insert_planner(objects: $objects) {
+    returning {
+      date
+      index
+      recipe {
+        id
+      }
+    }
+  }
+}
+    `;
+export type OverWritePlannerByDatesMutationFn = Apollo.MutationFunction<OverWritePlannerByDatesMutation, OverWritePlannerByDatesMutationVariables>;
+
+/**
+ * __useOverWritePlannerByDatesMutation__
+ *
+ * To run a mutation, you first call `useOverWritePlannerByDatesMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useOverWritePlannerByDatesMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [overWritePlannerByDatesMutation, { data, loading, error }] = useOverWritePlannerByDatesMutation({
+ *   variables: {
+ *      dates: // value for 'dates'
+ *      objects: // value for 'objects'
+ *   },
+ * });
+ */
+export function useOverWritePlannerByDatesMutation(baseOptions?: Apollo.MutationHookOptions<OverWritePlannerByDatesMutation, OverWritePlannerByDatesMutationVariables>) {
+        return Apollo.useMutation<OverWritePlannerByDatesMutation, OverWritePlannerByDatesMutationVariables>(OverWritePlannerByDatesDocument, baseOptions);
+      }
+export type OverWritePlannerByDatesMutationHookResult = ReturnType<typeof useOverWritePlannerByDatesMutation>;
+export type OverWritePlannerByDatesMutationResult = Apollo.MutationResult<OverWritePlannerByDatesMutation>;
+export type OverWritePlannerByDatesMutationOptions = Apollo.BaseMutationOptions<OverWritePlannerByDatesMutation, OverWritePlannerByDatesMutationVariables>;
 export const GetProfileDocument = gql`
     query GetProfile($uid: String!) {
   user(where: {id: {_eq: $uid}}) {
