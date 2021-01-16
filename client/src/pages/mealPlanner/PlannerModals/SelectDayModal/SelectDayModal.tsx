@@ -43,7 +43,7 @@ export default function SelectDayModal() {
   const handleClick = async (date: string) => {
     const f = "yyyy-MM-dd";
     // get from date and to date and format them
-    const fromDate = format(new Date(showSelectDayModal!), f);
+    const fromDate = format(new Date(recipeToModify!.date!), f);
     const toDate = format(new Date(date), f);
 
     // get all recipe ids and arrange them into ordered array
@@ -85,7 +85,7 @@ export default function SelectDayModal() {
 function getRecipesInPlanner(
   date: string,
   { id, index }: IRecipeToModify,
-  filter: boolean = false
+  excludeSelectedRecipe: boolean = false
 ): Planner_Insert_Input[] {
   const cache = client.readQuery<
     GetPlannerRecipeByDateQuery,
@@ -95,21 +95,26 @@ function getRecipesInPlanner(
   if (!cache) return [];
 
   const { planner } = cache;
-  type plannerElem = typeof cache.planner[0]; // shut up typescript
+  type plannerElem = typeof planner[0]; // shut up typescript
 
-  const recipeIdsSorted = planner
-    .filter((elem: plannerElem) => {
-      // remove the recipe by pk of id and idex
-      if (filter) {
-        return elem.recipe.id !== id && elem.index !== index;
-      } else {
-        return true;
-      }
-    })
+  const filtered = planner.filter(({ recipe, index: i }: plannerElem) => {
+    // remove the recipe by pk of id and idex
+    if (excludeSelectedRecipe) {
+      return i !== index;
+    } else {
+      return true;
+    }
+  });
+
+  const recipeIdsSorted = filtered
     .sort((a: plannerElem, b: plannerElem) => a.index - b.index)
     .map(({ recipe }: plannerElem) => recipe.id);
 
-  return [...recipeIdsSorted, id].map((id, index) => {
+  if (!excludeSelectedRecipe) {
+    recipeIdsSorted.push(id);
+  }
+
+  return recipeIdsSorted.map((id, index) => {
     return { date, index, recipe_id: id };
   });
 }
