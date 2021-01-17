@@ -25,15 +25,18 @@ export default function AddOrEditRecipeModal() {
 
   const { error, loading, recipe_by_pk } = useGetRecipeDetails(id);
 
+  const handleDismiss = () => dispatch(resetAddOrEditRecipe());
+
   if (loading) return <p>loading ...</p>;
   if (error) return <p>{error.message}</p>;
   return (
     <StyledFullScreenModal
       isOpen={showAddOrEditRecipe}
-      onDidDismiss={() => dispatch(resetAddOrEditRecipe())}
+      onDidDismiss={handleDismiss}
     >
       <Header isNew={id === null ? true : false} />
       <AddOrEditRecipeChild
+        handleDismiss={handleDismiss}
         id={id}
         isCreateNew={id === null ? true : false}
         defaultValues={

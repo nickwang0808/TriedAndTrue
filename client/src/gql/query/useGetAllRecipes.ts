@@ -1,9 +1,15 @@
 import { gql, useQuery } from "@apollo/client";
-import { GetAllRecipeQuery } from "../../generated/graphql";
+import {
+  GetAllRecipeQuery,
+  GetAllRecipeQueryVariables,
+} from "../../generated/graphql";
 
 export const GET_ALL_RECIPES = gql`
-  query GetAllRecipe {
-    recipe(order_by: { created_at: desc_nulls_last }) {
+  query GetAllRecipe($_like: String = "%") {
+    recipe(
+      order_by: { created_at: desc_nulls_last }
+      where: { title: { _like: $_like } }
+    ) {
       id
       img
       title
@@ -12,8 +18,11 @@ export const GET_ALL_RECIPES = gql`
   }
 `;
 
-export default function useGetAllRecipes() {
-  const { error, loading, data } = useQuery<GetAllRecipeQuery>(GET_ALL_RECIPES);
+export default function useGetAllRecipes(_like: string | null = "%%") {
+  const { error, loading, data } = useQuery<
+    GetAllRecipeQuery,
+    GetAllRecipeQueryVariables
+  >(GET_ALL_RECIPES, { variables: { _like } });
 
   return {
     error,

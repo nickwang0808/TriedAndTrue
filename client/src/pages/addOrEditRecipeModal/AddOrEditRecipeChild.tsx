@@ -15,12 +15,14 @@ interface IProps {
   isCreateNew: boolean;
   defaultValues: IRecipeForm;
   id: string | null;
+  handleDismiss: () => void;
 }
 
 export default function AddOrEditRecipeChild({
   defaultValues,
   isCreateNew,
   id,
+  handleDismiss,
 }: IProps) {
   const { formState, handleSubmit, control, reset } = useForm<IRecipeForm>({
     resolver: yupResolver(recipeFormSchema),
@@ -37,8 +39,6 @@ export default function AddOrEditRecipeChild({
 
   const { isDirty } = formState;
   const onSubmit = (data: IRecipeForm) => {
-    // console.log({ data });
-
     // amp ingredient out to write to raw_text column
     const { ingredients, ...dataWIthOutIngredients } = data;
     let mappedIngredients: Array<{ raw_text: string }> | [] = [];
@@ -94,6 +94,7 @@ export default function AddOrEditRecipeChild({
         }
       } else return;
     }
+    handleDismiss();
   };
 
   if (loading_insert) return <p>loading...</p>;

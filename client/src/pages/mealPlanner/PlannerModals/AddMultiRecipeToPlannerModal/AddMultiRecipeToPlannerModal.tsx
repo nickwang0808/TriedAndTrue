@@ -1,6 +1,6 @@
 import { IonContent } from "@ionic/react";
 import { format } from "date-fns";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RecipeCard from "../../../../components/card/RecipeCard";
 import SaveFooterButton from "../../../../components/layout/SaveFooterButton";
@@ -20,8 +20,9 @@ import getPlannerRecipeCount from "../../../../utils/getPlannerRecipeCount";
 import Header from "./Header";
 
 export default function AddMultiRecipeToPlannerModal() {
-  const { data, loading, error } = useGetAllRecipes();
   const { addRecipesToPlanner, error_m } = useAddRecipesToPlanner();
+  const [keyword, setKeyword] = useState<string>();
+  const { data, loading, error } = useGetAllRecipes(keyword);
 
   const { selectedRecipes, showModal, dateToModify } = useSelector(
     (state: IAppState) => state.plannerModalSlice
@@ -47,7 +48,7 @@ export default function AddMultiRecipeToPlannerModal() {
     return;
   };
 
-  if (loading) return <p>loading...</p>;
+  // if (loading) return <p>loading...</p>;
   if (error) return <p>{error.message}</p>;
   if (error_m) return <p>{error_m.message}</p>;
   return (
@@ -57,7 +58,20 @@ export default function AddMultiRecipeToPlannerModal() {
     >
       <Header />
       <IonContent>
-        <StyledSearchBar />
+        <StyledSearchBar
+          animated
+          debounce={500}
+          value={keyword?.slice(1, -1)}
+          onIonChange={(e) => {
+            const { value } = e.detail;
+            console.log(value);
+            if (value === keyword) return;
+            setKeyword(`%${value}%`);
+          }}
+        />
+
+        {/* {loading && <p>loading...</p>} */}
+
         <StyledRecipeGrid>
           {data?.recipe.map((recipe) => {
             return (
