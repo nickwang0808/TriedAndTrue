@@ -9,9 +9,12 @@ import {
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import xclose from "../../assets/svg/close-x.svg";
-import { StyledFullScreenModal } from "../../components/modals/fullScreenModalBase";
+import { FancyModalWithRoundTop } from "../../components/modals/FancyModalWithRoundTop";
 import useGetRecipeDetails from "../../gql/query/useGetRecipeDetails";
-import { resetAddOrEditRecipe } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
+import {
+  resetAddOrEditRecipe,
+  setShowConfirmCancelModal,
+} from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
 import { IAppState } from "../../redux/store";
 import { emptyDefaultValue, mealType } from "../../utils/recipeSchema";
 import AddOrEditRecipeChild from "./AddOrEditRecipeChild";
@@ -30,7 +33,7 @@ export default function AddOrEditRecipeModal() {
   if (loading) return <p>loading ...</p>;
   if (error) return <p>{error.message}</p>;
   return (
-    <StyledFullScreenModal
+    <FancyModalWithRoundTop
       isOpen={showAddOrEditRecipe}
       onDidDismiss={handleDismiss}
     >
@@ -58,12 +61,23 @@ export default function AddOrEditRecipeModal() {
               }
         }
       />
-    </StyledFullScreenModal>
+    </FancyModalWithRoundTop>
   );
 }
 
 function Header({ isNew }: { isNew: boolean }) {
   const dispatch = useDispatch();
+  const { formIsDirty } = useSelector(
+    ({ addOrEditRecipeSlice }: IAppState) => addOrEditRecipeSlice
+  );
+
+  const handleClose = () => {
+    if (formIsDirty) {
+      dispatch(setShowConfirmCancelModal(true));
+    } else {
+      dispatch(resetAddOrEditRecipe());
+    }
+  };
 
   return (
     <IonHeader>
@@ -72,7 +86,7 @@ function Header({ isNew }: { isNew: boolean }) {
           {isNew ? "Create Recipe" : "Edit Recipe"}
         </IonTitle>
         <IonButtons slot="start">
-          <IonButton onClick={() => dispatch(resetAddOrEditRecipe())}>
+          <IonButton onClick={handleClose}>
             <IonIcon icon={xclose} color="secondary" />
           </IonButton>
         </IonButtons>

@@ -6,7 +6,7 @@ import RecipeCard from "../../../../components/card/RecipeCard";
 import SaveFooterButton from "../../../../components/layout/SaveFooterButton";
 import StyledRecipeGrid from "../../../../components/layout/StyledRecipeGrid";
 import StyledSearchBar from "../../../../components/misc/SearchBar";
-import { StyledFullScreenModal } from "../../../../components/modals/fullScreenModalBase";
+import { FancyModalWithRoundTop } from "../../../../components/modals/FancyModalWithRoundTop";
 import useAddRecipesToPlanner from "../../../../gql/mutations/useInsertRecipeToPlanner";
 import useGetAllRecipes from "../../../../gql/query/useGetAllRecipes";
 import {
@@ -52,7 +52,7 @@ export default function AddMultiRecipeToPlannerModal() {
   if (error) return <p>{error.message}</p>;
   if (error_m) return <p>{error_m.message}</p>;
   return (
-    <StyledFullScreenModal
+    <FancyModalWithRoundTop
       onDidDismiss={() => dispatch(closePlannerModal())}
       isOpen={showModal}
     >
@@ -90,6 +90,6 @@ export default function AddMultiRecipeToPlannerModal() {
         action={handleSubmit}
         disabled={selectedRecipes.length === 0}
       />
-    </StyledFullScreenModal>
+    </FancyModalWithRoundTop>
   );
 }

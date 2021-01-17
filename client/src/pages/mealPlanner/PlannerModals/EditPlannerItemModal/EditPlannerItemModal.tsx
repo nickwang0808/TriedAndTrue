@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ModalHeader from "../../../../components/headers/ModalHeader";
-import { StyledFullScreenModal } from "../../../../components/modals/fullScreenModalBase";
+import { FancyModalWithRoundTop } from "../../../../components/modals/FancyModalWithRoundTop";
 import useDeleteRecipeFromPlanner from "../../../../gql/mutations/useDeleteRecipeFromPlanner.graphql";
 import {
   closePlannerItemModal,
@@ -56,7 +56,7 @@ export default function EditPlannerItemModal() {
   };
 
   return (
-    <StyledFullScreenModal
+    <FancyModalWithRoundTop
       height="220px"
       isOpen={!!showModifyModal}
       backdropDismiss
@@ -84,6 +84,6 @@ export default function EditPlannerItemModal() {
           </IonItem>
         </IonList>
       </IonContent>
-    </StyledFullScreenModal>
+    </FancyModalWithRoundTop>
   );
 }

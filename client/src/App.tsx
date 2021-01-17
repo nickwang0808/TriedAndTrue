@@ -33,6 +33,7 @@ import profileIcon from "./assets/svg/profileIcon.svg";
 import recipeIcon from "./assets/svg/recipeIcon.svg";
 import client from "./config/apoloConfig";
 import AddOrEditRecipeModal from "./pages/addOrEditRecipeModal/AddOrEditRecipeModal";
+import ConfirmCancelModal from "./pages/addOrEditRecipeModal/ConfirmCancelModal";
 import AuthChecker from "./pages/auth/AuthChecker";
 import MealPlannerMainPage from "./pages/mealPlanner/MealPlannerMainPage";
 import AddMultiRecipeToPlannerModal from "./pages/mealPlanner/PlannerModals/AddMultiRecipeToPlannerModal/AddMultiRecipeToPlannerModal";
@@ -66,6 +67,8 @@ const App: React.FC = () => {
       <AuthChecker>
         <IonApp>
           <AddOrEditRecipeModal />
+          <ConfirmCancelModal />
+
           <RecipeDetailsPage />
           <AddMultiRecipeToPlannerModal />
 
