@@ -31,14 +31,18 @@ export default function AddOrEditRecipeChild({
   const { updateRecipeDetails } = useUpdateRecipeDetails(id);
 
   // --------------------- Form Control ---------------------------------
-  const { formState, handleSubmit, control, reset } = useForm<IRecipeForm>({
+  // prettier-ignore
+  const { formState, handleSubmit, control, reset, watch } = useForm<IRecipeForm>({
     resolver: yupResolver(recipeFormSchema),
     defaultValues,
   });
 
+  console.log(watch());
+
   useEffect(() => {
     reset(defaultValues);
-  }, [defaultValues]);
+    // eslint-disable-next-line
+  }, []);
 
   const { isDirty } = formState;
   const onSubmit = (data: IRecipeForm) => {
