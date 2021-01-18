@@ -1,4 +1,11 @@
 type Mutation {
+  importRecipe (
+    url: String!
+  ): ImportedRecipe!
+}
+
+
+type Mutation {
   InsertRecipeOneDerived (
     object: InsertRecipeOneDerivedRecipeInsertInput!
   ): InsertRecipeOneDerivedOutput!
@@ -216,6 +223,10 @@ type InsertRecipeOneDerivedOutput {
 }
 
 type UpdatedRecipeIngredients {
+  id : String!
+}
+
+type ImportedRecipe {
   id : String!
 }
 
