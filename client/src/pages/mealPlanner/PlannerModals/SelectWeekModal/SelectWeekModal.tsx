@@ -4,7 +4,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import listArrowPointingRight from "../../../../assets/svg/listArrowPointingRight.svg";
 import ModalHeader from "../../../../components/headers/ModalHeader";
-import { StyledFullScreenModal } from "../../../../components/modals/fullScreenModalBase";
+import { FancyModalWithRoundTop } from "../../../../components/modals/FancyModalWithRoundTop";
 import {
   closePlannerItemModal,
   setShowSelectDayModal,
@@ -27,7 +27,7 @@ export default function SelectWeekModal() {
   const monAndSuns = getMonAndSun().slice(-4);
 
   return (
-    <StyledFullScreenModal
+    <FancyModalWithRoundTop
       height="330px"
       isOpen={!!showSelectWeekModal}
       backdropDismiss
@@ -49,7 +49,7 @@ export default function SelectWeekModal() {
           ))}
         </IonList>
       </IonContent>
-    </StyledFullScreenModal>
+    </FancyModalWithRoundTop>
   );
 }
 

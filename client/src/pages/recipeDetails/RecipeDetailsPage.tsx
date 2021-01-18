@@ -12,7 +12,7 @@ import CookTime from "../../components/detailsPageComp/CookTime";
 import DetailsPageTitle from "../../components/detailsPageComp/DetailsPageTitle";
 import DirectionsListItem from "../../components/listItem/DirectionsListItem";
 import IngredientListItem from "../../components/listItem/IngredientListItem";
-import { StyledFullScreenModal } from "../../components/modals/fullScreenModalBase";
+import { FancyModalWithRoundTop } from "../../components/modals/FancyModalWithRoundTop";
 import useGetRecipeDetails from "../../gql/query/useGetRecipeDetails";
 import { setRecipeDetailsId } from "../../redux/RecipeDetailsSlice/recipeDetailsSlice";
 import { IAppState } from "../../redux/store";
@@ -32,7 +32,7 @@ const RecipeDetailsPage: React.FC = () => {
   if (error) return <p>{error.message}</p>;
   if (!recipe_by_pk) return <p>404 recipe not found</p>;
   return (
-    <StyledFullScreenModal isOpen onDidDismiss={handleDismiss}>
+    <FancyModalWithRoundTop isOpen onDidDismiss={handleDismiss}>
       <IonContent>
         <DetailsPageTitle
           id={recipe_by_pk.id}
@@ -95,7 +95,7 @@ const RecipeDetailsPage: React.FC = () => {
               )}
         </StyledIngredientList>
       </IonContent>
-    </StyledFullScreenModal>
+    </FancyModalWithRoundTop>
   );
 };
 export default RecipeDetailsPage;

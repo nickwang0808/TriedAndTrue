@@ -2,6 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { IonContent } from "@ionic/react";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import AddDirections from "../../components/AddRecipeComp/AddDirections";
 import AddIngredients from "../../components/AddRecipeComp/AddIngredients";
 import MainFormArea from "../../components/AddRecipeComp/MainFormArea";
@@ -9,6 +10,7 @@ import SaveFooterButton from "../../components/layout/SaveFooterButton";
 import BlockSeparator from "../../components/misc/BlockSeparator";
 import useUpdateRecipeDetails from "../../gql/mutations/updateRecipeDetails.graphql";
 import useInsertRecipeOne from "../../gql/mutations/useInsertRecipeOne.graphql";
+import { setFormIsDirty } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
 import { IRecipeForm, recipeFormSchema } from "../../utils/recipeSchema";
 
 interface IProps {
@@ -24,18 +26,23 @@ export default function AddOrEditRecipeChild({
   id,
   handleDismiss,
 }: IProps) {
-  const { formState, handleSubmit, control, reset } = useForm<IRecipeForm>({
+  // prettier-ignore
+  const { error_insert, insertRecipeOne, loading_insert } = useInsertRecipeOne();
+  const { updateRecipeDetails } = useUpdateRecipeDetails(id);
+
+  // --------------------- Form Control ---------------------------------
+  // prettier-ignore
+  const { formState, handleSubmit, control, reset, watch } = useForm<IRecipeForm>({
     resolver: yupResolver(recipeFormSchema),
     defaultValues,
   });
 
+  console.log(watch());
+
   useEffect(() => {
     reset(defaultValues);
-  }, [defaultValues]);
-
-  // prettier-ignore
-  const { error_insert, insertRecipeOne, loading_insert } = useInsertRecipeOne();
-  const { updateRecipeDetails } = useUpdateRecipeDetails(id);
+    // eslint-disable-next-line
+  }, []);
 
   const { isDirty } = formState;
   const onSubmit = (data: IRecipeForm) => {
@@ -96,6 +103,15 @@ export default function AddOrEditRecipeChild({
     }
     handleDismiss();
   };
+  // --------------------- Form Control ---------------------------------
+
+  // only show cancel confirmation when form is dirty
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (formState.isDirty) {
+      dispatch(setFormIsDirty(true));
+    }
+  }, [formState]);
 
   if (loading_insert) return <p>loading...</p>;
   if (error_insert) return <p>{error_insert.message}</p>;

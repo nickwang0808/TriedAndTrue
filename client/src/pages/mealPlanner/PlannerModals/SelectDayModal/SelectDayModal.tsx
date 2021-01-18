@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ModalHeader from "../../../../components/headers/ModalHeader";
-import { StyledFullScreenModal } from "../../../../components/modals/fullScreenModalBase";
+import { FancyModalWithRoundTop } from "../../../../components/modals/FancyModalWithRoundTop";
 import client from "../../../../config/apoloConfig";
 import {
   GetPlannerRecipeByDateQuery,
@@ -122,7 +122,7 @@ export default function SelectDayModal() {
   };
 
   return (
-    <StyledFullScreenModal
+    <FancyModalWithRoundTop
       height="420px"
       isOpen={!!showSelectDayModal}
       backdropDismiss
@@ -141,7 +141,7 @@ export default function SelectDayModal() {
           ))}
         </IonList>
       </IonContent>
-    </StyledFullScreenModal>
+    </FancyModalWithRoundTop>
   );
 }
 

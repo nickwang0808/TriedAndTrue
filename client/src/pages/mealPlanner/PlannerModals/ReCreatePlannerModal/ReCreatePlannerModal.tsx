@@ -3,7 +3,7 @@ import { IonButton, IonContent, IonItem } from "@ionic/react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ModalHeader from "../../../../components/headers/ModalHeader";
-import { StyledFullScreenModal } from "../../../../components/modals/fullScreenModalBase";
+import { FancyModalWithRoundTop } from "../../../../components/modals/FancyModalWithRoundTop";
 import { setShowRecreateModal } from "../../../../redux/Planner/PlannerItemModalSlice";
 import { IAppState } from "../../../../redux/store";
 
@@ -16,7 +16,7 @@ export default function ReCreatePlannerModal() {
   const handleDismiss = () => dispatch(setShowRecreateModal(null));
 
   return (
-    <StyledFullScreenModal
+    <FancyModalWithRoundTop
       height="200px"
       isOpen={!!showRecreateModal}
       backdropDismiss
@@ -40,7 +40,7 @@ export default function ReCreatePlannerModal() {
           </IonButton>
         </StyledButtonContainer>
       </IonContent>
-    </StyledFullScreenModal>
+    </FancyModalWithRoundTop>
   );
 }
 
