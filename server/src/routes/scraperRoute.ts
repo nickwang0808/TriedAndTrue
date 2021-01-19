@@ -27,7 +27,9 @@ const importRecipeHandler = async (
     instructions,
     ingredients,
   } = await runScraper(url);
-  const directions = JSON.stringify(instructions.split("\n"));
+  const directions = JSON.stringify(
+    instructions.split("\n").map((e) => ({ value: e }))
+  );
   const { rows } =
     // run sql
     await query(
