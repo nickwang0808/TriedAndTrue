@@ -16,7 +16,7 @@ import RecipeCard from "../../components/card/RecipeCard";
 import StyledRecipeGrid from "../../components/layout/StyledRecipeGrid";
 import StyledSearchBar from "../../components/misc/SearchBar";
 import useGetAllRecipes from "../../gql/query/useGetAllRecipes";
-import { setShowAddOrEditRecipe } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
+import { setShowAddRecipeControlModal } from "../../redux/AddOrEditRecipe/AddRecipeControlSlice";
 import { setRecipeDetailsId } from "../../redux/RecipeDetailsSlice/recipeDetailsSlice";
 import NoRecipe from "./NoRecipe";
 
@@ -33,7 +33,9 @@ const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
         <IonToolbar>
           <IonTitle color="primary">My Recipes</IonTitle>
           <IonButtons slot="end">
-            <IonButton onClick={() => dispatch(setShowAddOrEditRecipe(true))}>
+            <IonButton
+              onClick={() => dispatch(setShowAddRecipeControlModal(true))}
+            >
               <IonIcon icon={addnew} color="secondary" />
             </IonButton>
           </IonButtons>

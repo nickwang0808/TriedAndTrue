@@ -30,6 +30,12 @@ export type Boolean_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['Boolean']>>;
 };
 
+export type ImportedRecipe = {
+  __typename?: 'ImportedRecipe';
+  id: Scalars['String'];
+  recipe?: Maybe<Recipe>;
+};
+
 export type InsertRecipeOneDerivedBooleanComparisonExp = {
   _eq?: Maybe<Scalars['Boolean']>;
   _gt?: Maybe<Scalars['Boolean']>;
@@ -323,6 +329,8 @@ export type Mutation_Root = {
   delete_recipe_ingredients?: Maybe<Recipe_Ingredients_Mutation_Response>;
   /** delete single row from the table: "recipe_ingredients" */
   delete_recipe_ingredients_by_pk?: Maybe<Recipe_Ingredients>;
+  /** perform the action: "importRecipe" */
+  importRecipe: ImportedRecipe;
   /** insert data into the table: "planner" */
   insert_planner?: Maybe<Planner_Mutation_Response>;
   /** insert a single row into the table: "planner" */
@@ -393,6 +401,12 @@ export type Mutation_RootDelete_Recipe_IngredientsArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Recipe_Ingredients_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootImportRecipeArgs = {
+  url: Scalars['String'];
 };
 
 
@@ -1276,6 +1290,22 @@ export type DeleteRecipeFromPlannerMutation = (
   )> }
 );
 
+export type ImportRecipeMutationVariables = Exact<{
+  url: Scalars['String'];
+}>;
+
+
+export type ImportRecipeMutation = (
+  { __typename?: 'mutation_root' }
+  & { importRecipe: (
+    { __typename?: 'ImportedRecipe' }
+    & { recipe?: Maybe<(
+      { __typename?: 'recipe' }
+      & Pick<Recipe, 'id' | 'img' | 'total_time' | 'title'>
+    )> }
+  ) }
+);
+
 export type InsertRecipeMutationVariables = Exact<{
   object: InsertRecipeOneDerivedRecipeInsertInput;
 }>;
@@ -1491,6 +1521,43 @@ export function useDeleteRecipeFromPlannerMutation(baseOptions?: Apollo.Mutation
 export type DeleteRecipeFromPlannerMutationHookResult = ReturnType<typeof useDeleteRecipeFromPlannerMutation>;
 export type DeleteRecipeFromPlannerMutationResult = Apollo.MutationResult<DeleteRecipeFromPlannerMutation>;
 export type DeleteRecipeFromPlannerMutationOptions = Apollo.BaseMutationOptions<DeleteRecipeFromPlannerMutation, DeleteRecipeFromPlannerMutationVariables>;
+export const ImportRecipeDocument = gql`
+    mutation ImportRecipe($url: String!) {
+  importRecipe(url: $url) {
+    recipe {
+      id
+      img
+      total_time
+      title
+    }
+  }
+}
+    `;
+export type ImportRecipeMutationFn = Apollo.MutationFunction<ImportRecipeMutation, ImportRecipeMutationVariables>;
+
+/**
+ * __useImportRecipeMutation__
+ *
+ * To run a mutation, you first call `useImportRecipeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useImportRecipeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [importRecipeMutation, { data, loading, error }] = useImportRecipeMutation({
+ *   variables: {
+ *      url: // value for 'url'
+ *   },
+ * });
+ */
+export function useImportRecipeMutation(baseOptions?: Apollo.MutationHookOptions<ImportRecipeMutation, ImportRecipeMutationVariables>) {
+        return Apollo.useMutation<ImportRecipeMutation, ImportRecipeMutationVariables>(ImportRecipeDocument, baseOptions);
+      }
+export type ImportRecipeMutationHookResult = ReturnType<typeof useImportRecipeMutation>;
+export type ImportRecipeMutationResult = Apollo.MutationResult<ImportRecipeMutation>;
+export type ImportRecipeMutationOptions = Apollo.BaseMutationOptions<ImportRecipeMutation, ImportRecipeMutationVariables>;
 export const InsertRecipeDocument = gql`
     mutation InsertRecipe($object: InsertRecipeOneDerivedRecipeInsertInput!) {
   InsertRecipeOneDerived(object: $object) {
