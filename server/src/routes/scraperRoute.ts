@@ -8,6 +8,7 @@ const scraperRoute = Router();
 
 type importRecipeArgs = {
   url: string;
+  wildMode: boolean;
 };
 
 type ImportedRecipe = {
@@ -16,33 +17,29 @@ type ImportedRecipe = {
 
 const importRecipeHandler = async (
   url: string,
-  token: string
+  token: string,
+  wildMode: boolean
 ): Promise<ImportedRecipe> => {
   const owner = getUserId(token);
-  const {
-    title,
-    image,
-    total_time,
-    yields,
-    instructions,
-    ingredients,
-  } = await runScraper(url);
+  // prettier-ignore
+  const { title, image, total_time, yields, instructions, ingredients } = await runScraper(url, wildMode);
   const directions = JSON.stringify(
     instructions.split("\n").map((e) => ({ value: e }))
   );
-  const { rows } =
-    // run sql
-    await query(
-      `
+
+  // insert recipe to db
+  const { rows } = await query(
+    `
     INSERT INTO recipe(title, img, total_time, yields, directions, owner)
     values($1, $2, $3, $4, $5, $6)
     RETURNING id
     `,
-      [title, image, total_time, yields, directions, owner]
-    );
+    [title, image, total_time, yields, directions, owner]
+  );
 
   const { id } = rows[0];
 
+  // insert ingredient to db
   await runOverWriteIngredientQuery(ingredients, id);
 
   return { id };
@@ -53,9 +50,9 @@ scraperRoute.post("/", async (req: Request, res: Response) => {
   // get request input
   const token = req.headers.authorization;
   const params: importRecipeArgs = req.body.input;
-  const { url } = params;
+  const { url, wildMode } = params;
   // run some business logic
-  const result = await importRecipeHandler(url, token);
+  const result = await importRecipeHandler(url, token, wildMode);
 
   /*
   // In case of errors:

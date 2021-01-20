@@ -5,8 +5,8 @@ import {
 } from "../../generated/graphql";
 
 export const IMPORT_RECIPE = gql`
-  mutation ImportRecipe($url: String!) {
-    importRecipe(url: $url) {
+  mutation ImportRecipe($url: String!, $wildMode: Boolean = false) {
+    importRecipe(url: $url, wildMode: $wildMode) {
       recipe {
         id
         img
