@@ -1,4 +1,8 @@
-import { IonContent } from "@ionic/react";
+import {
+  IonContent,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
+} from "@ionic/react";
 import { format } from "date-fns";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,13 +26,22 @@ import Header from "./Header";
 export default function AddMultiRecipeToPlannerModal() {
   const { addRecipesToPlanner, error_m } = useAddRecipesToPlanner();
   const [keyword, setKeyword] = useState<string>();
-  const { data, loading, error } = useGetAllRecipes(keyword);
+  const { data, loading, error, fetchMore } = useGetAllRecipes(keyword);
 
   const { selectedRecipes, showModal, dateToModify } = useSelector(
     (state: IAppState) => state.plannerModalSlice
   );
 
   const dispatch = useDispatch();
+
+  const handleFetchMore = async ($event: CustomEvent<void>) => {
+    await fetchMore({
+      variables: {
+        offset: data?.recipe.length,
+      },
+    });
+    ($event.target as HTMLIonInfiniteScrollElement).complete();
+  };
 
   const handleSelect = (recipe_id: string) =>
     selectedRecipes.find((e) => e === recipe_id)
@@ -84,6 +97,14 @@ export default function AddMultiRecipeToPlannerModal() {
             );
           })}
         </StyledRecipeGrid>
+
+        <IonInfiniteScroll
+          threshold="100px"
+          // disabled={disableInfiniteScroll}
+          onIonInfinite={(e: CustomEvent<void>) => handleFetchMore(e)}
+        >
+          <IonInfiniteScrollContent loadingText="Loading more recipes ..."></IonInfiniteScrollContent>
+        </IonInfiniteScroll>
       </IonContent>
       <SaveFooterButton
         text={`Add ${selectedRecipes.length} Recipe to List`}

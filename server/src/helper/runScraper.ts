@@ -11,9 +11,12 @@ interface IScrapeResult {
   image: string;
 }
 
-export default async function runScraper(url: string): Promise<IScrapeResult> {
+export default async function runScraper(
+  url: string,
+  wild_mode: boolean = false
+): Promise<IScrapeResult> {
   const { stdout } = await promiseExec(
-    `${__dirname}/../scraper/venv/bin/python ${__dirname}/../scraper/src/scrape.py ${url}`
+    `${__dirname}/../scraper/venv/bin/python ${__dirname}/../scraper/src/scrape.py ${url} ${wild_mode}`
   );
 
   console.log(stdout);

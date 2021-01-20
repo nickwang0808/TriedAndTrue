@@ -4,14 +4,16 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { setShowAddOrEditRecipe } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
 
-export default function NoRecipe() {
+interface IProps {
+  text: string;
+}
+
+export default function NoRecipe({ text }: IProps) {
   const dispatch = useDispatch();
 
   return (
     <StyledWrapper>
-      <p className="ion-padding-bottom">
-        Automatically import your favorite recipe or manually add one below.
-      </p>
+      <p className="ion-padding-bottom">{text}</p>
       <IonButton color="secondary">Import from Website</IonButton>
       <IonButton
         fill="outline"

@@ -5,8 +5,8 @@ import {
 } from "../../generated/graphql";
 
 export const IMPORT_RECIPE = gql`
-  mutation ImportRecipe($url: String!) {
-    importRecipe(url: $url) {
+  mutation ImportRecipe($url: String!, $wildMode: Boolean = false) {
+    importRecipe(url: $url, wildMode: $wildMode) {
       recipe {
         id
         img
@@ -27,7 +27,7 @@ export default function useImportRecipe() {
       const { recipe } = data.importRecipe;
       cache.modify({
         fields: {
-          [`recipe({"order_by":{"created_at":"desc_nulls_last"},"where":{"title":{"_like":"%%"}}})`]: (
+          [`recipe:{"where":{"title":{"_ilike":"%%"}}}`]: (
             curr,
             { toReference }
           ) => {
