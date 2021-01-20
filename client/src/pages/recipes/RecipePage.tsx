@@ -1,29 +1,24 @@
 import {
-  IonButton,
-  IonButtons,
   IonContent,
-  IonHeader,
-  IonIcon,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
   IonPage,
-  IonTitle,
-  IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { RouteComponentProps } from "react-router";
-import addnew from "../../assets/svg/addnew.svg";
 import RecipeCard from "../../components/card/RecipeCard";
+import RecipePageHeader from "../../components/headers/RecipePageHeader";
 import StyledRecipeGrid from "../../components/layout/StyledRecipeGrid";
 import StyledSearchBar from "../../components/misc/SearchBar";
 import useGetAllRecipes from "../../gql/query/useGetAllRecipes";
-import { setShowAddRecipeControlModal } from "../../redux/AddOrEditRecipe/AddRecipeControlSlice";
 import { setRecipeDetailsId } from "../../redux/RecipeDetailsSlice/recipeDetailsSlice";
 import NoRecipe from "./NoRecipe";
 
 const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
   const dispatch = useDispatch();
   const [keyword, setKeyword] = useState<string>();
-  const { error, loading, data } = useGetAllRecipes(keyword);
+  const { error, loading, data, fetchMore } = useGetAllRecipes(keyword);
 
   const handleIonChange = (value: string | undefined) => {
     if (value === keyword) return;
@@ -34,22 +29,20 @@ const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
     }
   };
 
+  const handleFetchMore = async ($event: CustomEvent<void>) => {
+    await fetchMore({
+      variables: {
+        offset: data?.recipe.length,
+      },
+    });
+    ($event.target as HTMLIonInfiniteScrollElement).complete();
+  };
+
   // if (loading) return <p>loading...</p>;
   if (error) return <p>{error.message}</p>;
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle color="primary">My Recipes</IonTitle>
-          <IonButtons slot="end">
-            <IonButton
-              onClick={() => dispatch(setShowAddRecipeControlModal(true))}
-            >
-              <IonIcon icon={addnew} color="secondary" />
-            </IonButton>
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>
+      <RecipePageHeader />
 
       <IonContent fullscreen>
         <StyledSearchBar
@@ -79,6 +72,14 @@ const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
             })}
           </StyledRecipeGrid>
         )}
+
+        <IonInfiniteScroll
+          threshold="100px"
+          // disabled={disableInfiniteScroll}
+          onIonInfinite={(e: CustomEvent<void>) => handleFetchMore(e)}
+        >
+          <IonInfiniteScrollContent loadingText="Loading more recipes ..."></IonInfiniteScrollContent>
+        </IonInfiniteScroll>
       </IonContent>
     </IonPage>
   );

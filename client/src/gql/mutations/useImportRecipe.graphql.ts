@@ -27,7 +27,7 @@ export default function useImportRecipe() {
       const { recipe } = data.importRecipe;
       cache.modify({
         fields: {
-          [`recipe({"order_by":{"created_at":"desc_nulls_last"},"where":{"title":{"_ilike":"%%"}}})`]: (
+          [`recipe:{"where":{"title":{"_ilike":"%%"}}}`]: (
             curr,
             { toReference }
           ) => {

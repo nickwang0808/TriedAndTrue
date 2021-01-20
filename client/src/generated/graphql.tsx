@@ -407,7 +407,7 @@ export type Mutation_RootDelete_Recipe_Ingredients_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootImportRecipeArgs = {
   url: Scalars['String'];
-  wildMode: Scalars['Boolean'];
+  wildMode?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -1396,6 +1396,8 @@ export type ParseIngredientsQuery = (
 
 export type GetAllRecipeQueryVariables = Exact<{
   _like?: Maybe<Scalars['String']>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
 }>;
 
 
@@ -1747,10 +1749,12 @@ export type ParseIngredientsQueryHookResult = ReturnType<typeof useParseIngredie
 export type ParseIngredientsLazyQueryHookResult = ReturnType<typeof useParseIngredientsLazyQuery>;
 export type ParseIngredientsQueryResult = Apollo.QueryResult<ParseIngredientsQuery, ParseIngredientsQueryVariables>;
 export const GetAllRecipeDocument = gql`
-    query GetAllRecipe($_like: String = "%") {
+    query GetAllRecipe($_like: String = "%", $limit: Int = 10, $offset: Int = 0) {
   recipe(
     order_by: {created_at: desc_nulls_last}
     where: {title: {_ilike: $_like}}
+    limit: $limit
+    offset: $offset
   ) {
     id
     img
@@ -1773,6 +1777,8 @@ export const GetAllRecipeDocument = gql`
  * const { data, loading, error } = useGetAllRecipeQuery({
  *   variables: {
  *      _like: // value for '_like'
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
  *   },
  * });
  */
