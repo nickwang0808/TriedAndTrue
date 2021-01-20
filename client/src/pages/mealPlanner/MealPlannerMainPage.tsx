@@ -2,8 +2,8 @@ import { IonContent, IonPage, useIonViewDidEnter } from "@ionic/react";
 import { format } from "date-fns";
 import React from "react";
 import { useSelector } from "react-redux";
+import Header from "../../components/headers/MealPlannerHeader";
 import { IAppState } from "../../redux/store";
-import Header from "./Header";
 import PlannerRow from "./PlannerRow";
 
 export default function MealPlannerMainPage() {

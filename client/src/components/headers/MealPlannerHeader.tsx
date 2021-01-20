@@ -11,7 +11,7 @@ import {
   IonToolbar,
   useIonViewDidEnter,
 } from "@ionic/react";
-import { isPast, isSameWeek } from "date-fns";
+import { isPast, isSameMonth, isSameWeek } from "date-fns";
 import { format } from "date-fns/esm";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -74,7 +74,7 @@ export default function Header({ weeks }: IProps) {
                 <IonLabel>
                   {`${format(new Date(mon), "MMM-d")} - ${format(
                     new Date(sun),
-                    "d"
+                    isSameMonth(new Date(mon), new Date(sun)) ? "d" : "MMM-d"
                   )}`}
                   {isSameWeek(new Date(), new Date(mon)) && " Today"}
                 </IonLabel>
