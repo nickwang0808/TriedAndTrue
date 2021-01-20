@@ -31,6 +31,7 @@ import listIcon from "./assets/svg/listIcon.svg";
 import mealPlanIcon from "./assets/svg/mealPlanIcon.svg";
 import profileIcon from "./assets/svg/profileIcon.svg";
 import recipeIcon from "./assets/svg/recipeIcon.svg";
+import Toast from "./components/misc/Toast";
 import client from "./config/apoloConfig";
 import AddOrEditRecipeModal from "./pages/addOrEditRecipeModal/AddOrEditRecipeModal";
 import ConfirmCancelModal from "./pages/addOrEditRecipeModal/ConfirmCancelModal";
@@ -78,6 +79,8 @@ const App: React.FC = () => {
           <ReCreatePlannerModal />
           <SelectWeekModal />
           <SelectDayModal />
+
+          <Toast />
 
           <IonReactRouter>
             <IonTabs>

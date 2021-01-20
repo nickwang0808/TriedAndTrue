@@ -15,6 +15,7 @@ import useImportRecipe from "../../gql/mutations/useImportRecipe.graphql";
 import { setShowAddOrEditRecipe } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
 import { setShowAddRecipeControlModal } from "../../redux/AddOrEditRecipe/AddRecipeControlSlice";
 import { IAppState } from "../../redux/store";
+import { setShowToast } from "../../redux/toastSlice/toastSlice";
 import validateImportUrl from "../../utils/validateImportUrl";
 
 export default function ImportRecipeModal() {
@@ -45,6 +46,10 @@ export default function ImportRecipeModal() {
     if (!url.length) return;
     await importRecipe({ variables: { url, wildMode: !!warning } });
     handleDismiss();
+    console.log(data?.importRecipe);
+    if (data?.importRecipe.recipe?.title) {
+      dispatch(setShowToast(data.importRecipe.recipe.title));
+    }
   };
 
   const handleManualAddRecipe = () => {
