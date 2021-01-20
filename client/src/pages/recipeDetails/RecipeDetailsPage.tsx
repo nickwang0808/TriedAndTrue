@@ -9,7 +9,7 @@ import {
   IonSegment,
   IonSegmentButton,
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import xclose from "../../assets/svg/close-x.svg";
 import CookTime from "../../components/detailsPageComp/CookTime";
@@ -32,29 +32,42 @@ const RecipeDetailsPage: React.FC = () => {
 
   const [showDirections, setShowDirections] = useState(false);
 
-  if (loading) return <p>loading...</p>;
-  if (error) return <p>{error.message}</p>;
-  if (!recipe_by_pk) return <p>404 recipe not found</p>;
-  return (
-    <FancyModalWithRoundTop isOpen onDidDismiss={handleDismiss}>
-      <IonContent>
+  useEffect(() => {
+    if (error) {
+      console.log("error");
+    }
+    if (loading) {
+      console.log("loading");
+    }
+    if (recipe_by_pk) {
+      console.log(recipe_by_pk);
+    }
+  }, [error, loading, recipe_by_pk]);
+
+  let content;
+  if (loading) {
+    content = <p>loading...</p>;
+  } else if (error) {
+    content = <p>{error.message}</p>;
+  } else if (!recipe_by_pk) {
+    content = <p>404 recipe not found</p>;
+  } else {
+    content = (
+      <>
         <IonFab vertical="top" horizontal="start" slot="fixed">
           <IonFabButton size="small" color="light" onClick={handleDismiss}>
             <IonIcon src={xclose} />
           </IonFabButton>
         </IonFab>
-
         <DetailsPageTitle
           id={recipe_by_pk.id}
           img={recipe_by_pk.img || null}
           title={recipe_by_pk.title}
         />
-
         <CookTime
           total_time={recipe_by_pk.total_time || null}
           servings={recipe_by_pk.yields || null}
         />
-
         <IonSegment
           // color="secondary"
           value={showDirections ? "directions" : "ingredients"}
@@ -69,7 +82,6 @@ const RecipeDetailsPage: React.FC = () => {
             <IonLabel>Directions</IonLabel>
           </StyledSegmentButton>
         </IonSegment>
-
         <StyledIngredientList lines="none">
           {showDirections
             ? recipe_by_pk.directions &&
@@ -104,7 +116,12 @@ const RecipeDetailsPage: React.FC = () => {
                 )
               )}
         </StyledIngredientList>
-      </IonContent>
+      </>
+    );
+  }
+  return (
+    <FancyModalWithRoundTop isOpen={!!id} onDidDismiss={handleDismiss}>
+      <IonContent>{content}</IonContent>
     </FancyModalWithRoundTop>
   );
 };
