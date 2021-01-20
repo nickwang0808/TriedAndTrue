@@ -8,7 +8,7 @@ export const GET_ALL_RECIPES = gql`
   query GetAllRecipe($_like: String = "%") {
     recipe(
       order_by: { created_at: desc_nulls_last }
-      where: { title: { _like: $_like } }
+      where: { title: { _ilike: $_like } }
     ) {
       id
       img

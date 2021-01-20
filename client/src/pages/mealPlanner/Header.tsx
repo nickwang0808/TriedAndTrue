@@ -35,7 +35,7 @@ export default function Header({ weeks }: IProps) {
 
   useIonViewDidEnter(() => {
     document.getElementById(selectedWeek)?.scrollIntoView({
-      behavior: "smooth",
+      behavior: "auto",
       block: "center",
       inline: "center",
     });

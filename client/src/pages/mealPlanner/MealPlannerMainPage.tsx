@@ -12,14 +12,15 @@ export default function MealPlannerMainPage() {
   );
 
   useIonViewDidEnter(() => {
-    console.log("scroll to today");
-    document
-      .getElementById(`row-${format(new Date(), "yyyy-MM-dd")}`)
-      ?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-        inline: "center",
-      });
+    setTimeout(() => {
+      document
+        .getElementById(`row-${format(new Date(), "yyyy-MM-dd")}`)
+        ?.scrollIntoView({
+          behavior: "auto",
+          block: "start",
+          inline: "start",
+        });
+    }, 5);
   }, []);
 
   return (

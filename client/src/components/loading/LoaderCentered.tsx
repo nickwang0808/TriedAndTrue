@@ -2,10 +2,9 @@ import styled from "@emotion/styled";
 import React from "react";
 import LoadingBase from "./loadingBase";
 
-export default function SavingImport() {
+export default function LoaderCentered() {
   return (
     <StyledCenterContainer>
-      <p>Saving Recipe, hold on</p>
       <LoadingBase />
     </StyledCenterContainer>
   );
