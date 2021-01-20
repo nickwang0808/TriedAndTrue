@@ -28,7 +28,7 @@ export default function useInsertRecipeOne() {
         if (!data) return;
         cache.modify({
           fields: {
-            [`recipe({"order_by":{"created_at":"desc_nulls_last"},"where":{"title":{"_like":"%%"}}})`]: (
+            [`recipe({"order_by":{"created_at":"desc_nulls_last"},"where":{"title":{"_ilike":"%%"}}})`]: (
               curr,
               { toReference }
             ) => {

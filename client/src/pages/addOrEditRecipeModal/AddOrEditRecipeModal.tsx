@@ -1,33 +1,22 @@
-import {
-  IonButton,
-  IonButtons,
-  IonHeader,
-  IonIcon,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import xclose from "../../assets/svg/close-x.svg";
+import AddOrEditRecipeHeader from "../../components/headers/AddOrEditRecipeHeader";
 import { FancyModalWithRoundTop } from "../../components/modals/FancyModalWithRoundTop";
 import useGetRecipeDetails from "../../gql/query/useGetRecipeDetails";
-import {
-  resetAddOrEditRecipe,
-  setShowConfirmCancelModal,
-} from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
+import { resetAddOrEditRecipe } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
 import { IAppState } from "../../redux/store";
 import { emptyDefaultValue, mealType } from "../../utils/recipeSchema";
 import AddOrEditRecipeChild from "./AddOrEditRecipeChild";
 
 export default function AddOrEditRecipeModal() {
   const dispatch = useDispatch();
-
+  const [disableSave, setDisableSave] = useState(true);
   const { id, showAddOrEditRecipe } = useSelector(
     (state: IAppState) => state.addOrEditRecipeSlice
   );
 
   const { error, loading, recipe_by_pk } = useGetRecipeDetails(id);
-
+  // prettier-ignore
   const handleDismiss = () => dispatch(resetAddOrEditRecipe());
 
   if (loading) return <p>loading ...</p>;
@@ -37,7 +26,7 @@ export default function AddOrEditRecipeModal() {
       isOpen={showAddOrEditRecipe}
       onDidDismiss={handleDismiss}
     >
-      <Header isNew={id === null ? true : false} />
+      <AddOrEditRecipeHeader isNew={id === null ? true : false} />
       <AddOrEditRecipeChild
         handleDismiss={handleDismiss}
         id={id}
@@ -62,35 +51,5 @@ export default function AddOrEditRecipeModal() {
         }
       />
     </FancyModalWithRoundTop>
-  );
-}
-
-function Header({ isNew }: { isNew: boolean }) {
-  const dispatch = useDispatch();
-  const { formIsDirty } = useSelector(
-    ({ addOrEditRecipeSlice }: IAppState) => addOrEditRecipeSlice
-  );
-
-  const handleClose = () => {
-    if (formIsDirty) {
-      dispatch(setShowConfirmCancelModal(true));
-    } else {
-      dispatch(resetAddOrEditRecipe());
-    }
-  };
-
-  return (
-    <IonHeader>
-      <IonToolbar>
-        <IonTitle color="primary">
-          {isNew ? "Create Recipe" : "Edit Recipe"}
-        </IonTitle>
-        <IonButtons slot="start">
-          <IonButton onClick={handleClose}>
-            <IonIcon icon={xclose} color="secondary" />
-          </IonButton>
-        </IonButtons>
-      </IonToolbar>
-    </IonHeader>
   );
 }

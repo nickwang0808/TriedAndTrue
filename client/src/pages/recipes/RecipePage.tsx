@@ -25,6 +25,15 @@ const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
   const [keyword, setKeyword] = useState<string>();
   const { error, loading, data } = useGetAllRecipes(keyword);
 
+  const handleIonChange = (value: string | undefined) => {
+    if (value === keyword) return;
+    if (!value) {
+      setKeyword(undefined);
+    } else {
+      setKeyword(`%${value}%`);
+    }
+  };
+
   // if (loading) return <p>loading...</p>;
   if (error) return <p>{error.message}</p>;
   return (
@@ -47,15 +56,16 @@ const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
           animated
           debounce={500}
           value={keyword?.slice(1, -1)}
-          onIonChange={(e) => {
-            const { value } = e.detail;
-            console.log(value);
-            if (value === keyword) return;
-            setKeyword(`%${value}%`);
-          }}
+          onIonChange={(e) => handleIonChange(e.detail.value)}
         />
         {!data?.recipe.length ? (
-          <NoRecipe />
+          <NoRecipe
+            text={
+              !keyword
+                ? "Automatically import your favorite recipe or manually add one below."
+                : "No Recipe found."
+            }
+          />
         ) : (
           <StyledRecipeGrid>
             {data.recipe.map((props) => {

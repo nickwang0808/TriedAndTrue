@@ -20,10 +20,12 @@ export default function ImportRecipeModal() {
   const { showAddRecipeControlModal } = useSelector(
     ({ AddRecipeControlSlice }: IAppState) => AddRecipeControlSlice
   );
-  const dispatch = useDispatch();
-  const handleDismiss = () => dispatch(setShowAddRecipeControlModal(false));
-
   const [url, setUrl] = useState("");
+  const dispatch = useDispatch();
+  const handleDismiss = () => {
+    setUrl("");
+    dispatch(setShowAddRecipeControlModal(false));
+  };
 
   const { importRecipe, data, loading } = useImportRecipe();
 

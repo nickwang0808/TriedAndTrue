@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 import {
   IonContent,
+  IonFab,
+  IonFabButton,
+  IonIcon,
   IonLabel,
   IonList,
   IonSegment,
@@ -8,6 +11,7 @@ import {
 } from "@ionic/react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import xclose from "../../assets/svg/close-x.svg";
 import CookTime from "../../components/detailsPageComp/CookTime";
 import DetailsPageTitle from "../../components/detailsPageComp/DetailsPageTitle";
 import DirectionsListItem from "../../components/listItem/DirectionsListItem";
@@ -34,6 +38,12 @@ const RecipeDetailsPage: React.FC = () => {
   return (
     <FancyModalWithRoundTop isOpen onDidDismiss={handleDismiss}>
       <IonContent>
+        <IonFab vertical="top" horizontal="start" slot="fixed">
+          <IonFabButton size="small" color="light" onClick={handleDismiss}>
+            <IonIcon src={xclose} />
+          </IonFabButton>
+        </IonFab>
+
         <DetailsPageTitle
           id={recipe_by_pk.id}
           img={recipe_by_pk.img || null}
