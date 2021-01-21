@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IState {
   id: string | null;
+  showDetailsOptionModal: boolean;
 }
 
 const initialState: IState = {
   id: null,
+  showDetailsOptionModal: false,
 };
 
 const recipeDetailsSlice = createSlice({
@@ -15,8 +17,17 @@ const recipeDetailsSlice = createSlice({
     setRecipeDetailsId: (state, { payload }: PayloadAction<IState["id"]>) => {
       state.id = payload;
     },
+    setShowDetailsOptionModal: (
+      state,
+      { payload }: PayloadAction<IState["showDetailsOptionModal"]>
+    ) => {
+      state.showDetailsOptionModal = payload;
+    },
   },
 });
 
-export const { setRecipeDetailsId } = recipeDetailsSlice.actions;
+export const {
+  setRecipeDetailsId,
+  setShowDetailsOptionModal,
+} = recipeDetailsSlice.actions;
 export default recipeDetailsSlice.reducer;
