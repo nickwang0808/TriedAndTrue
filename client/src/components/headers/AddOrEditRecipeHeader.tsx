@@ -14,6 +14,8 @@ import {
   setShowConfirmCancelModal,
 } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
 import { IAppState } from "../../redux/store";
+import styled from "@emotion/styled";
+
 
 interface IProps {
   isNew: boolean;
@@ -36,9 +38,9 @@ export default function AddOrEditRecipeHeader({ isNew }: IProps) {
   return (
     <IonHeader>
       <IonToolbar>
-        <IonTitle color="primary">
+        <StyledHeader color="primary">
           {isNew ? "Create Recipe" : "Edit Recipe"}
-        </IonTitle>
+        </StyledHeader>
         <IonButtons slot="start">
           <IonButton onClick={handleClose}>
             <IonIcon icon={xclose} color="secondary" />
@@ -48,3 +50,8 @@ export default function AddOrEditRecipeHeader({ isNew }: IProps) {
     </IonHeader>
   );
 }
+
+const StyledHeader = styled(IonTitle)`
+  padding-inline: 0 !important;
+`;
+

@@ -14,14 +14,14 @@ export default function NoRecipe({ text }: IProps) {
   return (
     <StyledWrapper>
       <p className="ion-padding-bottom">{text}</p>
-      <IonButton color="secondary">Import from Website</IonButton>
-      <IonButton
+      {/* <IonButton color="secondary">Import from Website</IonButton> */}
+      {/* <IonButton
         fill="outline"
         color="secondary"
         onClick={() => dispatch(setShowAddOrEditRecipe(true))}
       >
         Manually Add
-      </IonButton>
+      </IonButton> */}
     </StyledWrapper>
   );
 }
