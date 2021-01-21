@@ -125,6 +125,10 @@ ion-footer {
   background-image: none;
 }
 
+ion-fab-button {
+  --box-shadow: none;
+}
+
 @font-face {
   font-family: "OpenSansBold";
   font-style: normal;

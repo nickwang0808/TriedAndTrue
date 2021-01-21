@@ -55,8 +55,8 @@ const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
           <NoRecipe
             text={
               !keyword
-                ? "Automatically import your favorite recipe or manually add one below."
-                : "No Recipe found."
+                ? "No Recipes Yet! Use the “PLUS” button to start adding recipes!"
+                : "No recipes to show you!"
             }
           />
         ) : (
