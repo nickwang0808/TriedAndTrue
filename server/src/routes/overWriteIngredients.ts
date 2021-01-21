@@ -76,6 +76,9 @@ overWriteIngredient.post("/", async (req, res) => {
   const { ingredientsStrings, recipe_id } = req.body.input as IInput;
   console.log(ingredientsStrings);
   try {
+    if (!ingredientsStrings.length) {
+      return res.json([]);
+    }
     // delete all ingredients for this recipe
     const result = await runOverWriteIngredientQuery(
       ingredientsStrings,
