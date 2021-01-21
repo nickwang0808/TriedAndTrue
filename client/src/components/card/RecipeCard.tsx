@@ -20,7 +20,7 @@ export default function RecipeCard({
   return (
     <StyledCard onClick={onClick} mode="md">
       <StyledImgContainer>
-        <img src="https://loremflickr.com/320/240/recipe" />
+        <img src={img || "https://loremflickr.com/320/240/recipe"} />
         {showOverlay && <SelectedCardOverlay />}
       </StyledImgContainer>
       <StyledIonHeader mode="md">

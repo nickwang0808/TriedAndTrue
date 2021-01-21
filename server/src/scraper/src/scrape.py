@@ -4,8 +4,8 @@ import json
 
 
 class Scraper:
-    def __init__(self, url):
-        result = scrape_me(url)
+    def __init__(self, url, wild_mode):
+        result = scrape_me(url, wild_mode=True if wild_mode else False)
 
         self.title = result.title()
         self.total_time = result.total_time()
@@ -19,6 +19,7 @@ class Scraper:
 
 
 url = sys.argv[1]
-result = Scraper(url)
+wild_mode = sys.argv[2]
+result = Scraper(url, wild_mode)
 print(json.dumps(vars(result)))
 # print(json.dumps(vars(result), sort_keys=True, indent=4))

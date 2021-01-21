@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { format } from "date-fns";
+import { addDays, format, isPast } from "date-fns";
 import React from "react";
 import { useDispatch } from "react-redux";
 import AddCardOutLined from "../../components/card/AddCardOutLined";
@@ -24,13 +24,14 @@ export default function PlannerRow({ date }: IProps) {
   if (loading) return <p>loading ...</p>;
   if (error) return <p>{error.message}</p>;
   return (
-    <>
+    <StyledFadedOverLay fade={isPast(addDays(new Date(date), 1))}>
       <BlockSeparator
         title={format(new Date(date), "EEEE")}
         subTitle={format(new Date(date), "do")}
         showTodayTag={String(new Date()).slice(0, 15) === date.slice(0, 15)}
+        id={`row-${format(new Date(date), "yyyy-MM-dd")}`}
       />
-      <StyledContainer id={`row-${format(new Date(date), "yyyy-MM-dd")}`}>
+      <StyledContainer>
         {planner?.map(({ recipe: { title, img, id }, index }) => (
           <RecipeCardSmall
             title={title}
@@ -42,9 +43,13 @@ export default function PlannerRow({ date }: IProps) {
         ))}
         <AddCardOutLined onClick={() => dispatch(openPlannerModal(date))} />
       </StyledContainer>
-    </>
+    </StyledFadedOverLay>
   );
 }
+
+const StyledFadedOverLay = styled.div<{ fade: boolean }>`
+  opacity: ${(props) => (props.fade ? "0.5" : "1")};
+`;
 
 const StyledContainer = styled.div`
   display: flex;

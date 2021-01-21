@@ -18,19 +18,17 @@ export default function DetailsPageTitle({ title, img, id }: IProps) {
 
   return (
     <>
-      <StyledImg height="215" src="https://loremflickr.com/640/480/dinner" />
+      <StyledImg
+        height="215"
+        src={img || "https://loremflickr.com/640/480/dinner"}
+      />
 
       <StyledTitleAndIconWrapper>
         <StyledTitle>{title}</StyledTitle>
         <StyledIconWrapper>
-          <IonIcon
-            icon={edit}
-            onClick={() => dispatch(setRecipeId(id))}
-          />
-          <IonIcon 
-            icon={addtocalendar} />
-           <IonIcon 
-            icon={addtoList} />
+          <IonIcon icon={edit} onClick={() => dispatch(setRecipeId(id))} />
+          <IonIcon icon={addtocalendar} />
+          <IonIcon icon={addtoList} />
         </StyledIconWrapper>
       </StyledTitleAndIconWrapper>
     </>
@@ -60,11 +58,11 @@ const StyledIconWrapper = styled.div`
   width: 120px;
   justify-content: space-between;
 
-    ion-icon {
-      padding-top: 24px;
-      width: 40px;
-      height: 40px;
-    }
+  ion-icon {
+    padding-top: 24px;
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 const StyledTitle = styled.div`

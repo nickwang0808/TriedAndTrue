@@ -66,9 +66,10 @@ export const runOverWriteIngredientQuery = async (
           formatted_text,
         ]
       );
-      return { /*  newIngredients: rows[0], */ id: rows[0].id };
+      return rows.map(({ id }) => ({ id }));
     })
   );
+  return result;
 };
 
 overWriteIngredient.post("/", async (req, res) => {
@@ -80,7 +81,7 @@ overWriteIngredient.post("/", async (req, res) => {
       ingredientsStrings,
       recipe_id
     );
-    return res.json(result);
+    return res.json(...result);
   } catch (error) {
     return res.status(400).json({
       message: error.message,

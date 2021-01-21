@@ -5,15 +5,17 @@ interface IProps {
   title?: string;
   subTitle?: string;
   showTodayTag?: boolean;
+  id?: string;
 }
 
 export default function BlockSeparator({
   subTitle,
   title,
   showTodayTag = false,
+  id,
 }: IProps) {
   return (
-    <StyledDiv>
+    <StyledDiv id={id}>
       <StyledTitle>{title}</StyledTitle>
       {subTitle && <div>{subTitle}</div>}
       {showTodayTag && <StyledTodayTag>Today</StyledTodayTag>}

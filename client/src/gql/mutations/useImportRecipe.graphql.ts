@@ -1,0 +1,47 @@
+import { gql, useMutation } from "@apollo/client";
+import {
+  ImportRecipeMutation,
+  ImportRecipeMutationVariables,
+} from "../../generated/graphql";
+
+export const IMPORT_RECIPE = gql`
+  mutation ImportRecipe($url: String!, $wildMode: Boolean = false) {
+    importRecipe(url: $url, wildMode: $wildMode) {
+      recipe {
+        id
+        img
+        total_time
+        title
+      }
+    }
+  }
+`;
+
+export default function useImportRecipe() {
+  const [importRecipe, { data, loading, error }] = useMutation<
+    ImportRecipeMutation,
+    ImportRecipeMutationVariables
+  >(IMPORT_RECIPE, {
+    update: (cache, { data }) => {
+      if (!data?.importRecipe) return;
+      const { recipe } = data.importRecipe;
+      cache.modify({
+        fields: {
+          [`recipe:{"where":{"title":{"_ilike":"%%"}}}`]: (
+            curr,
+            { toReference }
+          ) => {
+            return [toReference(recipe!), ...curr];
+          },
+        },
+      });
+    },
+  });
+
+  return {
+    importRecipe,
+    data,
+    loading,
+    error,
+  };
+}
