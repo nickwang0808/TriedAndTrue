@@ -54,31 +54,39 @@ export default function ImportRecipeModal() {
 
   let content = (
     <>
-      <IonItem lines="none">
-        <IonLabel position="stacked">Save Recipe From Website</IonLabel>
-        <StyledIonInput
-          color="primary"
-          type="text"
-          value={url}
-          placeholder="Paste Recipe Link"
-          onIonChange={(e) => setUrl(e.detail.value!)}
-        />
-      </IonItem>
-      <StyledFullWidhtButton
+      <StyledImportContainer lines="none">
+        <div>
+          <IonLabel position="stacked">Save Recipe From Website</IonLabel>
+          <StyledIonInput
+            color="primary"
+            type="text"
+            value={url}
+            placeholder="Paste Recipe Link"
+            onIonChange={(e) => setUrl(e.detail.value!)}
+          />
+        </div>
+        <StyledButton
         expand="block"
         color="secondary"
         onClick={handleImport}
-      >
-        Save
-      </StyledFullWidhtButton>
+        >
+          Save
+        </StyledButton>
+      </StyledImportContainer>
       {warning && <span>This website may not be imported properly</span>}
-      <StyledFullWidhtButton
+
+      <StyledPageBreakOr>
+        <div>OR</div>
+      </StyledPageBreakOr>
+
+      <StyledFullWidthButton
         expand="block"
+        fill="outline"
         color="secondary"
         onClick={handleManualAddRecipe}
       >
         Manually Add Recipe
-      </StyledFullWidhtButton>
+      </StyledFullWidthButton>
     </>
   );
   if (loading) {
@@ -99,14 +107,41 @@ export default function ImportRecipeModal() {
   );
 }
 
-const StyledFullWidhtButton = styled(IonButton)`
+const StyledImportContainer = styled(IonItem)`
+  display: flex;
+  flex-direction: column;
+`;
+
+const StyledFullWidthButton = styled(IonButton)`
   margin: 8px 16px;
 `;
 
-const StyledButtonContainer = styled.div`
+const StyledButton= styled(IonButton)`
   display: flex;
+`;
+
+const StyledPageBreakOr = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
   padding: 0 16px;
+  margin: 0 0 24px 0;
+  text-align: center;
+  font-size: 12px;
+  font-family: OpenSansBold;
+  border-bottom: 1px solid #dcdcdc;
+  align-items: center;
+    position: relative;
+    height: 20px;
+    left: 16px;
+    width: calc(100% - 32px);
+ 
+
+  & div {
+    background-color: #ffffff;
+    width: 50px;
+    margin-top: 10px;
+  }
 `;
 
 const StyledIonInput = styled(IonInput)`

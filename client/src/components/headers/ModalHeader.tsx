@@ -8,6 +8,8 @@ import {
 } from "@ionic/react";
 import React from "react";
 import xclose from "../../assets/svg/close-x.svg";
+import styled from "@emotion/styled";
+
 
 interface IProps {
   title: string;
@@ -18,7 +20,7 @@ export default function ModalHeader({ title, handleClose }: IProps) {
   return (
     <IonHeader>
       <IonToolbar>
-        <IonTitle color="primary">{title}</IonTitle>
+        <StyledHeader color="primary">{title}</StyledHeader>
         <IonButtons slot="start">
           <IonButton onClick={handleClose}>
             <IonIcon src={xclose} />
@@ -28,3 +30,7 @@ export default function ModalHeader({ title, handleClose }: IProps) {
     </IonHeader>
   );
 }
+
+const StyledHeader = styled(IonTitle)`
+  padding-inline: 0 !important;
+`;
