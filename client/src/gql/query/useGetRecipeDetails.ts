@@ -28,23 +28,18 @@ export const GET_RECIPE_DETAILS = gql`
 `;
 
 export default function useGetRecipeDetails(id: string | null) {
-  const {
-    error,
-    loading,
-    data: { recipe_by_pk } = {} as GetRecipeDetailsQuery,
-    refetch,
-  } = useQuery<GetRecipeDetailsQuery, GetRecipeDetailsQueryVariables>(
-    GET_RECIPE_DETAILS,
-    {
-      skip: !id,
-      variables: { id: id as string },
-    }
-  );
+  const { error, loading, data, refetch } = useQuery<
+    GetRecipeDetailsQuery,
+    GetRecipeDetailsQueryVariables
+  >(GET_RECIPE_DETAILS, {
+    skip: !id,
+    variables: { id: id as string },
+  });
 
   return {
     error,
     loading,
-    recipe_by_pk,
+    data,
     refetch,
   };
 }

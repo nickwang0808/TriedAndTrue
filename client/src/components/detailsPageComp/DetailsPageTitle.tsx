@@ -4,8 +4,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import addtocalendar from "../../assets/svg/addtocalendar.svg";
 import addtoList from "../../assets/svg/addtoList.svg";
-import edit from "../../assets/svg/edit.svg";
-import { setRecipeId } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
+import ellipsisVertical from "../../assets/svg/ellipsis.svg";
+import { setShowDetailsOptionModal } from "../../redux/RecipeDetailsSlice/recipeDetailsSlice";
 
 interface IProps {
   img: string | null;
@@ -26,9 +26,13 @@ export default function DetailsPageTitle({ title, img, id }: IProps) {
       <StyledTitleAndIconWrapper>
         <StyledTitle>{title}</StyledTitle>
         <StyledIconWrapper>
-          <IonIcon icon={edit} onClick={() => dispatch(setRecipeId(id))} />
           <IonIcon icon={addtocalendar} />
           <IonIcon icon={addtoList} />
+          <IonIcon
+            // style={{ fontSize: 30 }}
+            icon={ellipsisVertical}
+            onClick={() => dispatch(setShowDetailsOptionModal(true))}
+          />
         </StyledIconWrapper>
       </StyledTitleAndIconWrapper>
     </>

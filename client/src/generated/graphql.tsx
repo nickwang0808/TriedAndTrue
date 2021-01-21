@@ -1291,6 +1291,19 @@ export type DeleteRecipeFromPlannerMutation = (
   )> }
 );
 
+export type DeleteRecipeOneMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type DeleteRecipeOneMutation = (
+  { __typename?: 'mutation_root' }
+  & { delete_recipe_by_pk?: Maybe<(
+    { __typename?: 'recipe' }
+    & Pick<Recipe, 'id'>
+  )> }
+);
+
 export type ImportRecipeMutationVariables = Exact<{
   url: Scalars['String'];
   wildMode?: Maybe<Scalars['Boolean']>;
@@ -1525,6 +1538,38 @@ export function useDeleteRecipeFromPlannerMutation(baseOptions?: Apollo.Mutation
 export type DeleteRecipeFromPlannerMutationHookResult = ReturnType<typeof useDeleteRecipeFromPlannerMutation>;
 export type DeleteRecipeFromPlannerMutationResult = Apollo.MutationResult<DeleteRecipeFromPlannerMutation>;
 export type DeleteRecipeFromPlannerMutationOptions = Apollo.BaseMutationOptions<DeleteRecipeFromPlannerMutation, DeleteRecipeFromPlannerMutationVariables>;
+export const DeleteRecipeOneDocument = gql`
+    mutation DeleteRecipeOne($id: String!) {
+  delete_recipe_by_pk(id: $id) {
+    id
+  }
+}
+    `;
+export type DeleteRecipeOneMutationFn = Apollo.MutationFunction<DeleteRecipeOneMutation, DeleteRecipeOneMutationVariables>;
+
+/**
+ * __useDeleteRecipeOneMutation__
+ *
+ * To run a mutation, you first call `useDeleteRecipeOneMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteRecipeOneMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteRecipeOneMutation, { data, loading, error }] = useDeleteRecipeOneMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteRecipeOneMutation(baseOptions?: Apollo.MutationHookOptions<DeleteRecipeOneMutation, DeleteRecipeOneMutationVariables>) {
+        return Apollo.useMutation<DeleteRecipeOneMutation, DeleteRecipeOneMutationVariables>(DeleteRecipeOneDocument, baseOptions);
+      }
+export type DeleteRecipeOneMutationHookResult = ReturnType<typeof useDeleteRecipeOneMutation>;
+export type DeleteRecipeOneMutationResult = Apollo.MutationResult<DeleteRecipeOneMutation>;
+export type DeleteRecipeOneMutationOptions = Apollo.BaseMutationOptions<DeleteRecipeOneMutation, DeleteRecipeOneMutationVariables>;
 export const ImportRecipeDocument = gql`
     mutation ImportRecipe($url: String!, $wildMode: Boolean = false) {
   importRecipe(url: $url, wildMode: $wildMode) {
@@ -1749,7 +1794,7 @@ export type ParseIngredientsQueryHookResult = ReturnType<typeof useParseIngredie
 export type ParseIngredientsLazyQueryHookResult = ReturnType<typeof useParseIngredientsLazyQuery>;
 export type ParseIngredientsQueryResult = Apollo.QueryResult<ParseIngredientsQuery, ParseIngredientsQueryVariables>;
 export const GetAllRecipeDocument = gql`
-    query GetAllRecipe($_like: String = "%", $limit: Int = 10, $offset: Int = 0) {
+    query GetAllRecipe($_like: String = "%", $limit: Int = 8, $offset: Int = 0) {
   recipe(
     order_by: {created_at: desc_nulls_last}
     where: {title: {_ilike: $_like}}
