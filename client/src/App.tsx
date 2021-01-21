@@ -46,7 +46,7 @@ import SelectWeekModal from "./pages/mealPlanner/PlannerModals/SelectWeekModal/S
 import RecipeDetailsPage from "./pages/recipeDetails/RecipeDetailsPage";
 import RecipePage from "./pages/recipes/RecipePage";
 import { setDateRange } from "./redux/Planner/PlannerDateRangeSlice";
-import "./style.css";
+import "./style.scss";
 /* Theme variables */
 import "./theme/variables.css";
 import getDatesForPlanner from "./utils/getDatesForPlanner";

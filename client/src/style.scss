@@ -1,0 +1,154 @@
+:root[mode="ios"],
+:root[mode="md"] {
+  --ion-font-family: "OpenSansRegular" !important;
+  font-family: "OpenSansRegular" !important;
+  --ion-tab-bar-background: #2a5077;
+}
+
+p {
+  color: var(--ion-color-dark);
+  font-family: OpenSansRegular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: 0.15px;
+}
+
+h1,
+h2,
+h3,
+h4,
+ion-searchbar,
+ion-select,
+ion-input,
+ion-textarea {
+  font-family: SuraRegular !important;
+  color: var(--ion-color-dark) !important;
+}
+
+ion-select,
+ion-input {
+  min-height: 48px;
+}
+ion-segment {
+  font-family: SuraBold;
+}
+
+ion-segment-button {
+  letter-spacing: 0;
+  --indicator-height: 4px;
+}
+
+ion-label {
+  text-transform: capitalize;
+}
+
+/* For Input Fields */
+.label-stacked {
+  text-transform: capitalize;
+  font-size: 14pt !important;
+  color: var(--ion-color-dark) !important;
+  padding-bottom: 4px;
+}
+
+ion-title {
+  font-family: SuraBold;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: 0.15px;
+  /* padding-inline: 0px !important; */
+}
+
+ion-tab-button {
+  --color-selected: white;
+  fill: white;
+  --ripple-color: transparent;
+  --color: rgba(255, 255, 255, 0.4);
+}
+
+ion-card-title {
+  font-size: 14px;
+}
+
+ion-tab-bar {
+  height: 64px;
+}
+
+ion-tab-button ion-icon {
+  font-size: 32px !important;
+}
+
+ion-toolbar ion-icon,
+ion-content ion-icon {
+  font-size: 40px !important;
+  width: 40px;
+  height: 40px;
+  fill: var(--ion-color-secondary);
+}
+
+ion-item {
+  /* disable md underline on focus */
+  --highlight-background: none;
+}
+
+ion-segment {
+  border-bottom: 1px solid #dcdcdc;
+  --ripple-color: transparent !important;
+}
+
+ion-segment-button {
+  --ripple-color: transparent !important;
+}
+
+ion-button {
+  --box-shadow: none;
+  --border-radius: 0;
+  text-transform: none;
+  height: 48px;
+  --padding-start: 24px;
+  --padding-end: 24px;
+  font-family: SuraBold;
+  font-size: 14px;
+  line-height: 28px;
+  text-align: center;
+  letter-spacing: 0.15px;
+  /* --ripple-color: transparent; */
+}
+
+ion-footer {
+  background-color: white;
+  border-top: 1px solid #dcdcdc;
+}
+.header-md::after {
+  /* get rid of header under line shadow thingy */
+  background-image: none;
+}
+
+@font-face {
+  font-family: "OpenSansBold";
+  font-style: normal;
+  font-weight: bold;
+  src: url("./assets/fonts/OpenSans-Bold.ttf");
+}
+
+@font-face {
+  font-family: "OpenSansRegular";
+  font-style: normal;
+  font-weight: normal;
+  src: url("./assets/fonts/OpenSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: "SuraBold";
+  font-style: normal;
+  font-weight: bold;
+  src: url("./assets/fonts/Sura-Bold.ttf");
+}
+
+@font-face {
+  font-family: "SuraRegular";
+  font-style: normal;
+  font-weight: normal;
+  src: url("./assets/fonts/Sura-Regular.ttf");
+}
