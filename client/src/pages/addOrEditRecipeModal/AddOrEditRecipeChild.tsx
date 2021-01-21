@@ -11,6 +11,7 @@ import BlockSeparator from "../../components/misc/BlockSeparator";
 import useUpdateRecipeDetails from "../../gql/mutations/updateRecipeDetails.graphql";
 import useInsertRecipeOne from "../../gql/mutations/useInsertRecipeOne.graphql";
 import { setFormIsDirty } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
+import { setShowToast } from "../../redux/toastSlice/toastSlice";
 import { IRecipeForm, recipeFormSchema } from "../../utils/recipeSchema";
 
 interface IProps {
@@ -80,6 +81,7 @@ export default function AddOrEditRecipeChild({
           //   },
           // },
         });
+        dispatch(setShowToast("Recipe Created"));
       } catch (error) {
         console.log(error);
       }
@@ -96,6 +98,7 @@ export default function AddOrEditRecipeChild({
               ingredientsStrings: ingredients?.map((ing) => ing.value) || [],
             },
           });
+          dispatch(setShowToast("Recipe Updated"));
         } catch (error) {
           console.log(error);
         }

@@ -43,10 +43,11 @@ import EditPlannerItemModal from "./pages/mealPlanner/PlannerModals/EditPlannerI
 import ReCreatePlannerModal from "./pages/mealPlanner/PlannerModals/ReCreatePlannerModal/ReCreatePlannerModal";
 import SelectDayModal from "./pages/mealPlanner/PlannerModals/SelectDayModal/SelectDayModal";
 import SelectWeekModal from "./pages/mealPlanner/PlannerModals/SelectWeekModal/SelectWeekModal";
+import DetailsOptionsModal from "./pages/recipeDetails/DetailsOptionsModal";
 import RecipeDetailsPage from "./pages/recipeDetails/RecipeDetailsPage";
 import RecipePage from "./pages/recipes/RecipePage";
 import { setDateRange } from "./redux/Planner/PlannerDateRangeSlice";
-import "./style.css";
+import "./style.scss";
 /* Theme variables */
 import "./theme/variables.css";
 import getDatesForPlanner from "./utils/getDatesForPlanner";
@@ -73,6 +74,8 @@ const App: React.FC = () => {
           <ImportRecipeModal />
 
           <RecipeDetailsPage />
+          <DetailsOptionsModal />
+
           <AddMultiRecipeToPlannerModal />
 
           <EditPlannerItemModal />

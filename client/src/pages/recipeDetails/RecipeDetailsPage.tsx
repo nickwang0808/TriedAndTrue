@@ -9,7 +9,7 @@ import {
   IonSegment,
   IonSegmentButton,
 } from "@ionic/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import xclose from "../../assets/svg/close-x.svg";
 import CookTime from "../../components/detailsPageComp/CookTime";
@@ -25,33 +25,23 @@ const RecipeDetailsPage: React.FC = () => {
   const { id } = useSelector(
     ({ recipeDetailsSlice }: IAppState) => recipeDetailsSlice
   );
-  const { error, loading, recipe_by_pk } = useGetRecipeDetails(id);
+  const { error, loading, data } = useGetRecipeDetails(id);
 
   const dispatch = useDispatch();
   const handleDismiss = () => dispatch(setRecipeDetailsId(null));
 
   const [showDirections, setShowDirections] = useState(false);
 
-  useEffect(() => {
-    if (error) {
-      console.log("error");
-    }
-    if (loading) {
-      console.log("loading");
-    }
-    if (recipe_by_pk) {
-      console.log(recipe_by_pk);
-    }
-  }, [error, loading, recipe_by_pk]);
-
   let content;
   if (loading) {
     content = <p>loading...</p>;
   } else if (error) {
     content = <p>{error.message}</p>;
-  } else if (!recipe_by_pk) {
+  } else if (!data || !data.recipe_by_pk) {
     content = <p>404 recipe not found</p>;
   } else {
+    //prettier-ignore
+    const { id, img, title, total_time, yields, directions, recipe_ingredients_list } = data.recipe_by_pk;
     content = (
       <>
         <IonFab vertical="top" horizontal="start" slot="fixed">
@@ -59,15 +49,8 @@ const RecipeDetailsPage: React.FC = () => {
             <IonIcon src={xclose} />
           </IonFabButton>
         </IonFab>
-        <DetailsPageTitle
-          id={recipe_by_pk.id}
-          img={recipe_by_pk.img || null}
-          title={recipe_by_pk.title}
-        />
-        <CookTime
-          total_time={recipe_by_pk.total_time || null}
-          servings={recipe_by_pk.yields || null}
-        />
+        <DetailsPageTitle id={id} img={img || null} title={title} />
+        <CookTime total_time={total_time || null} servings={yields || null} />
         <IonSegment
           // color="secondary"
           value={showDirections ? "directions" : "ingredients"}
@@ -84,10 +67,7 @@ const RecipeDetailsPage: React.FC = () => {
         </IonSegment>
         <StyledIngredientList lines="none">
           {showDirections
-            ? recipe_by_pk.directions &&
-              (recipe_by_pk.directions as [
-                { value: string }
-              ]).map(({ value }, i) => (
+            ? (directions as [{ value: string }])?.map(({ value }, i) => (
                 <DirectionsListItem
                   key={i}
                   content={value}
@@ -95,8 +75,7 @@ const RecipeDetailsPage: React.FC = () => {
                   index={i + 1}
                 />
               ))
-            : recipe_by_pk.recipe_ingredients_list &&
-              recipe_by_pk.recipe_ingredients_list.map(
+            : recipe_ingredients_list?.map(
                 (
                   { name, quantity_denominator, quantity_numerator, unit },
                   i
