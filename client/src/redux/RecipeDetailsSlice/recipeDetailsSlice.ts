@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface IState {
   id: string | null;
   showDetailsOptionModal: boolean;
+  showDeleteRecipeConfirmationModal: boolean;
 }
 
 const initialState: IState = {
   id: null,
   showDetailsOptionModal: false,
+  showDeleteRecipeConfirmationModal: false,
 };
 
 const recipeDetailsSlice = createSlice({
@@ -23,11 +25,18 @@ const recipeDetailsSlice = createSlice({
     ) => {
       state.showDetailsOptionModal = payload;
     },
+    setShowDeleteRecipeConfirmationModal: (
+      state,
+      { payload }: PayloadAction<IState["showDeleteRecipeConfirmationModal"]>
+    ) => {
+      state.showDeleteRecipeConfirmationModal = payload;
+    },
   },
 });
 
 export const {
   setRecipeDetailsId,
   setShowDetailsOptionModal,
+  setShowDeleteRecipeConfirmationModal,
 } = recipeDetailsSlice.actions;
 export default recipeDetailsSlice.reducer;
