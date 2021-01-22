@@ -47,6 +47,7 @@ import DetailsOptionsModal from "./pages/recipeDetails/DetailsOptionsModal";
 import RecipeDeleteConfirmationModal from "./pages/recipeDetails/RecipeDeleteConfirmationModal";
 import RecipeDetailsPage from "./pages/recipeDetails/RecipeDetailsPage";
 import RecipePage from "./pages/recipes/RecipePage";
+import ShoppingListPage from "./pages/ShoppingList/ShoppingListPage";
 import { setDateRange } from "./redux/Planner/PlannerDateRangeSlice";
 import "./style.scss";
 /* Theme variables */
@@ -55,7 +56,7 @@ import getDatesForPlanner from "./utils/getDatesForPlanner";
 
 const App: React.FC = () => {
   setupConfig({
-    // rippleEffect: false,
+    rippleEffect: false,
     mode: "md",
   });
 
@@ -96,14 +97,7 @@ const App: React.FC = () => {
                   exact={true}
                   component={MealPlannerMainPage}
                 />
-                <Route
-                  path="/lists"
-                  component={() => (
-                    <IonPage>
-                      <h1>Coming Soon</h1>
-                    </IonPage>
-                  )}
-                />
+                <Route path="/lists" component={ShoppingListPage} />
                 <Route
                   path="/profile"
                   component={() => (
