@@ -113,7 +113,15 @@ ion-button {
   line-height: 28px;
   text-align: center;
   letter-spacing: 0.15px;
-  /* --ripple-color: transparent; */
+
+  // opacity need to be set for activated state to work
+  --background-activated-opacity: 1;
+
+  --background-activated: #921c28;
+
+  &[fill="outline"] {
+    --background-activated: #fff6f7;
+  }
 }
 
 ion-footer {
