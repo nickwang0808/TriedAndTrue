@@ -5,8 +5,8 @@ import {
 } from "../../generated/graphql";
 
 export const INSERT_RECIPE_ONE = gql`
-  mutation InsertRecipe($object: InsertRecipeOneDerivedRecipeInsertInput!) {
-    InsertRecipeOneDerived(object: $object) {
+  mutation InsertRecipe($object: insertRecipeOneDerivedInput!) {
+    insertRecipeOneDerived(object: $object) {
       recipe {
         id
         title
@@ -33,7 +33,7 @@ export default function useInsertRecipeOne() {
               { toReference }
             ) => {
               return [
-                toReference(data.InsertRecipeOneDerived!.recipe!),
+                toReference(data.insertRecipeOneDerived!.recipe!),
                 ...curr,
               ];
             },

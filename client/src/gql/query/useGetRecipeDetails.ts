@@ -18,8 +18,7 @@ export const GET_RECIPE_DETAILS = gql`
       yields
       recipe_ingredients_list {
         name
-        quantity_denominator
-        quantity_numerator
+        quantity
         unit
         formatted_text
       }

@@ -1,7 +1,6 @@
 import { Router } from "express";
-import { parseIngredient } from "ingredient-parser";
 import query from "../db";
-import stringifyFormattedIngredients from "../helper/stringifyFormatedIngredients";
+import runParser from "../helper/runParser";
 
 const overWriteIngredient = Router();
 
@@ -14,6 +13,7 @@ export const runOverWriteIngredientQuery = async (
   ingredientsStrings: string[],
   recipe_id: string
 ) => {
+  // delete all ing for this recipe first to avoid conflicts
   await query(
     `
   DELETE FROM recipe_ingredients
@@ -24,50 +24,23 @@ export const runOverWriteIngredientQuery = async (
 
   // re insert all the new ingredients
   const result = await Promise.all(
-    ingredientsStrings.map(async (ingredient) => {
-      const parseResult = parseIngredient(ingredient);
+    (await runParser(ingredientsStrings)).map(
+      async ({ input, unit, qty, comment, name, other }, index) => {
+        // implement the formatting logic later
 
-      const formatted_text = stringifyFormattedIngredients(parseResult);
-
-      const {
-        name,
-        preparation,
-        quantity_denominator,
-        quantity_numerator,
-        unit,
-        optional,
-      } = parseResult;
-
-      const { rows } = await query(
-        `
-    INSERT INTO recipe_ingredients(
-      recipe_id,
-      raw_text,
-      quantity_denominator,
-      quantity_numerator,
-      name,
-      optional,
-      unit,
-      preparation,
-      formatted_text
-      )
-    VALUES ($1, $2, $3,$4,$5,$6,$7,$8,$9)
+        const { rows } = await query(
+          `
+    INSERT INTO recipe_ingredients
+    ( recipe_id, index, quantity, unit, name, raw_text, formatted_text, comment, other )
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *;
     `,
-        [
-          recipe_id,
-          ingredient,
-          quantity_denominator,
-          quantity_numerator,
-          name,
-          optional,
-          unit,
-          preparation,
-          formatted_text,
-        ]
-      );
-      return rows.map(({ id }) => ({ id }));
-    })
+          [recipe_id, index, qty, unit, name, input, input, comment, other]
+        );
+        // set the value of the result variable. poor prettier formatting
+        return rows.map(({ id }) => ({ id }));
+      }
+    )
   );
   return result;
 };
@@ -79,7 +52,8 @@ overWriteIngredient.post("/", async (req, res) => {
     if (!ingredientsStrings.length) {
       return res.json([]);
     }
-    // delete all ingredients for this recipe
+
+    // run sql queries
     const result = await runOverWriteIngredientQuery(
       ingredientsStrings,
       recipe_id
@@ -90,8 +64,6 @@ overWriteIngredient.post("/", async (req, res) => {
       message: error.message,
     });
   }
-
-  // success
 });
 
 export default overWriteIngredient;

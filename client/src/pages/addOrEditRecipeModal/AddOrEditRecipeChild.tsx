@@ -33,28 +33,24 @@ export default function AddOrEditRecipeChild({
 
   // --------------------- Form Control ---------------------------------
   // prettier-ignore
-  const { formState, handleSubmit, control, reset, watch } = useForm<IRecipeForm>({
+  const { formState, handleSubmit, control, reset } = useForm<IRecipeForm>({
     resolver: yupResolver(recipeFormSchema),
     defaultValues,
   });
 
-  console.log(watch());
+  // console.log(watch());
 
+  /*  do not use viewDidenter, additional modals with cause that to trigger,
+  use normal useEffect instead */
   useEffect(() => {
     reset(defaultValues);
     // eslint-disable-next-line
   }, []);
 
+  // formState needed to be read before it starts to work per rhf doc
   const { isDirty } = formState;
   const onSubmit = (data: IRecipeForm) => {
-    // amp ingredient out to write to raw_text column
     const { ingredients, ...dataWIthOutIngredients } = data;
-    let mappedIngredients: Array<{ raw_text: string }> | [] = [];
-    if (ingredients) {
-      mappedIngredients = ingredients.map((ing) => {
-        return { raw_text: ing.value };
-      });
-    }
 
     if (isCreateNew) {
       console.log("submit");
@@ -63,37 +59,22 @@ export default function AddOrEditRecipeChild({
           variables: {
             object: {
               ...dataWIthOutIngredients,
-              recipe_ingredients_list: {
-                data: mappedIngredients,
-              },
+              title: dataWIthOutIngredients.title!,
+              ingredients: ingredients?.map((e) => e.value) || [],
             },
           },
-          // TODO: use optimistic ui
-          // optimisticResponse: {
-          //   __typename: "mutation_root",
-          //   InsertRecipeOneDerived: {
-          //     __typename: "InsertRecipeOneDerivedOutput",
-          //     recipe: {
-          //       __typename: "recipe",
-          //       ...dataWIthOutIngredients!,
-          //       id: "dwad",
-          //     },
-          //   },
-          // },
         });
         dispatch(setShowToast("Recipe Created"));
       } catch (error) {
         console.log(error);
       }
     } else {
+      // make sure the form is dirty to run the update mutation
       if (isDirty && id) {
-        // perform update recipe
         try {
           updateRecipeDetails({
             variables: {
-              _set: {
-                ...dataWIthOutIngredients,
-              },
+              _set: { ...dataWIthOutIngredients },
               id,
               ingredientsStrings: ingredients?.map((ing) => ing.value) || [],
             },
