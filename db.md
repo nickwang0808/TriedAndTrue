@@ -23,7 +23,14 @@
 
 - id
 - recipe_id
-- index <!-- need a index here too i guess -->
+- index
+- quantity
+- unit
+- name
+- raw_text
+- formatted_text
+- comment
+- other
 
 ### planner
 
