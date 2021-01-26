@@ -7,9 +7,9 @@ type Mutation {
 
 
 type Mutation {
-  InsertRecipeOneDerived (
-    object: InsertRecipeOneDerivedRecipeInsertInput!
-  ): InsertRecipeOneDerivedOutput!
+  insertRecipeOneDerived (
+    object: insertRecipeOneDerivedInput!
+  ): InsertRecipeOneOutput!
 }
 
 
@@ -30,197 +30,19 @@ type Query {
 
 
 
-enum InsertRecipeOneDerivedRecipeConstraint {
-  """ unique or primary key constraint """ recipe_id_key
-  """ unique or primary key constraint """ recipe_pkey
-}
-
-enum InsertRecipeOneDerivedRecipeUpdateColumn {
-  """ column name """ cuisine
-  """ column name """ directions
-  """ column name """ img
-  """ column name """ meal_type
-  """ column name """ title
-  """ column name """ total_time
-  """ column name """ yields
-}
-
-enum InsertRecipeOneDerivedRecipeIngredientsConstraint {
-  """ unique or primary key constraint """ recipe_ingredients_id_key
-  """ unique or primary key constraint """ recipe_ingredients_pkey
-}
-
-enum InsertRecipeOneDerivedRecipeIngredientsUpdateColumn {
-  """ column name """ raw_text
-}
-
-input InsertRecipeOneDerivedRecipeInsertInput {
-  cuisine : String
-  directions : json
+input insertRecipeOneDerivedInput {
+  title : String!
   img : String
-  meal_type : String
-  recipe_ingredients_list : InsertRecipeOneDerivedRecipeIngredientsArrRelInsertInput
-  title : String
   total_time : Int
   yields : String
-}
-
-input InsertRecipeOneDerivedRecipeIngredientsArrRelInsertInput {
-  data : [InsertRecipeOneDerivedRecipeIngredientsInsertInput!]!
-  on_conflict : InsertRecipeOneDerivedRecipeIngredientsOnConflict
-}
-
-input InsertRecipeOneDerivedRecipeIngredientsInsertInput {
-  formatted_text : String
-  name : String
-  optional : Boolean
-  preparation : String
-  quantity_denominator : Int
-  quantity_numerator : Int
-  raw_text : String
-  recipe : InsertRecipeOneDerivedRecipeObjRelInsertInput
-  recipe_id : String
-  unit : String
-}
-
-input InsertRecipeOneDerivedRecipeObjRelInsertInput {
-  data : InsertRecipeOneDerivedRecipeInsertInput!
-  on_conflict : InsertRecipeOneDerivedRecipeOnConflict
-}
-
-input InsertRecipeOneDerivedRecipeOnConflict {
-  constraint : InsertRecipeOneDerivedRecipeConstraint!
-  update_columns : [InsertRecipeOneDerivedRecipeUpdateColumn!]!
-  where : InsertRecipeOneDerivedRecipeBoolExp
-}
-
-input InsertRecipeOneDerivedRecipeBoolExp {
-  _and : [InsertRecipeOneDerivedRecipeBoolExp]
-  _not : InsertRecipeOneDerivedRecipeBoolExp
-  _or : [InsertRecipeOneDerivedRecipeBoolExp]
-  cuisine : InsertRecipeOneDerivedStringComparisonExp
-  directions : InsertRecipeOneDerivedJsonComparisonExp
-  id : InsertRecipeOneDerivedStringComparisonExp
-  img : InsertRecipeOneDerivedStringComparisonExp
-  meal_type : InsertRecipeOneDerivedStringComparisonExp
-  owner : InsertRecipeOneDerivedStringComparisonExp
-  recipe_ingredients_list : InsertRecipeOneDerivedRecipeIngredientsBoolExp
-  title : InsertRecipeOneDerivedStringComparisonExp
-  total_time : InsertRecipeOneDerivedIntComparisonExp
-  user : InsertRecipeOneDerivedUserBoolExp
-  yields : InsertRecipeOneDerivedStringComparisonExp
-}
-
-input InsertRecipeOneDerivedStringComparisonExp {
-  _eq : String
-  _gt : String
-  _gte : String
-  _ilike : String
-  _in : [String!]
-  _is_null : Boolean
-  _like : String
-  _lt : String
-  _lte : String
-  _neq : String
-  _nilike : String
-  _nin : [String!]
-  _nlike : String
-  _nsimilar : String
-  _similar : String
-}
-
-input InsertRecipeOneDerivedJsonComparisonExp {
-  _eq : json
-  _gt : json
-  _gte : json
-  _in : [json!]
-  _is_null : Boolean
-  _lt : json
-  _lte : json
-  _neq : json
-  _nin : [json!]
-}
-
-input InsertRecipeOneDerivedRecipeIngredientsBoolExp {
-  _and : [InsertRecipeOneDerivedRecipeIngredientsBoolExp]
-  _not : InsertRecipeOneDerivedRecipeIngredientsBoolExp
-  _or : [InsertRecipeOneDerivedRecipeIngredientsBoolExp]
-  formatted_text : InsertRecipeOneDerivedStringComparisonExp
-  id : InsertRecipeOneDerivedUuidComparisonExp
-  name : InsertRecipeOneDerivedStringComparisonExp
-  optional : InsertRecipeOneDerivedBooleanComparisonExp
-  preparation : InsertRecipeOneDerivedStringComparisonExp
-  quantity_denominator : InsertRecipeOneDerivedIntComparisonExp
-  quantity_numerator : InsertRecipeOneDerivedIntComparisonExp
-  raw_text : InsertRecipeOneDerivedStringComparisonExp
-  recipe : InsertRecipeOneDerivedRecipeBoolExp
-  recipe_id : InsertRecipeOneDerivedStringComparisonExp
-  unit : InsertRecipeOneDerivedStringComparisonExp
-}
-
-input InsertRecipeOneDerivedUuidComparisonExp {
-  _eq : uuid
-  _gt : uuid
-  _gte : uuid
-  _in : [uuid!]
-  _is_null : Boolean
-  _lt : uuid
-  _lte : uuid
-  _neq : uuid
-  _nin : [uuid!]
-}
-
-input InsertRecipeOneDerivedBooleanComparisonExp {
-  _eq : Boolean
-  _gt : Boolean
-  _gte : Boolean
-  _in : [Boolean!]
-  _is_null : Boolean
-  _lt : Boolean
-  _lte : Boolean
-  _neq : Boolean
-  _nin : [Boolean!]
-}
-
-input InsertRecipeOneDerivedIntComparisonExp {
-  _eq : Int
-  _gt : Int
-  _gte : Int
-  _in : [Int!]
-  _is_null : Boolean
-  _lt : Int
-  _lte : Int
-  _neq : Int
-  _nin : [Int!]
-}
-
-input InsertRecipeOneDerivedUserBoolExp {
-  _and : [InsertRecipeOneDerivedUserBoolExp]
-  _not : InsertRecipeOneDerivedUserBoolExp
-  _or : [InsertRecipeOneDerivedUserBoolExp]
-  email : InsertRecipeOneDerivedStringComparisonExp
-  id : InsertRecipeOneDerivedStringComparisonExp
-  img : InsertRecipeOneDerivedStringComparisonExp
-  name : InsertRecipeOneDerivedStringComparisonExp
-  recipes_list : InsertRecipeOneDerivedRecipeBoolExp
-}
-
-input InsertRecipeOneDerivedRecipeIngredientsOnConflict {
-  constraint : InsertRecipeOneDerivedRecipeIngredientsConstraint!
-  update_columns : [InsertRecipeOneDerivedRecipeIngredientsUpdateColumn!]!
-  where : InsertRecipeOneDerivedRecipeIngredientsBoolExp
+  cuisine : String
+  meal_type : String
+  ingredients : [String!]
+  directions : json
 }
 
 type ParsedIngredients {
   name : String!
-}
-
-type Status {
-  status : String!
-}
-
-type InsertRecipeOneDerivedOutput {
-  id : String!
 }
 
 type UpdatedRecipeIngredients {
@@ -228,6 +50,10 @@ type UpdatedRecipeIngredients {
 }
 
 type ImportedRecipe {
+  id : String!
+}
+
+type InsertRecipeOneOutput {
   id : String!
 }
 

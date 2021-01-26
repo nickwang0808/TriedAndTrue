@@ -6,5 +6,5 @@ export default function getUserId(auth: string) {
   }
   const token = auth.replace("Bearer ", "");
   const { user_id } = jwt.decode(token);
-  return user_id;
+  return user_id as string;
 }

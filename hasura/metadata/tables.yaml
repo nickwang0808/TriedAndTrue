@@ -136,12 +136,12 @@
             id:
               _eq: X-Hasura-User-Id
       columns:
+      - comment
       - formatted_text
+      - index
       - name
-      - optional
-      - preparation
-      - quantity_denominator
-      - quantity_numerator
+      - other
+      - quantity
       - raw_text
       - recipe_id
       - unit
@@ -152,14 +152,14 @@
       columns:
       - id
       - name
-      - quantity_numerator
-      - quantity_denominator
       - unit
-      - preparation
-      - optional
+      - comment
       - recipe_id
       - raw_text
       - formatted_text
+      - other
+      - index
+      - quantity
       filter:
         recipe:
           user:
