@@ -5,7 +5,7 @@ import LoadingBase from "./loadingBase";
 export default function SavingImport() {
   return (
     <StyledCenterContainer>
-      <p>Saving Recipe, hold on</p>
+      <p>Saving Recipe, hang tight!</p>
       <LoadingBase />
     </StyledCenterContainer>
   );
