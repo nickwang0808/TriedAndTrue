@@ -133,6 +133,10 @@ ion-footer {
   background-image: none;
 }
 
+ion-checkbox {
+  --border-color: var(--ion-color-secondary);
+}
+
 @font-face {
   font-family: "OpenSansBold";
   font-style: normal;

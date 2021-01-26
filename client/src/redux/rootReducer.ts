@@ -5,6 +5,7 @@ import plannerDateRangeSlice from "./Planner/PlannerDateRangeSlice";
 import PlannerItemModalSlice from "./Planner/PlannerItemModalSlice";
 import plannerModalSlice from "./Planner/PlannerModalSlice";
 import recipeDetailsSlice from "./RecipeDetailsSlice/recipeDetailsSlice";
+import shoppingListDetailSlice from "./ShoppingList/ShoppingListDetailsSlice";
 import toastSlice from "./toastSlice/toastSlice";
 
 const rootReducer = combineReducers({
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   recipeDetailsSlice,
   AddRecipeControlSlice,
   toastSlice,
+  shoppingListDetailSlice,
 });
 
 export default rootReducer;

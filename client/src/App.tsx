@@ -47,7 +47,8 @@ import DetailsOptionsModal from "./pages/recipeDetails/DetailsOptionsModal";
 import RecipeDeleteConfirmationModal from "./pages/recipeDetails/RecipeDeleteConfirmationModal";
 import RecipeDetailsPage from "./pages/recipeDetails/RecipeDetailsPage";
 import RecipePage from "./pages/recipes/RecipePage";
-import ShoppingListPage from "./pages/ShoppingList/ShoppingListPage";
+import ShoppingListDetails from "./pages/ShoppingList/ShoppingListDetails";
+import ShoppingListHome from "./pages/ShoppingList/ShoppingListHome";
 import { setDateRange } from "./redux/Planner/PlannerDateRangeSlice";
 import "./style.scss";
 /* Theme variables */
@@ -97,7 +98,8 @@ const App: React.FC = () => {
                   exact={true}
                   component={MealPlannerMainPage}
                 />
-                <Route path="/lists" component={ShoppingListPage} />
+                <Route exact path="/lists" component={ShoppingListHome} />
+                <Route path="/lists/test" component={ShoppingListDetails} />
                 <Route
                   path="/profile"
                   component={() => (
