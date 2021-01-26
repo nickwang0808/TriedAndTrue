@@ -75,7 +75,7 @@ export default function ImportRecipeModal() {
           Save
         </StyledButton>
       </StyledImportContainer>
-      {warning && <span>This website may not be imported properly</span>}
+      {warning && <StyledWarningSpan>We'll do our best to import this recipe.</StyledWarningSpan>}
 
       <StyledPageBreakOr>
         <div>OR</div>
@@ -144,6 +144,12 @@ const StyledPageBreakOr = styled.div`
     width: 50px;
     margin-top: 10px;
   }
+`;
+
+const StyledWarningSpan = styled.div`
+text-align: center;
+padding: 4px 8px 0 8px;
+font-size: 14px;
 `;
 
 const StyledIonInput = styled(IonInput)`
