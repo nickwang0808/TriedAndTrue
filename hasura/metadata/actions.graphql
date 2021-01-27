@@ -7,6 +7,13 @@ type Mutation {
 
 
 type Mutation {
+  insertIngredientToList (
+    ingredientsIds: [String!]!
+  ): [shoppingListItems!]!
+}
+
+
+type Mutation {
   insertRecipeOneDerived (
     object: insertRecipeOneDerivedInput!
   ): InsertRecipeOneOutput!
@@ -54,6 +61,10 @@ type ImportedRecipe {
 }
 
 type InsertRecipeOneOutput {
+  id : String!
+}
+
+type shoppingListItems {
   id : String!
 }
 

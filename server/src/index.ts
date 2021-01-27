@@ -1,4 +1,5 @@
 import express from "express";
+import addIngredientToList from "./routes/insertIngredientsToListRoute";
 import InsertRecipeOneDerivedRoute from "./routes/insertRecipe";
 import overWriteIngredient from "./routes/overWriteIngredients";
 import parseIngredientToString from "./routes/parseIngredients";
@@ -13,5 +14,6 @@ app.use("/ingredients", parseIngredientToString);
 app.use("/overwrite-ingredients", overWriteIngredient);
 app.use("/InsertRecipeOneDerived", InsertRecipeOneDerivedRoute);
 app.use("/scraper", scraperRoute);
+app.use("/addIngredientToList", addIngredientToList);
 
 app.listen(port, () => console.log(`server is listening on ${port}`));

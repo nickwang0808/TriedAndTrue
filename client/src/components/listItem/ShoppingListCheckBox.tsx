@@ -8,7 +8,7 @@ interface IProps {
   comment?: string;
   value: string;
   isChecked: boolean;
-  onChange: (isChecked: boolean, id: string) => void;
+  onChange: (isChecked: boolean, value: string) => void;
 }
 
 export default function ShoppingListCheckBox({
@@ -30,9 +30,9 @@ export default function ShoppingListCheckBox({
         color="secondary"
         value={value}
         checked={isChecked}
-        onIonChange={({ detail: { checked, value } }) =>
+        onIonChange={({ detail: { checked, value } }) => 
           onChange(checked, value)
-        }
+       }
       />
     </IonItem>
   );

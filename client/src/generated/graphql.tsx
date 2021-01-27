@@ -1412,6 +1412,19 @@ export type ImportRecipeMutation = (
   ) }
 );
 
+export type InsertIngredientToListMutationVariables = Exact<{
+  objects: Array<List_Insert_Input> | List_Insert_Input;
+}>;
+
+
+export type InsertIngredientToListMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_list?: Maybe<(
+    { __typename?: 'list_mutation_response' }
+    & Pick<List_Mutation_Response, 'affected_rows'>
+  )> }
+);
+
 export type InsertRecipeMutationVariables = Exact<{
   object: InsertRecipeOneDerivedInput;
 }>;
@@ -1508,7 +1521,7 @@ export type GetAllIngredientsInweekQuery = (
   { __typename?: 'query_root' }
   & { planner: Array<(
     { __typename?: 'planner' }
-    & Pick<Planner, 'date'>
+    & Pick<Planner, 'date' | 'index'>
     & { recipe: (
       { __typename?: 'recipe' }
       & Pick<Recipe, 'id' | 'title'>
@@ -1628,6 +1641,16 @@ export const ImportRecipeDocument = gql`
 export type ImportRecipeMutationFn = Apollo.MutationFunction<ImportRecipeMutation, ImportRecipeMutationVariables>;
 export type ImportRecipeMutationResult = Apollo.MutationResult<ImportRecipeMutation>;
 export type ImportRecipeMutationOptions = Apollo.BaseMutationOptions<ImportRecipeMutation, ImportRecipeMutationVariables>;
+export const InsertIngredientToListDocument = gql`
+    mutation InsertIngredientToList($objects: [list_insert_input!]!) {
+  insert_list(objects: $objects) {
+    affected_rows
+  }
+}
+    `;
+export type InsertIngredientToListMutationFn = Apollo.MutationFunction<InsertIngredientToListMutation, InsertIngredientToListMutationVariables>;
+export type InsertIngredientToListMutationResult = Apollo.MutationResult<InsertIngredientToListMutation>;
+export type InsertIngredientToListMutationOptions = Apollo.BaseMutationOptions<InsertIngredientToListMutation, InsertIngredientToListMutationVariables>;
 export const InsertRecipeDocument = gql`
     mutation InsertRecipe($object: insertRecipeOneDerivedInput!) {
   insertRecipeOneDerived(object: $object) {
@@ -1703,6 +1726,7 @@ export const GetAllIngredientsInweekDocument = gql`
     order_by: {date: asc, index: asc}
   ) {
     date
+    index
     recipe {
       id
       title

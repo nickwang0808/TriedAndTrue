@@ -2,13 +2,18 @@ import { IonContent, IonList } from "@ionic/react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ModalHeader from "../../../../components/headers/ModalHeader";
+import SaveFooterButton from "../../../../components/layout/SaveFooterButton";
 import ShoppingListCheckBox from "../../../../components/listItem/ShoppingListCheckBox";
 import BlockSeparator from "../../../../components/misc/BlockSeparator";
 import { FancyModalWithRoundTop } from "../../../../components/modals/FancyModalWithRoundTop";
+import useInsertIngredientToList from "../../../../gql/mutations/useInsertIngredientToList.graphql";
 import useGetAllIngredientsInWeek from "../../../../gql/query/useGetAllIngredientsInWeek.graphql";
 import {
+  checkIngredients,
+  IRecipeIngredients,
   setSelectedIngredient,
   setShowIngredientToListModal,
+  unCheckIngredients,
 } from "../../../../redux/Planner/AddInGredientsToListSlice";
 import { IAppState } from "../../../../redux/store";
 
@@ -20,30 +25,59 @@ export default function AddIngredientsToListModel() {
 
   const { data, loading, error } = useGetAllIngredientsInWeek();
   const handleDismiss = () => dispatch(setShowIngredientToListModal(false));
-  const isFound = (id: string) =>
-    !!selectedIngredients.find((elem) => elem === id);
-  const handleCheck = (isCheck: boolean, id: string) => {
+  const isFound = (
+    id: string,
+    _date: string,
+    _index: number,
+    _recipe_Id: string
+  ) =>
+    !!selectedIngredients.find(
+      ({ date, recipe_index, ingredients, recipe_id }) =>
+        date === _date &&
+        recipe_index === _index &&
+        ingredients.find((e) => e === id) &&
+        recipe_id === _recipe_Id
+    );
+
+  const handleCheck = (
+    isCheck: boolean,
+    id: string,
+    recipe_id: string,
+    recipe_index: number,
+    date: string
+  ) => {
     if (isCheck) {
-      // add
-      dispatch(setSelectedIngredient([...selectedIngredients, id]));
+      dispatch(checkIngredients({ recipe_id, id, date, recipe_index }));
     } else {
-      // remove
-      dispatch(
-        setSelectedIngredient(selectedIngredients.filter((elem) => elem !== id))
-      );
+      dispatch(unCheckIngredients({ recipe_id, id, date, recipe_index }));
     }
   };
 
   const preCheckAllItems = () => {
-    const ids = data!
-      .planner!.map(({ recipe }) => {
-        return [
-          ...recipe.recipe_ingredients_list.map((ing) => ing.id as string),
-        ];
-      })
-      .flat();
+    const ids: IRecipeIngredients[] = data!.planner!.map(
+      ({ date, index, recipe: { id, recipe_ingredients_list } }) => {
+        return {
+          recipe_id: id,
+          date,
+          recipe_index: index,
+          ingredients: recipe_ingredients_list.map((e) => e.id),
+        };
+      }
+    );
 
     dispatch(setSelectedIngredient(ids));
+  };
+
+  const getTotalIngredientsCount = () =>
+    selectedIngredients
+      .map(({ ingredients }) => {
+        return [...ingredients];
+      })
+      .flat().length;
+
+  const { insertIngredientToList } = useInsertIngredientToList();
+  const handleSubmit = async () => {
+    await insertIngredientToList();
   };
 
   let content;
@@ -58,22 +92,24 @@ export default function AddIngredientsToListModel() {
     content = (
       <>
         {planner?.map(
-          ({ date, recipe: { id, title, recipe_ingredients_list } }) => {
+          ({
+            date,
+            index,
+            recipe: { id: recipe_id, title, recipe_ingredients_list },
+          }) => {
             if (!recipe_ingredients_list.length) return null;
             return (
-              <>
-                <BlockSeparator
-                  title={title}
-                  subTitle={date}
-                  key={`sep${id}`}
-                />
-                <IonList lines="full" key={id}>
+              <React.Fragment key={date + index + recipe_id}>
+                <BlockSeparator title={title} subTitle={date} />
+                <IonList lines="full">
                   {recipe_ingredients_list.map(
                     ({ id, quantity, comment, name, unit }) => (
                       <ShoppingListCheckBox
                         value={id}
-                        isChecked={isFound(id)}
-                        onChange={handleCheck}
+                        isChecked={isFound(id, date, index, recipe_id)}
+                        onChange={(isChecked: boolean, id: string) =>
+                          handleCheck(isChecked, id, recipe_id, index, date)
+                        }
                         key={id}
                         text={name!}
                         quantity={`${quantity || ""} ${unit || ""}`}
@@ -82,7 +118,7 @@ export default function AddIngredientsToListModel() {
                     )
                   )}
                 </IonList>
-              </>
+              </React.Fragment>
             );
           }
         )}
@@ -92,7 +128,7 @@ export default function AddIngredientsToListModel() {
 
   return (
     <FancyModalWithRoundTop
-      isOpen
+      isOpen={showAddIngredientToListModal}
       onDidDismiss={handleDismiss}
       onWillPresent={preCheckAllItems}
     >
@@ -101,6 +137,10 @@ export default function AddIngredientsToListModel() {
         handleClose={handleDismiss}
       />
       <IonContent>{content}</IonContent>
+      <SaveFooterButton
+        text={`Add ${getTotalIngredientsCount()} Ingredients To List`}
+        action={handleSubmit}
+      />
     </FancyModalWithRoundTop>
   );
 }

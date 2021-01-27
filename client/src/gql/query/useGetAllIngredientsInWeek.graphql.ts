@@ -13,6 +13,7 @@ export const GET_ALL_INGREDIENTS_IN_WEEK = gql`
       order_by: { date: asc, index: asc }
     ) {
       date
+      index
       recipe {
         id
         title
