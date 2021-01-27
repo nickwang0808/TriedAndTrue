@@ -1,6 +1,5 @@
 import {
   IonBackButton,
-  IonButton,
   IonButtons,
   IonHeader,
   IonIcon,
@@ -27,12 +26,8 @@ export default function ShoppingListDetailsHeader({ title }: IProps) {
         </IonButtons>
         <IonTitle color="primary">{title}</IonTitle>
         <IonButtons slot="end">
-          <IonButton>
-            <IonIcon size="small" src={addNew} />
-          </IonButton>
-          <IonButton>
-            <IonIcon size="small" src={ellipsis} />
-          </IonButton>
+          <IonIcon size="small" src={addNew} />
+          <IonIcon size="small" src={ellipsis} />
         </IonButtons>
       </IonToolbar>
 

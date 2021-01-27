@@ -3,7 +3,7 @@ import { startOfWeek } from "date-fns";
 
 interface IState {
   dateRange: null | string[][];
-  selectedWeek: string;
+  selectedWeek: string; // this will be the monday of the week
 }
 
 const initialState: IState = {

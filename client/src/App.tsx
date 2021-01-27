@@ -38,6 +38,7 @@ import ConfirmCancelModal from "./pages/addOrEditRecipeModal/ConfirmCancelModal"
 import ImportRecipeModal from "./pages/addOrEditRecipeModal/ImportRecipeModa";
 import AuthChecker from "./pages/auth/AuthChecker";
 import MealPlannerMainPage from "./pages/mealPlanner/MealPlannerMainPage";
+import AddIngredientsToListModel from "./pages/mealPlanner/PlannerModals/AddIngredientsToListModal/AddIngredientsToListModel";
 import AddMultiRecipeToPlannerModal from "./pages/mealPlanner/PlannerModals/AddMultiRecipeToPlannerModal/AddMultiRecipeToPlannerModal";
 import EditPlannerItemModal from "./pages/mealPlanner/PlannerModals/EditPlannerItemModal/EditPlannerItemModal";
 import ReCreatePlannerModal from "./pages/mealPlanner/PlannerModals/ReCreatePlannerModal/ReCreatePlannerModal";
@@ -82,6 +83,7 @@ const App: React.FC = () => {
 
           <AddMultiRecipeToPlannerModal />
 
+          <AddIngredientsToListModel />
           <EditPlannerItemModal />
           <ReCreatePlannerModal />
           <SelectWeekModal />

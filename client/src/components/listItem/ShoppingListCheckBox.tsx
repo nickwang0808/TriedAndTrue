@@ -6,23 +6,41 @@ interface IProps {
   text: string;
   quantity?: string;
   comment?: string;
+  value: string;
+  isChecked: boolean;
+  onChange: (isChecked: boolean, id: string) => void;
 }
 
 export default function ShoppingListCheckBox({
   text,
   comment,
   quantity,
+  value,
+  isChecked,
+  onChange,
 }: IProps) {
   return (
     <IonItem lines="full">
       <StyledFlexBox>
         <StyledTitle subContent={quantity}>{text}</StyledTitle>
-        <StyledComment>fresh</StyledComment>
+        <StyledComment>{comment}</StyledComment>
       </StyledFlexBox>
-      <IonCheckbox slot="start" color="secondary" />
+      <StyledCheckBox
+        slot="start"
+        color="secondary"
+        value={value}
+        checked={isChecked}
+        onIonChange={({ detail: { checked, value } }) =>
+          onChange(checked, value)
+        }
+      />
     </IonItem>
   );
 }
+
+const StyledCheckBox = styled(IonCheckbox)`
+  margin-inline-end: 16px !important;
+`;
 
 const StyledFlexBox = styled.div`
   display: flex;

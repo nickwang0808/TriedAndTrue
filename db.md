@@ -38,3 +38,15 @@
 - recipe_id
 - index
 - date
+
+### list
+
+- user_id
+- recipes: [{title, img}]
+- date
+- title
+- quantity
+- comment
+- other
+- category
+- is_completed
