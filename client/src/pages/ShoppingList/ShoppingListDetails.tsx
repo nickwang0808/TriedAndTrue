@@ -3,6 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ShoppingListDetailsHeader from "../../components/headers/ShoppingListDetailsHeader";
 import BlockSeparator from "../../components/misc/BlockSeparator";
+import useGetShoppingListByWeek from "../../gql/query/useGetShoppingListByDate.graphql";
 import { IAppState } from "../../redux/store";
 
 export default function ShoppingListDetails() {
@@ -10,6 +11,8 @@ export default function ShoppingListDetails() {
     ({ shoppingListDetailSlice }: IAppState) => shoppingListDetailSlice
   );
   const dispatch = useDispatch();
+
+  const { GetShoppingLIstByDate } = useGetShoppingListByWeek();
 
   return (
     <IonPage>

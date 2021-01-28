@@ -31,4 +31,4 @@ export default async function runParser(input: string[]) {
   }
 }
 
-runParser(["1pound beef", "10 cup water, boiled first", "1 tbsp honey"]);
+// runParser(["1pound beef", "10 cup water, boiled first", "1 tbsp honey"]);

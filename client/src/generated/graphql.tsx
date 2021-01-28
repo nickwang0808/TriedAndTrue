@@ -332,6 +332,8 @@ export type Mutation_Root = {
   delete_recipe_ingredients_by_pk?: Maybe<Recipe_Ingredients>;
   /** perform the action: "importRecipe" */
   importRecipe: ImportedRecipe;
+  /** perform the action: "insertIngredientToList" */
+  insertIngredientToList: Array<ShoppingListItems>;
   /** perform the action: "insertRecipeOneDerived" */
   insertRecipeOneDerived: InsertRecipeOneOutput;
   /** insert data into the table: "list" */
@@ -425,6 +427,13 @@ export type Mutation_RootDelete_Recipe_Ingredients_By_PkArgs = {
 export type Mutation_RootImportRecipeArgs = {
   url: Scalars['String'];
   wildMode?: Maybe<Scalars['Boolean']>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertIngredientToListArgs = {
+  date: Scalars['String'];
+  ingredientsIds: Array<Scalars['String']>;
 };
 
 
@@ -1099,6 +1108,11 @@ export enum Recipe_Update_Column {
   Yields = 'yields'
 }
 
+export type ShoppingListItems = {
+  __typename?: 'shoppingListItems';
+  id: Scalars['String'];
+};
+
 /** subscription root */
 export type Subscription_Root = {
   __typename?: 'subscription_root';
@@ -1234,11 +1248,23 @@ export type User = {
   email: Scalars['String'];
   id: Scalars['String'];
   img?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  lists: Array<List>;
   name: Scalars['String'];
   /** An array relationship */
   planners: Array<Planner>;
   /** An array relationship */
   recipes_list: Array<Recipe>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserListsArgs = {
+  distinct_on?: Maybe<Array<List_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<List_Order_By>>;
+  where?: Maybe<List_Bool_Exp>;
 };
 
 
@@ -1269,6 +1295,7 @@ export type User_Bool_Exp = {
   email?: Maybe<String_Comparison_Exp>;
   id?: Maybe<String_Comparison_Exp>;
   img?: Maybe<String_Comparison_Exp>;
+  lists?: Maybe<List_Bool_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   planners?: Maybe<Planner_Bool_Exp>;
   recipes_list?: Maybe<Recipe_Bool_Exp>;
@@ -1413,15 +1440,16 @@ export type ImportRecipeMutation = (
 );
 
 export type InsertIngredientToListMutationVariables = Exact<{
-  objects: Array<List_Insert_Input> | List_Insert_Input;
+  ingredientsIds: Array<Scalars['String']> | Scalars['String'];
+  date: Scalars['String'];
 }>;
 
 
 export type InsertIngredientToListMutation = (
   { __typename?: 'mutation_root' }
-  & { insert_list?: Maybe<(
-    { __typename?: 'list_mutation_response' }
-    & Pick<List_Mutation_Response, 'affected_rows'>
+  & { insertIngredientToList: Array<(
+    { __typename?: 'shoppingListItems' }
+    & Pick<ShoppingListItems, 'id'>
   )> }
 );
 
@@ -1582,6 +1610,20 @@ export type GetRecipeDetailsQuery = (
   )> }
 );
 
+export type GetShoppingLIstByDateQueryVariables = Exact<{
+  _gte: Scalars['date'];
+  _lte: Scalars['date'];
+}>;
+
+
+export type GetShoppingLIstByDateQuery = (
+  { __typename?: 'query_root' }
+  & { list: Array<(
+    { __typename?: 'list' }
+    & Pick<List, 'id' | 'date' | 'comment' | 'category' | 'is_completed' | 'other' | 'quantity'>
+  )> }
+);
+
 
 export const UpdateRecipeDetailDocument = gql`
     mutation UpdateRecipeDetail($id: String!, $_set: recipe_set_input!, $ingredientsStrings: [String!]!) {
@@ -1642,9 +1684,9 @@ export type ImportRecipeMutationFn = Apollo.MutationFunction<ImportRecipeMutatio
 export type ImportRecipeMutationResult = Apollo.MutationResult<ImportRecipeMutation>;
 export type ImportRecipeMutationOptions = Apollo.BaseMutationOptions<ImportRecipeMutation, ImportRecipeMutationVariables>;
 export const InsertIngredientToListDocument = gql`
-    mutation InsertIngredientToList($objects: [list_insert_input!]!) {
-  insert_list(objects: $objects) {
-    affected_rows
+    mutation InsertIngredientToList($ingredientsIds: [String!]!, $date: String!) {
+  insertIngredientToList(ingredientsIds: $ingredientsIds, date: $date) {
+    id
   }
 }
     `;
@@ -1794,3 +1836,17 @@ export const GetRecipeDetailsDocument = gql`
 }
     `;
 export type GetRecipeDetailsQueryResult = Apollo.QueryResult<GetRecipeDetailsQuery, GetRecipeDetailsQueryVariables>;
+export const GetShoppingLIstByDateDocument = gql`
+    query GetShoppingLIstByDate($_gte: date!, $_lte: date!) {
+  list(where: {_and: [{date: {_gte: $_gte}}, {date: {_lte: $_lte}}]}) {
+    id
+    date
+    comment
+    category
+    is_completed
+    other
+    quantity
+  }
+}
+    `;
+export type GetShoppingLIstByDateQueryResult = Apollo.QueryResult<GetShoppingLIstByDateQuery, GetShoppingLIstByDateQueryVariables>;

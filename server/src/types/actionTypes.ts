@@ -55,6 +55,7 @@ export type importRecipeArgs = {
 
 export type insertIngredientToListArgs = {
   ingredientsIds: Array<string>;
+  date: string;
 };
 
 export type insertRecipeOneDerivedArgs = {

@@ -5,9 +5,9 @@ import {
 } from "../../generated/graphql";
 
 export const INSERT_INGREDIENT_TO_LIST = gql`
-  mutation InsertIngredientToList($objects: [list_insert_input!]!) {
-    insert_list(objects: $objects) {
-      affected_rows
+  mutation InsertIngredientToList($ingredientsIds: [String!]!, $date: String!) {
+    insertIngredientToList(ingredientsIds: $ingredientsIds, date: $date) {
+      id
     }
   }
 `;

@@ -9,7 +9,7 @@ actions:
 - name: insertIngredientToList
   definition:
     kind: synchronous
-    handler: http://35.220.182.160:5001
+    handler: http://35.220.182.160:5001/addIngredientToList
     forward_client_headers: true
   permissions:
   - role: user

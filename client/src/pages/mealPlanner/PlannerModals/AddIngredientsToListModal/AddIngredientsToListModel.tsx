@@ -1,4 +1,5 @@
 import { IonContent, IonList } from "@ionic/react";
+import { format } from "date-fns";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ModalHeader from "../../../../components/headers/ModalHeader";
@@ -15,7 +16,8 @@ import {
   setShowIngredientToListModal,
   unCheckIngredients,
 } from "../../../../redux/Planner/AddInGredientsToListSlice";
-import { IAppState } from "../../../../redux/store";
+import { IAppState, store } from "../../../../redux/store";
+import { setShowToast } from "../../../../redux/toastSlice/toastSlice";
 
 export default function AddIngredientsToListModel() {
   const dispatch = useDispatch();
@@ -68,16 +70,27 @@ export default function AddIngredientsToListModel() {
     dispatch(setSelectedIngredient(ids));
   };
 
-  const getTotalIngredientsCount = () =>
+  const getAllCheckedIds = () =>
     selectedIngredients
       .map(({ ingredients }) => {
         return [...ingredients];
       })
-      .flat().length;
+      .flat();
 
   const { insertIngredientToList } = useInsertIngredientToList();
+
   const handleSubmit = async () => {
-    await insertIngredientToList();
+    const { selectedWeek } = store.getState().plannerDateRangeSlice;
+
+    await insertIngredientToList({
+      variables: {
+        date: format(new Date(selectedWeek), "yyyy-MM-dd"),
+        ingredientsIds: getAllCheckedIds(),
+      },
+    });
+
+    dispatch(setShowToast("shopping list update"));
+    handleDismiss();
   };
 
   let content;
@@ -138,7 +151,7 @@ export default function AddIngredientsToListModel() {
       />
       <IonContent>{content}</IonContent>
       <SaveFooterButton
-        text={`Add ${getTotalIngredientsCount()} Ingredients To List`}
+        text={`Add ${getAllCheckedIds().length} Ingredients To List`}
         action={handleSubmit}
       />
     </FancyModalWithRoundTop>
