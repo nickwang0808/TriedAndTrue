@@ -33,6 +33,13 @@ export type insertRecipeOneDerivedInput = {
   directions?: Maybe<json>;
 };
 
+export type insertIngredientToListInput = {
+  date: string;
+  recipe_id: string;
+  recipe_index: number;
+  ingredients: Array<string>;
+};
+
 export type Query = {
   parseIngredients: Array<ParsedIngredients>;
 };
@@ -54,8 +61,8 @@ export type importRecipeArgs = {
 };
 
 export type insertIngredientToListArgs = {
-  ingredientsIds: Array<string>;
-  date: string;
+  ingredientsToAddToList: Array<insertIngredientToListInput>;
+  shoppingListId: string;
 };
 
 export type insertRecipeOneDerivedArgs = {

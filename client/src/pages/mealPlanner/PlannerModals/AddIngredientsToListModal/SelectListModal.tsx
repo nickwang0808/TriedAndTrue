@@ -1,5 +1,4 @@
 import { IonContent, IonItem, IonLabel, IonList } from "@ionic/react";
-import { format } from "date-fns";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ModalHeader from "../../../../components/headers/ModalHeader";
@@ -7,7 +6,7 @@ import { FancyModalWithRoundTop } from "../../../../components/modals/FancyModal
 import useInsertIngredientToList from "../../../../gql/mutations/useInsertIngredientToList.graphql";
 import useGetAllShoppingLists from "../../../../gql/query/useGetAllShoppingLists.graphql";
 import { setShowIngredientToListModal } from "../../../../redux/Planner/AddInGredientsToListSlice";
-import { IAppState, store } from "../../../../redux/store";
+import { IAppState } from "../../../../redux/store";
 import { setShowToast } from "../../../../redux/toastSlice/toastSlice";
 
 export default function SelectListModal() {
@@ -21,19 +20,11 @@ export default function SelectListModal() {
   const { data, loading, error } = useGetAllShoppingLists();
 
   const { insertIngredientToList } = useInsertIngredientToList();
-  const handleSubmit = async () => {
-    const { selectedWeek } = store.getState().plannerDateRangeSlice;
-
-    const ingredientsIds = selectedIngredients
-      .map(({ ingredients }) => {
-        return [...ingredients];
-      })
-      .flat();
-
+  const handleSubmit = async (listId: string) => {
     await insertIngredientToList({
       variables: {
-        date: format(new Date(selectedWeek), "yyyy-MM-dd"),
-        ingredientsIds,
+        ingredientsToAddToList: selectedIngredients,
+        shoppingListId: listId,
       },
     });
 
@@ -54,7 +45,7 @@ export default function SelectListModal() {
     content = (
       <IonList lines="full">
         {list.map(({ id, name }) => (
-          <IonItem onClick={handleSubmit} key={id}>
+          <IonItem onClick={() => handleSubmit(id)} key={id}>
             <IonLabel>{name}</IonLabel>
           </IonItem>
         ))}

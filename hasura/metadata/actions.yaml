@@ -38,6 +38,7 @@ custom_types:
   enums: []
   input_objects:
   - name: insertRecipeOneDerivedInput
+  - name: insertIngredientToListInput
   objects:
   - name: ParsedIngredients
   - name: UpdatedRecipeIngredients

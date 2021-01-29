@@ -8,8 +8,8 @@ type Mutation {
 
 type Mutation {
   insertIngredientToList (
-    ingredientsIds: [String!]!
-    date: String!
+    ingredientsToAddToList: [insertIngredientToListInput!]!
+    shoppingListId: String!
   ): [shoppingListItems!]!
 }
 
@@ -47,6 +47,13 @@ input insertRecipeOneDerivedInput {
   meal_type : String
   ingredients : [String!]
   directions : json
+}
+
+input insertIngredientToListInput {
+  date : String!
+  recipe_id : String!
+  recipe_index : Int!
+  ingredients : [String!]!
 }
 
 type ParsedIngredients {

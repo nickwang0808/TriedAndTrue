@@ -1,7 +1,10 @@
 import { Request, Response, Router } from "express";
 import query from "../db";
 import getUserId from "../helper/getUserId";
-import { insertIngredientToListArgs } from "../types/actionTypes";
+import {
+  insertIngredientToListArgs,
+  insertIngredientToListInput,
+} from "../types/actionTypes";
 
 const router = Router();
 
@@ -10,10 +13,14 @@ router.post("/", async (req: Request, res: Response) => {
   const params: insertIngredientToListArgs = req.body.input;
 
   try {
-    const { ingredientsIds, date } = params;
+    const { ingredientsToAddToList, shoppingListId } = params;
 
     const userId = getUserId(req.headers.authorization);
-    const result = await insertIngredientsToDb(ingredientsIds, date, userId);
+    const result = await insertIngredientsToDb(
+      ingredientsToAddToList,
+      shoppingListId,
+      userId
+    );
 
     return res.json(result);
   } catch (err) {
@@ -28,53 +35,67 @@ interface ISelectResult {
   name: string;
   unit: string;
   comment: string;
+  other: string;
   title: string;
   img: string;
 }
 
 async function insertIngredientsToDb(
-  ids: string[],
-  date: string,
+  ingredientsToAddToList: insertIngredientToListInput[],
+  shoppingListId: string,
   userId: string
 ) {
   // get all info related to the ids
 
-  const { rows } = await query(
-    `
-SELECT i.quantity, i.name, i.unit, i.comment, r.title, r.img
-FROM recipe_ingredients i
-LEFT JOIN recipe r
-    ON r.id = i.recipe_id
-
-WHERE i.id = ANY($1)
-`,
-    [ids]
-  );
-
-  return await Promise.all(
-    (rows as ISelectResult[]).map(
-      async ({ quantity, name, unit, comment, title, img }) => {
+  const nestedIds = await Promise.all(
+    ingredientsToAddToList.map(
+      async ({
+        date,
+        recipe_id,
+        recipe_index,
+        ingredients: ingredientsIds,
+      }) => {
         // name is for the title column, title and img are for the recipe json
-
         const { rows } = await query(
           `
-        INSERT INTO list(user_id, date, title, quantity, comment, unit, recipes)
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
-        RETURNING id
-        `,
-          [
-            userId,
-            date,
-            name,
-            quantity,
-            comment,
-            unit,
-            JSON.stringify({ title, img }),
-          ]
+      SELECT i.quantity, i.name, i.unit, i.comment, i.other, r.title, r.img
+      FROM recipe_ingredients i
+      LEFT JOIN recipe r
+          ON r.id = i.recipe_id
+      
+      WHERE i.id = ANY($1)
+      `,
+          [ingredientsIds]
         );
 
-        return { id: rows[0].id as string };
+        return await Promise.all(
+          (rows as ISelectResult[]).map(
+            async ({ quantity, name, unit, other, comment, title, img }) => {
+              const { rows } = await query(
+                // name is for the title column, title and img are for the recipe json
+                `
+            INSERT INTO list_items(other, name, quantity, comment, unit, recipes, list)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            RETURNING id
+            `,
+                [
+                  other,
+                  name,
+                  quantity,
+                  comment,
+                  unit,
+                  JSON.stringify({ title, img, date }),
+                  shoppingListId,
+                ]
+              );
+
+              return { id: rows[0].id as string };
+            }
+          )
+        );
       }
     )
   );
+
+  return nestedIds.flat();
 }

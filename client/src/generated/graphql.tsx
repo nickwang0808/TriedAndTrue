@@ -99,6 +99,13 @@ export type Date_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['date']>>;
 };
 
+export type InsertIngredientToListInput = {
+  date: Scalars['String'];
+  ingredients: Array<Scalars['String']>;
+  recipe_id: Scalars['String'];
+  recipe_index: Scalars['Int'];
+};
+
 export type InsertRecipeOneDerivedInput = {
   cuisine?: Maybe<Scalars['String']>;
   directions?: Maybe<Scalars['json']>;
@@ -530,8 +537,8 @@ export type Mutation_RootImportRecipeArgs = {
 
 /** mutation root */
 export type Mutation_RootInsertIngredientToListArgs = {
-  date: Scalars['String'];
-  ingredientsIds: Array<Scalars['String']>;
+  ingredientsToAddToList: Array<InsertIngredientToListInput>;
+  shoppingListId: Scalars['String'];
 };
 
 
@@ -1608,8 +1615,8 @@ export type ImportRecipeMutation = (
 );
 
 export type InsertIngredientToListMutationVariables = Exact<{
-  ingredientsIds: Array<Scalars['String']> | Scalars['String'];
-  date: Scalars['String'];
+  ingredientsToAddToList: Array<InsertIngredientToListInput> | InsertIngredientToListInput;
+  shoppingListId: Scalars['String'];
 }>;
 
 
@@ -1862,8 +1869,11 @@ export type ImportRecipeMutationFn = Apollo.MutationFunction<ImportRecipeMutatio
 export type ImportRecipeMutationResult = Apollo.MutationResult<ImportRecipeMutation>;
 export type ImportRecipeMutationOptions = Apollo.BaseMutationOptions<ImportRecipeMutation, ImportRecipeMutationVariables>;
 export const InsertIngredientToListDocument = gql`
-    mutation InsertIngredientToList($ingredientsIds: [String!]!, $date: String!) {
-  insertIngredientToList(ingredientsIds: $ingredientsIds, date: $date) {
+    mutation InsertIngredientToList($ingredientsToAddToList: [insertIngredientToListInput!]!, $shoppingListId: String!) {
+  insertIngredientToList(
+    ingredientsToAddToList: $ingredientsToAddToList
+    shoppingListId: $shoppingListId
+  ) {
     id
   }
 }

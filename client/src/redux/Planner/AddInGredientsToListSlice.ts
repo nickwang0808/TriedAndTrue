@@ -10,7 +10,7 @@ export interface IRecipeIngredients {
   date: string;
   recipe_id: string;
   recipe_index: number;
-  ingredients: string[];
+  ingredients: string[]; // ids
 }
 
 export interface setCheckedIngType
