@@ -42,11 +42,15 @@
 ### list
 
 - user_id
-- recipes: [{title, img}]
-- date
-- title
+- name
+
+### list_items
+
+- recipes: [{title, img, date}]
+- name
 - quantity
 - comment
 - other
 - category
 - is_completed
+- list_name fk

@@ -1,5 +1,4 @@
 import { IonContent, IonList } from "@ionic/react";
-import { format } from "date-fns";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ModalHeader from "../../../../components/headers/ModalHeader";
@@ -7,17 +6,16 @@ import SaveFooterButton from "../../../../components/layout/SaveFooterButton";
 import ShoppingListCheckBox from "../../../../components/listItem/ShoppingListCheckBox";
 import BlockSeparator from "../../../../components/misc/BlockSeparator";
 import { FancyModalWithRoundTop } from "../../../../components/modals/FancyModalWithRoundTop";
-import useInsertIngredientToList from "../../../../gql/mutations/useInsertIngredientToList.graphql";
 import useGetAllIngredientsInWeek from "../../../../gql/query/useGetAllIngredientsInWeek.graphql";
 import {
   checkIngredients,
   IRecipeIngredients,
   setSelectedIngredient,
   setShowIngredientToListModal,
+  setShowSelectListModal,
   unCheckIngredients,
 } from "../../../../redux/Planner/AddInGredientsToListSlice";
-import { IAppState, store } from "../../../../redux/store";
-import { setShowToast } from "../../../../redux/toastSlice/toastSlice";
+import { IAppState } from "../../../../redux/store";
 
 export default function AddIngredientsToListModel() {
   const dispatch = useDispatch();
@@ -77,21 +75,7 @@ export default function AddIngredientsToListModel() {
       })
       .flat();
 
-  const { insertIngredientToList } = useInsertIngredientToList();
-
-  const handleSubmit = async () => {
-    const { selectedWeek } = store.getState().plannerDateRangeSlice;
-
-    await insertIngredientToList({
-      variables: {
-        date: format(new Date(selectedWeek), "yyyy-MM-dd"),
-        ingredientsIds: getAllCheckedIds(),
-      },
-    });
-
-    dispatch(setShowToast("shopping list update"));
-    handleDismiss();
-  };
+  const handleSubmit = async () => dispatch(setShowSelectListModal(true));
 
   let content;
   if (loading) {

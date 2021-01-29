@@ -39,6 +39,7 @@ import ImportRecipeModal from "./pages/addOrEditRecipeModal/CreateOrImportRecipe
 import AuthChecker from "./pages/auth/AuthChecker";
 import MealPlannerMainPage from "./pages/mealPlanner/MealPlannerMainPage";
 import AddIngredientsToListModel from "./pages/mealPlanner/PlannerModals/AddIngredientsToListModal/AddIngredientsToListModel";
+import SelectListModal from "./pages/mealPlanner/PlannerModals/AddIngredientsToListModal/SelectListModal";
 import AddMultiRecipeToPlannerModal from "./pages/mealPlanner/PlannerModals/AddMultiRecipeToPlannerModal/AddMultiRecipeToPlannerModal";
 import EditPlannerItemModal from "./pages/mealPlanner/PlannerModals/EditPlannerItemModal/EditPlannerItemModal";
 import ReCreatePlannerModal from "./pages/mealPlanner/PlannerModals/ReCreatePlannerModal/ReCreatePlannerModal";
@@ -50,6 +51,7 @@ import RecipeDetailsPage from "./pages/recipeDetails/RecipeDetailsPage";
 import RecipePage from "./pages/recipes/RecipePage";
 import ShoppingListDetails from "./pages/ShoppingList/ShoppingListDetails";
 import ShoppingListHome from "./pages/ShoppingList/ShoppingListHome";
+import AddNewShoppingListModal from "./pages/ShoppingList/ShoppingListModals/AddNewShoppingListModal";
 import { setDateRange } from "./redux/Planner/PlannerDateRangeSlice";
 import "./style.scss";
 /* Theme variables */
@@ -88,6 +90,9 @@ const App: React.FC = () => {
           <ReCreatePlannerModal />
           <SelectWeekModal />
           <SelectDayModal />
+          <SelectListModal />
+
+          <AddNewShoppingListModal />
 
           <Toast />
 

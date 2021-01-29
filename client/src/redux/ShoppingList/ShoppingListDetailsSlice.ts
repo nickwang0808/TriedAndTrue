@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IState {
+  // show the all the active shopping items
   showActive: boolean;
 }
 const initialState: IState = {

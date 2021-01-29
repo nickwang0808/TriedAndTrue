@@ -5,6 +5,14 @@
   - name: user
     using:
       foreign_key_constraint_on: user_id
+  array_relationships:
+  - name: list_items
+    using:
+      foreign_key_constraint_on:
+        column: list
+        table:
+          schema: public
+          name: list_items
   insert_permissions:
   - role: user
     permission:
@@ -15,31 +23,14 @@
       set:
         user_id: x-hasura-User-Id
       columns:
-      - user_id
-      - date
-      - title
-      - quantity
-      - comment
-      - other
-      - category
-      - is_completed
-      - recipes
-      - unit
+      - name
       backend_only: false
   select_permissions:
   - role: user
     permission:
       columns:
+      - name
       - user_id
-      - date
-      - title
-      - quantity
-      - comment
-      - other
-      - category
-      - is_completed
-      - recipes
-      - unit
       - id
       filter:
         user:
@@ -49,16 +40,7 @@
   - role: user
     permission:
       columns:
-      - is_completed
-      - date
-      - recipes
-      - category
-      - comment
-      - other
-      - quantity
-      - title
-      - unit
-      - user_id
+      - name
       filter:
         user:
           id:
@@ -71,6 +53,74 @@
         user:
           id:
             _eq: X-Hasura-User-Id
+- table:
+    schema: public
+    name: list_items
+  object_relationships:
+  - name: shopping_list
+    using:
+      foreign_key_constraint_on: list
+  insert_permissions:
+  - role: user
+    permission:
+      check:
+        shopping_list:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+      columns:
+      - name
+      - quantity
+      - comment
+      - other
+      - category
+      - is_completed
+      - id
+      - list
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - is_completed
+      - quantity
+      - category
+      - comment
+      - name
+      - other
+      - id
+      - list
+      filter:
+        shopping_list:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - is_completed
+      - quantity
+      - category
+      - comment
+      - name
+      - other
+      - id
+      - list
+      filter:
+        shopping_list:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+      check: null
+  delete_permissions:
+  - role: user
+    permission:
+      filter:
+        shopping_list:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
 - table:
     schema: public
     name: planner

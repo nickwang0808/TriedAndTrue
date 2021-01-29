@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface IState {
   showAddIngredientToListModal: boolean;
   selectedIngredients: IRecipeIngredients[];
+  showSelectListModal: boolean;
 }
 
 export interface IRecipeIngredients {
@@ -20,6 +21,7 @@ export interface setCheckedIngType
 const initialState: IState = {
   selectedIngredients: [],
   showAddIngredientToListModal: false,
+  showSelectListModal: false,
 };
 
 const addIngredientsToListSlice = createSlice({
@@ -31,6 +33,13 @@ const addIngredientsToListSlice = createSlice({
       { payload }: PayloadAction<IState["showAddIngredientToListModal"]>
     ) => {
       state.showAddIngredientToListModal = payload;
+    },
+
+    setShowSelectListModal: (
+      state,
+      { payload }: PayloadAction<IState["showSelectListModal"]>
+    ) => {
+      state.showSelectListModal = payload;
     },
 
     setSelectedIngredient: (
@@ -90,5 +99,6 @@ export const {
   checkIngredients,
   unCheckIngredients,
   setSelectedIngredient,
+  setShowSelectListModal,
 } = addIngredientsToListSlice.actions;
 export default addIngredientsToListSlice.reducer;
