@@ -23,7 +23,7 @@ export default function AddDirectionListItem({
   return (
     <StyledWrapper showBackground={showBackground}>
       <StyledIndexBox slot="start">{index}</StyledIndexBox>
-      <IonTextarea
+      <StyledTextArea
         placeholder="Add recipe instructions here..."
         autoGrow
         value={value}
@@ -63,8 +63,12 @@ export const StyledIndexBox = styled.div`
   align-items: center;
   font-family: SuraBold;
   size: 16px;
-  /* margin-right: 8px; */
 
   border: 1px solid var(--ion-color-primary);
   margin-inline: 0px 8px;
+`;
+
+const StyledTextArea = styled(IonTextarea)`
+  --padding-bottom: 0;
+  --padding-top: 0;
 `;

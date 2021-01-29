@@ -35,7 +35,7 @@ import Toast from "./components/misc/Toast";
 import client from "./config/apoloConfig";
 import AddOrEditRecipeModal from "./pages/addOrEditRecipeModal/AddOrEditRecipeModal";
 import ConfirmCancelModal from "./pages/addOrEditRecipeModal/ConfirmCancelModal";
-import ImportRecipeModal from "./pages/addOrEditRecipeModal/ImportRecipeModa";
+import ImportRecipeModal from "./pages/addOrEditRecipeModal/CreateOrImportRecipeModa";
 import AuthChecker from "./pages/auth/AuthChecker";
 import MealPlannerMainPage from "./pages/mealPlanner/MealPlannerMainPage";
 import AddMultiRecipeToPlannerModal from "./pages/mealPlanner/PlannerModals/AddMultiRecipeToPlannerModal/AddMultiRecipeToPlannerModal";
