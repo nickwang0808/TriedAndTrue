@@ -128,6 +128,11 @@ ion-footer {
   background-color: white;
   border-top: 1px solid #dcdcdc;
 }
+
+ion-fab-button {
+  --box-shadow: none;
+}
+
 .header-md::after {
   /* get rid of header under line shadow thingy */
   background-image: none;
