@@ -5,7 +5,10 @@ import ModalHeader from "../../../../components/headers/ModalHeader";
 import { FancyModalWithRoundTop } from "../../../../components/modals/FancyModalWithRoundTop";
 import useInsertIngredientToList from "../../../../gql/mutations/useInsertIngredientToList.graphql";
 import useGetAllShoppingLists from "../../../../gql/query/useGetAllShoppingLists.graphql";
-import { setShowIngredientToListModal } from "../../../../redux/Planner/AddInGredientsToListSlice";
+import {
+  setShowIngredientToListModal,
+  setShowSelectListModal,
+} from "../../../../redux/Planner/AddInGredientsToListSlice";
 import { IAppState } from "../../../../redux/store";
 import { setShowToast } from "../../../../redux/toastSlice/toastSlice";
 
@@ -15,7 +18,7 @@ export default function SelectListModal() {
     ({ addIngredientsToListSlice }: IAppState) => addIngredientsToListSlice
   );
 
-  const handleDismiss = () => {};
+  const handleDismiss = () => dispatch(setShowSelectListModal(false));
 
   const { data, loading, error } = useGetAllShoppingLists();
 

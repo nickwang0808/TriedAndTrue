@@ -5,7 +5,7 @@ interface IState {
   showAddNewListModal: boolean;
 }
 const initialState: IState = {
-  showAddNewListModal: true,
+  showAddNewListModal: false,
 };
 
 const shoppingListHomeSlice = createSlice({

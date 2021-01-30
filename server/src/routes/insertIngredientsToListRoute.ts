@@ -76,7 +76,11 @@ async function insertIngredientsToDb(
                 `
             INSERT INTO list_items(other, name, quantity, comment, unit, recipes, list)
             VALUES ($1, $2, $3, $4, $5, $6, $7)
-            RETURNING id
+            ON CONFLICT ON CONSTRAINT list_items_name_list_comment_key 
+                DO UPDATE SET 
+                    quantity = list_items.quantity + EXCLUDED.quantity,
+                    recipes  = list_items.recipes || EXCLUDED.recipes::jsonb
+            RETURNING id;
             `,
                 [
                   other,
@@ -84,7 +88,7 @@ async function insertIngredientsToDb(
                   quantity,
                   comment,
                   unit,
-                  JSON.stringify({ title, img, date }),
+                  JSON.stringify([{ title, img, date }]),
                   shoppingListId,
                 ]
               );

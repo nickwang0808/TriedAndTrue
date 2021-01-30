@@ -5,7 +5,7 @@ interface IState {
   showActive: boolean;
 }
 const initialState: IState = {
-  showActive: true,
+  showActive: false,
 };
 
 const shoppingListDetailSlice = createSlice({
