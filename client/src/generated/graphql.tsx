@@ -12,6 +12,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   date: any;
+  float8: any;
   json: any;
   timestamptz: any;
   uuid: any;
@@ -97,6 +98,20 @@ export type Date_Comparison_Exp = {
   _lte?: Maybe<Scalars['date']>;
   _neq?: Maybe<Scalars['date']>;
   _nin?: Maybe<Array<Scalars['date']>>;
+};
+
+
+/** expression to compare columns of type float8. All fields are combined with logical 'AND'. */
+export type Float8_Comparison_Exp = {
+  _eq?: Maybe<Scalars['float8']>;
+  _gt?: Maybe<Scalars['float8']>;
+  _gte?: Maybe<Scalars['float8']>;
+  _in?: Maybe<Array<Scalars['float8']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['float8']>;
+  _lte?: Maybe<Scalars['float8']>;
+  _neq?: Maybe<Scalars['float8']>;
+  _nin?: Maybe<Array<Scalars['float8']>>;
 };
 
 export type InsertIngredientToListInput = {
@@ -193,7 +208,7 @@ export type List_Items = {
   list: Scalars['uuid'];
   name: Scalars['String'];
   other?: Maybe<Scalars['String']>;
-  quantity?: Maybe<Scalars['Int']>;
+  quantity?: Maybe<Scalars['float8']>;
   /** An object relationship */
   shopping_list: List;
 };
@@ -216,19 +231,21 @@ export type List_Items_Bool_Exp = {
   list?: Maybe<Uuid_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   other?: Maybe<String_Comparison_Exp>;
-  quantity?: Maybe<Int_Comparison_Exp>;
+  quantity?: Maybe<Float8_Comparison_Exp>;
   shopping_list?: Maybe<List_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "list_items" */
 export enum List_Items_Constraint {
   /** unique or primary key constraint */
+  ListItemsNameListCommentKey = 'list_items_name_list_comment_key',
+  /** unique or primary key constraint */
   ListItemsPkey = 'list_items_pkey'
 }
 
 /** input type for incrementing integer column in table "list_items" */
 export type List_Items_Inc_Input = {
-  quantity?: Maybe<Scalars['Int']>;
+  quantity?: Maybe<Scalars['float8']>;
 };
 
 /** input type for inserting data into table "list_items" */
@@ -240,7 +257,7 @@ export type List_Items_Insert_Input = {
   list?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   other?: Maybe<Scalars['String']>;
-  quantity?: Maybe<Scalars['Int']>;
+  quantity?: Maybe<Scalars['float8']>;
   shopping_list?: Maybe<List_Obj_Rel_Insert_Input>;
 };
 
@@ -313,7 +330,7 @@ export type List_Items_Set_Input = {
   list?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   other?: Maybe<Scalars['String']>;
-  quantity?: Maybe<Scalars['Int']>;
+  quantity?: Maybe<Scalars['float8']>;
 };
 
 /** update columns of table "list_items" */
@@ -1775,6 +1792,19 @@ export type GetAllShoppingListsQuery = (
   )> }
 );
 
+export type GetListItemsByIdQueryVariables = Exact<{
+  _eq?: Maybe<Scalars['uuid']>;
+}>;
+
+
+export type GetListItemsByIdQuery = (
+  { __typename?: 'query_root' }
+  & { list_items: Array<(
+    { __typename?: 'list_items' }
+    & Pick<List_Items, 'quantity' | 'other' | 'name' | 'list' | 'is_completed' | 'comment' | 'id' | 'category'>
+  )> }
+);
+
 export type GetPlannerRecipeByDateQueryVariables = Exact<{
   date?: Maybe<Scalars['date']>;
 }>;
@@ -2008,6 +2038,21 @@ export const GetAllShoppingListsDocument = gql`
 }
     `;
 export type GetAllShoppingListsQueryResult = Apollo.QueryResult<GetAllShoppingListsQuery, GetAllShoppingListsQueryVariables>;
+export const GetListItemsByIdDocument = gql`
+    query GetListItemsById($_eq: uuid) {
+  list_items(where: {list: {_eq: $_eq}}) {
+    quantity
+    other
+    name
+    list
+    is_completed
+    comment
+    id
+    category
+  }
+}
+    `;
+export type GetListItemsByIdQueryResult = Apollo.QueryResult<GetListItemsByIdQuery, GetListItemsByIdQueryVariables>;
 export const GetPlannerRecipeByDateDocument = gql`
     query GetPlannerRecipeByDate($date: date) {
   planner(where: {date: {_eq: $date}}) {

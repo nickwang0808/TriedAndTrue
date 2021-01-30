@@ -121,6 +121,17 @@
           user:
             id:
               _eq: X-Hasura-User-Id
+  event_triggers:
+  - name: find_category
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      num_retries: 5
+      interval_sec: 10
+      timeout_sec: 60
+    webhook: http://35.220.182.160:5001/category
 - table:
     schema: public
     name: planner

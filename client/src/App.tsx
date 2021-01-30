@@ -106,7 +106,7 @@ const App: React.FC = () => {
                   component={MealPlannerMainPage}
                 />
                 <Route exact path="/lists" component={ShoppingListHome} />
-                <Route path="/lists/test" component={ShoppingListDetails} />
+                <Route path="/lists/:id" component={ShoppingListDetails} />
                 <Route
                   path="/profile"
                   component={() => (

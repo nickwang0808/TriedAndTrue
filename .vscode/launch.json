@@ -7,7 +7,7 @@
     {
       "type": "pwa-chrome",
       "request": "attach",
-      "url": "http://localhost:8100/meal-plan",
+      "url": "http://localhost:49744/lists",
       "name": "attach to chrome",
       "port": 9222,
       "webRoot": "${workspaceFolder}"
