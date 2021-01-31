@@ -10,14 +10,33 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import addNew from "../../assets/svg/addnew.svg";
 import ellipsis from "../../assets/svg/ellipsis.svg";
+import { setShowActive } from "../../redux/ShoppingList/ShoppingListDetailsSlice";
+import { IAppState } from "../../redux/store";
 
 interface IProps {
   title: string;
 }
 
+type segmentValue = "active" | "completed" | undefined;
+
 export default function ShoppingListDetailsHeader({ title }: IProps) {
+  const dispatch = useDispatch();
+  const handleSwitch = (value: segmentValue) => {
+    if (!value) return;
+    if (value === "active") {
+      dispatch(setShowActive(true));
+    } else {
+      dispatch(setShowActive(false));
+    }
+  };
+
+  const { showActive } = useSelector(
+    ({ shoppingListDetailSlice }: IAppState) => shoppingListDetailSlice
+  );
+
   return (
     <IonHeader>
       <IonToolbar>
@@ -33,10 +52,11 @@ export default function ShoppingListDetailsHeader({ title }: IProps) {
 
       <IonToolbar>
         <IonSegment
-          value="active"
-          onIonChange={(e) => {}}
+          value={showActive ? "active" : "completed"}
+          onIonChange={({ detail }) =>
+            handleSwitch(detail.value as segmentValue)
+          }
           color="secondary"
-          // color={isPast(new Date(selectedWeek[1])) ? "medium" : "secondary"}
         >
           <IonSegmentButton value="active">
             <IonLabel>Active</IonLabel>

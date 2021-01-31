@@ -19,6 +19,8 @@ export const GET_LIST_ITEMS_BY_ID = gql`
       comment
       id
       category
+      unit
+      recipes
     }
   }
 `;
@@ -33,10 +35,18 @@ export default function useGetListItemsById(id: string) {
     },
   });
 
-  const groupedData = () => {
+  const groupItemsByCategory = () => {
+    /*  use the item's category field to read category data, this is a 2 dim
+    entional array chunked by category */
     if (!data) return null;
-    return groupBy(data.list_items, "category");
+    let arr: GetListItemsByIdQuery["list_items"][] = [];
+    const groups = groupBy(data.list_items, "category");
+    for (const group in groups) {
+      arr.push(groups[group]);
+    }
+    return arr;
   };
-  console.log(groupedData());
-  return { data: groupedData(), loading, error };
+
+  // console.log(groupItemsByCategory());
+  return { data: groupItemsByCategory(), loading, error };
 }

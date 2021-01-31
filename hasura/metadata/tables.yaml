@@ -69,27 +69,30 @@
             id:
               _eq: X-Hasura-User-Id
       columns:
-      - name
-      - quantity
-      - comment
-      - other
       - category
+      - comment
       - is_completed
-      - id
       - list
+      - name
+      - other
+      - quantity
+      - recipes
+      - unit
       backend_only: false
   select_permissions:
   - role: user
     permission:
       columns:
-      - is_completed
-      - quantity
-      - category
-      - comment
       - name
+      - quantity
+      - comment
       - other
+      - category
+      - is_completed
       - id
       - list
+      - unit
+      - recipes
       filter:
         shopping_list:
           user:
@@ -99,14 +102,15 @@
   - role: user
     permission:
       columns:
-      - is_completed
-      - quantity
       - category
       - comment
+      - is_completed
+      - list
       - name
       - other
-      - id
-      - list
+      - quantity
+      - recipes
+      - unit
       filter:
         shopping_list:
           user:

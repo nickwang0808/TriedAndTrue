@@ -1,7 +1,13 @@
 import styled from "@emotion/styled";
-import { IonCheckbox, IonItem } from "@ionic/react";
+import {
+  IonButton,
+  IonButtons,
+  IonCheckbox,
+  IonIcon,
+  IonItem,
+} from "@ionic/react";
 import React from "react";
-
+import lightPencil from "../../assets/svg/lightPencil.svg";
 interface IProps {
   text: string;
   quantity?: string;
@@ -20,7 +26,7 @@ export default function ShoppingListCheckBox({
   onChange,
 }: IProps) {
   return (
-    <IonItem lines="full">
+    <StyledIonItem lines="full">
       <StyledFlexBox>
         <StyledTitle subContent={quantity}>{text}</StyledTitle>
         <StyledComment>{comment}</StyledComment>
@@ -30,13 +36,22 @@ export default function ShoppingListCheckBox({
         color="secondary"
         value={value}
         checked={isChecked}
-        onIonChange={({ detail: { checked, value } }) => 
+        onIonChange={({ detail: { checked, value } }) =>
           onChange(checked, value)
-       }
+        }
       />
-    </IonItem>
+      <IonButtons slot="end">
+        <IonButton onClick={() => console.log("clicked")}>
+          <IonIcon icon={lightPencil} />
+        </IonButton>
+      </IonButtons>
+    </StyledIonItem>
   );
 }
+
+const StyledIonItem = styled(IonItem)`
+  --inner-padding-end: 0;
+`;
 
 const StyledCheckBox = styled(IonCheckbox)`
   margin-inline-end: 16px !important;
