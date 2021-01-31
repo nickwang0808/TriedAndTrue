@@ -13,7 +13,7 @@ import {
   setSelectedIngredient,
   setShowIngredientToListModal,
   setShowSelectListModal,
-  unCheckIngredients,
+  unCheckIngredients
 } from "../../../../redux/Planner/AddInGredientsToListSlice";
 import { IAppState } from "../../../../redux/store";
 
@@ -23,7 +23,8 @@ export default function AddIngredientsToListModel() {
     ({ addIngredientsToListSlice }: IAppState) => addIngredientsToListSlice
   );
 
-  const { data, loading, error } = useGetAllIngredientsInWeek();
+  const { data, loading, error, refetch } = useGetAllIngredientsInWeek();
+
   const handleDismiss = () => dispatch(setShowIngredientToListModal(false));
   const isFound = (
     id: string,
@@ -53,7 +54,11 @@ export default function AddIngredientsToListModel() {
     }
   };
 
-  const preCheckAllItems = () => {
+  const preCheckAllItems = async () => {
+    /* after add recipe to planner and immediately open this modal, it will
+     still show previous version of data, use refetch to update cache */
+    await refetch();
+
     const ids: IRecipeIngredients[] = data!.planner!.map(
       ({ date, index, recipe: { id, recipe_ingredients_list } }) => {
         return {

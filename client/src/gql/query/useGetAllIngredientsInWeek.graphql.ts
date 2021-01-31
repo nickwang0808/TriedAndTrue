@@ -44,12 +44,12 @@ export default function useGetAllIngredientsInWeek() {
     return { _gte: mon, _lte: sun };
   };
 
-  const { data, loading, error } = useQuery<
+  const { data, loading, error, refetch } = useQuery<
     GetAllIngredientsInweekQuery,
     GetAllIngredientsInweekQueryVariables
   >(GET_ALL_INGREDIENTS_IN_WEEK, {
     variables: getMonAndSun(),
   });
 
-  return { data, loading, error };
+  return { data, loading, error, refetch };
 }
