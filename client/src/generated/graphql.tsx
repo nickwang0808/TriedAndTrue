@@ -1991,6 +1991,19 @@ export type GetRecipeDetailsQuery = (
   )> }
 );
 
+export type GetShoppingListNameQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type GetShoppingListNameQuery = (
+  { __typename?: 'query_root' }
+  & { list_by_pk?: Maybe<(
+    { __typename?: 'list' }
+    & Pick<List, 'name' | 'id'>
+  )> }
+);
+
 
 export const UpdateRecipeDetailDocument = gql`
     mutation UpdateRecipeDetail($id: String!, $_set: recipe_set_input!, $ingredientsStrings: [String!]!) {
@@ -2306,3 +2319,12 @@ export const GetRecipeDetailsDocument = gql`
 }
     `;
 export type GetRecipeDetailsQueryResult = Apollo.QueryResult<GetRecipeDetailsQuery, GetRecipeDetailsQueryVariables>;
+export const GetShoppingListNameDocument = gql`
+    query GetShoppingListName($id: uuid!) {
+  list_by_pk(id: $id) {
+    name
+    id
+  }
+}
+    `;
+export type GetShoppingListNameQueryResult = Apollo.QueryResult<GetShoppingListNameQuery, GetShoppingListNameQueryVariables>;

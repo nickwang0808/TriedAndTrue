@@ -102,7 +102,7 @@ export default function ShoppingListDetails() {
 
   return (
     <IonPage>
-      <ShoppingListDetailsHeader title="My Weekly list" />
+      <ShoppingListDetailsHeader />
       <IonContent>{content}</IonContent>
     </IonPage>
   );

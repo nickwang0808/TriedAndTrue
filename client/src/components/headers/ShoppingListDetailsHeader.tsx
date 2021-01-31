@@ -14,19 +14,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import addNew from "../../assets/svg/addnew.svg";
 import ellipsis from "../../assets/svg/ellipsis.svg";
+import useGetShoppingListName from "../../gql/query/useGetShopingListName.graphql";
 import {
   setShowActive,
   setShowConfigShoppingListModal,
 } from "../../redux/ShoppingList/ShoppingListDetailsSlice";
 import { IAppState } from "../../redux/store";
 
-interface IProps {
-  title: string;
-}
-
 type segmentValue = "active" | "completed" | undefined;
 
-export default function ShoppingListDetailsHeader({ title }: IProps) {
+export default function ShoppingListDetailsHeader() {
   const dispatch = useDispatch();
   const handleSwitch = (value: segmentValue) => {
     if (!value) return;
@@ -43,6 +40,8 @@ export default function ShoppingListDetailsHeader({ title }: IProps) {
   const { showActive } = useSelector(
     ({ shoppingListDetailSlice }: IAppState) => shoppingListDetailSlice
   );
+
+  const title = useGetShoppingListName(id);
 
   return (
     <IonHeader>
