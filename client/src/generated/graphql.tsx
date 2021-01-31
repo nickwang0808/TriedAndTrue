@@ -1886,6 +1886,19 @@ export type GetAllShoppingListsQuery = (
   )> }
 );
 
+export type GetListItemByIdQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type GetListItemByIdQuery = (
+  { __typename?: 'query_root' }
+  & { list_items_by_pk?: Maybe<(
+    { __typename?: 'list_items' }
+    & Pick<List_Items, 'id' | 'name' | 'quantity' | 'recipes' | 'other' | 'comment' | 'unit'>
+  )> }
+);
+
 export type GetListItemsByIdQueryVariables = Exact<{
   _eq?: Maybe<Scalars['uuid']>;
 }>;
@@ -2146,6 +2159,20 @@ export const GetAllShoppingListsDocument = gql`
 }
     `;
 export type GetAllShoppingListsQueryResult = Apollo.QueryResult<GetAllShoppingListsQuery, GetAllShoppingListsQueryVariables>;
+export const GetListItemByIdDocument = gql`
+    query GetListItemById($id: uuid!) {
+  list_items_by_pk(id: $id) {
+    id
+    name
+    quantity
+    recipes
+    other
+    comment
+    unit
+  }
+}
+    `;
+export type GetListItemByIdQueryResult = Apollo.QueryResult<GetListItemByIdQuery, GetListItemByIdQueryVariables>;
 export const GetListItemsByIdDocument = gql`
     query GetListItemsById($_eq: uuid) {
   list_items(where: {list: {_eq: $_eq}}, order_by: {category: asc_nulls_last}) {

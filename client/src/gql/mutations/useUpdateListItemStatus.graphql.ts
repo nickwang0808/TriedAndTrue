@@ -23,23 +23,7 @@ export default function useUpdateListItemStatus() {
   const [updateListItemStatus, { data, loading, error }] = useMutation<
     UpdateListItemStatusMutation,
     UpdateListItemStatusMutationVariables
-  >(
-    UPDATE_LIST_ITEM_STATUS
-    // {
-    // optimisticResponse: {
-    //   __typename: "mutation_root",
-    //   update_list_items_by_pk: { __typename: "list_items", id, is_completed },
-    // },
-    // update: (cache, {data}) => {
-    //   if (!data?.update_list_items_by_pk) return;
-    //   const {update_list_items_by_pk} = data;
-    //   cache.modify({
-    //     fields: {
-    //     }
-    //   })
-    // }
-    // }
-  );
+  >(UPDATE_LIST_ITEM_STATUS);
 
   return { updateListItemStatus, data, loading, error };
 }

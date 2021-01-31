@@ -52,6 +52,7 @@ import RecipePage from "./pages/recipes/RecipePage";
 import ShoppingListDetails from "./pages/ShoppingList/ShoppingListDetails";
 import ShoppingListHome from "./pages/ShoppingList/ShoppingListHome";
 import AddNewShoppingListModal from "./pages/ShoppingList/ShoppingListModals/AddNewShoppingListModal";
+import ShoppingItemDetailsModal from "./pages/ShoppingList/ShoppingListModals/ShoppingItemDetailsModal";
 import { setDateRange } from "./redux/Planner/PlannerDateRangeSlice";
 import "./style.scss";
 /* Theme variables */
@@ -93,6 +94,7 @@ const App: React.FC = () => {
           <SelectListModal />
 
           <AddNewShoppingListModal />
+          <ShoppingItemDetailsModal />
 
           <Toast />
 

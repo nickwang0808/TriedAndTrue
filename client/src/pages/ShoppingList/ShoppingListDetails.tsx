@@ -7,6 +7,7 @@ import ShoppingListCheckBox from "../../components/listItem/ShoppingListCheckBox
 import BlockSeparator from "../../components/misc/BlockSeparator";
 import useUpdateListItemStatus from "../../gql/mutations/useUpdateListItemStatus.graphql";
 import useGetListItemsById from "../../gql/query/useGetListItemsById.graphql";
+import { setShowItemDetails } from "../../redux/ShoppingList/ShoppingListDetailsSlice";
 import { IAppState } from "../../redux/store";
 
 export default function ShoppingListDetails() {
@@ -74,6 +75,7 @@ export default function ShoppingListDetails() {
                           quantity={quantity || undefined}
                           isChecked={is_completed}
                           onChange={() => handleCheck(!is_completed, id)}
+                          showDetails={() => dispatch(setShowItemDetails(id))}
                           value={id}
                         />
                       );

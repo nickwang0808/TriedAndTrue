@@ -15,6 +15,7 @@ interface IProps {
   value: string;
   isChecked: boolean;
   onChange: (isChecked: boolean, value: string) => void;
+  showDetails?: () => void;
 }
 
 export default function ShoppingListCheckBox({
@@ -24,6 +25,7 @@ export default function ShoppingListCheckBox({
   value,
   isChecked,
   onChange,
+  showDetails,
 }: IProps) {
   return (
     <StyledIonItem lines="full">
@@ -40,11 +42,13 @@ export default function ShoppingListCheckBox({
           onChange(checked, value)
         }
       />
-      <IonButtons slot="end">
-        <IonButton onClick={() => console.log("clicked")}>
-          <IonIcon icon={lightPencil} />
-        </IonButton>
-      </IonButtons>
+      {!!showDetails && (
+        <IonButtons slot="end">
+          <IonButton onClick={showDetails}>
+            <IonIcon icon={lightPencil} />
+          </IonButton>
+        </IonButtons>
+      )}
     </StyledIonItem>
   );
 }
