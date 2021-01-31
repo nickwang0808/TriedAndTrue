@@ -38,6 +38,8 @@ import ConfirmCancelModal from "./pages/addOrEditRecipeModal/ConfirmCancelModal"
 import ImportRecipeModal from "./pages/addOrEditRecipeModal/CreateOrImportRecipeModa";
 import AuthChecker from "./pages/auth/AuthChecker";
 import MealPlannerMainPage from "./pages/mealPlanner/MealPlannerMainPage";
+import AddIngredientsToListModel from "./pages/mealPlanner/PlannerModals/AddIngredientsToListModal/AddIngredientsToListModel";
+import SelectListModal from "./pages/mealPlanner/PlannerModals/AddIngredientsToListModal/SelectListModal";
 import AddMultiRecipeToPlannerModal from "./pages/mealPlanner/PlannerModals/AddMultiRecipeToPlannerModal/AddMultiRecipeToPlannerModal";
 import EditPlannerItemModal from "./pages/mealPlanner/PlannerModals/EditPlannerItemModal/EditPlannerItemModal";
 import ReCreatePlannerModal from "./pages/mealPlanner/PlannerModals/ReCreatePlannerModal/ReCreatePlannerModal";
@@ -47,7 +49,11 @@ import DetailsOptionsModal from "./pages/recipeDetails/DetailsOptionsModal";
 import RecipeDeleteConfirmationModal from "./pages/recipeDetails/RecipeDeleteConfirmationModal";
 import RecipeDetailsPage from "./pages/recipeDetails/RecipeDetailsPage";
 import RecipePage from "./pages/recipes/RecipePage";
-import ShoppingListPage from "./pages/ShoppingList/ShoppingListPage";
+import ShoppingListDetails from "./pages/ShoppingList/ShoppingListDetails";
+import ShoppingListHome from "./pages/ShoppingList/ShoppingListHome";
+import AddNewShoppingListModal from "./pages/ShoppingList/ShoppingListModals/AddNewShoppingListModal";
+import ConfigureShoppingList from "./pages/ShoppingList/ShoppingListModals/ConfigureShoppingList";
+import ShoppingItemDetailsModal from "./pages/ShoppingList/ShoppingListModals/ShoppingItemDetailsModal";
 import { setDateRange } from "./redux/Planner/PlannerDateRangeSlice";
 import "./style.scss";
 /* Theme variables */
@@ -71,24 +77,30 @@ const App: React.FC = () => {
     <ApolloProvider client={client}>
       <AuthChecker>
         <IonApp>
-          <AddOrEditRecipeModal />
-          <ConfirmCancelModal />
-          <ImportRecipeModal />
-
-          <RecipeDetailsPage />
-          <DetailsOptionsModal />
-          <RecipeDeleteConfirmationModal />
-
-          <AddMultiRecipeToPlannerModal />
-
-          <EditPlannerItemModal />
-          <ReCreatePlannerModal />
-          <SelectWeekModal />
-          <SelectDayModal />
-
-          <Toast />
-
           <IonReactRouter>
+            <AddOrEditRecipeModal />
+            <ConfirmCancelModal />
+            <ImportRecipeModal />
+
+            <RecipeDetailsPage />
+            <DetailsOptionsModal />
+            <RecipeDeleteConfirmationModal />
+
+            <AddMultiRecipeToPlannerModal />
+
+            <AddIngredientsToListModel />
+            <EditPlannerItemModal />
+            <ReCreatePlannerModal />
+            <SelectWeekModal />
+            <SelectDayModal />
+            <SelectListModal />
+
+            <AddNewShoppingListModal />
+            <ShoppingItemDetailsModal />
+            <ConfigureShoppingList />
+
+            <Toast />
+
             <IonTabs>
               <IonRouterOutlet>
                 <Route path="/recipes" component={RecipePage} exact={true} />
@@ -97,7 +109,8 @@ const App: React.FC = () => {
                   exact={true}
                   component={MealPlannerMainPage}
                 />
-                <Route path="/lists" component={ShoppingListPage} />
+                <Route exact path="/lists" component={ShoppingListHome} />
+                <Route path="/lists/:id" component={ShoppingListDetails} />
                 <Route
                   path="/profile"
                   component={() => (

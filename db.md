@@ -38,3 +38,19 @@
 - recipe_id
 - index
 - date
+
+### list
+
+- user_id
+- name
+
+### list_items
+
+- recipes: [{title, img, date}]
+- name
+- quantity
+- comment
+- other
+- category
+- is_completed
+- list_name fk

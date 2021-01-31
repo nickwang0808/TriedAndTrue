@@ -1,5 +1,143 @@
 - table:
     schema: public
+    name: list
+  object_relationships:
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+  array_relationships:
+  - name: list_items
+    using:
+      foreign_key_constraint_on:
+        column: list
+        table:
+          schema: public
+          name: list_items
+  insert_permissions:
+  - role: user
+    permission:
+      check:
+        user:
+          id:
+            _eq: X-Hasura-User-Id
+      set:
+        user_id: x-hasura-User-Id
+      columns:
+      - name
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - name
+      - user_id
+      - id
+      filter:
+        user:
+          id:
+            _eq: X-Hasura-User-Id
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - name
+      filter:
+        user:
+          id:
+            _eq: X-Hasura-User-Id
+      check: null
+  delete_permissions:
+  - role: user
+    permission:
+      filter:
+        user:
+          id:
+            _eq: X-Hasura-User-Id
+- table:
+    schema: public
+    name: list_items
+  object_relationships:
+  - name: shopping_list
+    using:
+      foreign_key_constraint_on: list
+  insert_permissions:
+  - role: user
+    permission:
+      check:
+        shopping_list:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+      columns:
+      - category
+      - comment
+      - is_completed
+      - list
+      - name
+      - other
+      - quantity
+      - recipes
+      - unit
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - name
+      - quantity
+      - comment
+      - other
+      - category
+      - is_completed
+      - id
+      - list
+      - unit
+      - recipes
+      filter:
+        shopping_list:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - category
+      - comment
+      - is_completed
+      - list
+      - name
+      - other
+      - quantity
+      - recipes
+      - unit
+      filter:
+        shopping_list:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+      check: null
+  delete_permissions:
+  - role: user
+    permission:
+      filter:
+        shopping_list:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+  event_triggers:
+  - name: find_category
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      num_retries: 5
+      interval_sec: 10
+      timeout_sec: 60
+    webhook: http://35.220.182.160:5001/category
+- table:
+    schema: public
     name: planner
   object_relationships:
   - name: recipe
@@ -188,6 +326,13 @@
     schema: public
     name: user
   array_relationships:
+  - name: lists
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          schema: public
+          name: list
   - name: planners
     using:
       foreign_key_constraint_on:

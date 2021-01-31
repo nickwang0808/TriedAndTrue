@@ -7,6 +7,14 @@ type Mutation {
 
 
 type Mutation {
+  insertIngredientToList (
+    ingredientsToAddToList: [insertIngredientToListInput!]!
+    shoppingListId: String!
+  ): [shoppingListItems!]!
+}
+
+
+type Mutation {
   insertRecipeOneDerived (
     object: insertRecipeOneDerivedInput!
   ): InsertRecipeOneOutput!
@@ -41,6 +49,13 @@ input insertRecipeOneDerivedInput {
   directions : json
 }
 
+input insertIngredientToListInput {
+  date : String!
+  recipe_id : String!
+  recipe_index : Int!
+  ingredients : [String!]!
+}
+
 type ParsedIngredients {
   name : String!
 }
@@ -54,6 +69,10 @@ type ImportedRecipe {
 }
 
 type InsertRecipeOneOutput {
+  id : String!
+}
+
+type shoppingListItems {
   id : String!
 }
 

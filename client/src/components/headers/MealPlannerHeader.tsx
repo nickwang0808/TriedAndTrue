@@ -17,6 +17,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import listIconForHeader from "../../assets/svg/addtoList.svg";
 import refresh from "../../assets/svg/refresh.svg";
+import { setShowIngredientToListModal } from "../../redux/Planner/AddInGredientsToListSlice";
 import { setSelectedWeek } from "../../redux/Planner/PlannerDateRangeSlice";
 import { IAppState } from "../../redux/store";
 import getMonAndSun from "../../utils/getMonAndFri";
@@ -49,7 +50,9 @@ export default function Header({ weeks }: IProps) {
           <IonButton>
             <IonIcon icon={refresh} />
           </IonButton>
-          <IonButton>
+          <IonButton
+            onClick={() => dispatch(setShowIngredientToListModal(true))}
+          >
             <IonIcon icon={listIconForHeader} />
           </IonButton>
         </IonButtons>

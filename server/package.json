@@ -20,6 +20,7 @@
   "dependencies": {
     "@types/pg": "^7.14.7",
     "date-fns": "^2.16.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "ingredient-parser": "https://github.com/plate0/ingredient-parser#master",
     "jsonwebtoken": "^8.5.1",

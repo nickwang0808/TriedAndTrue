@@ -6,6 +6,13 @@ actions:
     forward_client_headers: true
   permissions:
   - role: user
+- name: insertIngredientToList
+  definition:
+    kind: synchronous
+    handler: http://35.220.182.160:5001/addIngredientToList
+    forward_client_headers: true
+  permissions:
+  - role: user
 - name: insertRecipeOneDerived
   definition:
     kind: synchronous
@@ -31,6 +38,7 @@ custom_types:
   enums: []
   input_objects:
   - name: insertRecipeOneDerivedInput
+  - name: insertIngredientToListInput
   objects:
   - name: ParsedIngredients
   - name: UpdatedRecipeIngredients
@@ -60,4 +68,5 @@ custom_types:
       type: object
       field_mapping:
         id: id
+  - name: shoppingListItems
   scalars: []

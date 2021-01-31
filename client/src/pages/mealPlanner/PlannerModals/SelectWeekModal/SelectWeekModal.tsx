@@ -1,9 +1,9 @@
-import { IonContent, IonIcon, IonItem, IonLabel, IonList } from "@ionic/react";
+import { IonContent, IonList } from "@ionic/react";
 import { format } from "date-fns";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import listArrowPointingRight from "../../../../assets/svg/listArrowPointingRight.svg";
 import ModalHeader from "../../../../components/headers/ModalHeader";
+import ItemWithRightArrow from "../../../../components/listItem/ListItemWithRightArrow";
 import { FancyModalWithRoundTop } from "../../../../components/modals/FancyModalWithRoundTop";
 import {
   closePlannerItemModal,
@@ -50,20 +50,5 @@ export default function SelectWeekModal() {
         </IonList>
       </IonContent>
     </FancyModalWithRoundTop>
-  );
-}
-
-interface ISubProps {
-  content: string;
-  onClick: () => void;
-}
-
-function ItemWithRightArrow({ content, onClick }: ISubProps) {
-  return (
-    <IonItem onClick={onClick}>
-      <IonLabel color="primary">{content}</IonLabel>
-
-      <IonIcon slot="end" src={listArrowPointingRight} />
-    </IonItem>
   );
 }

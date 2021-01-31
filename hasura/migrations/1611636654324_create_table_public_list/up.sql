@@ -1,0 +1,1 @@
+CREATE TABLE "public"."list"("user_id" text NOT NULL, "date" date NOT NULL, "title" text NOT NULL, "quantity" text, "comment" text, "other" text, "category" text, "is_completed" bool NOT NULL DEFAULT false, "recipes" json, "unit" text, PRIMARY KEY ("title","unit","comment") ); COMMENT ON TABLE "public"."list" IS E'detach the item from recipe once record is written';

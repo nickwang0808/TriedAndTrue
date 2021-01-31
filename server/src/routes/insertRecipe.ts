@@ -5,7 +5,7 @@ import runParser from "../helper/runParser";
 import {
   insertRecipeOneDerivedArgs,
   insertRecipeOneDerivedInput,
-} from "../types/insertRecipeTypes";
+} from "../types/actionTypes";
 
 const InsertRecipeOneDerivedRoute = Router();
 

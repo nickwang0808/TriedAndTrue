@@ -12,9 +12,24 @@ export type Scalars = {
   Int: number;
   Float: number;
   date: any;
+  float8: any;
   json: any;
+  jsonb: any;
   timestamptz: any;
   uuid: any;
+};
+
+/** expression to compare columns of type Boolean. All fields are combined with logical 'AND'. */
+export type Boolean_Comparison_Exp = {
+  _eq?: Maybe<Scalars['Boolean']>;
+  _gt?: Maybe<Scalars['Boolean']>;
+  _gte?: Maybe<Scalars['Boolean']>;
+  _in?: Maybe<Array<Scalars['Boolean']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['Boolean']>;
+  _lte?: Maybe<Scalars['Boolean']>;
+  _neq?: Maybe<Scalars['Boolean']>;
+  _nin?: Maybe<Array<Scalars['Boolean']>>;
 };
 
 export type ImportedRecipe = {
@@ -86,6 +101,27 @@ export type Date_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['date']>>;
 };
 
+
+/** expression to compare columns of type float8. All fields are combined with logical 'AND'. */
+export type Float8_Comparison_Exp = {
+  _eq?: Maybe<Scalars['float8']>;
+  _gt?: Maybe<Scalars['float8']>;
+  _gte?: Maybe<Scalars['float8']>;
+  _in?: Maybe<Array<Scalars['float8']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['float8']>;
+  _lte?: Maybe<Scalars['float8']>;
+  _neq?: Maybe<Scalars['float8']>;
+  _nin?: Maybe<Array<Scalars['float8']>>;
+};
+
+export type InsertIngredientToListInput = {
+  date: Scalars['String'];
+  ingredients: Array<Scalars['String']>;
+  recipe_id: Scalars['String'];
+  recipe_index: Scalars['Int'];
+};
+
 export type InsertRecipeOneDerivedInput = {
   cuisine?: Maybe<Scalars['String']>;
   directions?: Maybe<Scalars['json']>;
@@ -111,9 +147,349 @@ export type Json_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['json']>>;
 };
 
+
+/** expression to compare columns of type jsonb. All fields are combined with logical 'AND'. */
+export type Jsonb_Comparison_Exp = {
+  /** is the column contained in the given json value */
+  _contained_in?: Maybe<Scalars['jsonb']>;
+  /** does the column contain the given json value at the top level */
+  _contains?: Maybe<Scalars['jsonb']>;
+  _eq?: Maybe<Scalars['jsonb']>;
+  _gt?: Maybe<Scalars['jsonb']>;
+  _gte?: Maybe<Scalars['jsonb']>;
+  /** does the string exist as a top-level key in the column */
+  _has_key?: Maybe<Scalars['String']>;
+  /** do all of these strings exist as top-level keys in the column */
+  _has_keys_all?: Maybe<Array<Scalars['String']>>;
+  /** do any of these strings exist as top-level keys in the column */
+  _has_keys_any?: Maybe<Array<Scalars['String']>>;
+  _in?: Maybe<Array<Scalars['jsonb']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['jsonb']>;
+  _lte?: Maybe<Scalars['jsonb']>;
+  _neq?: Maybe<Scalars['jsonb']>;
+  _nin?: Maybe<Array<Scalars['jsonb']>>;
+};
+
+/** columns and relationships of "list" */
+export type List = {
+  __typename?: 'list';
+  id: Scalars['uuid'];
+  /** An array relationship */
+  list_items: Array<List_Items>;
+  name: Scalars['String'];
+  /** An object relationship */
+  user: User;
+  user_id: Scalars['String'];
+};
+
+
+/** columns and relationships of "list" */
+export type ListList_ItemsArgs = {
+  distinct_on?: Maybe<Array<List_Items_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<List_Items_Order_By>>;
+  where?: Maybe<List_Items_Bool_Exp>;
+};
+
+/** input type for inserting array relation for remote table "list" */
+export type List_Arr_Rel_Insert_Input = {
+  data: Array<List_Insert_Input>;
+  on_conflict?: Maybe<List_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "list". All fields are combined with a logical 'AND'. */
+export type List_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<List_Bool_Exp>>>;
+  _not?: Maybe<List_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<List_Bool_Exp>>>;
+  id?: Maybe<Uuid_Comparison_Exp>;
+  list_items?: Maybe<List_Items_Bool_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  user?: Maybe<User_Bool_Exp>;
+  user_id?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "list" */
+export enum List_Constraint {
+  /** unique or primary key constraint */
+  ListPkey = 'list_pkey'
+}
+
+/** input type for inserting data into table "list" */
+export type List_Insert_Input = {
+  list_items?: Maybe<List_Items_Arr_Rel_Insert_Input>;
+  name?: Maybe<Scalars['String']>;
+};
+
+/** columns and relationships of "list_items" */
+export type List_Items = {
+  __typename?: 'list_items';
+  category?: Maybe<Scalars['String']>;
+  comment?: Maybe<Scalars['String']>;
+  id: Scalars['uuid'];
+  is_completed: Scalars['Boolean'];
+  list: Scalars['uuid'];
+  name: Scalars['String'];
+  other?: Maybe<Scalars['String']>;
+  quantity?: Maybe<Scalars['float8']>;
+  recipes?: Maybe<Scalars['jsonb']>;
+  /** An object relationship */
+  shopping_list: List;
+  unit?: Maybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "list_items" */
+export type List_ItemsRecipesArgs = {
+  path?: Maybe<Scalars['String']>;
+};
+
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type List_Items_Append_Input = {
+  recipes?: Maybe<Scalars['jsonb']>;
+};
+
+/** input type for inserting array relation for remote table "list_items" */
+export type List_Items_Arr_Rel_Insert_Input = {
+  data: Array<List_Items_Insert_Input>;
+  on_conflict?: Maybe<List_Items_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "list_items". All fields are combined with a logical 'AND'. */
+export type List_Items_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<List_Items_Bool_Exp>>>;
+  _not?: Maybe<List_Items_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<List_Items_Bool_Exp>>>;
+  category?: Maybe<String_Comparison_Exp>;
+  comment?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Uuid_Comparison_Exp>;
+  is_completed?: Maybe<Boolean_Comparison_Exp>;
+  list?: Maybe<Uuid_Comparison_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  other?: Maybe<String_Comparison_Exp>;
+  quantity?: Maybe<Float8_Comparison_Exp>;
+  recipes?: Maybe<Jsonb_Comparison_Exp>;
+  shopping_list?: Maybe<List_Bool_Exp>;
+  unit?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "list_items" */
+export enum List_Items_Constraint {
+  /** unique or primary key constraint */
+  ListItemsNameListCommentKey = 'list_items_name_list_comment_key',
+  /** unique or primary key constraint */
+  ListItemsPkey = 'list_items_pkey'
+}
+
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type List_Items_Delete_At_Path_Input = {
+  recipes?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type List_Items_Delete_Elem_Input = {
+  recipes?: Maybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type List_Items_Delete_Key_Input = {
+  recipes?: Maybe<Scalars['String']>;
+};
+
+/** input type for incrementing integer column in table "list_items" */
+export type List_Items_Inc_Input = {
+  quantity?: Maybe<Scalars['float8']>;
+};
+
+/** input type for inserting data into table "list_items" */
+export type List_Items_Insert_Input = {
+  category?: Maybe<Scalars['String']>;
+  comment?: Maybe<Scalars['String']>;
+  is_completed?: Maybe<Scalars['Boolean']>;
+  list?: Maybe<Scalars['uuid']>;
+  name?: Maybe<Scalars['String']>;
+  other?: Maybe<Scalars['String']>;
+  quantity?: Maybe<Scalars['float8']>;
+  recipes?: Maybe<Scalars['jsonb']>;
+  shopping_list?: Maybe<List_Obj_Rel_Insert_Input>;
+  unit?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "list_items" */
+export type List_Items_Mutation_Response = {
+  __typename?: 'list_items_mutation_response';
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<List_Items>;
+};
+
+/** input type for inserting object relation for remote table "list_items" */
+export type List_Items_Obj_Rel_Insert_Input = {
+  data: List_Items_Insert_Input;
+  on_conflict?: Maybe<List_Items_On_Conflict>;
+};
+
+/** on conflict condition type for table "list_items" */
+export type List_Items_On_Conflict = {
+  constraint: List_Items_Constraint;
+  update_columns: Array<List_Items_Update_Column>;
+  where?: Maybe<List_Items_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "list_items" */
+export type List_Items_Order_By = {
+  category?: Maybe<Order_By>;
+  comment?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  is_completed?: Maybe<Order_By>;
+  list?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  other?: Maybe<Order_By>;
+  quantity?: Maybe<Order_By>;
+  recipes?: Maybe<Order_By>;
+  shopping_list?: Maybe<List_Order_By>;
+  unit?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: "list_items" */
+export type List_Items_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type List_Items_Prepend_Input = {
+  recipes?: Maybe<Scalars['jsonb']>;
+};
+
+/** select columns of table "list_items" */
+export enum List_Items_Select_Column {
+  /** column name */
+  Category = 'category',
+  /** column name */
+  Comment = 'comment',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  IsCompleted = 'is_completed',
+  /** column name */
+  List = 'list',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Other = 'other',
+  /** column name */
+  Quantity = 'quantity',
+  /** column name */
+  Recipes = 'recipes',
+  /** column name */
+  Unit = 'unit'
+}
+
+/** input type for updating data in table "list_items" */
+export type List_Items_Set_Input = {
+  category?: Maybe<Scalars['String']>;
+  comment?: Maybe<Scalars['String']>;
+  is_completed?: Maybe<Scalars['Boolean']>;
+  list?: Maybe<Scalars['uuid']>;
+  name?: Maybe<Scalars['String']>;
+  other?: Maybe<Scalars['String']>;
+  quantity?: Maybe<Scalars['float8']>;
+  recipes?: Maybe<Scalars['jsonb']>;
+  unit?: Maybe<Scalars['String']>;
+};
+
+/** update columns of table "list_items" */
+export enum List_Items_Update_Column {
+  /** column name */
+  Category = 'category',
+  /** column name */
+  Comment = 'comment',
+  /** column name */
+  IsCompleted = 'is_completed',
+  /** column name */
+  List = 'list',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Other = 'other',
+  /** column name */
+  Quantity = 'quantity',
+  /** column name */
+  Recipes = 'recipes',
+  /** column name */
+  Unit = 'unit'
+}
+
+/** response of any mutation on the table "list" */
+export type List_Mutation_Response = {
+  __typename?: 'list_mutation_response';
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<List>;
+};
+
+/** input type for inserting object relation for remote table "list" */
+export type List_Obj_Rel_Insert_Input = {
+  data: List_Insert_Input;
+  on_conflict?: Maybe<List_On_Conflict>;
+};
+
+/** on conflict condition type for table "list" */
+export type List_On_Conflict = {
+  constraint: List_Constraint;
+  update_columns: Array<List_Update_Column>;
+  where?: Maybe<List_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "list" */
+export type List_Order_By = {
+  id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  user?: Maybe<User_Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: "list" */
+export type List_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "list" */
+export enum List_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  UserId = 'user_id'
+}
+
+/** input type for updating data in table "list" */
+export type List_Set_Input = {
+  name?: Maybe<Scalars['String']>;
+};
+
+/** update columns of table "list" */
+export enum List_Update_Column {
+  /** column name */
+  Name = 'name'
+}
+
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** delete data from the table: "list" */
+  delete_list?: Maybe<List_Mutation_Response>;
+  /** delete single row from the table: "list" */
+  delete_list_by_pk?: Maybe<List>;
+  /** delete data from the table: "list_items" */
+  delete_list_items?: Maybe<List_Items_Mutation_Response>;
+  /** delete single row from the table: "list_items" */
+  delete_list_items_by_pk?: Maybe<List_Items>;
   /** delete data from the table: "planner" */
   delete_planner?: Maybe<Planner_Mutation_Response>;
   /** delete single row from the table: "planner" */
@@ -128,8 +504,18 @@ export type Mutation_Root = {
   delete_recipe_ingredients_by_pk?: Maybe<Recipe_Ingredients>;
   /** perform the action: "importRecipe" */
   importRecipe: ImportedRecipe;
+  /** perform the action: "insertIngredientToList" */
+  insertIngredientToList: Array<ShoppingListItems>;
   /** perform the action: "insertRecipeOneDerived" */
   insertRecipeOneDerived: InsertRecipeOneOutput;
+  /** insert data into the table: "list" */
+  insert_list?: Maybe<List_Mutation_Response>;
+  /** insert data into the table: "list_items" */
+  insert_list_items?: Maybe<List_Items_Mutation_Response>;
+  /** insert a single row into the table: "list_items" */
+  insert_list_items_one?: Maybe<List_Items>;
+  /** insert a single row into the table: "list" */
+  insert_list_one?: Maybe<List>;
   /** insert data into the table: "planner" */
   insert_planner?: Maybe<Planner_Mutation_Response>;
   /** insert a single row into the table: "planner" */
@@ -144,6 +530,14 @@ export type Mutation_Root = {
   insert_recipe_one?: Maybe<Recipe>;
   /** perform the action: "overRideIngredients" */
   overRideIngredients: Array<Maybe<UpdatedRecipeIngredients>>;
+  /** update data of the table: "list" */
+  update_list?: Maybe<List_Mutation_Response>;
+  /** update single row of the table: "list" */
+  update_list_by_pk?: Maybe<List>;
+  /** update data of the table: "list_items" */
+  update_list_items?: Maybe<List_Items_Mutation_Response>;
+  /** update single row of the table: "list_items" */
+  update_list_items_by_pk?: Maybe<List_Items>;
   /** update data of the table: "recipe" */
   update_recipe?: Maybe<Recipe_Mutation_Response>;
   /** update single row of the table: "recipe" */
@@ -156,6 +550,30 @@ export type Mutation_Root = {
   update_user?: Maybe<User_Mutation_Response>;
   /** update single row of the table: "user" */
   update_user_by_pk?: Maybe<User>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_ListArgs = {
+  where: List_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_List_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_List_ItemsArgs = {
+  where: List_Items_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_List_Items_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -205,8 +623,43 @@ export type Mutation_RootImportRecipeArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsertIngredientToListArgs = {
+  ingredientsToAddToList: Array<InsertIngredientToListInput>;
+  shoppingListId: Scalars['String'];
+};
+
+
+/** mutation root */
 export type Mutation_RootInsertRecipeOneDerivedArgs = {
   object: InsertRecipeOneDerivedInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_ListArgs = {
+  objects: Array<List_Insert_Input>;
+  on_conflict?: Maybe<List_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_List_ItemsArgs = {
+  objects: Array<List_Items_Insert_Input>;
+  on_conflict?: Maybe<List_Items_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_List_Items_OneArgs = {
+  object: List_Items_Insert_Input;
+  on_conflict?: Maybe<List_Items_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_List_OneArgs = {
+  object: List_Insert_Input;
+  on_conflict?: Maybe<List_On_Conflict>;
 };
 
 
@@ -254,6 +707,46 @@ export type Mutation_RootInsert_Recipe_OneArgs = {
 export type Mutation_RootOverRideIngredientsArgs = {
   ingredientsStrings: Array<Maybe<Scalars['String']>>;
   recipe_id: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_ListArgs = {
+  _set?: Maybe<List_Set_Input>;
+  where: List_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_List_By_PkArgs = {
+  _set?: Maybe<List_Set_Input>;
+  pk_columns: List_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_List_ItemsArgs = {
+  _append?: Maybe<List_Items_Append_Input>;
+  _delete_at_path?: Maybe<List_Items_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<List_Items_Delete_Elem_Input>;
+  _delete_key?: Maybe<List_Items_Delete_Key_Input>;
+  _inc?: Maybe<List_Items_Inc_Input>;
+  _prepend?: Maybe<List_Items_Prepend_Input>;
+  _set?: Maybe<List_Items_Set_Input>;
+  where: List_Items_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_List_Items_By_PkArgs = {
+  _append?: Maybe<List_Items_Append_Input>;
+  _delete_at_path?: Maybe<List_Items_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<List_Items_Delete_Elem_Input>;
+  _delete_key?: Maybe<List_Items_Delete_Key_Input>;
+  _inc?: Maybe<List_Items_Inc_Input>;
+  _prepend?: Maybe<List_Items_Prepend_Input>;
+  _set?: Maybe<List_Items_Set_Input>;
+  pk_columns: List_Items_Pk_Columns_Input;
 };
 
 
@@ -401,6 +894,14 @@ export enum Planner_Select_Column {
 /** query root */
 export type Query_Root = {
   __typename?: 'query_root';
+  /** fetch data from the table: "list" */
+  list: Array<List>;
+  /** fetch data from the table: "list" using primary key columns */
+  list_by_pk?: Maybe<List>;
+  /** fetch data from the table: "list_items" */
+  list_items: Array<List_Items>;
+  /** fetch data from the table: "list_items" using primary key columns */
+  list_items_by_pk?: Maybe<List_Items>;
   /** perform the action: "parseIngredients" */
   parseIngredients: Array<ParsedIngredients>;
   /** fetch data from the table: "planner" */
@@ -419,6 +920,38 @@ export type Query_Root = {
   user: Array<User>;
   /** fetch data from the table: "user" using primary key columns */
   user_by_pk?: Maybe<User>;
+};
+
+
+/** query root */
+export type Query_RootListArgs = {
+  distinct_on?: Maybe<Array<List_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<List_Order_By>>;
+  where?: Maybe<List_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootList_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** query root */
+export type Query_RootList_ItemsArgs = {
+  distinct_on?: Maybe<Array<List_Items_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<List_Items_Order_By>>;
+  where?: Maybe<List_Items_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootList_Items_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -827,9 +1360,22 @@ export enum Recipe_Update_Column {
   Yields = 'yields'
 }
 
+export type ShoppingListItems = {
+  __typename?: 'shoppingListItems';
+  id: Scalars['String'];
+};
+
 /** subscription root */
 export type Subscription_Root = {
   __typename?: 'subscription_root';
+  /** fetch data from the table: "list" */
+  list: Array<List>;
+  /** fetch data from the table: "list" using primary key columns */
+  list_by_pk?: Maybe<List>;
+  /** fetch data from the table: "list_items" */
+  list_items: Array<List_Items>;
+  /** fetch data from the table: "list_items" using primary key columns */
+  list_items_by_pk?: Maybe<List_Items>;
   /** perform the action: "parseIngredients" */
   parseIngredients: Array<ParsedIngredients>;
   /** fetch data from the table: "planner" */
@@ -848,6 +1394,38 @@ export type Subscription_Root = {
   user: Array<User>;
   /** fetch data from the table: "user" using primary key columns */
   user_by_pk?: Maybe<User>;
+};
+
+
+/** subscription root */
+export type Subscription_RootListArgs = {
+  distinct_on?: Maybe<Array<List_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<List_Order_By>>;
+  where?: Maybe<List_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootList_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** subscription root */
+export type Subscription_RootList_ItemsArgs = {
+  distinct_on?: Maybe<Array<List_Items_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<List_Items_Order_By>>;
+  where?: Maybe<List_Items_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootList_Items_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -942,11 +1520,23 @@ export type User = {
   email: Scalars['String'];
   id: Scalars['String'];
   img?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  lists: Array<List>;
   name: Scalars['String'];
   /** An array relationship */
   planners: Array<Planner>;
   /** An array relationship */
   recipes_list: Array<Recipe>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserListsArgs = {
+  distinct_on?: Maybe<Array<List_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<List_Order_By>>;
+  where?: Maybe<List_Bool_Exp>;
 };
 
 
@@ -977,6 +1567,7 @@ export type User_Bool_Exp = {
   email?: Maybe<String_Comparison_Exp>;
   id?: Maybe<String_Comparison_Exp>;
   img?: Maybe<String_Comparison_Exp>;
+  lists?: Maybe<List_Bool_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   planners?: Maybe<Planner_Bool_Exp>;
   recipes_list?: Maybe<Recipe_Bool_Exp>;
@@ -1072,6 +1663,35 @@ export type UpdateRecipeDetailMutation = (
   )>> }
 );
 
+export type DeleteAllListItemsMutationVariables = Exact<{
+  _eq: Scalars['uuid'];
+}>;
+
+
+export type DeleteAllListItemsMutation = (
+  { __typename?: 'mutation_root' }
+  & { delete_list_items?: Maybe<(
+    { __typename?: 'list_items_mutation_response' }
+    & { returning: Array<(
+      { __typename?: 'list_items' }
+      & Pick<List_Items, 'list'>
+    )> }
+  )> }
+);
+
+export type DeleteListByIdMutationVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type DeleteListByIdMutation = (
+  { __typename?: 'mutation_root' }
+  & { delete_list_by_pk?: Maybe<(
+    { __typename?: 'list' }
+    & Pick<List, 'id'>
+  )> }
+);
+
 export type DeleteRecipeFromPlannerMutationVariables = Exact<{
   index: Scalars['Int'];
   date: Scalars['date'];
@@ -1118,6 +1738,33 @@ export type ImportRecipeMutation = (
       & Pick<Recipe, 'id' | 'img' | 'total_time' | 'title'>
     )> }
   ) }
+);
+
+export type InsertIngredientToListMutationVariables = Exact<{
+  ingredientsToAddToList: Array<InsertIngredientToListInput> | InsertIngredientToListInput;
+  shoppingListId: Scalars['String'];
+}>;
+
+
+export type InsertIngredientToListMutation = (
+  { __typename?: 'mutation_root' }
+  & { insertIngredientToList: Array<(
+    { __typename?: 'shoppingListItems' }
+    & Pick<ShoppingListItems, 'id'>
+  )> }
+);
+
+export type InsertNewListOneMutationVariables = Exact<{
+  object: List_Insert_Input;
+}>;
+
+
+export type InsertNewListOneMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_list_one?: Maybe<(
+    { __typename?: 'list' }
+    & Pick<List, 'id' | 'name'>
+  )> }
 );
 
 export type InsertRecipeMutationVariables = Exact<{
@@ -1180,6 +1827,36 @@ export type OverWritePlannerByDatesMutation = (
   )> }
 );
 
+export type UncheckAllListItemsMutationVariables = Exact<{
+  _eq: Scalars['uuid'];
+}>;
+
+
+export type UncheckAllListItemsMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_list_items?: Maybe<(
+    { __typename?: 'list_items_mutation_response' }
+    & { returning: Array<(
+      { __typename?: 'list_items' }
+      & Pick<List_Items, 'id' | 'is_completed'>
+    )> }
+  )> }
+);
+
+export type UpdateListItemStatusMutationVariables = Exact<{
+  pk_columns: List_Items_Pk_Columns_Input;
+  is_completed: Scalars['Boolean'];
+}>;
+
+
+export type UpdateListItemStatusMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_list_items_by_pk?: Maybe<(
+    { __typename?: 'list_items' }
+    & Pick<List_Items, 'id' | 'is_completed'>
+  )> }
+);
+
 export type GetProfileQueryVariables = Exact<{
   uid: Scalars['String'];
 }>;
@@ -1206,6 +1883,28 @@ export type ParseIngredientsQuery = (
   )> }
 );
 
+export type GetAllIngredientsInweekQueryVariables = Exact<{
+  _gte: Scalars['date'];
+  _lte: Scalars['date'];
+}>;
+
+
+export type GetAllIngredientsInweekQuery = (
+  { __typename?: 'query_root' }
+  & { planner: Array<(
+    { __typename?: 'planner' }
+    & Pick<Planner, 'date' | 'index'>
+    & { recipe: (
+      { __typename?: 'recipe' }
+      & Pick<Recipe, 'id' | 'title'>
+      & { recipe_ingredients_list: Array<(
+        { __typename?: 'recipe_ingredients' }
+        & Pick<Recipe_Ingredients, 'id' | 'comment' | 'quantity' | 'unit' | 'name'>
+      )> }
+    ) }
+  )> }
+);
+
 export type GetAllRecipeQueryVariables = Exact<{
   _like?: Maybe<Scalars['String']>;
   limit?: Maybe<Scalars['Int']>;
@@ -1218,6 +1917,43 @@ export type GetAllRecipeQuery = (
   & { recipe: Array<(
     { __typename?: 'recipe' }
     & Pick<Recipe, 'id' | 'img' | 'title' | 'total_time'>
+  )> }
+);
+
+export type GetAllShoppingListsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllShoppingListsQuery = (
+  { __typename?: 'query_root' }
+  & { list: Array<(
+    { __typename?: 'list' }
+    & Pick<List, 'name' | 'id'>
+  )> }
+);
+
+export type GetListItemByIdQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type GetListItemByIdQuery = (
+  { __typename?: 'query_root' }
+  & { list_items_by_pk?: Maybe<(
+    { __typename?: 'list_items' }
+    & Pick<List_Items, 'id' | 'name' | 'quantity' | 'recipes' | 'other' | 'comment' | 'unit'>
+  )> }
+);
+
+export type GetListItemsByIdQueryVariables = Exact<{
+  _eq?: Maybe<Scalars['uuid']>;
+}>;
+
+
+export type GetListItemsByIdQuery = (
+  { __typename?: 'query_root' }
+  & { list_items: Array<(
+    { __typename?: 'list_items' }
+    & Pick<List_Items, 'quantity' | 'other' | 'name' | 'list' | 'is_completed' | 'comment' | 'id' | 'category' | 'unit' | 'recipes'>
   )> }
 );
 
@@ -1255,6 +1991,19 @@ export type GetRecipeDetailsQuery = (
   )> }
 );
 
+export type GetShoppingListNameQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type GetShoppingListNameQuery = (
+  { __typename?: 'query_root' }
+  & { list_by_pk?: Maybe<(
+    { __typename?: 'list' }
+    & Pick<List, 'name' | 'id'>
+  )> }
+);
+
 
 export const UpdateRecipeDetailDocument = gql`
     mutation UpdateRecipeDetail($id: String!, $_set: recipe_set_input!, $ingredientsStrings: [String!]!) {
@@ -1277,6 +2026,28 @@ export const UpdateRecipeDetailDocument = gql`
 export type UpdateRecipeDetailMutationFn = Apollo.MutationFunction<UpdateRecipeDetailMutation, UpdateRecipeDetailMutationVariables>;
 export type UpdateRecipeDetailMutationResult = Apollo.MutationResult<UpdateRecipeDetailMutation>;
 export type UpdateRecipeDetailMutationOptions = Apollo.BaseMutationOptions<UpdateRecipeDetailMutation, UpdateRecipeDetailMutationVariables>;
+export const DeleteAllListItemsDocument = gql`
+    mutation DeleteAllListItems($_eq: uuid!) {
+  delete_list_items(where: {list: {_eq: $_eq}}) {
+    returning {
+      list
+    }
+  }
+}
+    `;
+export type DeleteAllListItemsMutationFn = Apollo.MutationFunction<DeleteAllListItemsMutation, DeleteAllListItemsMutationVariables>;
+export type DeleteAllListItemsMutationResult = Apollo.MutationResult<DeleteAllListItemsMutation>;
+export type DeleteAllListItemsMutationOptions = Apollo.BaseMutationOptions<DeleteAllListItemsMutation, DeleteAllListItemsMutationVariables>;
+export const DeleteListByIdDocument = gql`
+    mutation DeleteListById($id: uuid!) {
+  delete_list_by_pk(id: $id) {
+    id
+  }
+}
+    `;
+export type DeleteListByIdMutationFn = Apollo.MutationFunction<DeleteListByIdMutation, DeleteListByIdMutationVariables>;
+export type DeleteListByIdMutationResult = Apollo.MutationResult<DeleteListByIdMutation>;
+export type DeleteListByIdMutationOptions = Apollo.BaseMutationOptions<DeleteListByIdMutation, DeleteListByIdMutationVariables>;
 export const DeleteRecipeFromPlannerDocument = gql`
     mutation DeleteRecipeFromPlanner($index: Int!, $date: date!, $recipe_id: String!) {
   delete_planner_by_pk(date: $date, recipe_id: $recipe_id, index: $index) {
@@ -1314,6 +2085,30 @@ export const ImportRecipeDocument = gql`
 export type ImportRecipeMutationFn = Apollo.MutationFunction<ImportRecipeMutation, ImportRecipeMutationVariables>;
 export type ImportRecipeMutationResult = Apollo.MutationResult<ImportRecipeMutation>;
 export type ImportRecipeMutationOptions = Apollo.BaseMutationOptions<ImportRecipeMutation, ImportRecipeMutationVariables>;
+export const InsertIngredientToListDocument = gql`
+    mutation InsertIngredientToList($ingredientsToAddToList: [insertIngredientToListInput!]!, $shoppingListId: String!) {
+  insertIngredientToList(
+    ingredientsToAddToList: $ingredientsToAddToList
+    shoppingListId: $shoppingListId
+  ) {
+    id
+  }
+}
+    `;
+export type InsertIngredientToListMutationFn = Apollo.MutationFunction<InsertIngredientToListMutation, InsertIngredientToListMutationVariables>;
+export type InsertIngredientToListMutationResult = Apollo.MutationResult<InsertIngredientToListMutation>;
+export type InsertIngredientToListMutationOptions = Apollo.BaseMutationOptions<InsertIngredientToListMutation, InsertIngredientToListMutationVariables>;
+export const InsertNewListOneDocument = gql`
+    mutation InsertNewListOne($object: list_insert_input!) {
+  insert_list_one(object: $object) {
+    id
+    name
+  }
+}
+    `;
+export type InsertNewListOneMutationFn = Apollo.MutationFunction<InsertNewListOneMutation, InsertNewListOneMutationVariables>;
+export type InsertNewListOneMutationResult = Apollo.MutationResult<InsertNewListOneMutation>;
+export type InsertNewListOneMutationOptions = Apollo.BaseMutationOptions<InsertNewListOneMutation, InsertNewListOneMutationVariables>;
 export const InsertRecipeDocument = gql`
     mutation InsertRecipe($object: insertRecipeOneDerivedInput!) {
   insertRecipeOneDerived(object: $object) {
@@ -1364,6 +2159,33 @@ export const OverWritePlannerByDatesDocument = gql`
 export type OverWritePlannerByDatesMutationFn = Apollo.MutationFunction<OverWritePlannerByDatesMutation, OverWritePlannerByDatesMutationVariables>;
 export type OverWritePlannerByDatesMutationResult = Apollo.MutationResult<OverWritePlannerByDatesMutation>;
 export type OverWritePlannerByDatesMutationOptions = Apollo.BaseMutationOptions<OverWritePlannerByDatesMutation, OverWritePlannerByDatesMutationVariables>;
+export const UncheckAllListItemsDocument = gql`
+    mutation UncheckAllListItems($_eq: uuid!) {
+  update_list_items(where: {list: {_eq: $_eq}}, _set: {is_completed: false}) {
+    returning {
+      id
+      is_completed
+    }
+  }
+}
+    `;
+export type UncheckAllListItemsMutationFn = Apollo.MutationFunction<UncheckAllListItemsMutation, UncheckAllListItemsMutationVariables>;
+export type UncheckAllListItemsMutationResult = Apollo.MutationResult<UncheckAllListItemsMutation>;
+export type UncheckAllListItemsMutationOptions = Apollo.BaseMutationOptions<UncheckAllListItemsMutation, UncheckAllListItemsMutationVariables>;
+export const UpdateListItemStatusDocument = gql`
+    mutation UpdateListItemStatus($pk_columns: list_items_pk_columns_input!, $is_completed: Boolean!) {
+  update_list_items_by_pk(
+    pk_columns: $pk_columns
+    _set: {is_completed: $is_completed}
+  ) {
+    id
+    is_completed
+  }
+}
+    `;
+export type UpdateListItemStatusMutationFn = Apollo.MutationFunction<UpdateListItemStatusMutation, UpdateListItemStatusMutationVariables>;
+export type UpdateListItemStatusMutationResult = Apollo.MutationResult<UpdateListItemStatusMutation>;
+export type UpdateListItemStatusMutationOptions = Apollo.BaseMutationOptions<UpdateListItemStatusMutation, UpdateListItemStatusMutationVariables>;
 export const GetProfileDocument = gql`
     query GetProfile($uid: String!) {
   user(where: {id: {_eq: $uid}}) {
@@ -1382,6 +2204,29 @@ export const ParseIngredientsDocument = gql`
 }
     `;
 export type ParseIngredientsQueryResult = Apollo.QueryResult<ParseIngredientsQuery, ParseIngredientsQueryVariables>;
+export const GetAllIngredientsInweekDocument = gql`
+    query GetAllIngredientsInweek($_gte: date!, $_lte: date!) {
+  planner(
+    where: {_and: [{date: {_gte: $_gte}}, {date: {_lte: $_lte}}]}
+    order_by: {date: asc, index: asc}
+  ) {
+    date
+    index
+    recipe {
+      id
+      title
+      recipe_ingredients_list {
+        id
+        comment
+        quantity
+        unit
+        name
+      }
+    }
+  }
+}
+    `;
+export type GetAllIngredientsInweekQueryResult = Apollo.QueryResult<GetAllIngredientsInweekQuery, GetAllIngredientsInweekQueryVariables>;
 export const GetAllRecipeDocument = gql`
     query GetAllRecipe($_like: String = "%", $limit: Int = 8, $offset: Int = 0) {
   recipe(
@@ -1398,6 +2243,46 @@ export const GetAllRecipeDocument = gql`
 }
     `;
 export type GetAllRecipeQueryResult = Apollo.QueryResult<GetAllRecipeQuery, GetAllRecipeQueryVariables>;
+export const GetAllShoppingListsDocument = gql`
+    query getAllShoppingLists {
+  list(limit: 50) {
+    name
+    id
+  }
+}
+    `;
+export type GetAllShoppingListsQueryResult = Apollo.QueryResult<GetAllShoppingListsQuery, GetAllShoppingListsQueryVariables>;
+export const GetListItemByIdDocument = gql`
+    query GetListItemById($id: uuid!) {
+  list_items_by_pk(id: $id) {
+    id
+    name
+    quantity
+    recipes
+    other
+    comment
+    unit
+  }
+}
+    `;
+export type GetListItemByIdQueryResult = Apollo.QueryResult<GetListItemByIdQuery, GetListItemByIdQueryVariables>;
+export const GetListItemsByIdDocument = gql`
+    query GetListItemsById($_eq: uuid) {
+  list_items(where: {list: {_eq: $_eq}}, order_by: {category: asc_nulls_last}) {
+    quantity
+    other
+    name
+    list
+    is_completed
+    comment
+    id
+    category
+    unit
+    recipes
+  }
+}
+    `;
+export type GetListItemsByIdQueryResult = Apollo.QueryResult<GetListItemsByIdQuery, GetListItemsByIdQueryVariables>;
 export const GetPlannerRecipeByDateDocument = gql`
     query GetPlannerRecipeByDate($date: date) {
   planner(where: {date: {_eq: $date}}) {
@@ -1434,3 +2319,12 @@ export const GetRecipeDetailsDocument = gql`
 }
     `;
 export type GetRecipeDetailsQueryResult = Apollo.QueryResult<GetRecipeDetailsQuery, GetRecipeDetailsQueryVariables>;
+export const GetShoppingListNameDocument = gql`
+    query GetShoppingListName($id: uuid!) {
+  list_by_pk(id: $id) {
+    name
+    id
+  }
+}
+    `;
+export type GetShoppingListNameQueryResult = Apollo.QueryResult<GetShoppingListNameQuery, GetShoppingListNameQueryVariables>;

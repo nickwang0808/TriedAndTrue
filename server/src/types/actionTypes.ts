@@ -18,15 +18,26 @@ export type InsertRecipeOneOutput = {
   id: string;
 };
 
+export type shoppingListItems = {
+  id: string;
+};
+
 export type insertRecipeOneDerivedInput = {
   title: string;
   img?: Maybe<string>;
-  total_time?: Maybe<string>;
+  total_time?: Maybe<number>;
   yields?: Maybe<string>;
   cuisine?: Maybe<string>;
   meal_type?: Maybe<string>;
   ingredients: Array<string>;
   directions?: Maybe<json>;
+};
+
+export type insertIngredientToListInput = {
+  date: string;
+  recipe_id: string;
+  recipe_index: number;
+  ingredients: Array<string>;
 };
 
 export type Query = {
@@ -35,6 +46,7 @@ export type Query = {
 
 export type Mutation = {
   importRecipe: ImportedRecipe;
+  insertIngredientToList: Array<shoppingListItems>;
   insertRecipeOneDerived: InsertRecipeOneOutput;
   overRideIngredients: Array<UpdatedRecipeIngredients>;
 };
@@ -46,6 +58,11 @@ export type parseIngredientsArgs = {
 export type importRecipeArgs = {
   url: string;
   wildMode?: Maybe<boolean>;
+};
+
+export type insertIngredientToListArgs = {
+  ingredientsToAddToList: Array<insertIngredientToListInput>;
+  shoppingListId: string;
 };
 
 export type insertRecipeOneDerivedArgs = {
