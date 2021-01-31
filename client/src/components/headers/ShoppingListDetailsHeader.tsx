@@ -11,9 +11,13 @@ import {
 } from "@ionic/react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
 import addNew from "../../assets/svg/addnew.svg";
 import ellipsis from "../../assets/svg/ellipsis.svg";
-import { setShowActive } from "../../redux/ShoppingList/ShoppingListDetailsSlice";
+import {
+  setShowActive,
+  setShowConfigShoppingListModal,
+} from "../../redux/ShoppingList/ShoppingListDetailsSlice";
 import { IAppState } from "../../redux/store";
 
 interface IProps {
@@ -33,6 +37,9 @@ export default function ShoppingListDetailsHeader({ title }: IProps) {
     }
   };
 
+  const { id } = useParams<{ id: string }>();
+  const handleOpenConfig = () => dispatch(setShowConfigShoppingListModal(true));
+
   const { showActive } = useSelector(
     ({ shoppingListDetailSlice }: IAppState) => shoppingListDetailSlice
   );
@@ -46,7 +53,7 @@ export default function ShoppingListDetailsHeader({ title }: IProps) {
         <IonTitle color="primary">{title}</IonTitle>
         <IonButtons slot="end">
           <IonIcon size="small" src={addNew} />
-          <IonIcon size="small" src={ellipsis} />
+          <IonIcon size="small" src={ellipsis} onClick={handleOpenConfig} />
         </IonButtons>
       </IonToolbar>
 

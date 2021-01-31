@@ -1,4 +1,9 @@
-import { IonContent, IonList, IonPage } from "@ionic/react";
+import {
+  IonContent,
+  IonList,
+  IonPage,
+  useIonViewWillEnter,
+} from "@ionic/react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
@@ -7,11 +12,18 @@ import ShoppingListCheckBox from "../../components/listItem/ShoppingListCheckBox
 import BlockSeparator from "../../components/misc/BlockSeparator";
 import useUpdateListItemStatus from "../../gql/mutations/useUpdateListItemStatus.graphql";
 import useGetListItemsById from "../../gql/query/useGetListItemsById.graphql";
-import { setShowItemDetails } from "../../redux/ShoppingList/ShoppingListDetailsSlice";
+import {
+  setListid,
+  setShowItemDetails,
+} from "../../redux/ShoppingList/ShoppingListDetailsSlice";
 import { IAppState } from "../../redux/store";
 
 export default function ShoppingListDetails() {
   const { id } = useParams<{ id: string }>();
+
+  useIonViewWillEnter(() => {
+    dispatch(setListid(id));
+  }, [id]);
 
   const { showActive } = useSelector(
     ({ shoppingListDetailSlice }: IAppState) => shoppingListDetailSlice

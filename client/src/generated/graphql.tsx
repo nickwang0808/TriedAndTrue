@@ -1663,6 +1663,35 @@ export type UpdateRecipeDetailMutation = (
   )>> }
 );
 
+export type DeleteAllListItemsMutationVariables = Exact<{
+  _eq: Scalars['uuid'];
+}>;
+
+
+export type DeleteAllListItemsMutation = (
+  { __typename?: 'mutation_root' }
+  & { delete_list_items?: Maybe<(
+    { __typename?: 'list_items_mutation_response' }
+    & { returning: Array<(
+      { __typename?: 'list_items' }
+      & Pick<List_Items, 'list'>
+    )> }
+  )> }
+);
+
+export type DeleteListByIdMutationVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type DeleteListByIdMutation = (
+  { __typename?: 'mutation_root' }
+  & { delete_list_by_pk?: Maybe<(
+    { __typename?: 'list' }
+    & Pick<List, 'id'>
+  )> }
+);
+
 export type DeleteRecipeFromPlannerMutationVariables = Exact<{
   index: Scalars['Int'];
   date: Scalars['date'];
@@ -1794,6 +1823,22 @@ export type OverWritePlannerByDatesMutation = (
         { __typename?: 'recipe' }
         & Pick<Recipe, 'id'>
       ) }
+    )> }
+  )> }
+);
+
+export type UncheckAllListItemsMutationVariables = Exact<{
+  _eq: Scalars['uuid'];
+}>;
+
+
+export type UncheckAllListItemsMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_list_items?: Maybe<(
+    { __typename?: 'list_items_mutation_response' }
+    & { returning: Array<(
+      { __typename?: 'list_items' }
+      & Pick<List_Items, 'id' | 'is_completed'>
     )> }
   )> }
 );
@@ -1968,6 +2013,28 @@ export const UpdateRecipeDetailDocument = gql`
 export type UpdateRecipeDetailMutationFn = Apollo.MutationFunction<UpdateRecipeDetailMutation, UpdateRecipeDetailMutationVariables>;
 export type UpdateRecipeDetailMutationResult = Apollo.MutationResult<UpdateRecipeDetailMutation>;
 export type UpdateRecipeDetailMutationOptions = Apollo.BaseMutationOptions<UpdateRecipeDetailMutation, UpdateRecipeDetailMutationVariables>;
+export const DeleteAllListItemsDocument = gql`
+    mutation DeleteAllListItems($_eq: uuid!) {
+  delete_list_items(where: {list: {_eq: $_eq}}) {
+    returning {
+      list
+    }
+  }
+}
+    `;
+export type DeleteAllListItemsMutationFn = Apollo.MutationFunction<DeleteAllListItemsMutation, DeleteAllListItemsMutationVariables>;
+export type DeleteAllListItemsMutationResult = Apollo.MutationResult<DeleteAllListItemsMutation>;
+export type DeleteAllListItemsMutationOptions = Apollo.BaseMutationOptions<DeleteAllListItemsMutation, DeleteAllListItemsMutationVariables>;
+export const DeleteListByIdDocument = gql`
+    mutation DeleteListById($id: uuid!) {
+  delete_list_by_pk(id: $id) {
+    id
+  }
+}
+    `;
+export type DeleteListByIdMutationFn = Apollo.MutationFunction<DeleteListByIdMutation, DeleteListByIdMutationVariables>;
+export type DeleteListByIdMutationResult = Apollo.MutationResult<DeleteListByIdMutation>;
+export type DeleteListByIdMutationOptions = Apollo.BaseMutationOptions<DeleteListByIdMutation, DeleteListByIdMutationVariables>;
 export const DeleteRecipeFromPlannerDocument = gql`
     mutation DeleteRecipeFromPlanner($index: Int!, $date: date!, $recipe_id: String!) {
   delete_planner_by_pk(date: $date, recipe_id: $recipe_id, index: $index) {
@@ -2079,6 +2146,19 @@ export const OverWritePlannerByDatesDocument = gql`
 export type OverWritePlannerByDatesMutationFn = Apollo.MutationFunction<OverWritePlannerByDatesMutation, OverWritePlannerByDatesMutationVariables>;
 export type OverWritePlannerByDatesMutationResult = Apollo.MutationResult<OverWritePlannerByDatesMutation>;
 export type OverWritePlannerByDatesMutationOptions = Apollo.BaseMutationOptions<OverWritePlannerByDatesMutation, OverWritePlannerByDatesMutationVariables>;
+export const UncheckAllListItemsDocument = gql`
+    mutation UncheckAllListItems($_eq: uuid!) {
+  update_list_items(where: {list: {_eq: $_eq}}, _set: {is_completed: false}) {
+    returning {
+      id
+      is_completed
+    }
+  }
+}
+    `;
+export type UncheckAllListItemsMutationFn = Apollo.MutationFunction<UncheckAllListItemsMutation, UncheckAllListItemsMutationVariables>;
+export type UncheckAllListItemsMutationResult = Apollo.MutationResult<UncheckAllListItemsMutation>;
+export type UncheckAllListItemsMutationOptions = Apollo.BaseMutationOptions<UncheckAllListItemsMutation, UncheckAllListItemsMutationVariables>;
 export const UpdateListItemStatusDocument = gql`
     mutation UpdateListItemStatus($pk_columns: list_items_pk_columns_input!, $is_completed: Boolean!) {
   update_list_items_by_pk(

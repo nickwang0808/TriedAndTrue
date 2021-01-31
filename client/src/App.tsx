@@ -52,6 +52,7 @@ import RecipePage from "./pages/recipes/RecipePage";
 import ShoppingListDetails from "./pages/ShoppingList/ShoppingListDetails";
 import ShoppingListHome from "./pages/ShoppingList/ShoppingListHome";
 import AddNewShoppingListModal from "./pages/ShoppingList/ShoppingListModals/AddNewShoppingListModal";
+import ConfigureShoppingList from "./pages/ShoppingList/ShoppingListModals/ConfigureShoppingList";
 import ShoppingItemDetailsModal from "./pages/ShoppingList/ShoppingListModals/ShoppingItemDetailsModal";
 import { setDateRange } from "./redux/Planner/PlannerDateRangeSlice";
 import "./style.scss";
@@ -76,29 +77,30 @@ const App: React.FC = () => {
     <ApolloProvider client={client}>
       <AuthChecker>
         <IonApp>
-          <AddOrEditRecipeModal />
-          <ConfirmCancelModal />
-          <ImportRecipeModal />
-
-          <RecipeDetailsPage />
-          <DetailsOptionsModal />
-          <RecipeDeleteConfirmationModal />
-
-          <AddMultiRecipeToPlannerModal />
-
-          <AddIngredientsToListModel />
-          <EditPlannerItemModal />
-          <ReCreatePlannerModal />
-          <SelectWeekModal />
-          <SelectDayModal />
-          <SelectListModal />
-
-          <AddNewShoppingListModal />
-          <ShoppingItemDetailsModal />
-
-          <Toast />
-
           <IonReactRouter>
+            <AddOrEditRecipeModal />
+            <ConfirmCancelModal />
+            <ImportRecipeModal />
+
+            <RecipeDetailsPage />
+            <DetailsOptionsModal />
+            <RecipeDeleteConfirmationModal />
+
+            <AddMultiRecipeToPlannerModal />
+
+            <AddIngredientsToListModel />
+            <EditPlannerItemModal />
+            <ReCreatePlannerModal />
+            <SelectWeekModal />
+            <SelectDayModal />
+            <SelectListModal />
+
+            <AddNewShoppingListModal />
+            <ShoppingItemDetailsModal />
+            <ConfigureShoppingList />
+
+            <Toast />
+
             <IonTabs>
               <IonRouterOutlet>
                 <Route path="/recipes" component={RecipePage} exact={true} />
