@@ -3,6 +3,7 @@ import React from "react";
 import { useHistory } from "react-router";
 import ShoppingListMainHeader from "../../components/headers/ShoppingListMainHeader";
 import ItemWithRightArrow from "../../components/listItem/ListItemWithRightArrow";
+import LoaderCentered from "../../components/loading/LoaderCentered";
 import useGetAllShoppingLists from "../../gql/query/useGetAllShoppingLists.graphql";
 
 export default function ShoppingListHome() {
@@ -11,7 +12,7 @@ export default function ShoppingListHome() {
 
   let content;
   if (loading) {
-    content = <p>laoding ...</p>;
+    content = <LoaderCentered />;
   } else if (error) {
     content = <p>{error.message}</p>;
   } else if (!data?.list.length) {

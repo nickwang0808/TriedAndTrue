@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ModalHeader from "../../../components/headers/ModalHeader";
 import { StyledIonInput } from "../../../components/Input/StyledIonInput";
 import RecipeThumbNail from "../../../components/listItem/RecipeThumbNail";
+import LoaderCentered from "../../../components/loading/LoaderCentered";
 import BlockSeparator from "../../../components/misc/BlockSeparator";
 import { FancyModalWithRoundTop } from "../../../components/modals/FancyModalWithRoundTop";
 import useGetListItemById, {
@@ -24,7 +25,7 @@ export default function ShoppingItemDetailsModal() {
 
   let content;
   if (loading) {
-    content = <p>laoding ...</p>;
+    content = <LoaderCentered />;
   } else if (error) {
     content = <p>{error.message}</p>;
   } else if (!data) {

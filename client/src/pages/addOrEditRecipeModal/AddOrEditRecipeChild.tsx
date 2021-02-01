@@ -7,6 +7,7 @@ import AddDirections from "../../components/AddRecipeComp/AddDirections";
 import AddIngredients from "../../components/AddRecipeComp/AddIngredients";
 import MainFormArea from "../../components/AddRecipeComp/MainFormArea";
 import SaveFooterButton from "../../components/layout/SaveFooterButton";
+import LoaderCentered from "../../components/loading/LoaderCentered";
 import BlockSeparator from "../../components/misc/BlockSeparator";
 import useUpdateRecipeDetails from "../../gql/mutations/updateRecipeDetails.graphql";
 import useInsertRecipeOne from "../../gql/mutations/useInsertRecipeOne.graphql";
@@ -97,7 +98,7 @@ export default function AddOrEditRecipeChild({
     }
   }, [formState]);
 
-  if (loading_insert) return <p>loading...</p>;
+  if (loading_insert) return <LoaderCentered />;
   if (error_insert) return <p>{error_insert.message}</p>;
   return (
     <>

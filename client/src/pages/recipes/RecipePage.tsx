@@ -10,6 +10,7 @@ import { RouteComponentProps } from "react-router";
 import RecipeCard from "../../components/card/RecipeCard";
 import RecipePageHeader from "../../components/headers/RecipePageHeader";
 import StyledRecipeGrid from "../../components/layout/StyledRecipeGrid";
+import RecipeGridSkeleton from "../../components/loading/RecipeGridSkeleton";
 import StyledSearchBar from "../../components/misc/SearchBar";
 import useGetAllRecipes from "../../gql/query/useGetAllRecipes";
 import { setRecipeDetailsId } from "../../redux/RecipeDetailsSlice/recipeDetailsSlice";
@@ -38,9 +39,43 @@ const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
     ($event.target as HTMLIonInfiniteScrollElement).complete();
   };
 
-  // if (loading) return <p>loading...</p>;
-  if (error) return <p>{error.message}</p>;
-  if (!data) return <p>no recipe</p>;
+  let content;
+  if (loading) {
+    content = (
+      <StyledRecipeGrid>
+        <RecipeGridSkeleton />
+        <RecipeGridSkeleton />
+        <RecipeGridSkeleton />
+      </StyledRecipeGrid>
+    );
+  } else if (error) {
+    content = <p>{error.message}</p>;
+  } else if (!data?.recipe?.length) {
+    content = (
+      <NoRecipe
+        text={
+          !keyword
+            ? "No Recipes Yet! Use the “PLUS” button to start adding recipes!"
+            : "No recipes to show you!"
+        }
+      />
+    );
+  } else {
+    content = (
+      <StyledRecipeGrid>
+        {data.recipe.map((props) => {
+          return (
+            <RecipeCard
+              key={props.id}
+              {...props}
+              onClick={() => dispatch(setRecipeDetailsId(props.id))}
+            />
+          );
+        })}
+      </StyledRecipeGrid>
+    );
+  }
+
   return (
     <IonPage>
       <RecipePageHeader />
@@ -52,27 +87,7 @@ const RecipePage: React.FC<RouteComponentProps> = ({ history }) => {
           value={keyword?.slice(1, -1)}
           onIonChange={(e) => handleIonChange(e.detail.value)}
         />
-        {!data?.recipe.length ? (
-          <NoRecipe
-            text={
-              !keyword
-                ? "No Recipes Yet! Use the “PLUS” button to start adding recipes!"
-                : "No recipes to show you!"
-            }
-          />
-        ) : (
-          <StyledRecipeGrid>
-            {data.recipe.map((props) => {
-              return (
-                <RecipeCard
-                  key={props.id}
-                  {...props}
-                  onClick={() => dispatch(setRecipeDetailsId(props.id))}
-                />
-              );
-            })}
-          </StyledRecipeGrid>
-        )}
+        {content}
 
         <IonInfiniteScroll
           threshold="100px"

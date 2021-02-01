@@ -4,6 +4,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import AddCardOutLined from "../../components/card/AddCardOutLined";
 import RecipeCardSmall from "../../components/card/RecipeCardSmall";
+import LoaderCentered from "../../components/loading/LoaderCentered";
 import BlockSeparator from "../../components/misc/BlockSeparator";
 import useGetPlannerRecipeByDate from "../../gql/query/useGetPlannerRecipeByDate";
 import { setShowModifyModal } from "../../redux/Planner/PlannerItemModalSlice";
@@ -21,7 +22,7 @@ export default function PlannerRow({ date }: IProps) {
 
   console.log("row rendered");
 
-  if (loading) return <p>loading ...</p>;
+  if (loading) return <LoaderCentered />;
   if (error) return <p>{error.message}</p>;
   return (
     <StyledFadedOverLay fade={isPast(addDays(new Date(date), 1))}>

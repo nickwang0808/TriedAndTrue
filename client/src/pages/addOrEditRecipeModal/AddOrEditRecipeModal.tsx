@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AddOrEditRecipeHeader from "../../components/headers/AddOrEditRecipeHeader";
+import LoaderCentered from "../../components/loading/LoaderCentered";
 import { FancyModalWithRoundTop } from "../../components/modals/FancyModalWithRoundTop";
 import useGetRecipeDetails from "../../gql/query/useGetRecipeDetails";
 import { resetAddOrEditRecipe } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
@@ -25,7 +26,7 @@ export default function AddOrEditRecipeModal() {
   let content;
   let defaultValue: IRecipeForm = emptyDefaultValue;
   if (loading) {
-    content = <p>loading ...</p>;
+    content = <LoaderCentered />;
   } else if (error) {
     content = <p>{error.message}</p>;
   } else {

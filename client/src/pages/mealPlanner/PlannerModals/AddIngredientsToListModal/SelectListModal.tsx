@@ -2,6 +2,7 @@ import { IonContent, IonItem, IonLabel, IonList } from "@ionic/react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ModalHeader from "../../../../components/headers/ModalHeader";
+import LoaderCentered from "../../../../components/loading/LoaderCentered";
 import { FancyModalWithRoundTop } from "../../../../components/modals/FancyModalWithRoundTop";
 import useInsertIngredientToList from "../../../../gql/mutations/useInsertIngredientToList.graphql";
 import useGetAllShoppingLists from "../../../../gql/query/useGetAllShoppingLists.graphql";
@@ -38,7 +39,7 @@ export default function SelectListModal() {
 
   let content;
   if (loading) {
-    content = <p>laoding ...</p>;
+    content = <LoaderCentered />;
   } else if (error) {
     content = <p>{error.message}</p>;
   } else if (!data?.list?.length) {
