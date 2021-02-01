@@ -16,6 +16,7 @@ import CookTime from "../../components/detailsPageComp/CookTime";
 import DetailsPageTitle from "../../components/detailsPageComp/DetailsPageTitle";
 import DirectionsListItem from "../../components/listItem/DirectionsListItem";
 import IngredientListItem from "../../components/listItem/IngredientListItem";
+import DetailsSkeleton from "../../components/loading/DetailsSkeleton";
 import { FancyModalWithRoundTop } from "../../components/modals/FancyModalWithRoundTop";
 import useGetRecipeDetails from "../../gql/query/useGetRecipeDetails";
 import { setRecipeDetailsId } from "../../redux/RecipeDetailsSlice/recipeDetailsSlice";
@@ -34,7 +35,7 @@ const RecipeDetailsPage: React.FC = () => {
 
   let content;
   if (loading) {
-    content = <p>loading...</p>;
+    content = <DetailsSkeleton />;
   } else if (error) {
     content = <p>{error.message}</p>;
   } else if (!data || !data.recipe_by_pk) {

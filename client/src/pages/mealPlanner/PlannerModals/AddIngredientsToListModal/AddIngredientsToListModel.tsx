@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ModalHeader from "../../../../components/headers/ModalHeader";
 import SaveFooterButton from "../../../../components/layout/SaveFooterButton";
 import ShoppingListCheckBox from "../../../../components/listItem/ShoppingListCheckBox";
+import LoaderCentered from "../../../../components/loading/LoaderCentered";
 import BlockSeparator from "../../../../components/misc/BlockSeparator";
 import { FancyModalWithRoundTop } from "../../../../components/modals/FancyModalWithRoundTop";
 import useGetAllIngredientsInWeek from "../../../../gql/query/useGetAllIngredientsInWeek.graphql";
@@ -13,7 +14,7 @@ import {
   setSelectedIngredient,
   setShowIngredientToListModal,
   setShowSelectListModal,
-  unCheckIngredients
+  unCheckIngredients,
 } from "../../../../redux/Planner/AddInGredientsToListSlice";
 import { IAppState } from "../../../../redux/store";
 
@@ -84,7 +85,7 @@ export default function AddIngredientsToListModel() {
 
   let content;
   if (loading) {
-    content = <p>Loading</p>;
+    content = <LoaderCentered />;
   } else if (error) {
     content = <p>{error.message}</p>;
   } else if (!data?.planner) {

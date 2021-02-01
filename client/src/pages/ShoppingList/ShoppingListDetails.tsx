@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import ShoppingListDetailsHeader from "../../components/headers/ShoppingListDetailsHeader";
 import ShoppingListCheckBox from "../../components/listItem/ShoppingListCheckBox";
+import LoaderCentered from "../../components/loading/LoaderCentered";
 import BlockSeparator from "../../components/misc/BlockSeparator";
 import useUpdateListItemStatus from "../../gql/mutations/useUpdateListItemStatus.graphql";
 import useGetListItemsById from "../../gql/query/useGetListItemsById.graphql";
@@ -56,7 +57,7 @@ export default function ShoppingListDetails() {
 
   let content;
   if (loading) {
-    content = <p>laoding ...</p>;
+    content = <LoaderCentered />;
   } else if (error) {
     content = <p>{error.message}</p>;
   } else if (!data) {
