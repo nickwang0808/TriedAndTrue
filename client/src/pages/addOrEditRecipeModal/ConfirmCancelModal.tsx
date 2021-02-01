@@ -29,7 +29,7 @@ export default function ConfirmCancelModal() {
       onDidDismiss={handleDismissSelf}
     >
       <ModalHeader
-        title="Recreate Weekly Meal Plan"
+        title="Cancel Recipe Changes?"
         handleClose={handleDismissSelf}
       />
 

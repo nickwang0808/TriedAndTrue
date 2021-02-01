@@ -3,7 +3,6 @@ import {
   IonApp,
   IonIcon,
   IonLabel,
-  IonPage,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
@@ -45,6 +44,8 @@ import EditPlannerItemModal from "./pages/mealPlanner/PlannerModals/EditPlannerI
 import ReCreatePlannerModal from "./pages/mealPlanner/PlannerModals/ReCreatePlannerModal/ReCreatePlannerModal";
 import SelectDayModal from "./pages/mealPlanner/PlannerModals/SelectDayModal/SelectDayModal";
 import SelectWeekModal from "./pages/mealPlanner/PlannerModals/SelectWeekModal/SelectWeekModal";
+import AboutUsModal from "./pages/profile/AboutUsModal";
+import ProfilePage from "./pages/profile/ProfilePage";
 import DetailsOptionsModal from "./pages/recipeDetails/DetailsOptionsModal";
 import RecipeDeleteConfirmationModal from "./pages/recipeDetails/RecipeDeleteConfirmationModal";
 import RecipeDetailsPage from "./pages/recipeDetails/RecipeDetailsPage";
@@ -87,7 +88,6 @@ const App: React.FC = () => {
             <RecipeDeleteConfirmationModal />
 
             <AddMultiRecipeToPlannerModal />
-
             <AddIngredientsToListModel />
             <EditPlannerItemModal />
             <ReCreatePlannerModal />
@@ -98,6 +98,8 @@ const App: React.FC = () => {
             <AddNewShoppingListModal />
             <ShoppingItemDetailsModal />
             <ConfigureShoppingList />
+
+            <AboutUsModal />
 
             <Toast />
 
@@ -111,14 +113,7 @@ const App: React.FC = () => {
                 />
                 <Route exact path="/lists" component={ShoppingListHome} />
                 <Route path="/lists/:id" component={ShoppingListDetails} />
-                <Route
-                  path="/profile"
-                  component={() => (
-                    <IonPage>
-                      <h1>Coming Soon</h1>
-                    </IonPage>
-                  )}
-                />
+                <Route path="/profile" component={ProfilePage} />
 
                 <Route
                   exact
