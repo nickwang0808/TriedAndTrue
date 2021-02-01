@@ -72,7 +72,7 @@ export default function ImportRecipeModal() {
           </IonButton>
         </StyledFlex>
       </StyledImportContainer>
-      {warning && <span>This website may not be imported properly</span>}
+      {warning && <StyledWarningSpan>We'll do our best to import this recipe.</StyledWarningSpan>}
 
       <StyledLineContainer>
         <HorizontalLineWithText color="#DCDCDC" text="OR" />
@@ -127,6 +127,12 @@ const StyledImportContainer = styled(IonItem)`
 
 const StyledFullWidthButton = styled(IonButton)`
   margin: 8px 16px;
+`;
+
+const StyledWarningSpan = styled.div`
+text-align: center;
+padding: 4px 8px 0 8px;
+font-size: 14px;
 `;
 
 const StyledIonInput = styled(IonInput)`

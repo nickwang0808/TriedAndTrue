@@ -35,7 +35,7 @@ export default function ConfirmCancelModal() {
 
       <IonContent>
         <IonItem lines="none">
-          <p>Any changes made to this recipe will be discarded... FOREVER!</p>
+          <p>Any changes made to this recipe will be discarded.</p>
         </IonItem>
         <StyledButtonContainer>
           <IonButton
@@ -43,10 +43,10 @@ export default function ConfirmCancelModal() {
             fill="outline"
             onClick={handleDismissSelf}
           >
-            No Go Back
+            No
           </IonButton>
           <IonButton color="secondary" fill="solid" onClick={handleDismissAll}>
-            Yes, Cancel Change
+            Yes, Cancel Changes
           </IonButton>
         </StyledButtonContainer>
       </IonContent>

@@ -30,9 +30,11 @@ const StyledWrapper = styled(IonItem)<{ showBackground: boolean }>`
 
 const StyledTitle = styled.div`
   margin-right: 8px;
+  margin-left: 8px;
+  font-family: OpenSansBold;
 
   & + div {
-    font-weight: 700;
+    font-family: OpenSansRegular;
     margin-right: 4px; /* separator between 2 titles */
   }
 `;
