@@ -8,7 +8,7 @@ interface IState {
 }
 
 const initialState: IState = {
-  showAddOrEditRecipe: false,
+  showAddOrEditRecipe: true,
   id: null,
   showConfirmCancelModal: false,
   formIsDirty: false,

@@ -9,12 +9,16 @@ import {
 } from "@ionic/react";
 import React from "react";
 import { Control, Controller } from "react-hook-form";
+import { useAddRecipeImage } from "../../hooks/useAddRecipeImage";
+import ImageBox from "../misc/ImageBox";
 
 interface IProps {
   control: Control<Record<string, any>>;
 }
 
 export default function MainFormArea({ control }: IProps) {
+  const { takePhoto, photos } = useAddRecipeImage();
+
   return (
     <StyledList lines="none">
       <IonItem style={{ width: "100%" }}>
@@ -35,6 +39,11 @@ export default function MainFormArea({ control }: IProps) {
             />
           )}
         />
+      </IonItem>
+
+      <IonItem>
+        <IonLabel position="stacked">Image</IonLabel>
+        <ImageBox onClick={() => takePhoto()} src={photos?.webviewPath} />
       </IonItem>
 
       <IonItem>
@@ -135,8 +144,8 @@ export default function MainFormArea({ control }: IProps) {
   );
 }
 
-const StyledList = styled(IonList)` 
-padding-bottom: 32px;
+const StyledList = styled(IonList)`
+  padding-bottom: 32px;
   & ion-item {
     width: calc(50% + 16px); // using inline style to over ride this on title
   }
