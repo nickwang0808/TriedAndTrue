@@ -8,13 +8,18 @@ import {
   IonSelectOption,
 } from "@ionic/react";
 import React from "react";
-import { Control, Controller } from "react-hook-form";
+import { Control, Controller, useForm } from "react-hook-form";
+import ImageBox from "../../components/misc/ImageBox";
+import { useAddRecipeImage } from "../../hooks/useAddRecipeImage";
 
 interface IProps {
   control: Control<Record<string, any>>;
+  setValue: ReturnType<typeof useForm>["setValue"];
 }
 
-export default function MainFormArea({ control }: IProps) {
+export default function MainFormArea({ control, setValue }: IProps) {
+  const { takePhoto, loading } = useAddRecipeImage(setValue);
+
   return (
     <StyledList lines="none">
       <IonItem style={{ width: "100%" }}>
@@ -33,6 +38,17 @@ export default function MainFormArea({ control }: IProps) {
               onIonChange={(e) => onChange(e.detail.value!)}
               ref={ref}
             />
+          )}
+        />
+      </IonItem>
+
+      <IonItem>
+        <IonLabel position="stacked">Image</IonLabel>
+        <Controller
+          control={control}
+          name="img"
+          render={({ onChange, ref, value }) => (
+            <ImageBox onClick={takePhoto} src={value} loading={loading} />
           )}
         />
       </IonItem>
@@ -135,8 +151,8 @@ export default function MainFormArea({ control }: IProps) {
   );
 }
 
-const StyledList = styled(IonList)` 
-padding-bottom: 32px;
+const StyledList = styled(IonList)`
+  padding-bottom: 32px;
   & ion-item {
     width: calc(50% + 16px); // using inline style to over ride this on title
   }

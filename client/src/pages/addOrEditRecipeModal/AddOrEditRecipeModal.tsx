@@ -33,8 +33,9 @@ export default function AddOrEditRecipeModal() {
     // prettier-ignore
     if (data?.recipe_by_pk && id!==null) {
       // set default value if recipe info is found
-      const {cuisine, total_time, meal_type, yields, title,directions, recipe_ingredients_list} = data.recipe_by_pk!
+      const {cuisine, total_time, meal_type, yields, title,directions, recipe_ingredients_list, img} = data.recipe_by_pk!
       defaultValue={
+          img:img || null,
           cuisine: cuisine || null,
           total_time: total_time || null,
           meal_type: (meal_type as mealType) || null,

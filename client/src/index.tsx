@@ -1,9 +1,13 @@
+import { defineCustomElements } from "@ionic/pwa-elements/loader";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import App from "./App";
 import { store } from "./redux/store";
 import * as serviceWorker from "./serviceWorker";
+
+// Call the element loader after the platform has been bootstrapped
+defineCustomElements(window);
 
 const renderApp = () =>
   ReactDOM.render(
