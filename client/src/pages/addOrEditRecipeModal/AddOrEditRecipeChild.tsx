@@ -6,12 +6,9 @@ import { useDispatch } from "react-redux";
 import AddDirections from "../../components/AddRecipeComp/AddDirections";
 import AddIngredients from "../../components/AddRecipeComp/AddIngredients";
 import SaveFooterButton from "../../components/layout/SaveFooterButton";
-import LoaderCentered from "../../components/loading/LoaderCentered";
 import BlockSeparator from "../../components/misc/BlockSeparator";
-import useUpdateRecipeDetails from "../../gql/mutations/updateRecipeDetails.graphql";
-import useInsertRecipeOne from "../../gql/mutations/useInsertRecipeOne.graphql";
+import useRecipeFormSubmit from "../../hooks/useRecipeFormSubmit";
 import { setFormIsDirty } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
-import { setShowToast } from "../../redux/toastSlice/toastSlice";
 import { IRecipeForm, recipeFormSchema } from "../../utils/recipeSchema";
 import MainFormArea from "./MainFormArea";
 
@@ -29,17 +26,10 @@ export default function AddOrEditRecipeChild({
   handleDismiss,
 }: IProps) {
   // prettier-ignore
-  const { error_insert, insertRecipeOne, loading_insert } = useInsertRecipeOne();
-  const { updateRecipeDetails } = useUpdateRecipeDetails(id);
-
-  // --------------------- Form Control ---------------------------------
-  // prettier-ignore
-  const { formState, handleSubmit, control, register, reset, watch, setValue } = useForm<IRecipeForm>({
+  const { formState, handleSubmit, control, reset, setValue } = useForm<IRecipeForm>({
     resolver: yupResolver(recipeFormSchema),
     defaultValues,
   });
-
-  console.log(watch());
 
   /*  do not use viewDidenter, additional modals with cause that to trigger,
   use normal useEffect instead */
@@ -50,45 +40,13 @@ export default function AddOrEditRecipeChild({
 
   // formState needed to be read before it starts to work per rhf doc
   const { isDirty } = formState;
-  const onSubmit = (data: IRecipeForm) => {
-    const { ingredients, ...dataWIthOutIngredients } = data;
 
-    if (isCreateNew) {
-      console.log("submit");
-      try {
-        insertRecipeOne({
-          variables: {
-            object: {
-              ...dataWIthOutIngredients,
-              title: dataWIthOutIngredients.title!,
-              ingredients: ingredients?.map((e) => e.value) || [],
-            },
-          },
-        });
-        dispatch(setShowToast("Recipe Created"));
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      // make sure the form is dirty to run the update mutation
-      if (isDirty && id) {
-        try {
-          updateRecipeDetails({
-            variables: {
-              _set: { ...dataWIthOutIngredients },
-              id,
-              ingredientsStrings: ingredients?.map((ing) => ing.value) || [],
-            },
-          });
-          dispatch(setShowToast("Recipe Updated"));
-        } catch (error) {
-          console.log(error);
-        }
-      } else return;
-    }
-    handleDismiss();
-  };
-  // --------------------- Form Control ---------------------------------
+  const { onSubmit } = useRecipeFormSubmit(
+    isCreateNew,
+    id,
+    handleDismiss,
+    isDirty
+  );
 
   // only show cancel confirmation when form is dirty
   const dispatch = useDispatch();
@@ -98,15 +56,12 @@ export default function AddOrEditRecipeChild({
     }
   }, [formState]);
 
-  if (loading_insert) return <LoaderCentered />;
-  if (error_insert) return <p>{error_insert.message}</p>;
   return (
     <>
       <IonContent fullscreen>
         <form onSubmit={handleSubmit(onSubmit)}>
           <MainFormArea control={control} setValue={setValue} />
           {/* dummy field to hold the img url */}
-        
 
           <div className="ion-margin-vertical" />
 
