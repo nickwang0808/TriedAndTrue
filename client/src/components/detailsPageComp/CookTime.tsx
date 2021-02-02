@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
+import convertMinToHr from "../../utils/convertMinToHr";
 
 interface IProps {
   total_time: number | null;
@@ -11,7 +12,7 @@ export default function CookTime({ total_time, servings }: IProps) {
     <StyledWrapper>
       {total_time && (
         <StyledCol>
-          <StyledTitle>{total_time}</StyledTitle>
+          <StyledTitle>{convertMinToHr(total_time)}</StyledTitle>
           <StyledSubtitle>Total Time</StyledSubtitle>
         </StyledCol>
       )}
