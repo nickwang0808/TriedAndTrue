@@ -10,16 +10,11 @@ interface IProps {
 }
 
 export default function ImageBox({ onClick, src, loading }: IProps) {
-  let content = (
-    <>
-      <img src={addImage} />
-      <div>Add Image</div>
-    </>
-  );
+  let content = <PlaceHolder />;
 
   if (loading) {
     content = <LoaderCentered />;
-  } else {
+  } else if (src) {
     content = <img src={src} />;
   }
 
@@ -27,16 +22,33 @@ export default function ImageBox({ onClick, src, loading }: IProps) {
 }
 
 const StyledFlex = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
   width: 100%;
   max-width: calc(50vw - 16px);
   height: 120px;
 
   margin-top: 8px;
+
+  & > img {
+    border: 1px solid #2a5077;
+    object-fit: contain;
+  }
+`;
+
+function PlaceHolder() {
+  return (
+    <StyledPlaceHolder>
+      <img src={addImage} />
+      <div>Add Image</div>
+    </StyledPlaceHolder>
+  );
+}
+
+const StyledPlaceHolder = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 
   background: #f4f6f8;
   border: 1px solid #2a5077;
