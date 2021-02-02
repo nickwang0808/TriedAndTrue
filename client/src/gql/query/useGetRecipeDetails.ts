@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useLazyQuery } from "@apollo/client";
 import {
   GetRecipeDetailsQuery,
   GetRecipeDetailsQueryVariables,
@@ -26,19 +26,17 @@ export const GET_RECIPE_DETAILS = gql`
   }
 `;
 
-export default function useGetRecipeDetails(id: string | null) {
-  const { error, loading, data, refetch } = useQuery<
+export default function useGetRecipeDetails() {
+  const [getRecipeDetails, { error, loading, data, refetch }] = useLazyQuery<
     GetRecipeDetailsQuery,
     GetRecipeDetailsQueryVariables
-  >(GET_RECIPE_DETAILS, {
-    skip: !id,
-    variables: { id: id as string },
-  });
+  >(GET_RECIPE_DETAILS);
 
   return {
     error,
     loading,
     data,
     refetch,
+    getRecipeDetails,
   };
 }

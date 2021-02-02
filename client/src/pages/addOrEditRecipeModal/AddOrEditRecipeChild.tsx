@@ -31,15 +31,15 @@ export default function AddOrEditRecipeChild({
     defaultValues,
   });
 
-  /*  do not use viewDidenter, additional modals with cause that to trigger,
-  use normal useEffect instead */
+  const { isDirty } = formState;
+
   useEffect(() => {
-    reset(defaultValues);
-    // eslint-disable-next-line
-  }, []);
+    if (!isDirty) {
+      reset(defaultValues);
+    }
+  }, [defaultValues]);
 
   // formState needed to be read before it starts to work per rhf doc
-  const { isDirty } = formState;
 
   const { onSubmit } = useRecipeFormSubmit(
     isCreateNew,

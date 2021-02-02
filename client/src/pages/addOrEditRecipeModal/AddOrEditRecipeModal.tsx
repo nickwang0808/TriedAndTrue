@@ -19,7 +19,8 @@ export default function AddOrEditRecipeModal() {
     (state: IAppState) => state.addOrEditRecipeSlice
   );
 
-  const { error, loading, data } = useGetRecipeDetails(id);
+  const { error, loading, data, getRecipeDetails } = useGetRecipeDetails();
+  const runQuery = () => getRecipeDetails({ variables: { id: id! } });
   // prettier-ignore
   const handleDismiss = () => dispatch(resetAddOrEditRecipe());
 
@@ -62,6 +63,7 @@ export default function AddOrEditRecipeModal() {
     <FancyModalWithRoundTop
       isOpen={showAddOrEditRecipe}
       onDidDismiss={handleDismiss}
+      onWillPresent={runQuery}
     >
       <AddOrEditRecipeHeader isNew={id === null ? true : false} />
       {content}

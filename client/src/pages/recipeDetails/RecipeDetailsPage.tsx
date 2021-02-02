@@ -26,10 +26,11 @@ const RecipeDetailsPage: React.FC = () => {
   const { id } = useSelector(
     ({ recipeDetailsSlice }: IAppState) => recipeDetailsSlice
   );
-  const { error, loading, data } = useGetRecipeDetails(id);
+  const { error, loading, data, getRecipeDetails } = useGetRecipeDetails();
 
   const dispatch = useDispatch();
   const handleDismiss = () => dispatch(setRecipeDetailsId(null));
+  const runQuery = () => getRecipeDetails({ variables: { id: id! } });
 
   const [showDirections, setShowDirections] = useState(false);
 
@@ -89,7 +90,11 @@ const RecipeDetailsPage: React.FC = () => {
     );
   }
   return (
-    <FancyModalWithRoundTop isOpen={!!id} onDidDismiss={handleDismiss}>
+    <FancyModalWithRoundTop
+      isOpen={!!id}
+      onDidDismiss={handleDismiss}
+      onWillPresent={runQuery}
+    >
       <IonContent>{content}</IonContent>
     </FancyModalWithRoundTop>
   );
