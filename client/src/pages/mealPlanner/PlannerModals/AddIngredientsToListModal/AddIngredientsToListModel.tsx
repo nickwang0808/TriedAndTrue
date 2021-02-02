@@ -103,7 +103,7 @@ export default function AddIngredientsToListModel() {
             if (!recipe_ingredients_list.length) return null;
             return (
               <React.Fragment key={date + index + recipe_id}>
-                <BlockSeparator title={title} subTitle={date} />
+                <BlockSeparator title={title} />
                 <IonList lines="full">
                   {recipe_ingredients_list.map(
                     ({ id, quantity, comment, name, unit }) => (

@@ -7,7 +7,7 @@
 
 p {
   color: var(--ion-color-dark);
-  font-family: OpenSansRegular;
+  font-family: SuraRegular;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -31,6 +31,7 @@ ion-select,
 ion-input {
   min-height: 48px;
 }
+
 ion-segment {
   font-family: SuraBold;
 }
@@ -81,7 +82,6 @@ ion-tab-button ion-icon {
 
 ion-toolbar ion-icon,
 ion-content ion-icon {
-  font-size: 40px !important;
   width: 40px;
   height: 40px;
   fill: var(--ion-color-secondary);
@@ -108,25 +108,35 @@ ion-button {
   height: 48px;
   --padding-start: 24px;
   --padding-end: 24px;
-  font-family: SuraBold;
+  font-family: SuraRegular;
   font-size: 14px;
   line-height: 28px;
   text-align: center;
-  letter-spacing: 0.15px;
-  /* --ripple-color: transparent; */
+  letter-spacing: 0.5px;
+  --background-activated-opacity: 1;
+  --background-activated: #921c28;
+}
+
+ion-button[fill="outline"] {
+  --background-activated: #fff6f7;
 }
 
 ion-footer {
   background-color: white;
   border-top: 1px solid #dcdcdc;
 }
+
+ion-fab-button {
+  --box-shadow: none;
+}
+
 .header-md::after {
   /* get rid of header under line shadow thingy */
   background-image: none;
 }
 
-ion-fab-button {
-  --box-shadow: none;
+ion-checkbox {
+  --border-color: var(--ion-color-secondary);
 }
 
 @font-face {
@@ -156,3 +166,4 @@ ion-fab-button {
   font-weight: normal;
   src: url("./assets/fonts/Sura-Regular.ttf");
 }
+/*# sourceMappingURL=style.css.map */

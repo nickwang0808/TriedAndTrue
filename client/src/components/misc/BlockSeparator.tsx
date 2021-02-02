@@ -18,7 +18,7 @@ export default function BlockSeparator({
     <StyledDiv id={id}>
       <StyledTitle>{title}</StyledTitle>
       {subTitle && <div>{subTitle}</div>}
-      {showTodayTag && <StyledTodayTag>Today</StyledTodayTag>}
+      {showTodayTag && <StyledTodayTag>(Today)</StyledTodayTag>}
     </StyledDiv>
   );
 }
@@ -40,6 +40,7 @@ const StyledTitle = styled.div`
 `;
 
 const StyledTodayTag = styled.div`
-  color: var(--ion-color-secondary);
-  font-weight: 700;
+  opacity: 0.5;
+  width: 100%;
+  text-align: right;
 `;

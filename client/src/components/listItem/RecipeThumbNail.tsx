@@ -31,7 +31,7 @@ const StyledIonThumbNail = styled(IonThumbnail)`
 
 const StyledIonLabel = styled(IonLabel)<{ after: string }>`
   & > h3 {
-    font-family: Open Sans;
+    font-family: OpenSansRegular;
     font-style: normal;
     font-weight: bold;
     font-size: 14px;
@@ -45,7 +45,7 @@ const StyledIonLabel = styled(IonLabel)<{ after: string }>`
   }
 
   & > div {
-    font-family: Open Sans;
+    font-family: OpenSansRegular;
     font-style: normal;
     font-weight: normal;
     font-size: 12px;

@@ -39,7 +39,7 @@ export default function DetailsOptionsModal() {
       isOpen={showDetailsOptionModal}
       onDidDismiss={handleDismiss}
     >
-      <ModalHeader title="More Options" handleClose={handleDismiss} />
+      <ModalHeader title="More" handleClose={handleDismiss} />
       <IonContent>
         <IonList lines="full">
           <IonItem>
@@ -48,7 +48,7 @@ export default function DetailsOptionsModal() {
             </IonLabel>
           </IonItem>
           <IonItem lines="none" onClick={showConfirmDelete}>
-            <IonLabel color="primary">Delete Recipe Recipe</IonLabel>
+            <IonLabel color="primary">Delete Recipe</IonLabel>
           </IonItem>
         </IonList>
       </IonContent>

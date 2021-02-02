@@ -41,9 +41,8 @@ export default function AboutUsModal() {
         <p className="ion-padding">
           Tried & True keeps the recipes you already know, automatically puts
           them into next week’s meal plan, and creates a shopping list from that
-          meal plan.
+          meal plan.<br/><br/> It’s easy, really.
         </p>
-        <p className="ion-padding">It’s easy, really.</p>
         <SmallBlockSeparator />
         <p className="ion-padding">Let's chat!</p>
         <StyledFlexCenter>
@@ -72,3 +71,4 @@ const StyledFlexCenter = styled.div`
   display: flex;
   justify-content: center;
 `;
+

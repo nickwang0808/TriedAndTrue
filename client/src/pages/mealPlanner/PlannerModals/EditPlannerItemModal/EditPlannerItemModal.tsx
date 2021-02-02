@@ -57,30 +57,33 @@ export default function EditPlannerItemModal() {
 
   return (
     <FancyModalWithRoundTop
-      height="220px"
+      height="270px"
       isOpen={!!showModifyModal}
       backdropDismiss
       onDidDismiss={handleDismiss}
     >
-      <ModalHeader title="Add Recipe" handleClose={handleDismiss} />
+      <ModalHeader title="Recipe Options" handleClose={handleDismiss} />
 
       <IonContent>
         <IonList lines="full">
-          <IonItem
-            onClick={() => dispatch(setShowSelectWeekModal(showModifyModal))}
-          >
-            <IonLabel color="primary">Move to Another Day</IonLabel>
-          </IonItem>
-          <IonItem
+        <IonItem
             onClick={() => {
               dispatch(setRecipeDetailsId(showModifyModal));
               handleDismiss();
             }}
           >
-            <IonLabel color="primary">Recipe Details</IonLabel>
+            <IonLabel color="primary">View Details</IonLabel>
+          </IonItem>
+        <IonItem>
+            <IonLabel color="primary">Add Ingredients to List</IonLabel>
+          </IonItem>
+          <IonItem
+            onClick={() => dispatch(setShowSelectWeekModal(showModifyModal))}
+          >
+            <IonLabel color="primary">Move to Another Day</IonLabel>
           </IonItem>
           <IonItem onClick={handleDelete}>
-            <IonLabel color="primary">Remove Recipe</IonLabel>
+            <IonLabel color="primary">Remove from Meal Plan</IonLabel>
           </IonItem>
         </IonList>
       </IonContent>
