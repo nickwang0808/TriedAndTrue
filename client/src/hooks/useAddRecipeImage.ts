@@ -12,7 +12,7 @@ export interface Photo {
 type SetValue = ReturnType<typeof useForm>["setValue"];
 
 export function useAddRecipeImage(setValue: SetValue) {
-  const [photo, setPhotos] = useState<string>();
+  const [loading, setLoading] = useState(false);
   const { getPhoto } = useCamera();
 
   const takePhoto = async () => {
@@ -28,15 +28,17 @@ export function useAddRecipeImage(setValue: SetValue) {
     };
 
     console.log("webPath", cameraPhoto.webPath);
+    setLoading(true);
     const url = await upLoadToFirebase(newPhoto);
 
-    setPhotos(url);
+    setLoading(false);
+    // set the form img value
     setValue("img", url, { shouldDirty: true, shouldValidate: true });
   };
 
   return {
-    photo,
     takePhoto,
+    loading,
   };
 }
 

@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import AddDirections from "../../components/AddRecipeComp/AddDirections";
 import AddIngredients from "../../components/AddRecipeComp/AddIngredients";
-import MainFormArea from "../../components/AddRecipeComp/MainFormArea";
 import SaveFooterButton from "../../components/layout/SaveFooterButton";
 import LoaderCentered from "../../components/loading/LoaderCentered";
 import BlockSeparator from "../../components/misc/BlockSeparator";
@@ -14,6 +13,7 @@ import useInsertRecipeOne from "../../gql/mutations/useInsertRecipeOne.graphql";
 import { setFormIsDirty } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
 import { setShowToast } from "../../redux/toastSlice/toastSlice";
 import { IRecipeForm, recipeFormSchema } from "../../utils/recipeSchema";
+import MainFormArea from "./MainFormArea";
 
 interface IProps {
   isCreateNew: boolean;
@@ -106,7 +106,7 @@ export default function AddOrEditRecipeChild({
         <form onSubmit={handleSubmit(onSubmit)}>
           <MainFormArea control={control} setValue={setValue} />
           {/* dummy field to hold the img url */}
-          <input name="img" ref={register()} type="hidden" />
+        
 
           <div className="ion-margin-vertical" />
 

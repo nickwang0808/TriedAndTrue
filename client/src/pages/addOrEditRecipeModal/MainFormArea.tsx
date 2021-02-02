@@ -9,8 +9,8 @@ import {
 } from "@ionic/react";
 import React from "react";
 import { Control, Controller, useForm } from "react-hook-form";
+import ImageBox from "../../components/misc/ImageBox";
 import { useAddRecipeImage } from "../../hooks/useAddRecipeImage";
-import ImageBox from "../misc/ImageBox";
 
 interface IProps {
   control: Control<Record<string, any>>;
@@ -18,7 +18,7 @@ interface IProps {
 }
 
 export default function MainFormArea({ control, setValue }: IProps) {
-  const { takePhoto, photo } = useAddRecipeImage(setValue);
+  const { takePhoto, loading } = useAddRecipeImage(setValue);
 
   return (
     <StyledList lines="none">
@@ -44,7 +44,13 @@ export default function MainFormArea({ control, setValue }: IProps) {
 
       <IonItem>
         <IonLabel position="stacked">Image</IonLabel>
-        <ImageBox onClick={() => takePhoto()} src={photo} />
+        <Controller
+          control={control}
+          name="img"
+          render={({ onChange, ref, value }) => (
+            <ImageBox onClick={takePhoto} src={value} loading={loading} />
+          )}
+        />
       </IonItem>
 
       <IonItem>

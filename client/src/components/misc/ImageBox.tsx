@@ -1,20 +1,25 @@
 import styled from "@emotion/styled";
 import React from "react";
 import addImage from "../../assets/svg/addImage.svg";
+import LoaderCentered from "../loading/LoaderCentered";
 
 interface IProps {
   onClick: () => void;
   src?: string;
+  loading: boolean;
 }
 
-export default function ImageBox({ onClick, src }: IProps) {
+export default function ImageBox({ onClick, src, loading }: IProps) {
   let content = (
     <>
       <img src={addImage} />
       <div>Add Image</div>
     </>
   );
-  if (src) {
+
+  if (loading) {
+    content = <LoaderCentered />;
+  } else {
     content = <img src={src} />;
   }
 
