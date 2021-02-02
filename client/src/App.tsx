@@ -79,10 +79,11 @@ const App: React.FC = () => {
       <AuthChecker>
         <IonApp>
           <IonReactRouter>
+            {/* mounting modal on root because some modals requires to be accessible 
+            from different routes */}
             <AddOrEditRecipeModal />
             <ConfirmCancelModal />
             <ImportRecipeModal />
-
             <RecipeDetailsPage />
             <DetailsOptionsModal />
             <RecipeDeleteConfirmationModal />

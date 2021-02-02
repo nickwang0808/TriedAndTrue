@@ -31,6 +31,7 @@ export default function AddOrEditRecipeChild({
     defaultValues,
   });
 
+  // formState needed to be read before it starts to work per rhf doc
   const { isDirty } = formState;
 
   useEffect(() => {
@@ -38,8 +39,6 @@ export default function AddOrEditRecipeChild({
       reset(defaultValues);
     }
   }, [defaultValues]);
-
-  // formState needed to be read before it starts to work per rhf doc
 
   const { onSubmit } = useRecipeFormSubmit(
     isCreateNew,
