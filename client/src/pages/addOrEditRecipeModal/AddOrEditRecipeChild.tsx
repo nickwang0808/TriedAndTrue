@@ -1,15 +1,11 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import { IonContent } from "@ionic/react";
-import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import React from "react";
 import AddDirections from "../../components/AddRecipeComp/AddDirections";
 import AddIngredients from "../../components/AddRecipeComp/AddIngredients";
 import SaveFooterButton from "../../components/layout/SaveFooterButton";
 import BlockSeparator from "../../components/misc/BlockSeparator";
 import useRecipeFormSubmit from "../../hooks/useRecipeFormSubmit";
-import { setFormIsDirty } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
-import { IRecipeForm, recipeFormSchema } from "../../utils/recipeSchema";
+import { IRecipeForm } from "../../utils/recipeSchema";
 import MainFormArea from "./MainFormArea";
 
 interface IProps {
@@ -25,35 +21,13 @@ export default function AddOrEditRecipeChild({
   id,
   handleDismiss,
 }: IProps) {
-  // prettier-ignore
-  const { formState, handleSubmit, control, reset, setValue } = useForm<IRecipeForm>({
-    resolver: yupResolver(recipeFormSchema),
-    defaultValues,
-  });
-
-  // formState needed to be read before it starts to work per rhf doc
-  const { isDirty } = formState;
-
-  useEffect(() => {
-    if (!isDirty) {
-      reset(defaultValues);
-    }
-  }, [defaultValues]);
-
-  const { onSubmit } = useRecipeFormSubmit(
-    isCreateNew,
-    id,
-    handleDismiss,
-    isDirty
-  );
-
-  // only show cancel confirmation when form is dirty
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (formState.isDirty) {
-      dispatch(setFormIsDirty(true));
-    }
-  }, [formState]);
+  const {
+    onSubmit,
+    handleSubmit,
+    control,
+    setValue,
+    isDirty,
+  } = useRecipeFormSubmit(isCreateNew, id, handleDismiss, defaultValues);
 
   return (
     <>

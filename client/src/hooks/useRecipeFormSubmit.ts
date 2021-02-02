@@ -1,14 +1,18 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import useUpdateRecipeDetails from "../gql/mutations/updateRecipeDetails.graphql";
 import useInsertRecipeOne from "../gql/mutations/useInsertRecipeOne.graphql";
+import { setFormIsDirty } from "../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
 import { setShowToast } from "../redux/toastSlice/toastSlice";
-import { IRecipeForm } from "../utils/recipeSchema";
+import { IRecipeForm, recipeFormSchema } from "../utils/recipeSchema";
 
 export default function useRecipeFormSubmit(
   isCreateNew: boolean,
   id: string | null,
   handleDismiss: () => void,
-  isDirty: boolean
+  defaultValues: IRecipeForm
 ) {
   const {
     error_insert,
@@ -18,6 +22,28 @@ export default function useRecipeFormSubmit(
   const { updateRecipeDetails } = useUpdateRecipeDetails(id);
 
   const dispatch = useDispatch();
+
+  // prettier-ignore
+  const { formState, handleSubmit, control, reset, setValue } = useForm <IRecipeForm>({
+      resolver: yupResolver(recipeFormSchema),
+      defaultValues,
+    });
+
+  // formState needed to be read before it starts to work per rhf doc
+  const { isDirty } = formState;
+
+  useEffect(() => {
+    if (!isDirty) {
+      reset(defaultValues);
+    }
+  }, [defaultValues]);
+
+  // only show cancel confirmation when form is dirty
+  useEffect(() => {
+    if (formState.isDirty) {
+      dispatch(setFormIsDirty(true));
+    }
+  }, [formState]);
 
   const onSubmit = (data: IRecipeForm) => {
     const { ingredients, ...dataWIthOutIngredients } = data;
@@ -60,5 +86,9 @@ export default function useRecipeFormSubmit(
 
   return {
     onSubmit,
+    handleSubmit,
+    control,
+    setValue,
+    isDirty,
   };
 }
