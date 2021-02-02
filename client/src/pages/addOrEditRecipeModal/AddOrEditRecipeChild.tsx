@@ -34,12 +34,12 @@ export default function AddOrEditRecipeChild({
 
   // --------------------- Form Control ---------------------------------
   // prettier-ignore
-  const { formState, handleSubmit, control, reset } = useForm<IRecipeForm>({
+  const { formState, handleSubmit, control, register, reset, watch, setValue } = useForm<IRecipeForm>({
     resolver: yupResolver(recipeFormSchema),
     defaultValues,
   });
 
-  // console.log(watch());
+  console.log(watch());
 
   /*  do not use viewDidenter, additional modals with cause that to trigger,
   use normal useEffect instead */
@@ -104,7 +104,9 @@ export default function AddOrEditRecipeChild({
     <>
       <IonContent fullscreen>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <MainFormArea control={control} />
+          <MainFormArea control={control} setValue={setValue} />
+          {/* dummy field to hold the img url */}
+          <input name="img" ref={register()} type="hidden" />
 
           <div className="ion-margin-vertical" />
 

@@ -8,16 +8,17 @@ import {
   IonSelectOption,
 } from "@ionic/react";
 import React from "react";
-import { Control, Controller } from "react-hook-form";
+import { Control, Controller, useForm } from "react-hook-form";
 import { useAddRecipeImage } from "../../hooks/useAddRecipeImage";
 import ImageBox from "../misc/ImageBox";
 
 interface IProps {
   control: Control<Record<string, any>>;
+  setValue: ReturnType<typeof useForm>["setValue"];
 }
 
-export default function MainFormArea({ control }: IProps) {
-  const { takePhoto, photos } = useAddRecipeImage();
+export default function MainFormArea({ control, setValue }: IProps) {
+  const { takePhoto, photo } = useAddRecipeImage(setValue);
 
   return (
     <StyledList lines="none">
@@ -43,7 +44,7 @@ export default function MainFormArea({ control }: IProps) {
 
       <IonItem>
         <IonLabel position="stacked">Image</IonLabel>
-        <ImageBox onClick={() => takePhoto()} src={photos?.webviewPath} />
+        <ImageBox onClick={() => takePhoto()} src={photo} />
       </IonItem>
 
       <IonItem>

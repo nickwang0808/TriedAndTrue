@@ -24,6 +24,7 @@ export interface IRecipeForm {
   total_time: number | null;
   yields: string | null;
   cuisine: string | null;
+  img: string | null;
 
   ingredients: Array<{ value: string }> | null;
   directions: Array<{ value: string }> | null;
@@ -35,7 +36,7 @@ export const recipeFormSchema = object().shape({
   total_time: number().nullable(),
   yields: string().nullable(),
   cuisine: string().nullable(),
-
+  img: string().nullable(),
   ingredients: array(object().shape({ value: string() })).nullable(),
   directions: array(object().shape({ value: string() })).nullable(),
 });
@@ -43,6 +44,7 @@ export const recipeFormSchema = object().shape({
 export const emptyDefaultValue: IRecipeForm = {
   cuisine: null,
   total_time: null,
+  img: null,
   meal_type: null,
   yields: null,
   title: null,

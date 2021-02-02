@@ -1,14 +1,18 @@
 import { CameraResultType, CameraSource } from "@capacitor/core";
 import { useCamera } from "@ionic/react-hooks/camera";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { storage } from "../config/firebaseConfig";
 
 export interface Photo {
   filepath: string;
-  webviewPath?: string;
+  webviewPath: string;
 }
 
-export function useAddRecipeImage() {
-  const [photos, setPhotos] = useState<Photo>();
+type SetValue = ReturnType<typeof useForm>["setValue"];
+
+export function useAddRecipeImage(setValue: SetValue) {
+  const [photo, setPhotos] = useState<string>();
   const { getPhoto } = useCamera();
 
   const takePhoto = async () => {
@@ -18,17 +22,36 @@ export function useAddRecipeImage() {
       quality: 100,
     });
     const fileName = new Date().getTime() + ".jpeg";
-    const newPhotos = {
+    const newPhoto = {
       filepath: fileName,
-      webviewPath: cameraPhoto.webPath,
+      webviewPath: cameraPhoto.webPath || "",
     };
 
     console.log("webPath", cameraPhoto.webPath);
-    setPhotos(newPhotos);
+    const url = await upLoadToFirebase(newPhoto);
+
+    setPhotos(url);
+    setValue("img", url, { shouldDirty: true, shouldValidate: true });
   };
 
   return {
-    photos,
+    photo,
     takePhoto,
   };
+}
+
+async function upLoadToFirebase(newPhoto: Photo) {
+  // get blob
+  const blob = await fetch(newPhoto.webviewPath).then((r) => r.blob());
+
+  // upload to firebase
+  const imgRef = storage.ref().child(`images/${newPhoto.filepath}`);
+
+  await imgRef.put(blob).then((snap) => {
+    console.log({ snap });
+  });
+
+  const url = await imgRef.getDownloadURL();
+
+  return url;
 }
