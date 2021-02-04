@@ -20,6 +20,7 @@ import {
   deSelectRecipe,
 } from "../../../../redux/Planner/PlannerModalSlice";
 import { IAppState } from "../../../../redux/store";
+import { setShowToast } from "../../../../redux/toastSlice/toastSlice";
 import getPlannerRecipeCount from "../../../../utils/getPlannerRecipeCount";
 import Header from "./Header";
 
@@ -56,7 +57,13 @@ export default function AddMultiRecipeToPlannerModal() {
     });
 
     dispatch(closePlannerModal());
-    await addRecipesToPlanner({ variables: { objects } });
+    try {
+      await addRecipesToPlanner({ variables: { objects } });
+      dispatch(setShowToast({ text: "Recipe Added to Planner!" }));
+    } catch (err) {
+      console.log(err);
+      dispatch(setShowToast({ text: "Something Went Wrong", color: "red" }));
+    }
     dispatch(clearSelectedRecipe());
     return;
   };

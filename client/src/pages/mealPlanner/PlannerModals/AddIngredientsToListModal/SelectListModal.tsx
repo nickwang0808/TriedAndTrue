@@ -25,14 +25,19 @@ export default function SelectListModal() {
 
   const { insertIngredientToList } = useInsertIngredientToList();
   const handleSubmit = async (listId: string) => {
-    await insertIngredientToList({
-      variables: {
-        ingredientsToAddToList: selectedIngredients,
-        shoppingListId: listId,
-      },
-    });
+    try {
+      await insertIngredientToList({
+        variables: {
+          ingredientsToAddToList: selectedIngredients,
+          shoppingListId: listId,
+        },
+      });
 
-    dispatch(setShowToast({ text: "shopping list update" }));
+      dispatch(setShowToast({ text: "shopping list update" }));
+    } catch (err) {
+      console.log(err);
+      dispatch(setShowToast({ text: "Something Went Wrong", color: "red" }));
+    }
     dispatch(setShowIngredientToListModal(false));
     handleDismiss();
   };

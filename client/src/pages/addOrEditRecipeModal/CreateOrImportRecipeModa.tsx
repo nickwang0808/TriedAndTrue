@@ -41,12 +41,17 @@ export default function ImportRecipeModal() {
     dispatch(setShowAddRecipeControlModal(false));
   };
 
-  const { importRecipe, data, loading } = useImportRecipe();
+  const { importRecipe, loading } = useImportRecipe();
 
   const handleImport = async () => {
     if (!url.length) return;
-    await importRecipe({ variables: { url, wildMode: !!warning } });
-    dispatch(setShowToast({ text: "Recipe Import Successful" }));
+    try {
+      await importRecipe({ variables: { url, wildMode: !!warning } });
+      dispatch(setShowToast({ text: "Recipe Import Successful" }));
+    } catch (err) {
+      console.log(err.message);
+      dispatch(setShowToast({ text: "Something went wrong", color: "red" }));
+    }
     handleDismiss();
   };
 

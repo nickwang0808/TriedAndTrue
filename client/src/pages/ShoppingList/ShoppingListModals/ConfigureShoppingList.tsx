@@ -24,11 +24,11 @@ export default function ConfigureShoppingList() {
   const { deleteAllListItems } = useDeleteAllListItems(id);
   const { uncheckAllListItems } = useUncheckAllListItems(id);
 
-  const handleReset = async () => {
+  const handleReset = () => {
     uncheckAllListItems();
     handleDismiss();
   };
-  const handleRemoveAll = async () => {
+  const handleRemoveAll = () => {
     console.log(id);
     deleteAllListItems();
     handleDismiss();
