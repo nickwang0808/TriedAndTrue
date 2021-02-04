@@ -56,9 +56,23 @@ export default function AuthChecker({ children }: IProps) {
   }, []);
 
   // console.log("auth render");
+  const checkIsFirstTime = () => {
+    const isFirstTime = window.localStorage.getItem("isFirstTime");
+    if (isFirstTime === null) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
-  if (true) {
-    return <OnBoarding />;
+  const handleComplete = () => {
+    console.log("slide clicked");
+    window.localStorage.setItem("isFirstTime", "false");
+    handleGoogleSignIn();
+  };
+
+  if (!isAuthed && checkIsFirstTime()) {
+    return <OnBoarding onComplete={handleComplete} />;
   }
 
   if (!isAuthed) {

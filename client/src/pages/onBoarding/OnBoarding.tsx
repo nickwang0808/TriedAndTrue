@@ -9,7 +9,11 @@ const slideOpts = {
   speed: 400,
 };
 
-export default function OnBoarding() {
+interface IProps {
+  onComplete: () => void;
+}
+
+export default function OnBoarding({ onComplete }: IProps) {
   return (
     <IonPage>
       <IonContent>
@@ -29,7 +33,7 @@ export default function OnBoarding() {
               subTitle="your next meal plan and shopping list"
               graphic={slideTwoGraphic}
               buttonText="Let's do it!"
-              buttonAction={() => {}}
+              buttonAction={onComplete}
             />
           </IonSlide>
         </IonSlides>
