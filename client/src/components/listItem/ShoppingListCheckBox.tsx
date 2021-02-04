@@ -69,7 +69,7 @@ const StyledFlexBox = styled.div`
 `;
 
 const StyledTitle = styled.div<{ subContent?: string }>`
-  font-family: Open Sans;
+  font-family: OpenSansRegular;
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
@@ -85,13 +85,7 @@ const StyledTitle = styled.div<{ subContent?: string }>`
 `;
 
 const StyledComment = styled.div`
-  font-family: Open Sans;
-  font-style: italic;
+  font-family: OpenSansRegular;
   font-weight: normal;
   font-size: 12px;
-  line-height: 16px;
-
-  /* Red */
-
-  color: var(--ion-color-secondary);
-`;
+  line-height: 16px;`;

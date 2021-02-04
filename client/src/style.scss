@@ -7,7 +7,7 @@
 
 p {
   color: var(--ion-color-dark);
-  font-family: OpenSansRegular;
+  font-family: SuraRegular;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -108,11 +108,11 @@ ion-button {
   height: 48px;
   --padding-start: 24px;
   --padding-end: 24px;
-  font-family: SuraBold;
+  font-family: SuraRegular;
   font-size: 14px;
   line-height: 28px;
   text-align: center;
-  letter-spacing: 0.15px;
+  letter-spacing: 0.5px;
 
   // opacity need to be set for activated state to work
   --background-activated-opacity: 1;

@@ -79,7 +79,7 @@ export default function Header({ weeks }: IProps) {
                     new Date(sun),
                     isSameMonth(new Date(mon), new Date(sun)) ? "d" : "MMM-d"
                   )}`}
-                  {isSameWeek(new Date(), new Date(mon)) && " Today"}
+                  {/* {isSameWeek(new Date(), new Date(mon)) && " Today"} */}
                 </IonLabel>
               </StyledSegmentButton>
             );

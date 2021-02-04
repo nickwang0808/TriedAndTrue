@@ -134,7 +134,7 @@ const App: React.FC = () => {
                 </IonTabButton>
                 <IonTabButton tab="lists" href="/lists">
                   <IonIcon src={listIcon} />
-                  <IonLabel>Lists</IonLabel>
+                  <IonLabel>Shopping List</IonLabel>
                 </IonTabButton>
                 <IonTabButton tab="profile" href="/profile">
                   <IonIcon src={profileIcon} />

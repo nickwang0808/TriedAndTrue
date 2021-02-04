@@ -24,11 +24,13 @@ export default function Header() {
             <IonIcon icon={xclose} color="secondary" />
           </IonButton>
         </IonButtons>
+        {/*
         <IonButtons slot="end">
-          <IonButton /* onClick={() => dispatch(resetAddOrEditRecipe())} */>
+          <IonButton onClick={() => dispatch(resetAddOrEditRecipe())} >
             <IonIcon icon={filter} color="secondary" />
           </IonButton>
         </IonButtons>
+        */}
       </IonToolbar>
     </IonHeader>
   );
