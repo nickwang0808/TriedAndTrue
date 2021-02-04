@@ -14,11 +14,7 @@ export default function useRecipeFormSubmit(
   handleDismiss: () => void,
   defaultValues: IRecipeForm
 ) {
-  const {
-    error_insert,
-    insertRecipeOne,
-    loading_insert,
-  } = useInsertRecipeOne();
+  const { insertRecipeOne } = useInsertRecipeOne();
   const { updateRecipeDetails } = useUpdateRecipeDetails(id);
 
   const dispatch = useDispatch();
@@ -60,9 +56,10 @@ export default function useRecipeFormSubmit(
             },
           },
         });
-        dispatch(setShowToast("Recipe Created"));
+        dispatch(setShowToast({ text: "Recipe Created" }));
       } catch (error) {
         console.log(error);
+        dispatch(setShowToast({ text: "Something Went Wrong", color: "red" }));
       }
     } else {
       // make sure the form is dirty to run the update mutation
@@ -75,9 +72,12 @@ export default function useRecipeFormSubmit(
               ingredientsStrings: ingredients?.map((ing) => ing.value) || [],
             },
           });
-          dispatch(setShowToast("Recipe Updated"));
+          dispatch(setShowToast({ text: "Recipe Updated" }));
         } catch (error) {
           console.log(error);
+          dispatch(
+            setShowToast({ text: "Something Went Wrong", color: "red" })
+          );
         }
       } else return;
     }
