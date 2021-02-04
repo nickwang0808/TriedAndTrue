@@ -9,6 +9,7 @@ import {
   GetProfileQueryVariables,
 } from "../../generated/graphql";
 import { GET_PROFILE } from "../../gql/query/getProfile.graphql";
+import OnBoarding from "../onBoarding/OnBoarding";
 
 interface IProps {
   children: React.ReactNode;
@@ -55,6 +56,10 @@ export default function AuthChecker({ children }: IProps) {
   }, []);
 
   // console.log("auth render");
+
+  if (true) {
+    return <OnBoarding />;
+  }
 
   if (!isAuthed) {
     return (
