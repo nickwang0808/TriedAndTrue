@@ -45,6 +45,7 @@ import ReCreatePlannerModal from "./pages/mealPlanner/PlannerModals/ReCreatePlan
 import SelectDayModal from "./pages/mealPlanner/PlannerModals/SelectDayModal/SelectDayModal";
 import SelectWeekModal from "./pages/mealPlanner/PlannerModals/SelectWeekModal/SelectWeekModal";
 import AboutUsModal from "./pages/profile/AboutUsModal";
+import DeleteAccountConfirmModal from "./pages/profile/DeleteAccountConfirmModal";
 import ProfilePage from "./pages/profile/ProfilePage";
 import DetailsOptionsModal from "./pages/recipeDetails/DetailsOptionsModal";
 import RecipeDeleteConfirmationModal from "./pages/recipeDetails/RecipeDeleteConfirmationModal";
@@ -101,6 +102,7 @@ const App: React.FC = () => {
             <ConfigureShoppingList />
 
             <AboutUsModal />
+            <DeleteAccountConfirmModal />
 
             <Toast />
 

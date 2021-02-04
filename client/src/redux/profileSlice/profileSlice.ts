@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IState {
   showAboutModal: boolean;
+  showConfirmDelete: boolean;
 }
 
 const initialState: IState = {
   showAboutModal: false,
+  showConfirmDelete: false,
 };
 
 const profileSlice = createSlice({
@@ -18,8 +20,17 @@ const profileSlice = createSlice({
     ) => {
       state.showAboutModal = payload;
     },
+    setShowDeleteAccountModal: (
+      state,
+      { payload }: PayloadAction<IState["showConfirmDelete"]>
+    ) => {
+      state.showConfirmDelete = payload;
+    },
   },
 });
 
-export const { setShowAboutModal } = profileSlice.actions;
+export const {
+  setShowAboutModal,
+  setShowDeleteAccountModal,
+} = profileSlice.actions;
 export default profileSlice.reducer;

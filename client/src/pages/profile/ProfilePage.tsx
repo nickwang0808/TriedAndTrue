@@ -13,12 +13,17 @@ import { useDispatch } from "react-redux";
 import ItemWithRightArrow from "../../components/listItem/ListItemWithRightArrow";
 import SmallBlockSeparator from "../../components/misc/SmallBlockSeperator";
 import { auth } from "../../config/firebaseConfig";
-import { setShowAboutModal } from "../../redux/profileSlice/profileSlice";
+import {
+  setShowAboutModal,
+  setShowDeleteAccountModal,
+} from "../../redux/profileSlice/profileSlice";
 
 export default function ProfilePage() {
   const dispatch = useDispatch();
   const handleSignOut = () =>
     auth.signOut().then(() => window.location.reload());
+  const handleDelete = () => dispatch(setShowDeleteAccountModal(true));
+
   return (
     <IonPage>
       <IonHeader>
@@ -39,7 +44,7 @@ export default function ProfilePage() {
           <IonItem onClick={handleSignOut}>
             <IonLabel color="primary">{`Sign Out (nfwadwaw@gmail.com)`}</IonLabel>
           </IonItem>
-          <IonItem>
+          <IonItem onClick={handleDelete}>
             <IonLabel color="primary">Erase Account</IonLabel>
           </IonItem>
         </IonList>
