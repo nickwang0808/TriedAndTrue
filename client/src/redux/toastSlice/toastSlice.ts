@@ -1,7 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IState {
-  showToast: string | null;
+  showToast: IShowToast | null;
+}
+
+export interface IShowToast {
+  color?: string;
+  text: string;
 }
 
 const initialState: IState = {
@@ -13,6 +18,9 @@ const toastSlice = createSlice({
   initialState,
   reducers: {
     setShowToast: (state, { payload }: PayloadAction<IState["showToast"]>) => {
+      if (payload && !payload.color) {
+        payload.color = "lightgreen";
+      }
       state.showToast = payload;
     },
   },

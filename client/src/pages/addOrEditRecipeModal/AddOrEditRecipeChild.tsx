@@ -34,7 +34,6 @@ export default function AddOrEditRecipeChild({
       <IonContent fullscreen>
         <form onSubmit={handleSubmit(onSubmit)}>
           <MainFormArea control={control} setValue={setValue} />
-          {/* dummy field to hold the img url */}
 
           <div className="ion-margin-vertical" />
 

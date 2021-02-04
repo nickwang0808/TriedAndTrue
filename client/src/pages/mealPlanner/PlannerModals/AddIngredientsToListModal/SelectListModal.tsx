@@ -32,7 +32,7 @@ export default function SelectListModal() {
       },
     });
 
-    dispatch(setShowToast("shopping list update"));
+    dispatch(setShowToast({ text: "shopping list update" }));
     dispatch(setShowIngredientToListModal(false));
     handleDismiss();
   };

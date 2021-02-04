@@ -4,7 +4,7 @@ import { close } from "ionicons/icons";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IAppState } from "../../redux/store";
-import { setShowToast } from "../../redux/toastSlice/toastSlice";
+import { IShowToast, setShowToast } from "../../redux/toastSlice/toastSlice";
 
 export default function Toast() {
   const { showToast } = useSelector(({ toastSlice }: IAppState) => toastSlice);
@@ -21,17 +21,17 @@ export default function Toast() {
   }, [showToast]);
 
   return (
-    <StyledDiv showToast={!!showToast}>
-      <div>{showToast ?? ""}</div>
+    <StyledDiv showToast={showToast!}>
+      <div>{showToast?.text ?? ""}</div>
       <IonIcon icon={close} color="dark" onClick={handleDismiss} />
     </StyledDiv>
   );
 }
 
-const StyledDiv = styled.div<{ showToast: boolean }>`
+const StyledDiv = styled.div<{ showToast: IShowToast }>`
   --toast-width: 96vw;
 
-  visibility: ${(props) => (props.showToast ? "visible" : "hidden")};
+  visibility: ${({ showToast }) => (!!showToast ? "visible" : "hidden")};
   /* min-width: var(--toast-width); Set a default minimum width */
   /* max-width: 500px; prevent it getting too long */
 
@@ -39,7 +39,8 @@ const StyledDiv = styled.div<{ showToast: boolean }>`
   /* Divide value of min-width by 2 */
   margin-left: calc(var(--toast-width) / 2 * -1);
 
-  background-color: lightgreen; /* Black background color */
+  background-color: ${({ showToast }) =>
+    showToast?.color}; /* Black background color */
   border-radius: 2px; /* Rounded borders */
   padding: 16px; /* Padding */
   position: fixed; /* Sit on top of the screen */

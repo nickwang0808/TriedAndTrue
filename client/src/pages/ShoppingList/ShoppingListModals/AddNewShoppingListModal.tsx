@@ -22,7 +22,7 @@ export default function AddNewShoppingListModal() {
 
   const handleSubmit = async () => {
     insertNewList();
-    dispatch(setShowToast("new shopping list created"));
+    dispatch(setShowToast({ text: "new shopping list created" }));
     handleDismiss();
   };
 

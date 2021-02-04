@@ -46,7 +46,7 @@ export default function ImportRecipeModal() {
   const handleImport = async () => {
     if (!url.length) return;
     await importRecipe({ variables: { url, wildMode: !!warning } });
-    dispatch(setShowToast("Recipe Import Successful"));
+    dispatch(setShowToast({ text: "Recipe Import Successful" }));
     handleDismiss();
   };
 
@@ -72,7 +72,11 @@ export default function ImportRecipeModal() {
           </IonButton>
         </StyledFlex>
       </StyledImportContainer>
-      {warning && <StyledWarningSpan>We'll do our best to import this recipe.</StyledWarningSpan>}
+      {warning && (
+        <StyledWarningSpan>
+          We'll do our best to import this recipe.
+        </StyledWarningSpan>
+      )}
 
       <StyledLineContainer>
         <HorizontalLineWithText color="#DCDCDC" text="OR" />
@@ -130,9 +134,9 @@ const StyledFullWidthButton = styled(IonButton)`
 `;
 
 const StyledWarningSpan = styled.div`
-text-align: center;
-padding: 4px 8px 0 8px;
-font-size: 14px;
+  text-align: center;
+  padding: 4px 8px 0 8px;
+  font-size: 14px;
 `;
 
 const StyledIonInput = styled(IonInput)`

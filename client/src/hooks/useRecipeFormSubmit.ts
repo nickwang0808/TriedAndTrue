@@ -60,7 +60,7 @@ export default function useRecipeFormSubmit(
             },
           },
         });
-        dispatch(setShowToast("Recipe Created"));
+        dispatch(setShowToast({ text: "Recipe Created" }));
       } catch (error) {
         console.log(error);
       }
@@ -75,7 +75,7 @@ export default function useRecipeFormSubmit(
               ingredientsStrings: ingredients?.map((ing) => ing.value) || [],
             },
           });
-          dispatch(setShowToast("Recipe Updated"));
+          dispatch(setShowToast({ text: "Recipe Updated" }));
         } catch (error) {
           console.log(error);
         }
