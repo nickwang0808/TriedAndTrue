@@ -9,6 +9,7 @@ import {
   GetProfileQueryVariables,
 } from "../../generated/graphql";
 import { GET_PROFILE } from "../../gql/query/getProfile.graphql";
+import OnBoarding from "../onBoarding/OnBoarding";
 
 interface IProps {
   children: React.ReactNode;
@@ -55,6 +56,24 @@ export default function AuthChecker({ children }: IProps) {
   }, []);
 
   // console.log("auth render");
+  const checkIsFirstTime = () => {
+    const isFirstTime = window.localStorage.getItem("isFirstTime");
+    if (isFirstTime === null) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const handleComplete = () => {
+    console.log("slide clicked");
+    window.localStorage.setItem("isFirstTime", "false");
+    handleGoogleSignIn();
+  };
+
+  if (!isAuthed && checkIsFirstTime()) {
+    return <OnBoarding onComplete={handleComplete} />;
+  }
 
   if (!isAuthed) {
     return (
