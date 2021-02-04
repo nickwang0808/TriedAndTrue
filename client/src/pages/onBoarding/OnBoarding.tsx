@@ -1,7 +1,8 @@
 import { IonContent, IonPage, IonSlide, IonSlides } from "@ionic/react";
 import React from "react";
 import slideOneGraphic from "../../assets/svg/slideOneGraphic.svg";
-import SlideOne from "./SlideBase";
+import slideTwoGraphic from "../../assets/svg/slideTwoGraphic.svg";
+import SlideBase from "./SlideBase";
 
 const slideOpts = {
   initialSlide: 0,
@@ -14,7 +15,7 @@ export default function OnBoarding() {
       <IonContent>
         <IonSlides pager={true} options={slideOpts}>
           <IonSlide>
-            <SlideOne
+            <SlideBase
               title="Quickly Add"
               subTitle="your tried & true recipes"
               graphic={slideOneGraphic}
@@ -23,10 +24,10 @@ export default function OnBoarding() {
             />
           </IonSlide>
           <IonSlide>
-            <SlideOne
+            <SlideBase
               title="We'll Create"
               subTitle="your next meal plan and shopping list"
-              graphic={slideOneGraphic}
+              graphic={slideTwoGraphic}
               buttonText="Let's do it!"
               buttonAction={() => {}}
             />

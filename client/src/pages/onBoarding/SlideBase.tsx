@@ -11,7 +11,7 @@ interface IProps {
   graphic: string;
 }
 
-export default function SlideOne({
+export default function SlideBase({
   title,
   subTitle,
   buttonText,
@@ -30,7 +30,7 @@ export default function SlideOne({
           <h3>{subTitle}</h3>
         </StyledTextBox>
       </WhiteBox>
-      <IonButton color="secondary" onClick={buttonAction}>
+      <IonButton color="secondary" fill="solid" onClick={buttonAction}>
         {buttonText}
       </IonButton>
     </Container>
