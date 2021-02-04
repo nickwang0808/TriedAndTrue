@@ -23,6 +23,7 @@ export default function SlideBase({
       <BlueBox>
         <img src={onBoardLogo} />
         <img src={graphic} />
+        <div /> {/* responsive spacer */}
       </BlueBox>
       <WhiteBox>
         <StyledTextBox>
@@ -55,10 +56,14 @@ const BlueBox = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 
-  padding: 31.52px 0 79.85px 0;
+  @media screen and (max-height: 641px) {
+    padding-top: 8px;
+  }
+
+  /* padding: 31.52px 0 0 0; */
 `;
 
 const WhiteBox = styled.div`
@@ -81,6 +86,9 @@ const StyledTextBox = styled.div`
     padding: 3px 11px;
     text-align: left;
     max-width: 80%;
+    @media screen and (max-height: 641px) {
+      max-width: unset;
+    }
   }
 
   & > h2 {
