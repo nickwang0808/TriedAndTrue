@@ -6,17 +6,17 @@ import React from "react";
 interface IProp {
   img: string;
   title: string;
-  counter?: number;
+  count?: number;
   date: string;
 }
 
-export default function RecipeThumbNail({ img, title, counter, date }: IProp) {
+export default function RecipeThumbNail({ img, title, count, date }: IProp) {
   return (
     <IonItem lines="full">
       <StyledIonThumbNail slot="start">
         <img src={img} />
       </StyledIonThumbNail>
-      <StyledIonLabel after={counter ? `(${counter})` : ""}>
+      <StyledIonLabel after={count ? `(${count})` : ""}>
         <h3>{title}</h3>
         <div>{format(new Date(date), "MMM dd")}</div>
       </StyledIonLabel>

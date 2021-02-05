@@ -7,9 +7,7 @@ import RecipeThumbNail from "../../../components/listItem/RecipeThumbNail";
 import LoaderCentered from "../../../components/loading/LoaderCentered";
 import BlockSeparator from "../../../components/misc/BlockSeparator";
 import { FancyModalWithRoundTop } from "../../../components/modals/FancyModalWithRoundTop";
-import useGetListItemById, {
-  IListItemRecipeRef,
-} from "../../../gql/query/useGetListItemById.graphql";
+import useGetListItemById from "../../../gql/query/useGetListItemById.graphql";
 import { setShowItemDetails } from "../../../redux/ShoppingList/ShoppingListDetailsSlice";
 import { IAppState } from "../../../redux/store";
 
@@ -21,18 +19,16 @@ export default function ShoppingItemDetailsModal() {
     ({ shoppingListDetailSlice }: IAppState) => shoppingListDetailSlice
   );
 
-  const { data, loading, error } = useGetListItemById(showItemDetails!);
+  const { loading, error, recipes } = useGetListItemById(showItemDetails!);
 
   let content;
   if (loading) {
     content = <LoaderCentered />;
   } else if (error) {
     content = <p>{error.message}</p>;
-  } else if (!data) {
+  } else if (!recipes) {
     content = <p>No items yet</p>;
   } else {
-    const { list_items_by_pk } = data;
-
     content = (
       <>
         <ModalHeader title="beans" handleClose={handleDismiss} />
@@ -51,11 +47,9 @@ export default function ShoppingItemDetailsModal() {
           </IonItem>
           <BlockSeparator title="Added From" />
 
-          {(list_items_by_pk?.recipes as IListItemRecipeRef[])?.map(
-            (recipe) => (
-              <RecipeThumbNail {...recipe} />
-            )
-          )}
+          {recipes?.map((recipe) => (
+            <RecipeThumbNail {...recipe} />
+          ))}
         </IonContent>
       </>
     );
