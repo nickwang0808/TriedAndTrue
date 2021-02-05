@@ -6,6 +6,10 @@ import {
 } from "../../generated/graphql";
 import { store } from "../../redux/store";
 import getPlannerRecipeCount from "../../utils/getPlannerRecipeCount";
+import {
+  getMonAndSun,
+  GET_ALL_INGREDIENTS_IN_WEEK,
+} from "../query/useGetAllIngredientsInWeek.graphql";
 
 export const ADD_RECIPES_TO_PLANNER = gql`
   mutation addRecipesToPlanner($objects: [planner_insert_input!]!) {
@@ -29,6 +33,9 @@ export default function useAddRecipesToPlanner() {
     AddRecipesToPlannerMutation,
     AddRecipesToPlannerMutationVariables
   >(ADD_RECIPES_TO_PLANNER, {
+    refetchQueries: [
+      { query: GET_ALL_INGREDIENTS_IN_WEEK, variables: getMonAndSun() },
+    ],
     optimisticResponse: {
       __typename: "mutation_root",
       insert_planner: {

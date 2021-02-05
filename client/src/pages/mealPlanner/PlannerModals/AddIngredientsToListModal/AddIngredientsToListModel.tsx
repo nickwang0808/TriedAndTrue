@@ -24,7 +24,7 @@ export default function AddIngredientsToListModel() {
     ({ addIngredientsToListSlice }: IAppState) => addIngredientsToListSlice
   );
 
-  const { data, loading, error, refetch } = useGetAllIngredientsInWeek();
+  const { data, loading, error } = useGetAllIngredientsInWeek();
 
   const handleDismiss = () => dispatch(setShowIngredientToListModal(false));
   const isFound = (
@@ -56,10 +56,9 @@ export default function AddIngredientsToListModel() {
   };
 
   const preCheckAllItems = async () => {
-    /* after add recipe to planner and immediately open this modal, it will
-     still show previous version of data, use refetch to update cache */
-    await refetch();
-
+    /* add recipe to planner and delete from planner will trigger the
+     refetch for the query above */
+    console.log(data);
     const ids: IRecipeIngredients[] = data!.planner!.map(
       ({ date, index, recipe: { id, recipe_ingredients_list } }) => {
         return {
@@ -81,7 +80,7 @@ export default function AddIngredientsToListModel() {
       })
       .flat();
 
-  const handleSubmit = async () => dispatch(setShowSelectListModal(true));
+  const handleSubmit = () => dispatch(setShowSelectListModal(true));
 
   let content;
   if (loading) {
