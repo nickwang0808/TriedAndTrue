@@ -5,6 +5,10 @@ import {
   DeleteRecipeFromPlannerMutationVariables,
 } from "../../generated/graphql";
 import { store } from "../../redux/store";
+import {
+  getMonAndSun,
+  GET_ALL_INGREDIENTS_IN_WEEK,
+} from "../query/useGetAllIngredientsInWeek.graphql";
 
 export const DELETE_RECIPE_FROM_PLANNER = gql`
   mutation DeleteRecipeFromPlanner(
@@ -24,7 +28,11 @@ export default function useDeleteRecipeFromPlanner() {
   const [deleteRecipeFromPlanner, { data, error, loading }] = useMutation<
     DeleteRecipeFromPlannerMutation,
     DeleteRecipeFromPlannerMutationVariables
-  >(DELETE_RECIPE_FROM_PLANNER);
+  >(DELETE_RECIPE_FROM_PLANNER, {
+    refetchQueries: [
+      { query: GET_ALL_INGREDIENTS_IN_WEEK, variables: getMonAndSun() },
+    ],
+  });
 
   const { recipeToModify } = store.getState().PlannerItemModalSlice;
 
