@@ -69,10 +69,9 @@ const StyledFlexBox = styled.div`
 `;
 
 const StyledTitle = styled.div<{ subContent?: string }>`
-  font-family: OpenSansRegular;
+  font-family: OpenSansBold;
   font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 19px;
 
   color: #192938;

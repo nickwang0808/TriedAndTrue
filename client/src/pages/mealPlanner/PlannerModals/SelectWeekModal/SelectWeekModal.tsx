@@ -40,9 +40,9 @@ export default function SelectWeekModal() {
           {monAndSuns.map(([mon, fri]) => (
             <ItemWithRightArrow
               key={mon}
-              content={`${format(new Date(mon), "MMMM-dd")} - ${format(
+              content={`${format(new Date(mon), "MMMM dd")} - ${format(
                 new Date(fri),
-                "MMMM-dd"
+                "MMMM dd"
               )}`}
               onClick={() => dispatch(setShowSelectDayModal(mon))}
             />

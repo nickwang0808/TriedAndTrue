@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import {
   IonBackButton,
   IonButtons,
@@ -51,7 +52,10 @@ export default function ShoppingListDetailsHeader() {
         </IonButtons>
         <IonTitle color="primary">{title}</IonTitle>
         <IonButtons slot="end">
-          <IonIcon size="small" src={addNew} />
+          <StylizedTitleButtonText>Add Item</StylizedTitleButtonText>
+          <IonIcon size="small" src={addNew}/>
+        </IonButtons>
+        <IonButtons slot="end">
           <IonIcon size="small" src={ellipsis} onClick={handleOpenConfig} />
         </IonButtons>
       </IonToolbar>
@@ -75,3 +79,9 @@ export default function ShoppingListDetailsHeader() {
     </IonHeader>
   );
 }
+
+const StylizedTitleButtonText = styled.div`
+  color: var(--ion-color-secondary);
+  font-family: SuraBold;
+  font-size: 16px;
+`;

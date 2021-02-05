@@ -56,10 +56,10 @@ export default function useRecipeFormSubmit(
             },
           },
         });
-        dispatch(setShowToast({ text: "Recipe Created" }));
+        dispatch(setShowToast({ text: "Recipe created!" }));
       } catch (error) {
         console.log(error);
-        dispatch(setShowToast({ text: "Something Went Wrong", color: "red" }));
+        dispatch(setShowToast({ text: "Something went wrong", color: "red" }));
       }
     } else {
       // make sure the form is dirty to run the update mutation
@@ -72,11 +72,11 @@ export default function useRecipeFormSubmit(
               ingredientsStrings: ingredients?.map((ing) => ing.value) || [],
             },
           });
-          dispatch(setShowToast({ text: "Recipe Updated" }));
+          dispatch(setShowToast({ text: "Recipe updated!" }));
         } catch (error) {
           console.log(error);
           dispatch(
-            setShowToast({ text: "Something Went Wrong", color: "red" })
+            setShowToast({ text: "Something went wrong", color: "red" })
           );
         }
       } else return;

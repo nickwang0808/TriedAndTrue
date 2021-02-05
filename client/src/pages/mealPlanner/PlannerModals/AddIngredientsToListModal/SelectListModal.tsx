@@ -33,10 +33,10 @@ export default function SelectListModal() {
         },
       });
 
-      dispatch(setShowToast({ text: "shopping list update" }));
+      dispatch(setShowToast({ text: "Shopping list updated." }));
     } catch (err) {
       console.log(err);
-      dispatch(setShowToast({ text: "Something Went Wrong", color: "red" }));
+      dispatch(setShowToast({ text: "Something went wrong", color: "red" }));
     }
     dispatch(setShowIngredientToListModal(false));
     handleDismiss();
@@ -68,7 +68,7 @@ export default function SelectListModal() {
       onDidDismiss={handleDismiss}
       height="180px"
     >
-      <ModalHeader title="Confirm Shopping List" handleClose={handleDismiss} />
+      <ModalHeader title="Add To Shopping List..." handleClose={handleDismiss} />
       <IonContent>{content}</IonContent>
     </FancyModalWithRoundTop>
   );

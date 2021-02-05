@@ -22,7 +22,7 @@ export default function AddNewShoppingListModal() {
 
   const handleSubmit = async () => {
     insertNewList();
-    dispatch(setShowToast({ text: "new shopping list created" }));
+    dispatch(setShowToast({ text: "New shopping list created!" }));
     handleDismiss();
   };
 
@@ -38,9 +38,9 @@ export default function AddNewShoppingListModal() {
       />
       <IonContent>
         <IonItem lines="none">
-          <IonLabel position="stacked">Name</IonLabel>
+          <IonLabel position="stacked">List Name</IonLabel>
           <StyledIonInput
-            placeholder="your list name goes here"
+            placeholder="ex: Weekly List, Desserts, Party"
             value={value}
             onIonChange={({ detail }) => setValue(detail.value!)}
           />

@@ -43,7 +43,7 @@ export default function MainFormArea({ control, setValue }: IProps) {
       </IonItem>
 
       <IonItem>
-        <IonLabel position="stacked">Image</IonLabel>
+        <IonLabel position="stacked">Image (Tap to add)</IonLabel>
         <Controller
           control={control}
           name="img"
