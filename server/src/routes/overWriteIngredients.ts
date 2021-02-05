@@ -27,18 +27,22 @@ export const runOverWriteIngredientQuery = async (
     (await runParser(ingredientsStrings)).map(
       async ({ input, unit, qty, comment, name, other }, index) => {
         // implement the formatting logic later
-
-        const { rows } = await query(
-          `
-    INSERT INTO recipe_ingredients
-    ( recipe_id, index, quantity, unit, name, raw_text, formatted_text, comment, other )
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-    RETURNING *;
-    `,
-          [recipe_id, index, qty, unit, name, input, input, comment, other]
-        );
-        // set the value of the result variable. poor prettier formatting
-        return rows.map(({ id }) => ({ id }));
+        try {
+          const { rows } = await query(
+            `
+            INSERT INTO recipe_ingredients
+            ( recipe_id, index, quantity, unit, name, raw_text, formatted_text, comment, other )
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+            RETURNING *;
+            `,
+            [recipe_id, index, qty, unit, name, input, input, comment, other]
+          );
+          // set the value of the result variable. poor prettier formatting
+          return rows.map(({ id }) => ({ id }));
+        } catch (err) {
+          console.log(err);
+          return;
+        }
       }
     )
   );
