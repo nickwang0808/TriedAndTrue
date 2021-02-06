@@ -11,8 +11,7 @@ import {
   IonToolbar,
   useIonViewDidEnter,
 } from "@ionic/react";
-import { isPast, isSameMonth, isSameWeek } from "date-fns";
-import { format } from "date-fns/esm";
+import { format, isPast, isSameMonth } from "date-fns";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import listIconForHeader from "../../assets/svg/addtoList.svg";

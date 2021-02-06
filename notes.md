@@ -6,6 +6,12 @@ run `docker ps` to get container ip, then `docker inspect <container id> | grep 
 
 for what ever reason I had to `const {isDirty} = formState` to read it first before i can get all the updates form it
 
+## jest won't pass
+
+add this to npm test
+
+`--env=jsdom --transformIgnorePatterns 'node_modules/(?!(@ionic|<other-package-need-to-transform>)/)`
+
 # notes
 
 - relationship for the derived action is defined, now work on the server code

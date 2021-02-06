@@ -16,7 +16,6 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^8.0.3",
-    "@types/jest": "^24.0.25",
     "@types/node": "^12.12.24",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
@@ -41,7 +40,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom --transformIgnorePatterns 'node_modules/(?!(@ionic|@hookform/resolvers)/)'",
     "eject": "react-scripts eject",
     "generate": "graphql-codegen --config codegen.js",
     "host": "http-server build -p 8105 --proxy http://localhost:8105?"
@@ -62,12 +61,16 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.12.13",
+    "@babel/preset-env": "^7.12.13",
+    "@babel/preset-typescript": "^7.12.13",
     "@capacitor/cli": "2.4.5",
     "@graphql-codegen/cli": "^1.20.0",
     "@graphql-codegen/introspection": "^1.18.1",
     "@graphql-codegen/typescript": "^1.20.0",
     "@graphql-codegen/typescript-operations": "^1.17.13",
     "@graphql-codegen/typescript-react-apollo": "^2.2.1",
+    "@types/jest": "^24.9.1",
     "@types/lodash.groupby": "^4.6.6",
     "@types/react-redux": "^7.1.15",
     "@types/webpack-env": "^1.16.0",
