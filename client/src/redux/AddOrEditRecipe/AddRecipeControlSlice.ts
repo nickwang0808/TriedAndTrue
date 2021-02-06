@@ -4,7 +4,7 @@ interface IState {
   showAddRecipeControlModal: boolean;
 }
 
-const initialState: IState = {
+export const initialState: IState = {
   showAddRecipeControlModal: false,
 };
 

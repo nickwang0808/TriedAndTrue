@@ -4,5 +4,7 @@ export default function convertMinToHr(input: number): string {
   const hr = Math.floor(input / 60);
   const min = input % 60;
 
+  if (min === 0) return `${hr}h`;
+
   return `${hr}h ${min}m`;
 }

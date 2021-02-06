@@ -18,7 +18,7 @@ export interface setCheckedIngType
   id: string;
 }
 
-const initialState: IState = {
+export const initialState: IState = {
   selectedIngredients: [],
   showAddIngredientToListModal: false,
   showSelectListModal: false,
@@ -68,26 +68,31 @@ const addIngredientsToListSlice = createSlice({
         ]!.ingredients.filter((elem) => elem !== payload.id);
       }
     },
+    /* pull initial list of data in the component nad by checking one ingredient,
+    we push the id into the ingredients array */
     checkIngredients: (
       state,
       { payload }: PayloadAction<setCheckedIngType>
     ) => {
-      const found = state.selectedIngredients.find(
-        ({ date, ingredients, recipe_id, recipe_index }) =>
-          date === payload.date &&
-          recipe_index === payload.recipe_index &&
-          recipe_id === payload.recipe_id
-      )!.ingredients;
-      if (found.find((e) => e === payload.id)) {
+      const findCriteria = (arg: IRecipeIngredients) => {
+        if (
+          arg.date === payload.date &&
+          arg.recipe_index === payload.recipe_index &&
+          arg.recipe_id === payload.recipe_id
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      };
+
+      const found = state.selectedIngredients.find((arg) => findCriteria(arg))
+        ?.ingredients;
+      if (found?.find((e) => e === payload.id)) {
         return state;
       } else {
         state.selectedIngredients
-          .find(
-            ({ date, ingredients, recipe_id, recipe_index }) =>
-              date === payload.date &&
-              recipe_index === payload.recipe_index &&
-              recipe_id === payload.recipe_id
-          )!
+          .find((arg) => findCriteria(arg))!
           .ingredients.push(payload.id);
       }
     },
