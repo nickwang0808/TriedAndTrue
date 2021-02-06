@@ -24,6 +24,18 @@ export const initialState: IState = {
   showSelectListModal: false,
 };
 
+const checkMatch = (arg: IRecipeIngredients, payload: setCheckedIngType) => {
+  if (
+    arg.date === payload.date &&
+    arg.recipe_index === payload.recipe_index &&
+    arg.recipe_id === payload.recipe_id
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 const addIngredientsToListSlice = createSlice({
   name: "addIngredientsToList",
   initialState,
@@ -53,11 +65,8 @@ const addIngredientsToListSlice = createSlice({
       state,
       { payload }: PayloadAction<setCheckedIngType>
     ) => {
-      const foundIndex = state.selectedIngredients.findIndex(
-        ({ date, ingredients, recipe_id, recipe_index }) =>
-          date === payload.date &&
-          recipe_index === payload.recipe_index &&
-          recipe_id === payload.recipe_id
+      const foundIndex = state.selectedIngredients.findIndex((elem) =>
+        checkMatch(elem, payload)
       );
 
       if (foundIndex !== -1) {
@@ -74,26 +83,15 @@ const addIngredientsToListSlice = createSlice({
       state,
       { payload }: PayloadAction<setCheckedIngType>
     ) => {
-      const findCriteria = (arg: IRecipeIngredients) => {
-        if (
-          arg.date === payload.date &&
-          arg.recipe_index === payload.recipe_index &&
-          arg.recipe_id === payload.recipe_id
-        ) {
-          return true;
-        } else {
-          return false;
-        }
-      };
-
-      const found = state.selectedIngredients.find((arg) => findCriteria(arg))
-        ?.ingredients;
-      if (found?.find((e) => e === payload.id)) {
+      const found = state.selectedIngredients.find((elem) =>
+        checkMatch(elem, payload)
+      )?.ingredients;
+      if (!found) {
+        return state;
+      } else if (found?.find((e) => e === payload.id)) {
         return state;
       } else {
-        state.selectedIngredients
-          .find((arg) => findCriteria(arg))!
-          .ingredients.push(payload.id);
+        found.push(payload.id);
       }
     },
   },
