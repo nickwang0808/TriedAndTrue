@@ -1,6 +1,6 @@
 import { addWeeks, eachDayOfInterval, isMonday, isSunday } from "date-fns";
 
-const chunk = (array: string[], size: number) => {
+export const chunk = (array: any[], size: number) => {
   const chunked_arr = [];
   let copied = [...array]; // ES6 destructuring
   const numOfChild = Math.ceil(copied.length / size); // Round up to the nearest integer
@@ -10,7 +10,7 @@ const chunk = (array: string[], size: number) => {
   return chunked_arr;
 };
 
-const findSundayFromTail = (dates: Date[]) => {
+export const findSundayFromTail = (dates: Date[]) => {
   for (let i = dates.length - 1; i >= 0; i--) {
     const curr = dates[i];
     if (isSunday(curr)) {

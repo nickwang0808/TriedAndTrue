@@ -4,7 +4,7 @@ import {
   InsertIngredientToListMutation,
   InsertIngredientToListMutationVariables,
 } from "../../generated/graphql";
-import { setShowIngredientToListModal } from "../../redux/Planner/AddInGredientsToListSlice";
+import { setShowIngredientToListModal } from "../../redux/Planner/AddIngredientsToListSlice";
 import { store } from "../../redux/store";
 import { setShowToast } from "../../redux/toastSlice/toastSlice";
 

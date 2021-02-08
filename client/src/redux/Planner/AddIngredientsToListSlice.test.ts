@@ -6,7 +6,7 @@ import AddInGredientsToListSlice, {
   setShowIngredientToListModal,
   setShowSelectListModal,
   unCheckIngredients,
-} from "./AddInGredientsToListSlice";
+} from "./AddIngredientsToListSlice";
 
 describe("AddIngredientsToListSlice", () => {
   describe("modal control", () => {

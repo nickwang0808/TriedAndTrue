@@ -16,7 +16,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import listIconForHeader from "../../assets/svg/addtoList.svg";
 import refresh from "../../assets/svg/refresh.svg";
-import { setShowIngredientToListModal } from "../../redux/Planner/AddInGredientsToListSlice";
+import { setShowIngredientToListModal } from "../../redux/Planner/AddIngredientsToListSlice";
 import { setSelectedWeek } from "../../redux/Planner/PlannerDateRangeSlice";
 import { IAppState } from "../../redux/store";
 import getMonAndSun from "../../utils/getMonAndFri";
