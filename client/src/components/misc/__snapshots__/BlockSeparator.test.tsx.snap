@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BlockSeperator with content should render block separator with today tag  1`] = `
+<div
+  className="css-32bzbt"
+  id="id"
+>
+  <div
+    className="css-g90fw7"
+  >
+    title
+  </div>
+  <div>
+    sub
+  </div>
+  <div
+    className="css-1011qfy"
+  >
+    (Today)
+  </div>
+</div>
+`;
+
+exports[`BlockSeperator with content should render block separator without today tag 1`] = `
+<div
+  className="css-32bzbt"
+  id="id"
+>
+  <div
+    className="css-g90fw7"
+  >
+    title
+  </div>
+  <div>
+    sub
+  </div>
+</div>
+`;

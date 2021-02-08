@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render image box with loading and with src from turkey burger 1`] = `
+<div
+  className="css-e5j2yi"
+  onClick={[Function]}
+>
+  <div
+    className="css-1hso2vt"
+  >
+    <img
+      src="ttloader.png"
+      width="48px"
+    />
+  </div>
+</div>
+`;
+
+exports[`should render image box with loading and with src from turkey burger 2`] = `
+<div
+  className="css-e5j2yi"
+  onClick={[Function]}
+>
+  <img
+    src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F43%2F2020%2F03%2F20%2F1360550.jpg"
+  />
+</div>
+`;
+
+exports[`should render image box without loading and without src 1`] = `
+<div
+  className="css-e5j2yi"
+  onClick={[Function]}
+>
+  <div
+    className="css-a0ew8a"
+  >
+    <img
+      src="addImage.svg"
+    />
+    <div>
+      Add Image
+    </div>
+  </div>
+</div>
+`;
