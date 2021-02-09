@@ -31,13 +31,13 @@ router.post("/", async (req: Request, res: Response) => {
 export default router;
 
 interface ISelectResult {
-  quantity: number;
+  quantity: number | null;
   name: string;
-  unit: string;
-  comment: string;
-  other: string;
+  unit: string | null;
+  comment: string | null;
+  other: string | null;
   title: string;
-  img: string;
+  img: string | null;
 }
 
 async function insertIngredientsToDb(
@@ -86,7 +86,7 @@ async function insertIngredientsToDb(
                   other,
                   name,
                   quantity,
-                  comment,
+                  comment ?? "",
                   unit,
                   JSON.stringify([{ title, img, date }]),
                   shoppingListId,
