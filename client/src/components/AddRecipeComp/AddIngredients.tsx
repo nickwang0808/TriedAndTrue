@@ -40,7 +40,7 @@ export default function AddIngredients({ control }: IProps) {
               onChange={onChange}
               inputRef={ref}
               value={value}
-              remove={remove}
+              remove={() => remove(index)}
               showBackground={index % 2 === 0 ? true : false}
             />
           )}
