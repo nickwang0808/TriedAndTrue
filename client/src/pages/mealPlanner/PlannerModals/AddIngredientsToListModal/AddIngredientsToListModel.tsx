@@ -15,7 +15,7 @@ import {
   setShowIngredientToListModal,
   setShowSelectListModal,
   unCheckIngredients,
-} from "../../../../redux/Planner/AddInGredientsToListSlice";
+} from "../../../../redux/Planner/AddIngredientsToListSlice";
 import { IAppState } from "../../../../redux/store";
 
 export default function AddIngredientsToListModel() {

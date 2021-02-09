@@ -18,10 +18,22 @@ export interface setCheckedIngType
   id: string;
 }
 
-const initialState: IState = {
+export const initialState: IState = {
   selectedIngredients: [],
   showAddIngredientToListModal: false,
   showSelectListModal: false,
+};
+
+const checkMatch = (arg: IRecipeIngredients, payload: setCheckedIngType) => {
+  if (
+    arg.date === payload.date &&
+    arg.recipe_index === payload.recipe_index &&
+    arg.recipe_id === payload.recipe_id
+  ) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 const addIngredientsToListSlice = createSlice({
@@ -53,11 +65,8 @@ const addIngredientsToListSlice = createSlice({
       state,
       { payload }: PayloadAction<setCheckedIngType>
     ) => {
-      const foundIndex = state.selectedIngredients.findIndex(
-        ({ date, ingredients, recipe_id, recipe_index }) =>
-          date === payload.date &&
-          recipe_index === payload.recipe_index &&
-          recipe_id === payload.recipe_id
+      const foundIndex = state.selectedIngredients.findIndex((elem) =>
+        checkMatch(elem, payload)
       );
 
       if (foundIndex !== -1) {
@@ -68,27 +77,21 @@ const addIngredientsToListSlice = createSlice({
         ]!.ingredients.filter((elem) => elem !== payload.id);
       }
     },
+    /* pull initial list of data in the component nad by checking one ingredient,
+    we push the id into the ingredients array */
     checkIngredients: (
       state,
       { payload }: PayloadAction<setCheckedIngType>
     ) => {
-      const found = state.selectedIngredients.find(
-        ({ date, ingredients, recipe_id, recipe_index }) =>
-          date === payload.date &&
-          recipe_index === payload.recipe_index &&
-          recipe_id === payload.recipe_id
-      )!.ingredients;
-      if (found.find((e) => e === payload.id)) {
+      const found = state.selectedIngredients.find((elem) =>
+        checkMatch(elem, payload)
+      )?.ingredients;
+      if (!found) {
+        return state;
+      } else if (found?.find((e) => e === payload.id)) {
         return state;
       } else {
-        state.selectedIngredients
-          .find(
-            ({ date, ingredients, recipe_id, recipe_index }) =>
-              date === payload.date &&
-              recipe_index === payload.recipe_index &&
-              recipe_id === payload.recipe_id
-          )!
-          .ingredients.push(payload.id);
+        found.push(payload.id);
       }
     },
   },

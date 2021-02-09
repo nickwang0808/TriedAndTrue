@@ -6,7 +6,7 @@ import LoaderCentered from "../../../../components/loading/LoaderCentered";
 import { FancyModalWithRoundTop } from "../../../../components/modals/FancyModalWithRoundTop";
 import useInsertIngredientToList from "../../../../gql/mutations/useInsertIngredientToList.graphql";
 import useGetAllShoppingLists from "../../../../gql/query/useGetAllShoppingLists.graphql";
-import { setShowSelectListModal } from "../../../../redux/Planner/AddInGredientsToListSlice";
+import { setShowSelectListModal } from "../../../../redux/Planner/AddIngredientsToListSlice";
 import { IAppState } from "../../../../redux/store";
 
 export default function SelectListModal() {
