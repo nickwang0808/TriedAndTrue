@@ -1,6 +1,6 @@
 import { array, mixed, number, object, string } from "yup";
 
-const mealTypeArray = [
+export const mealTypeArray = [
   "breakfast",
   "lunch",
   "dinner",

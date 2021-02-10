@@ -1,13 +1,18 @@
 import { IonContent, IonPage, useIonViewDidEnter } from "@ionic/react";
 import { format } from "date-fns";
 import React from "react";
+import { useDispatch } from "react-redux";
 import Header from "../../components/headers/MealPlannerHeader";
 import LoaderCentered from "../../components/loading/LoaderCentered";
 import useGetPlannerRecipeByWeek from "../../gql/query/useGetPlannerRecipeByWeek";
+import { setShowGeneratePlannerModal } from "../../redux/Planner/GeneratePlannerModalSlice";
 import NothingInPlanner from "./NothingInPlanner";
 import PlannerRow from "./PlannerRow";
 
 export default function MealPlannerMainPage() {
+  const dispatch = useDispatch();
+  const openGenerateModal = () => dispatch(setShowGeneratePlannerModal(true));
+
   useIonViewDidEnter(() => {
     setTimeout(() => {
       document
@@ -38,7 +43,7 @@ export default function MealPlannerMainPage() {
   } else if (!showRows) {
     content = (
       <NothingInPlanner
-        onClickPrimary={() => {}}
+        onClickPrimary={openGenerateModal}
         onClickSecondary={() => setShowRows(true)}
       />
     );

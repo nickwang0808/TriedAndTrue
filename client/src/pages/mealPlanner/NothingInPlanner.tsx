@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { IonButton } from "@ionic/react";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setShowGeneratePlannerModal } from "../../redux/Planner/GeneratePlannerModalSlice";
 
 interface IProps {
   onClickPrimary: () => void;
@@ -11,6 +13,9 @@ export default function NothingInPlanner({
   onClickPrimary,
   onClickSecondary,
 }: IProps) {
+  const dispatch = useDispatch();
+  const openGenerateModal = () => dispatch(setShowGeneratePlannerModal(true));
+
   return (
     <StyledWrapper>
       <p className="ion-padding-bottom">
