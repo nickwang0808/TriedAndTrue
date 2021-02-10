@@ -1,18 +1,13 @@
 import { IonContent, IonPage, useIonViewDidEnter } from "@ionic/react";
 import { format } from "date-fns";
 import React from "react";
-import { useSelector } from "react-redux";
 import Header from "../../components/headers/MealPlannerHeader";
 import LoaderCentered from "../../components/loading/LoaderCentered";
 import useGetPlannerRecipeByWeek from "../../gql/query/useGetPlannerRecipeByWeek";
-import { IAppState } from "../../redux/store";
+import NothingInPlanner from "./NothingInPlanner";
 import PlannerRow from "./PlannerRow";
 
 export default function MealPlannerMainPage() {
-  const { dateRange } = useSelector(
-    (state: IAppState) => state.plannerDateRangeSlice
-  );
-
   useIonViewDidEnter(() => {
     setTimeout(() => {
       document
@@ -30,6 +25,9 @@ export default function MealPlannerMainPage() {
     loading,
     error,
     currentWeekDates,
+    dateRange,
+    setShowRows,
+    showRows,
   } = useGetPlannerRecipeByWeek();
 
   let content;
@@ -37,6 +35,13 @@ export default function MealPlannerMainPage() {
     content = <LoaderCentered />;
   } else if (error) {
     content = <p>{error.message}</p>;
+  } else if (!showRows) {
+    content = (
+      <NothingInPlanner
+        onClickPrimary={() => {}}
+        onClickSecondary={() => setShowRows(true)}
+      />
+    );
   } else {
     /* find the current selected week and then map out the days */
     content = currentWeekDates.map((date) => (

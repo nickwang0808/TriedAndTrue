@@ -1,10 +1,12 @@
 import { gql, useQuery } from "@apollo/client";
 import { format } from "date-fns";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import {
   GetPlannerRecipeByWeekQuery,
   GetPlannerRecipeByWeekQueryVariables,
 } from "../../generated/graphql";
-import { store } from "../../redux/store";
+import { IAppState, store } from "../../redux/store";
 
 export const GET_PLANNER_RECIPE_BY_DATE = gql`
   query GetPlannerRecipeByWeek($_gte: date!, $_lte: date!) {
@@ -23,6 +25,10 @@ export const GET_PLANNER_RECIPE_BY_DATE = gql`
 `;
 
 export default function useGetPlannerRecipeByWeek() {
+  const { dateRange, selectedWeek } = useSelector(
+    (state: IAppState) => state.plannerDateRangeSlice
+  );
+
   const getMonAndSunDate = () => {
     const { dateRange, selectedWeek } = store.getState().plannerDateRangeSlice;
 
@@ -51,9 +57,25 @@ export default function useGetPlannerRecipeByWeek() {
   const plannerByDate = (date: string) => {
     const _date = format(new Date(date), "yyyy-MM-dd");
     const result = data?.planner?.filter((elem) => elem.date === _date);
-    console.log({ result });
     return result ?? [];
   };
 
-  return { plannerByDate, loading, error, currentWeekDates };
+  const [showRows, setShowRows] = useState(false);
+  useEffect(() => {
+    if (data?.planner?.length) {
+      setShowRows(true);
+    } else {
+      setShowRows(false);
+    }
+  }, [selectedWeek, data]);
+  return {
+    plannerByDate,
+    data,
+    loading,
+    error,
+    currentWeekDates,
+    dateRange,
+    showRows,
+    setShowRows,
+  };
 }
