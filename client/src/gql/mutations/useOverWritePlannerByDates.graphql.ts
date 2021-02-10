@@ -10,7 +10,7 @@ import {
 } from "../../generated/graphql";
 import { IRecipeToModify } from "../../redux/Planner/PlannerItemModalSlice";
 import { store } from "../../redux/store";
-import { GET_PLANNER_RECIPE_BY_DATE } from "../query/useGetPlannerRecipeByDate";
+import { GET_PLANNER_RECIPE_BY_DATE } from "../query/useGetPlannerRecipeByWeek";
 
 export const OVER_WRITE_PLANNER_BY_DATES = gql`
   mutation OverWritePlannerByDates(

@@ -1119,7 +1119,7 @@ export type Recipe_Ingredients = {
   formatted_text?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
   index: Scalars['Int'];
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   other?: Maybe<Scalars['String']>;
   quantity?: Maybe<Scalars['String']>;
   raw_text: Scalars['String'];
@@ -1957,12 +1957,13 @@ export type GetListItemsByIdQuery = (
   )> }
 );
 
-export type GetPlannerRecipeByDateQueryVariables = Exact<{
-  date?: Maybe<Scalars['date']>;
+export type GetPlannerRecipeByWeekQueryVariables = Exact<{
+  _gte: Scalars['date'];
+  _lte: Scalars['date'];
 }>;
 
 
-export type GetPlannerRecipeByDateQuery = (
+export type GetPlannerRecipeByWeekQuery = (
   { __typename?: 'query_root' }
   & { planner: Array<(
     { __typename?: 'planner' }
@@ -2001,6 +2002,23 @@ export type GetShoppingListNameQuery = (
   & { list_by_pk?: Maybe<(
     { __typename?: 'list' }
     & Pick<List, 'name' | 'id'>
+  )> }
+);
+
+export type GetPlannerRecipeByDateQueryVariables = Exact<{
+  date?: Maybe<Scalars['date']>;
+}>;
+
+
+export type GetPlannerRecipeByDateQuery = (
+  { __typename?: 'query_root' }
+  & { planner: Array<(
+    { __typename?: 'planner' }
+    & Pick<Planner, 'date' | 'index'>
+    & { recipe: (
+      { __typename?: 'recipe' }
+      & Pick<Recipe, 'id' | 'img' | 'title'>
+    ) }
   )> }
 );
 
@@ -2283,9 +2301,9 @@ export const GetListItemsByIdDocument = gql`
 }
     `;
 export type GetListItemsByIdQueryResult = Apollo.QueryResult<GetListItemsByIdQuery, GetListItemsByIdQueryVariables>;
-export const GetPlannerRecipeByDateDocument = gql`
-    query GetPlannerRecipeByDate($date: date) {
-  planner(where: {date: {_eq: $date}}) {
+export const GetPlannerRecipeByWeekDocument = gql`
+    query GetPlannerRecipeByWeek($_gte: date!, $_lte: date!) {
+  planner(where: {_and: [{date: {_gte: $_gte}}, {date: {_lte: $_lte}}]}) {
     date
     index
     recipe {
@@ -2296,7 +2314,7 @@ export const GetPlannerRecipeByDateDocument = gql`
   }
 }
     `;
-export type GetPlannerRecipeByDateQueryResult = Apollo.QueryResult<GetPlannerRecipeByDateQuery, GetPlannerRecipeByDateQueryVariables>;
+export type GetPlannerRecipeByWeekQueryResult = Apollo.QueryResult<GetPlannerRecipeByWeekQuery, GetPlannerRecipeByWeekQueryVariables>;
 export const GetRecipeDetailsDocument = gql`
     query GetRecipeDetails($id: String!) {
   recipe_by_pk(id: $id) {
@@ -2328,3 +2346,17 @@ export const GetShoppingListNameDocument = gql`
 }
     `;
 export type GetShoppingListNameQueryResult = Apollo.QueryResult<GetShoppingListNameQuery, GetShoppingListNameQueryVariables>;
+export const GetPlannerRecipeByDateDocument = gql`
+    query GetPlannerRecipeByDate($date: date) {
+  planner(where: {date: {_eq: $date}}) {
+    date
+    index
+    recipe {
+      id
+      img
+      title
+    }
+  }
+}
+    `;
+export type GetPlannerRecipeByDateQueryResult = Apollo.QueryResult<GetPlannerRecipeByDateQuery, GetPlannerRecipeByDateQueryVariables>;

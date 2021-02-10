@@ -19,14 +19,14 @@ import refresh from "../../assets/svg/refresh.svg";
 import { setShowIngredientToListModal } from "../../redux/Planner/AddIngredientsToListSlice";
 import { setSelectedWeek } from "../../redux/Planner/PlannerDateRangeSlice";
 import { IAppState } from "../../redux/store";
-import getMonAndSun from "../../utils/getMonAndFri";
+import getAllMonAndSun from "../../utils/getAllMonAndSun";
 
 interface IProps {
   weeks: string[][];
 }
 
 export default function Header({ weeks }: IProps) {
-  const monAndSuns = getMonAndSun();
+  const monAndSuns = getAllMonAndSun();
   // the monday that represent the week
   const { selectedWeek } = useSelector(
     (state: IAppState) => state.plannerDateRangeSlice

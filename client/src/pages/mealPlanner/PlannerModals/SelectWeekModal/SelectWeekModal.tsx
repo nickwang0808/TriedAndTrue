@@ -10,7 +10,7 @@ import {
   setShowSelectDayModal,
 } from "../../../../redux/Planner/PlannerItemModalSlice";
 import { IAppState } from "../../../../redux/store";
-import getMonAndSun from "../../../../utils/getMonAndFri";
+import getAllMonAndSun from "../../../../utils/getAllMonAndSun";
 
 export default function SelectWeekModal() {
   const { showSelectWeekModal } = useSelector(
@@ -24,7 +24,7 @@ export default function SelectWeekModal() {
   const handleDismiss = () =>
     dispatch(closePlannerItemModal("showSelectWeekModal"));
 
-  const monAndSuns = getMonAndSun().slice(-4);
+  const monAndSuns = getAllMonAndSun().slice(-4);
 
   return (
     <FancyModalWithRoundTop
