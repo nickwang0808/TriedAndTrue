@@ -1,4 +1,10 @@
-import { IonContent, IonItem, IonLabel, IonList } from "@ionic/react";
+import {
+  IonButton,
+  IonContent,
+  IonItem,
+  IonLabel,
+  IonList,
+} from "@ionic/react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ModalHeader from "../../../../components/headers/ModalHeader";
@@ -9,6 +15,7 @@ import {
   setShowGeneratePlannerModal,
 } from "../../../../redux/Planner/GeneratePlannerModalSlice";
 import { IAppState } from "../../../../redux/store";
+import getMonAndSunDate from "../../../../utils/getMonAndSunDate";
 import { mealTypeArray } from "../../../../utils/recipeSchema";
 
 export default function GeneratePlannerModal() {
@@ -16,6 +23,11 @@ export default function GeneratePlannerModal() {
   const { showGeneratePlannerModal, mealTypes } = useSelector(
     ({ generatePlannerModalSlice }: IAppState) => generatePlannerModalSlice
   );
+  const { selectedWeek } = useSelector(
+    ({ plannerDateRangeSlice }: IAppState) => plannerDateRangeSlice
+  );
+
+  const { date_start, date_end } = getMonAndSunDate(selectedWeek, "MMM d");
 
   const handleDismiss = () => dispatch(setShowGeneratePlannerModal(false));
 
@@ -23,7 +35,7 @@ export default function GeneratePlannerModal() {
     <FancyModalWithRoundTop
       isOpen={showGeneratePlannerModal}
       onDidDismiss={handleDismiss}
-      height="480px"
+      height="544px"
     >
       <ModalHeader
         title="Automatic Meal Planning"
@@ -38,7 +50,7 @@ export default function GeneratePlannerModal() {
           {mealTypeArray.map((meal) => {
             if (!meal) return null;
             return (
-              <IonItem id={meal}>
+              <IonItem key={meal}>
                 <IonLabel>{meal}</IonLabel>
                 <StyledCheckBox
                   slot="start"
@@ -51,6 +63,11 @@ export default function GeneratePlannerModal() {
             );
           })}
         </IonList>
+        <IonButton
+          fill="solid"
+          color="secondary"
+          expand="full"
+        >{`Create Meal Plan for ${date_start} - ${date_end}`}</IonButton>
       </IonContent>
     </FancyModalWithRoundTop>
   );
