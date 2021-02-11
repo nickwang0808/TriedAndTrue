@@ -1,4 +1,13 @@
 type Mutation {
+  generatePlanner (
+    mealTypes: [String!]!
+    _gte: String!
+    _lte: String!
+  ): [generatedPlanner!]!
+}
+
+
+type Mutation {
   importRecipe (
     url: String!
     wildMode: Boolean
@@ -73,6 +82,10 @@ type InsertRecipeOneOutput {
 }
 
 type shoppingListItems {
+  id : String!
+}
+
+type generatedPlanner {
   id : String!
 }
 

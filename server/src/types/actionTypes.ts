@@ -22,6 +22,10 @@ export type shoppingListItems = {
   id: string;
 };
 
+export type generatedPlanner = {
+  id: string;
+};
+
 export type insertRecipeOneDerivedInput = {
   title: string;
   img?: Maybe<string>;
@@ -45,6 +49,7 @@ export type Query = {
 };
 
 export type Mutation = {
+  generatePlanner: Array<generatedPlanner>;
   importRecipe: ImportedRecipe;
   insertIngredientToList: Array<shoppingListItems>;
   insertRecipeOneDerived: InsertRecipeOneOutput;
@@ -53,6 +58,12 @@ export type Mutation = {
 
 export type parseIngredientsArgs = {
   ingredientsToParse?: Maybe<Array<Maybe<string>>>;
+};
+
+export type generatePlannerArgs = {
+  mealTypes: Array<string>;
+  _gte: string;
+  _lte: string;
 };
 
 export type importRecipeArgs = {

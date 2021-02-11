@@ -1,5 +1,6 @@
 import express from "express";
 import categoryRoute from "./routes/categoryRoute";
+import generatedPlannerRoute from "./routes/generatePlannerRoute";
 import addIngredientToList from "./routes/insertIngredientsToListRoute";
 import InsertRecipeOneDerivedRoute from "./routes/insertRecipe";
 import overWriteIngredient from "./routes/overWriteIngredients";
@@ -19,5 +20,6 @@ app.use("/InsertRecipeOneDerived", InsertRecipeOneDerivedRoute);
 app.use("/scraper", scraperRoute);
 app.use("/addIngredientToList", addIngredientToList);
 app.use("/category", categoryRoute);
+app.use("/generatePlanner", generatedPlannerRoute);
 
 app.listen(port, () => console.log(`server is listening on ${port}`));
