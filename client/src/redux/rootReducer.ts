@@ -1,7 +1,7 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import addOrEditRecipeSlice from "./AddOrEditRecipe/AddOrEditRecipeSlice";
 import AddRecipeControlSlice from "./AddOrEditRecipe/AddRecipeControlSlice";
-import addIngredientsToListSlice from "./Planner/AddInGredientsToListSlice";
+import addIngredientsToListSlice from "./Planner/AddIngredientsToListSlice";
 import plannerDateRangeSlice from "./Planner/PlannerDateRangeSlice";
 import PlannerItemModalSlice from "./Planner/PlannerItemModalSlice";
 import plannerModalSlice from "./Planner/PlannerModalSlice";

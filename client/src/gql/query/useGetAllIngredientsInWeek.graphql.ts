@@ -30,20 +30,6 @@ export const GET_ALL_INGREDIENTS_IN_WEEK = gql`
 `;
 
 export default function useGetAllIngredientsInWeek() {
-  const getMonAndSun = (): GetAllIngredientsInweekQueryVariables => {
-    const { selectedWeek, dateRange } = store.getState().plannerDateRangeSlice;
-    const sun = format(
-      new Date(
-        dateRange!.find((e) => e[0] === selectedWeek)![dateRange![0].length - 1]
-      ),
-      "yyyy-MM-dd"
-    );
-
-    const mon = format(new Date(), "yyyy-MM-dd");
-
-    return { _gte: mon, _lte: sun };
-  };
-
   const { data, loading, error, refetch } = useQuery<
     GetAllIngredientsInweekQuery,
     GetAllIngredientsInweekQueryVariables
@@ -52,4 +38,18 @@ export default function useGetAllIngredientsInWeek() {
   });
 
   return { data, loading, error, refetch };
+}
+
+export function getMonAndSun(): GetAllIngredientsInweekQueryVariables {
+  const { selectedWeek, dateRange } = store.getState().plannerDateRangeSlice;
+  const sun = format(
+    new Date(
+      dateRange!.find((e) => e[0] === selectedWeek)![dateRange![0].length - 1]
+    ),
+    "yyyy-MM-dd"
+  );
+
+  const mon = format(new Date(), "yyyy-MM-dd");
+
+  return { _gte: mon, _lte: sun };
 }

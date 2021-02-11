@@ -7,7 +7,7 @@ interface IState {
   formIsDirty: boolean;
 }
 
-const initialState: IState = {
+export const initialState: IState = {
   showAddOrEditRecipe: false,
   id: null,
   showConfirmCancelModal: false,

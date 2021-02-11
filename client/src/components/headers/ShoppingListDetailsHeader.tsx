@@ -48,7 +48,7 @@ export default function ShoppingListDetailsHeader() {
     <IonHeader>
       <IonToolbar>
         <IonButtons slot="start">
-          <IonBackButton color="secondary" />
+          <IonBackButton defaultHref="/lists" color="secondary" />
         </IonButtons>
         <IonTitle color="primary">{title}</IonTitle>
         <IonButtons slot="end">

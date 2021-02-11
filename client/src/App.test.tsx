@@ -1,8 +1,14 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import { render } from "@testing-library/react";
+import React from "react";
+import { Provider } from "react-redux";
+import App from "./App";
+import { store } from "./redux/store";
 
-test('renders without crashing', () => {
-  const { baseElement } = render(<App />);
+test("renders without crashing", () => {
+  const { baseElement } = render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
   expect(baseElement).toBeDefined();
 });

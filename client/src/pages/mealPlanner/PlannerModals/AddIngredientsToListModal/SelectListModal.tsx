@@ -6,16 +6,12 @@ import LoaderCentered from "../../../../components/loading/LoaderCentered";
 import { FancyModalWithRoundTop } from "../../../../components/modals/FancyModalWithRoundTop";
 import useInsertIngredientToList from "../../../../gql/mutations/useInsertIngredientToList.graphql";
 import useGetAllShoppingLists from "../../../../gql/query/useGetAllShoppingLists.graphql";
-import {
-  setShowIngredientToListModal,
-  setShowSelectListModal,
-} from "../../../../redux/Planner/AddInGredientsToListSlice";
+import { setShowSelectListModal } from "../../../../redux/Planner/AddIngredientsToListSlice";
 import { IAppState } from "../../../../redux/store";
-import { setShowToast } from "../../../../redux/toastSlice/toastSlice";
 
 export default function SelectListModal() {
   const dispatch = useDispatch();
-  const { selectedIngredients, showSelectListModal } = useSelector(
+  const { showSelectListModal } = useSelector(
     ({ addIngredientsToListSlice }: IAppState) => addIngredientsToListSlice
   );
 
@@ -23,24 +19,8 @@ export default function SelectListModal() {
 
   const { data, loading, error } = useGetAllShoppingLists();
 
-  const { insertIngredientToList } = useInsertIngredientToList();
-  const handleSubmit = async (listId: string) => {
-    try {
-      await insertIngredientToList({
-        variables: {
-          ingredientsToAddToList: selectedIngredients,
-          shoppingListId: listId,
-        },
-      });
 
-      dispatch(setShowToast({ text: "Shopping list updated." }));
-    } catch (err) {
-      console.log(err);
-      dispatch(setShowToast({ text: "Something went wrong", color: "red" }));
-    }
-    dispatch(setShowIngredientToListModal(false));
-    handleDismiss();
-  };
+  const { handleSubmit } = useInsertIngredientToList();
 
   let content;
   if (loading) {
@@ -54,7 +34,13 @@ export default function SelectListModal() {
     content = (
       <IonList lines="full">
         {list.map(({ id, name }) => (
-          <IonItem onClick={() => handleSubmit(id)} key={id}>
+          <IonItem
+            onClick={() => {
+              handleSubmit(id);
+              handleDismiss();
+            }}
+            key={id}
+          >
             <IonLabel>{name}</IonLabel>
           </IonItem>
         ))}

@@ -1,5 +1,4 @@
 import { IonContent, IonItem, IonLabel, IonList } from "@ionic/react";
-import { format } from "date-fns";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ModalHeader from "../../../../components/headers/ModalHeader";
@@ -13,7 +12,7 @@ import { setRecipeDetailsId } from "../../../../redux/RecipeDetailsSlice/recipeD
 import { IAppState } from "../../../../redux/store";
 
 export default function EditPlannerItemModal() {
-  const { showModifyModal, recipeToModify } = useSelector(
+  const { showModifyModal } = useSelector(
     ({ PlannerItemModalSlice }: IAppState) => PlannerItemModalSlice
   );
   const dispatch = useDispatch();
@@ -21,39 +20,7 @@ export default function EditPlannerItemModal() {
   const handleDismiss = () =>
     dispatch(closePlannerItemModal("showModifyModal"));
 
-  const { deleteRecipeFromPlanner } = useDeleteRecipeFromPlanner();
-  const handleDelete = async () => {
-    const { index, id } = recipeToModify!;
-    const date = format(new Date(recipeToModify!.date), "yyyy-MM-dd");
-    deleteRecipeFromPlanner({
-      variables: { index, date, recipe_id: id },
-      optimisticResponse: {
-        __typename: "mutation_root",
-        delete_planner_by_pk: {
-          __typename: "planner",
-          recipe: {
-            __typename: "recipe",
-            id,
-          },
-        },
-      },
-
-      update: (cache, { data }) => {
-        if (!data || !data.delete_planner_by_pk) return;
-        cache.modify({
-          fields: {
-            [`planner({"where":{"date":{"_eq":"${date}"}}})`]: (
-              curr,
-              { toReference }
-            ) => {
-              return curr.filter((elem: any) => elem.index !== index);
-            },
-          },
-        });
-      },
-    });
-    handleDismiss();
-  };
+  const { handleDelete } = useDeleteRecipeFromPlanner();
 
   return (
     <FancyModalWithRoundTop
@@ -66,7 +33,7 @@ export default function EditPlannerItemModal() {
 
       <IonContent>
         <IonList lines="full">
-        <IonItem
+          <IonItem
             onClick={() => {
               dispatch(setRecipeDetailsId(showModifyModal));
               handleDismiss();
@@ -74,7 +41,7 @@ export default function EditPlannerItemModal() {
           >
             <IonLabel color="primary">View Details</IonLabel>
           </IonItem>
-        <IonItem>
+          <IonItem>
             <IonLabel color="primary">Add Ingredients to List</IonLabel>
           </IonItem>
           <IonItem
@@ -82,7 +49,12 @@ export default function EditPlannerItemModal() {
           >
             <IonLabel color="primary">Move to Another Day</IonLabel>
           </IonItem>
-          <IonItem onClick={handleDelete}>
+          <IonItem
+            onClick={() => {
+              handleDelete();
+              handleDismiss();
+            }}
+          >
             <IonLabel color="primary">Remove from Meal Plan</IonLabel>
           </IonItem>
         </IonList>

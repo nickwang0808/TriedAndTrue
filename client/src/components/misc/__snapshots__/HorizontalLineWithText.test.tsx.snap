@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render horizontal line with "OR" and color red  1`] = `
+<div
+  className="css-15aylje"
+>
+  <div
+    className="css-ukll68"
+    color="red"
+  />
+  <div
+    className="css-1vzg4fa"
+  >
+    OR
+  </div>
+  <div
+    className="css-ukll68"
+    color="red"
+  />
+</div>
+`;
+
+exports[`should render horizontal line with "OR" and color with default color black 1`] = `
+<div
+  className="css-15aylje"
+>
+  <div
+    className="css-1k8iws9"
+    color="black"
+  />
+  <div
+    className="css-1vzg4fa"
+  >
+    OR
+  </div>
+  <div
+    className="css-1k8iws9"
+    color="black"
+  />
+</div>
+`;
