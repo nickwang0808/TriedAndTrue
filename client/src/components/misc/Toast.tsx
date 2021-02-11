@@ -16,7 +16,7 @@ export default function Toast() {
     if (showToast) {
       setTimeout(() => {
         handleDismiss();
-      }, 2000);
+      }, showToast.time ?? 2000);
     }
   }, [showToast]);
 
