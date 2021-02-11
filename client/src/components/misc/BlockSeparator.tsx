@@ -29,7 +29,7 @@ const StyledDiv = styled.div`
   background-color: rgba(227, 236, 240, 0.5);
   border-bottom: 1px solid #dcdcdc;
   padding: 0 16px;
-  font-size: 14px;
+  font-size: 16px;
   display: flex;
   align-items: center;
   gap: 4px;

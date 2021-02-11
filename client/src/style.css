@@ -69,7 +69,7 @@ ion-tab-button {
 }
 
 ion-card-title {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 ion-tab-bar {
@@ -109,7 +109,7 @@ ion-button {
   --padding-start: 24px;
   --padding-end: 24px;
   font-family: SuraRegular;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 28px;
   text-align: center;
   letter-spacing: 0.5px;
