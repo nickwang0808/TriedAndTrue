@@ -30,11 +30,11 @@ const importRecipeHandler = async (
   // insert recipe to db
   const { rows } = await query(
     `
-    INSERT INTO recipe(title, img, total_time, yields, directions, owner)
-    values($1, $2, $3, $4, $5, $6)
+    INSERT INTO recipe(title, img, total_time, yields, directions, owner, meal_type )
+    values($1, $2, $3, $4, $5, $6, $7)
     RETURNING id
     `,
-    [title, image, total_time, yields, directions, owner]
+    [title, image, total_time, yields, directions, owner, "uncategorized"]
   );
 
   const { id } = rows[0];
