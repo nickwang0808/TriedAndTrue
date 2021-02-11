@@ -8,7 +8,7 @@ interface IState {
 
 const initialState: IState = {
   showGeneratePlannerModal: false,
-  mealTypes: mealTypeArray.filter((e) => !!e) as string[],
+  mealTypes: mealTypeArray,
 };
 
 const generatePlannerModalSlice = createSlice({
