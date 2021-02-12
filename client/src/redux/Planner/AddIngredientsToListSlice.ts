@@ -4,6 +4,9 @@ interface IState {
   showAddIngredientToListModal: boolean;
   selectedIngredients: IRecipeIngredients[];
   showSelectListModal: boolean;
+  /*this field control whether or not to only add one recipes ingredient in or
+  all ingredient in*/
+  singleRecipeId: string | null;
 }
 
 export interface IRecipeIngredients {
@@ -22,6 +25,7 @@ export const initialState: IState = {
   selectedIngredients: [],
   showAddIngredientToListModal: false,
   showSelectListModal: false,
+  singleRecipeId: null,
 };
 
 const checkMatch = (arg: IRecipeIngredients, payload: setCheckedIngType) => {
@@ -40,11 +44,21 @@ const addIngredientsToListSlice = createSlice({
   name: "addIngredientsToList",
   initialState,
   reducers: {
+    setSingleRecipeId: (
+      state,
+      { payload }: PayloadAction<IState["singleRecipeId"]>
+    ) => {
+      state.singleRecipeId = payload;
+    },
+
     setShowIngredientToListModal: (
       state,
       { payload }: PayloadAction<IState["showAddIngredientToListModal"]>
     ) => {
       state.showAddIngredientToListModal = payload;
+      if (!payload) {
+        state.singleRecipeId = null;
+      }
     },
 
     setShowSelectListModal: (
@@ -98,6 +112,7 @@ const addIngredientsToListSlice = createSlice({
 });
 
 export const {
+  setSingleRecipeId,
   setShowIngredientToListModal,
   checkIngredients,
   unCheckIngredients,

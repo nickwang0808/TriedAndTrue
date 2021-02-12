@@ -5,6 +5,10 @@ import ModalHeader from "../../../../components/headers/ModalHeader";
 import { FancyModalWithRoundTop } from "../../../../components/modals/FancyModalWithRoundTop";
 import useDeleteRecipeFromPlanner from "../../../../gql/mutations/useDeleteRecipeFromPlanner.graphql";
 import {
+  setShowIngredientToListModal,
+  setSingleRecipeId,
+} from "../../../../redux/Planner/AddIngredientsToListSlice";
+import {
   closePlannerItemModal,
   setShowSelectWeekModal,
 } from "../../../../redux/Planner/PlannerItemModalSlice";
@@ -21,6 +25,12 @@ export default function EditPlannerItemModal() {
     dispatch(closePlannerItemModal("showModifyModal"));
 
   const { handleDelete } = useDeleteRecipeFromPlanner();
+
+  const handleAddOneRecipeToList = () => {
+    dispatch(setSingleRecipeId(showModifyModal));
+    dispatch(setShowIngredientToListModal(true));
+    handleDismiss();
+  };
 
   return (
     <FancyModalWithRoundTop
@@ -41,7 +51,7 @@ export default function EditPlannerItemModal() {
           >
             <IonLabel color="primary">View Details</IonLabel>
           </IonItem>
-          <IonItem>
+          <IonItem onClick={handleAddOneRecipeToList}>
             <IonLabel color="primary">Add Ingredients to List</IonLabel>
           </IonItem>
           <IonItem
