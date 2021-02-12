@@ -28,15 +28,17 @@ export default function PlannerRow({ date, planner }: IProps) {
         id={`row-${format(new Date(date), "yyyy-MM-dd")}`}
       />
       <StyledContainer>
-        {planner.map(({ recipe: { title, img, id }, index }) => (
-          <RecipeCardSmall
-            title={title}
-            img={img}
-            id={id}
-            key={id + index}
-            onClick={() => dispatch(setShowModifyModal({ id, date, index }))}
-          />
-        ))}
+        {planner
+          .sort((a, b) => b.index - a.index)
+          .map(({ recipe: { title, img, id }, index }) => (
+            <RecipeCardSmall
+              title={title}
+              img={img}
+              id={id}
+              key={id + index}
+              onClick={() => dispatch(setShowModifyModal({ id, date, index }))}
+            />
+          ))}
         <AddCardOutLined onClick={() => dispatch(openPlannerModal(date))} />
       </StyledContainer>
     </StyledFadedOverLay>
