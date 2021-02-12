@@ -7,6 +7,7 @@ interface IState {
 export interface IShowToast {
   color?: string;
   text: string;
+  time?: number; // in millisecond
 }
 
 const initialState: IState = {

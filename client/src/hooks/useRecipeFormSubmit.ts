@@ -15,7 +15,7 @@ export default function useRecipeFormSubmit(
   defaultValues: IRecipeForm
 ) {
   const { insertRecipeOne } = useInsertRecipeOne();
-  const { updateRecipeDetails } = useUpdateRecipeDetails(id);
+  const { updateRecipeDetails, loading_update } = useUpdateRecipeDetails(id);
 
   const dispatch = useDispatch();
 
@@ -43,7 +43,7 @@ export default function useRecipeFormSubmit(
     }
   }, [formState]);
 
-  const onSubmit = (data: IRecipeForm) => {
+  const onSubmit = async (data: IRecipeForm) => {
     const { ingredients, ...dataWIthOutIngredients } = data;
 
     if (isCreateNew) {
@@ -67,14 +67,17 @@ export default function useRecipeFormSubmit(
       // make sure the form is dirty to run the update mutation
       if (isDirty && id) {
         try {
-          updateRecipeDetails({
+          await updateRecipeDetails({
             variables: {
               _set: { ...dataWIthOutIngredients },
               id,
               ingredientsStrings: ingredients?.map((ing) => ing.value) || [],
             },
           });
-          dispatch(setShowToast({ text: "Recipe updated!" }));
+          setTimeout(() => {
+            dispatch(setShowToast({ text: "Recipe Updated" }));
+          }, 500);
+
         } catch (error) {
           console.log(error);
           dispatch(
@@ -92,5 +95,6 @@ export default function useRecipeFormSubmit(
     control,
     setValue,
     isDirty,
+    loading_update,
   };
 }
