@@ -55,6 +55,7 @@ import ShoppingListDetails from "./pages/ShoppingList/ShoppingListDetails";
 import ShoppingListHome from "./pages/ShoppingList/ShoppingListHome";
 import AddNewShoppingListModal from "./pages/ShoppingList/ShoppingListModals/AddNewShoppingListModal";
 import ConfigureShoppingList from "./pages/ShoppingList/ShoppingListModals/ConfigureShoppingList";
+import CustomIngredientModal from "./pages/ShoppingList/ShoppingListModals/CustomIngredientModal";
 import ShoppingItemDetailsModal from "./pages/ShoppingList/ShoppingListModals/ShoppingItemDetailsModal";
 import { setDateRange } from "./redux/Planner/PlannerDateRangeSlice";
 import "./style.scss";
@@ -100,6 +101,7 @@ const App: React.FC = () => {
             <AddNewShoppingListModal />
             <ShoppingItemDetailsModal />
             <ConfigureShoppingList />
+            <CustomIngredientModal />
 
             <AboutUsModal />
             <DeleteAccountConfirmModal />

@@ -6,12 +6,14 @@ interface IState {
   showItemDetails: string | null;
   showConfigShoppingListModal: boolean;
   listId: string;
+  showAddCustomIngredientModal: boolean;
 }
 const initialState: IState = {
   showActive: true,
   showItemDetails: null,
   showConfigShoppingListModal: false,
   listId: "",
+  showAddCustomIngredientModal: false;
 };
 
 const shoppingListDetailSlice = createSlice({
@@ -41,6 +43,10 @@ const shoppingListDetailSlice = createSlice({
 
     setListid: (state, {payload}: PayloadAction<IState["listId"]>) => {
       state.listId = payload
+    },
+    setShowAddCustomIngredientModal: (state, {payload}: PayloadAction<IState["showAddCustomIngredientModal"]>) => {
+      state.showAddCustomIngredientModal = payload
+
     }
   },
 });
@@ -49,6 +55,7 @@ export const {
   setShowActive,
   setShowItemDetails,
   setShowConfigShoppingListModal,
-  setListid
+  setListid,
+  setShowAddCustomIngredientModal
 } = shoppingListDetailSlice.actions;
 export default shoppingListDetailSlice.reducer;
