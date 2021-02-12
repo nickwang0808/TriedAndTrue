@@ -20,6 +20,6 @@ app.use("/InsertRecipeOneDerived", InsertRecipeOneDerivedRoute);
 app.use("/scraper", scraperRoute);
 app.use("/addIngredientToList", addIngredientToList);
 app.use("/category", categoryRoute);
-app.use("/generatePlanner", generatedPlannerRoute);
+app.use("/generate", generatedPlannerRoute);
 
 app.listen(port, () => console.log(`server is listening on ${port}`));
