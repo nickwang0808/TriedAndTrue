@@ -20,12 +20,12 @@ export default function useRecipeFormSubmit(
   const dispatch = useDispatch();
 
   // prettier-ignore
-  const { formState, handleSubmit, control, reset, setValue, watch } = useForm <IRecipeForm>({
+  const { formState, handleSubmit, control, reset, setValue } = useForm <IRecipeForm>({
       resolver: yupResolver(recipeFormSchema),
       defaultValues,
     });
 
-  console.log(watch());
+  // console.log(watch());
 
   // formState needed to be read before it starts to work per rhf doc
   const { isDirty } = formState;

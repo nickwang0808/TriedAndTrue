@@ -96,15 +96,7 @@ export default function MainFormArea({ control, setValue }: IProps) {
           name="total_time"
           control={control}
           // defaultValue={null}
-          render={({ onChange, ref, value }) => (
-            // <IonInput
-            //   color="primary"
-            //   type="number"
-            //   value={value}
-            //   placeholder="Hours / Minutes"
-            //   ref={ref}
-            //   onIonChange={(e) => onChange(e.detail.value)}
-            // />
+          render={({ onChange, value }) => (
             <HourMinuteInput onChange={onChange} value={value} />
           )}
         />
