@@ -25,6 +25,8 @@ export default function useRecipeFormSubmit(
       defaultValues,
     });
 
+  // console.log(watch());
+
   // formState needed to be read before it starts to work per rhf doc
   const { isDirty } = formState;
 
