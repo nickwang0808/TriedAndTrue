@@ -57,6 +57,7 @@ export default function HourMinuteInput({ onChange, value }: IProps) {
         onIonChange={({ detail }) => setHr(Number(detail.value))}
       />
 
+      <div>hr</div>
       <IonInput
         placeholder="minutes"
         color="primary"
@@ -65,6 +66,7 @@ export default function HourMinuteInput({ onChange, value }: IProps) {
         value={min}
         onIonChange={({ detail }) => setMin(Number(detail.value))}
       />
+      <div>min</div>
     </StyledWrapper>
   );
 }
@@ -73,5 +75,8 @@ const StyledWrapper = styled.div`
   display: flex;
   gap: 8px;
 
-  align-items: flex-end;
+  align-items: center;
+  & > div {
+    margin-top: 8px;
+  }
 `;
