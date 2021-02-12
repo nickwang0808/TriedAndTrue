@@ -15,7 +15,7 @@ export default function useRecipeFormSubmit(
   defaultValues: IRecipeForm
 ) {
   const { insertRecipeOne } = useInsertRecipeOne();
-  const { updateRecipeDetails } = useUpdateRecipeDetails(id);
+  const { updateRecipeDetails, loading_update } = useUpdateRecipeDetails(id);
 
   const dispatch = useDispatch();
 
@@ -24,6 +24,8 @@ export default function useRecipeFormSubmit(
       resolver: yupResolver(recipeFormSchema),
       defaultValues,
     });
+
+  // console.log(watch());
 
   // formState needed to be read before it starts to work per rhf doc
   const { isDirty } = formState;
@@ -41,7 +43,7 @@ export default function useRecipeFormSubmit(
     }
   }, [formState]);
 
-  const onSubmit = (data: IRecipeForm) => {
+  const onSubmit = async (data: IRecipeForm) => {
     const { ingredients, ...dataWIthOutIngredients } = data;
 
     if (isCreateNew) {
@@ -56,27 +58,30 @@ export default function useRecipeFormSubmit(
             },
           },
         });
-        dispatch(setShowToast({ text: "Recipe Created" }));
+        dispatch(setShowToast({ text: "Recipe created!" }));
       } catch (error) {
         console.log(error);
-        dispatch(setShowToast({ text: "Something Went Wrong", color: "red" }));
+        dispatch(setShowToast({ text: "Something went wrong", color: "red" }));
       }
     } else {
       // make sure the form is dirty to run the update mutation
       if (isDirty && id) {
         try {
-          updateRecipeDetails({
+          await updateRecipeDetails({
             variables: {
               _set: { ...dataWIthOutIngredients },
               id,
               ingredientsStrings: ingredients?.map((ing) => ing.value) || [],
             },
           });
-          dispatch(setShowToast({ text: "Recipe Updated" }));
+          setTimeout(() => {
+            dispatch(setShowToast({ text: "Recipe Updated" }));
+          }, 500);
+
         } catch (error) {
           console.log(error);
           dispatch(
-            setShowToast({ text: "Something Went Wrong", color: "red" })
+            setShowToast({ text: "Something went wrong", color: "red" })
           );
         }
       } else return;
@@ -90,5 +95,6 @@ export default function useRecipeFormSubmit(
     control,
     setValue,
     isDirty,
+    loading_update,
   };
 }

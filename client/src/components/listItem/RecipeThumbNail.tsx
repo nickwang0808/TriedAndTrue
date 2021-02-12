@@ -34,7 +34,7 @@ const StyledIonLabel = styled(IonLabel)<{ after: string }>`
     font-family: OpenSansRegular;
     font-style: normal;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 19px;
   }
 

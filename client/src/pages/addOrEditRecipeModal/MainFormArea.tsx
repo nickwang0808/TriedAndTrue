@@ -9,6 +9,7 @@ import {
 } from "@ionic/react";
 import React from "react";
 import { Control, Controller, useForm } from "react-hook-form";
+import HourMinuteInput from "../../components/Input/HourMinuteInput";
 import ImageBox from "../../components/misc/ImageBox";
 import { useAddRecipeImage } from "../../hooks/useAddRecipeImage";
 
@@ -43,7 +44,7 @@ export default function MainFormArea({ control, setValue }: IProps) {
       </IonItem>
 
       <IonItem>
-        <IonLabel position="stacked">Image</IonLabel>
+        <IonLabel position="stacked">Image (Tap to add)</IonLabel>
         <Controller
           control={control}
           name="img"
@@ -98,15 +99,8 @@ export default function MainFormArea({ control, setValue }: IProps) {
           name="total_time"
           control={control}
           // defaultValue={null}
-          render={({ onChange, ref, value }) => (
-            <IonInput
-              color="primary"
-              type="number"
-              value={value}
-              placeholder="Hours / Minutes"
-              ref={ref}
-              onIonChange={(e) => onChange(e.detail.value)}
-            />
+          render={({ onChange, value }) => (
+            <HourMinuteInput onChange={onChange} value={value} />
           )}
         />
       </IonItem>

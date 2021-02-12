@@ -59,10 +59,10 @@ export default function AddMultiRecipeToPlannerModal() {
     dispatch(closePlannerModal());
     try {
       await addRecipesToPlanner({ variables: { objects } });
-      dispatch(setShowToast({ text: "Recipe Added to Planner!" }));
+      dispatch(setShowToast({ text: "Recipe added to meal plan!" }));
     } catch (err) {
       console.log(err);
-      dispatch(setShowToast({ text: "Something Went Wrong", color: "red" }));
+      dispatch(setShowToast({ text: "Something went wrong", color: "red" }));
     }
     dispatch(clearSelectedRecipe());
     return;

@@ -27,7 +27,10 @@ export default function AddOrEditRecipeChild({
     control,
     setValue,
     isDirty,
+    loading_update,
   } = useRecipeFormSubmit(isCreateNew, id, handleDismiss, defaultValues);
+
+  const buttonText = loading_update ? "Saving Changes..." : "Save";
 
   return (
     <>
@@ -46,8 +49,8 @@ export default function AddOrEditRecipeChild({
       </IonContent>
 
       <SaveFooterButton
-        disabled={!isDirty}
-        text="Save Recipe"
+        disabled={!isDirty || loading_update}
+        text={buttonText}
         action={() => handleSubmit(onSubmit)()}
       />
     </>

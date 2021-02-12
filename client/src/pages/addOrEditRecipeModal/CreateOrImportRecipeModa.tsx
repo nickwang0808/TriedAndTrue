@@ -47,7 +47,7 @@ export default function ImportRecipeModal() {
     if (!url.length) return;
     try {
       await importRecipe({ variables: { url, wildMode: !!warning } });
-      dispatch(setShowToast({ text: "Recipe Import Successful" }));
+      dispatch(setShowToast({ text: "Recipe imported successfully!" }));
     } catch (err) {
       console.log(err.message);
       dispatch(setShowToast({ text: "Something went wrong", color: "red" }));
@@ -141,7 +141,7 @@ const StyledFullWidthButton = styled(IonButton)`
 const StyledWarningSpan = styled.div`
   text-align: center;
   padding: 4px 8px 0 8px;
-  font-size: 14px;
+  font-size: 16px;
 `;
 
 const StyledIonInput = styled(IonInput)`
