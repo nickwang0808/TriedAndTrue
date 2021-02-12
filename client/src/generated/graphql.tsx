@@ -2017,7 +2017,7 @@ export type GetRecipeDetailsQuery = (
     & Pick<Recipe, 'cuisine' | 'directions' | 'id' | 'img' | 'meal_type' | 'owner' | 'title' | 'total_time' | 'yields'>
     & { recipe_ingredients_list: Array<(
       { __typename?: 'recipe_ingredients' }
-      & Pick<Recipe_Ingredients, 'name' | 'quantity' | 'unit' | 'formatted_text'>
+      & Pick<Recipe_Ingredients, 'name' | 'quantity' | 'unit' | 'formatted_text' | 'comment' | 'other'>
     )> }
   )> }
 );
@@ -2355,6 +2355,8 @@ export const GetRecipeDetailsDocument = gql`
       quantity
       unit
       formatted_text
+      comment
+      other
     }
   }
 }

@@ -77,14 +77,18 @@ const RecipeDetailsPage: React.FC = () => {
                   index={i + 1}
                 />
               ))
-            : recipe_ingredients_list?.map(({ name, quantity, unit }, i) => (
-                <IngredientListItem
-                  key={(name || "") + i}
-                  materialText={name || ""}
-                  quantityText={`${quantity || ""} ${unit || ""}`}
-                  showBackground={i % 2 === 0 ? true : false}
-                />
-              ))}
+            : recipe_ingredients_list?.map(
+                ({ name, quantity, unit, comment }, i) => (
+                  <IngredientListItem
+                    key={(name || "") + i}
+                    materialText={`${name || ""}${
+                      comment ? ", " + comment : ""
+                    }`}
+                    quantityText={`${quantity || ""} ${unit || ""}`}
+                    showBackground={i % 2 === 0 ? true : false}
+                  />
+                )
+              )}
         </StyledIngredientList>
       </>
     );

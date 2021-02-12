@@ -21,6 +21,8 @@ export const GET_RECIPE_DETAILS = gql`
         quantity
         unit
         formatted_text
+        comment
+        other
       }
     }
   }
