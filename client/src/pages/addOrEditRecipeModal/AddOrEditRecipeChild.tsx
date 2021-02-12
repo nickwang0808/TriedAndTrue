@@ -49,7 +49,7 @@ export default function AddOrEditRecipeChild({
       </IonContent>
 
       <SaveFooterButton
-        disabled={!isDirty}
+        disabled={!isDirty || loading_update}
         text={buttonText}
         action={() => handleSubmit(onSubmit)()}
       />
