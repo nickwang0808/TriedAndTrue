@@ -27,7 +27,8 @@ const StyledWrapper = styled(IonItem)<{ showBackground: boolean }>`
   --padding-start: 8px;
   --padding-top: 8px;
   --padding-bottom: 8px;
-  font-size: 14px;
+  font-size: 16px;
+  line-height: 150%;
   color: var(--ion-color-dark);
   
   align-items: unset;
@@ -48,5 +49,5 @@ const StyledIndexBox = styled.div`
   border: 1px solid black;
   font-weight: 700;
 
-  margin-inline: 0px 8px;
+  margin-inline: 0px 16px;
 `;

@@ -25,6 +25,8 @@ export default function useRecipeFormSubmit(
       defaultValues,
     });
 
+  // console.log(watch());
+
   // formState needed to be read before it starts to work per rhf doc
   const { isDirty } = formState;
 
@@ -56,10 +58,10 @@ export default function useRecipeFormSubmit(
             },
           },
         });
-        dispatch(setShowToast({ text: "Recipe Created" }));
+        dispatch(setShowToast({ text: "Recipe created!" }));
       } catch (error) {
         console.log(error);
-        dispatch(setShowToast({ text: "Something Went Wrong", color: "red" }));
+        dispatch(setShowToast({ text: "Something went wrong", color: "red" }));
       }
     } else {
       // make sure the form is dirty to run the update mutation
@@ -75,10 +77,11 @@ export default function useRecipeFormSubmit(
           setTimeout(() => {
             dispatch(setShowToast({ text: "Recipe Updated" }));
           }, 500);
+
         } catch (error) {
           console.log(error);
           dispatch(
-            setShowToast({ text: "Something Went Wrong", color: "red" })
+            setShowToast({ text: "Something went wrong", color: "red" })
           );
         }
       } else return;

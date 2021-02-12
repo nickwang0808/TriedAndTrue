@@ -19,6 +19,7 @@ export default function SelectListModal() {
 
   const { data, loading, error } = useGetAllShoppingLists();
 
+
   const { handleSubmit } = useInsertIngredientToList();
 
   let content;
@@ -53,7 +54,7 @@ export default function SelectListModal() {
       onDidDismiss={handleDismiss}
       height="180px"
     >
-      <ModalHeader title="Confirm Shopping List" handleClose={handleDismiss} />
+      <ModalHeader title="Add To Shopping List..." handleClose={handleDismiss} />
       <IonContent>{content}</IonContent>
     </FancyModalWithRoundTop>
   );

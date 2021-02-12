@@ -39,7 +39,7 @@ export default function DetailsOptionsModal() {
       isOpen={showDetailsOptionModal}
       onDidDismiss={handleDismiss}
     >
-      <ModalHeader title="More" handleClose={handleDismiss} />
+      <ModalHeader title="Options" handleClose={handleDismiss} />
       <IonContent>
         <IonList lines="full">
           <IonItem>

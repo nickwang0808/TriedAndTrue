@@ -28,7 +28,7 @@ export default function RecipeDeleteConfirmationModal() {
       <ModalHeader title="Delete Recipe" handleClose={handleDismiss} />
       <IonContent>
         <IonItem lines="none">
-          <p>Are you sure you want to remove this recipe?”</p>
+          <p>Are you sure you want to remove this recipe?</p>
         </IonItem>
         <StyledButtonContainer>
           <IonButton

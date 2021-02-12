@@ -25,7 +25,7 @@ const StyledWrapper = styled(IonItem)<{ showBackground: boolean }>`
   --background: ${(props) =>
     props.showBackground ? "rgba(227, 236, 240, 0.5)" : "none"};
   --padding-start: 0px;
-  font-size: 14px;
+  font-size: 16px;
 `;
 
 const StyledTitle = styled.div`

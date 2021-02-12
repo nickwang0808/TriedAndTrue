@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import {
   IonButton,
   IonButtons,
@@ -16,11 +17,11 @@ export default function RecipePageHeader() {
   return (
     <IonHeader>
       <IonToolbar>
-        <IonTitle color="primary">My Recipes</IonTitle>
+        <IonTitle color="primary">Recipes</IonTitle>
         <IonButtons slot="end">
           <IonButton
             onClick={() => dispatch(setShowAddRecipeControlModal(true))}
-          >
+          ><StylizedTitleButtonText>Add Recipe</StylizedTitleButtonText>
             <IonIcon icon={addnew} color="secondary" />
           </IonButton>
         </IonButtons>
@@ -28,3 +29,9 @@ export default function RecipePageHeader() {
     </IonHeader>
   );
 }
+
+const StylizedTitleButtonText = styled.div`
+  color: var(--ion-color-secondary);
+  font-family: SuraBold;
+  font-size: 16px;
+`;
