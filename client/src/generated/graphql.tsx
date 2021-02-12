@@ -115,6 +115,11 @@ export type Float8_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['float8']>>;
 };
 
+export type GeneratedPlanner = {
+  __typename?: 'generatedPlanner';
+  id: Scalars['String'];
+};
+
 export type InsertIngredientToListInput = {
   date: Scalars['String'];
   ingredients: Array<Scalars['String']>;
@@ -502,6 +507,8 @@ export type Mutation_Root = {
   delete_recipe_ingredients?: Maybe<Recipe_Ingredients_Mutation_Response>;
   /** delete single row from the table: "recipe_ingredients" */
   delete_recipe_ingredients_by_pk?: Maybe<Recipe_Ingredients>;
+  /** perform the action: "generatePlanner" */
+  generatePlanner: Array<GeneratedPlanner>;
   /** perform the action: "importRecipe" */
   importRecipe: ImportedRecipe;
   /** perform the action: "insertIngredientToList" */
@@ -612,6 +619,14 @@ export type Mutation_RootDelete_Recipe_IngredientsArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Recipe_Ingredients_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootGeneratePlannerArgs = {
+  _gte: Scalars['String'];
+  _lte: Scalars['String'];
+  mealTypes: Array<Scalars['String']>;
 };
 
 
@@ -1723,6 +1738,21 @@ export type DeleteRecipeOneMutation = (
   )> }
 );
 
+export type GeneratePlannerMutationVariables = Exact<{
+  _gte: Scalars['String'];
+  _lte: Scalars['String'];
+  mealTypes: Array<Scalars['String']> | Scalars['String'];
+}>;
+
+
+export type GeneratePlannerMutation = (
+  { __typename?: 'mutation_root' }
+  & { generatePlanner: Array<(
+    { __typename?: 'generatedPlanner' }
+    & Pick<GeneratedPlanner, 'id'>
+  )> }
+);
+
 export type ImportRecipeMutationVariables = Exact<{
   url: Scalars['String'];
   wildMode?: Maybe<Scalars['Boolean']>;
@@ -2005,23 +2035,6 @@ export type GetShoppingListNameQuery = (
   )> }
 );
 
-export type GetPlannerRecipeByDateQueryVariables = Exact<{
-  date?: Maybe<Scalars['date']>;
-}>;
-
-
-export type GetPlannerRecipeByDateQuery = (
-  { __typename?: 'query_root' }
-  & { planner: Array<(
-    { __typename?: 'planner' }
-    & Pick<Planner, 'date' | 'index'>
-    & { recipe: (
-      { __typename?: 'recipe' }
-      & Pick<Recipe, 'id' | 'img' | 'title'>
-    ) }
-  )> }
-);
-
 
 export const UpdateRecipeDetailDocument = gql`
     mutation UpdateRecipeDetail($id: String!, $_set: recipe_set_input!, $ingredientsStrings: [String!]!) {
@@ -2088,6 +2101,16 @@ export const DeleteRecipeOneDocument = gql`
 export type DeleteRecipeOneMutationFn = Apollo.MutationFunction<DeleteRecipeOneMutation, DeleteRecipeOneMutationVariables>;
 export type DeleteRecipeOneMutationResult = Apollo.MutationResult<DeleteRecipeOneMutation>;
 export type DeleteRecipeOneMutationOptions = Apollo.BaseMutationOptions<DeleteRecipeOneMutation, DeleteRecipeOneMutationVariables>;
+export const GeneratePlannerDocument = gql`
+    mutation GeneratePlanner($_gte: String!, $_lte: String!, $mealTypes: [String!]!) {
+  generatePlanner(_gte: $_gte, _lte: $_lte, mealTypes: $mealTypes) {
+    id
+  }
+}
+    `;
+export type GeneratePlannerMutationFn = Apollo.MutationFunction<GeneratePlannerMutation, GeneratePlannerMutationVariables>;
+export type GeneratePlannerMutationResult = Apollo.MutationResult<GeneratePlannerMutation>;
+export type GeneratePlannerMutationOptions = Apollo.BaseMutationOptions<GeneratePlannerMutation, GeneratePlannerMutationVariables>;
 export const ImportRecipeDocument = gql`
     mutation ImportRecipe($url: String!, $wildMode: Boolean = false) {
   importRecipe(url: $url, wildMode: $wildMode) {
@@ -2346,17 +2369,3 @@ export const GetShoppingListNameDocument = gql`
 }
     `;
 export type GetShoppingListNameQueryResult = Apollo.QueryResult<GetShoppingListNameQuery, GetShoppingListNameQueryVariables>;
-export const GetPlannerRecipeByDateDocument = gql`
-    query GetPlannerRecipeByDate($date: date) {
-  planner(where: {date: {_eq: $date}}) {
-    date
-    index
-    recipe {
-      id
-      img
-      title
-    }
-  }
-}
-    `;
-export type GetPlannerRecipeByDateQueryResult = Apollo.QueryResult<GetPlannerRecipeByDateQuery, GetPlannerRecipeByDateQueryVariables>;

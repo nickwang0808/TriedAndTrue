@@ -2,15 +2,15 @@ import { gql, useMutation } from "@apollo/client";
 import { format } from "date-fns";
 import client from "../../config/apoloConfig";
 import {
-  GetPlannerRecipeByDateQuery,
-  GetPlannerRecipeByDateQueryVariables,
+  GetPlannerRecipeByWeekQuery,
+  GetPlannerRecipeByWeekQueryVariables,
   OverWritePlannerByDatesMutation,
   OverWritePlannerByDatesMutationVariables,
   Planner_Insert_Input,
 } from "../../generated/graphql";
 import { IRecipeToModify } from "../../redux/Planner/PlannerItemModalSlice";
 import { store } from "../../redux/store";
-import { GET_PLANNER_RECIPE_BY_DATE } from "../query/useGetPlannerRecipeByWeek";
+import { GET_PLANNER_RECIPE_BY_WEEK } from "../query/useGetPlannerRecipeByWeek";
 
 export const OVER_WRITE_PLANNER_BY_DATES = gql`
   mutation OverWritePlannerByDates(
@@ -128,9 +128,12 @@ function getRecipesInPlanner(
   excludeSelectedRecipe: boolean = false
 ): Planner_Insert_Input[] {
   const cache = client.readQuery<
-    GetPlannerRecipeByDateQuery,
-    GetPlannerRecipeByDateQueryVariables
-  >({ query: GET_PLANNER_RECIPE_BY_DATE, variables: { date } });
+    GetPlannerRecipeByWeekQuery,
+    GetPlannerRecipeByWeekQueryVariables
+  >({
+    query: GET_PLANNER_RECIPE_BY_WEEK,
+    variables: { _lte: date, _gte: date },
+  });
 
   if (!cache) return [];
 

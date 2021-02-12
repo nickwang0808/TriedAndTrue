@@ -8,7 +8,7 @@ import {
 } from "../../generated/graphql";
 import { IAppState, store } from "../../redux/store";
 
-export const GET_PLANNER_RECIPE_BY_DATE = gql`
+export const GET_PLANNER_RECIPE_BY_WEEK = gql`
   query GetPlannerRecipeByWeek($_gte: date!, $_lte: date!) {
     planner(
       where: { _and: [{ date: { _gte: $_gte } }, { date: { _lte: $_lte } }] }
@@ -50,7 +50,7 @@ export default function useGetPlannerRecipeByWeek() {
   const { data, loading, error } = useQuery<
     GetPlannerRecipeByWeekQuery,
     GetPlannerRecipeByWeekQueryVariables
-  >(GET_PLANNER_RECIPE_BY_DATE, {
+  >(GET_PLANNER_RECIPE_BY_WEEK, {
     variables: { _gte: date_start, _lte: date_end },
   });
 

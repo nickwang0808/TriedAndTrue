@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ModalHeader from "../../../../components/headers/ModalHeader";
 import { StyledCheckBox } from "../../../../components/listItem/ShoppingListCheckBox";
 import { FancyModalWithRoundTop } from "../../../../components/modals/FancyModalWithRoundTop";
+import useGeneratePlanner from "../../../../gql/mutations/useGeneratePlanner.graphql";
 import {
   checkMealType,
   setShowGeneratePlannerModal,
@@ -30,6 +31,20 @@ export default function GeneratePlannerModal() {
   const { date_start, date_end } = getMonAndSunDate(selectedWeek, "MMM d");
 
   const handleDismiss = () => dispatch(setShowGeneratePlannerModal(false));
+
+  const { handleGenerate, loading } = useGeneratePlanner();
+  const generate = async () => {
+    const { date_start, date_end } = getMonAndSunDate(
+      selectedWeek,
+      "yyyy-MM-dd"
+    );
+    await handleGenerate(mealTypes, date_start, date_end);
+    handleDismiss();
+  };
+
+  const buttonText = loading
+    ? "Generating..."
+    : `Create Meal Plan for ${date_start} - ${date_end}`;
 
   return (
     <FancyModalWithRoundTop
@@ -67,7 +82,11 @@ export default function GeneratePlannerModal() {
           fill="solid"
           color="secondary"
           expand="full"
-        >{`Create Meal Plan for ${date_start} - ${date_end}`}</IonButton>
+          disabled={loading}
+          onClick={generate}
+        >
+          {buttonText}
+        </IonButton>
       </IonContent>
     </FancyModalWithRoundTop>
   );

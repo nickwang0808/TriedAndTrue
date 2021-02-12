@@ -3,7 +3,7 @@ import {
   GetPlannerRecipeByWeekQuery,
   GetPlannerRecipeByWeekQueryVariables,
 } from "../generated/graphql";
-import { GET_PLANNER_RECIPE_BY_DATE } from "../gql/query/useGetPlannerRecipeByWeek";
+import { GET_PLANNER_RECIPE_BY_WEEK } from "../gql/query/useGetPlannerRecipeByWeek";
 import getMonAndSunDate from "./getMonAndSunDate";
 
 export default function getPlannerRecipeCount(date: string) {
@@ -13,7 +13,7 @@ export default function getPlannerRecipeCount(date: string) {
     GetPlannerRecipeByWeekQuery,
     GetPlannerRecipeByWeekQueryVariables
   >({
-    query: GET_PLANNER_RECIPE_BY_DATE,
+    query: GET_PLANNER_RECIPE_BY_WEEK,
     variables: { _gte: date_start, _lte: date_end },
   });
 
