@@ -20,11 +20,15 @@ import { IAppState } from "../../../../redux/store";
 
 export default function AddIngredientsToListModel() {
   const dispatch = useDispatch();
-  const { selectedIngredients, showAddIngredientToListModal } = useSelector(
+  const {
+    selectedIngredients,
+    showAddIngredientToListModal,
+    singleRecipeId,
+  } = useSelector(
     ({ addIngredientsToListSlice }: IAppState) => addIngredientsToListSlice
   );
 
-  const { data, loading, error } = useGetAllIngredientsInWeek();
+  const { data, loading, error } = useGetAllIngredientsInWeek(singleRecipeId);
 
   const handleDismiss = () => dispatch(setShowIngredientToListModal(false));
   const isFound = (
@@ -132,7 +136,7 @@ export default function AddIngredientsToListModel() {
     <FancyModalWithRoundTop
       isOpen={showAddIngredientToListModal}
       onDidDismiss={handleDismiss}
-      onWillPresent={preCheckAllItems}
+      onDidPresent={preCheckAllItems}
     >
       <ModalHeader
         title="Add Ingredients to List"

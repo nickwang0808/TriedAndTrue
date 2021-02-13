@@ -1935,6 +1935,27 @@ export type GetAllIngredientsInweekQuery = (
   )> }
 );
 
+export type GetOneRecipeFromPlannerQueryVariables = Exact<{
+  _eq: Scalars['String'];
+}>;
+
+
+export type GetOneRecipeFromPlannerQuery = (
+  { __typename?: 'query_root' }
+  & { planner: Array<(
+    { __typename?: 'planner' }
+    & Pick<Planner, 'date' | 'index'>
+    & { recipe: (
+      { __typename?: 'recipe' }
+      & Pick<Recipe, 'id' | 'title'>
+      & { recipe_ingredients_list: Array<(
+        { __typename?: 'recipe_ingredients' }
+        & Pick<Recipe_Ingredients, 'id' | 'comment' | 'quantity' | 'unit' | 'name'>
+      )> }
+    ) }
+  )> }
+);
+
 export type GetAllRecipeQueryVariables = Exact<{
   _like?: Maybe<Scalars['String']>;
   limit?: Maybe<Scalars['Int']>;
@@ -2268,6 +2289,26 @@ export const GetAllIngredientsInweekDocument = gql`
 }
     `;
 export type GetAllIngredientsInweekQueryResult = Apollo.QueryResult<GetAllIngredientsInweekQuery, GetAllIngredientsInweekQueryVariables>;
+export const GetOneRecipeFromPlannerDocument = gql`
+    query GetOneRecipeFromPlanner($_eq: String!) {
+  planner(order_by: {date: asc, index: asc}, limit: 1) {
+    date
+    index
+    recipe {
+      id
+      title
+      recipe_ingredients_list(where: {recipe: {id: {_eq: $_eq}}}) {
+        id
+        comment
+        quantity
+        unit
+        name
+      }
+    }
+  }
+}
+    `;
+export type GetOneRecipeFromPlannerQueryResult = Apollo.QueryResult<GetOneRecipeFromPlannerQuery, GetOneRecipeFromPlannerQueryVariables>;
 export const GetAllRecipeDocument = gql`
     query GetAllRecipe($_like: String = "%", $limit: Int = 8, $offset: Int = 0) {
   recipe(
