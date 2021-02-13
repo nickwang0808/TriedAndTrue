@@ -5,6 +5,7 @@ import {
   AddRecipesToPlannerMutationVariables,
 } from "../../generated/graphql";
 import { store } from "../../redux/store";
+import getMonAndSunDate from "../../utils/getMonAndSunDate";
 import getPlannerRecipeCount from "../../utils/getPlannerRecipeCount";
 import {
   getMonAndSun,
@@ -59,9 +60,11 @@ export default function useAddRecipesToPlanner() {
     update: (cache, { data }) => {
       const { dateToModify } = store.getState().plannerModalSlice;
       const date = format(new Date(dateToModify), "yyyy-MM-dd");
+      const { date_end, date_start } = getMonAndSunDate(date);
+      console.log({ date_end, date_start });
       cache.modify({
         fields: {
-          [`planner({"where":{"date":{"_eq":"${date}"}}})`]: (
+          [`planner({"where":{"_and":[{"date":{"_gte":"${date_start}"}},{"date":{"_lte":"${date_end}"}}]}})`]: (
             curr,
             { toReference }
           ) => {

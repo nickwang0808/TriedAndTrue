@@ -57,7 +57,7 @@ const StyledIonItem = styled(IonItem)`
   --inner-padding-end: 0;
 `;
 
-const StyledCheckBox = styled(IonCheckbox)`
+export const StyledCheckBox = styled(IonCheckbox)`
   margin-inline-end: 16px !important;
 `;
 
@@ -87,4 +87,5 @@ const StyledComment = styled.div`
   font-family: OpenSansRegular;
   font-weight: normal;
   font-size: 12px;
-  line-height: 16px;`;
+  line-height: 16px;
+`;

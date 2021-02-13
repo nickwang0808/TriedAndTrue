@@ -15,8 +15,9 @@ export default function IngredientListItem({
 }: IProps) {
   return (
     <StyledWrapper showBackground={showBackground}>
-      <StyledTitle>{quantityText}</StyledTitle>
-      <div>{materialText}</div>
+      <div>
+        <strong>{quantityText}</strong> {materialText}
+      </div>
     </StyledWrapper>
   );
 }

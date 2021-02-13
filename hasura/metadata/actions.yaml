@@ -1,4 +1,11 @@
 actions:
+- name: generatePlanner
+  definition:
+    kind: synchronous
+    handler: http://35.220.182.160:5001/generate
+    forward_client_headers: true
+  permissions:
+  - role: user
 - name: importRecipe
   definition:
     kind: synchronous
@@ -69,4 +76,5 @@ custom_types:
       field_mapping:
         id: id
   - name: shoppingListItems
+  - name: generatedPlanner
   scalars: []

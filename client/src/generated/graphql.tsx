@@ -115,6 +115,11 @@ export type Float8_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['float8']>>;
 };
 
+export type GeneratedPlanner = {
+  __typename?: 'generatedPlanner';
+  id: Scalars['String'];
+};
+
 export type InsertIngredientToListInput = {
   date: Scalars['String'];
   ingredients: Array<Scalars['String']>;
@@ -502,6 +507,8 @@ export type Mutation_Root = {
   delete_recipe_ingredients?: Maybe<Recipe_Ingredients_Mutation_Response>;
   /** delete single row from the table: "recipe_ingredients" */
   delete_recipe_ingredients_by_pk?: Maybe<Recipe_Ingredients>;
+  /** perform the action: "generatePlanner" */
+  generatePlanner: Array<GeneratedPlanner>;
   /** perform the action: "importRecipe" */
   importRecipe: ImportedRecipe;
   /** perform the action: "insertIngredientToList" */
@@ -612,6 +619,14 @@ export type Mutation_RootDelete_Recipe_IngredientsArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Recipe_Ingredients_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootGeneratePlannerArgs = {
+  _gte: Scalars['String'];
+  _lte: Scalars['String'];
+  mealTypes: Array<Scalars['String']>;
 };
 
 
@@ -1119,7 +1134,7 @@ export type Recipe_Ingredients = {
   formatted_text?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
   index: Scalars['Int'];
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   other?: Maybe<Scalars['String']>;
   quantity?: Maybe<Scalars['String']>;
   raw_text: Scalars['String'];
@@ -1723,6 +1738,21 @@ export type DeleteRecipeOneMutation = (
   )> }
 );
 
+export type GeneratePlannerMutationVariables = Exact<{
+  _gte: Scalars['String'];
+  _lte: Scalars['String'];
+  mealTypes: Array<Scalars['String']> | Scalars['String'];
+}>;
+
+
+export type GeneratePlannerMutation = (
+  { __typename?: 'mutation_root' }
+  & { generatePlanner: Array<(
+    { __typename?: 'generatedPlanner' }
+    & Pick<GeneratedPlanner, 'id'>
+  )> }
+);
+
 export type ImportRecipeMutationVariables = Exact<{
   url: Scalars['String'];
   wildMode?: Maybe<Scalars['Boolean']>;
@@ -1957,12 +1987,13 @@ export type GetListItemsByIdQuery = (
   )> }
 );
 
-export type GetPlannerRecipeByDateQueryVariables = Exact<{
-  date?: Maybe<Scalars['date']>;
+export type GetPlannerRecipeByWeekQueryVariables = Exact<{
+  _gte: Scalars['date'];
+  _lte: Scalars['date'];
 }>;
 
 
-export type GetPlannerRecipeByDateQuery = (
+export type GetPlannerRecipeByWeekQuery = (
   { __typename?: 'query_root' }
   & { planner: Array<(
     { __typename?: 'planner' }
@@ -1986,7 +2017,7 @@ export type GetRecipeDetailsQuery = (
     & Pick<Recipe, 'cuisine' | 'directions' | 'id' | 'img' | 'meal_type' | 'owner' | 'title' | 'total_time' | 'yields'>
     & { recipe_ingredients_list: Array<(
       { __typename?: 'recipe_ingredients' }
-      & Pick<Recipe_Ingredients, 'name' | 'quantity' | 'unit' | 'formatted_text'>
+      & Pick<Recipe_Ingredients, 'name' | 'quantity' | 'unit' | 'formatted_text' | 'comment' | 'other'>
     )> }
   )> }
 );
@@ -2070,6 +2101,16 @@ export const DeleteRecipeOneDocument = gql`
 export type DeleteRecipeOneMutationFn = Apollo.MutationFunction<DeleteRecipeOneMutation, DeleteRecipeOneMutationVariables>;
 export type DeleteRecipeOneMutationResult = Apollo.MutationResult<DeleteRecipeOneMutation>;
 export type DeleteRecipeOneMutationOptions = Apollo.BaseMutationOptions<DeleteRecipeOneMutation, DeleteRecipeOneMutationVariables>;
+export const GeneratePlannerDocument = gql`
+    mutation GeneratePlanner($_gte: String!, $_lte: String!, $mealTypes: [String!]!) {
+  generatePlanner(_gte: $_gte, _lte: $_lte, mealTypes: $mealTypes) {
+    id
+  }
+}
+    `;
+export type GeneratePlannerMutationFn = Apollo.MutationFunction<GeneratePlannerMutation, GeneratePlannerMutationVariables>;
+export type GeneratePlannerMutationResult = Apollo.MutationResult<GeneratePlannerMutation>;
+export type GeneratePlannerMutationOptions = Apollo.BaseMutationOptions<GeneratePlannerMutation, GeneratePlannerMutationVariables>;
 export const ImportRecipeDocument = gql`
     mutation ImportRecipe($url: String!, $wildMode: Boolean = false) {
   importRecipe(url: $url, wildMode: $wildMode) {
@@ -2283,9 +2324,9 @@ export const GetListItemsByIdDocument = gql`
 }
     `;
 export type GetListItemsByIdQueryResult = Apollo.QueryResult<GetListItemsByIdQuery, GetListItemsByIdQueryVariables>;
-export const GetPlannerRecipeByDateDocument = gql`
-    query GetPlannerRecipeByDate($date: date) {
-  planner(where: {date: {_eq: $date}}) {
+export const GetPlannerRecipeByWeekDocument = gql`
+    query GetPlannerRecipeByWeek($_gte: date!, $_lte: date!) {
+  planner(where: {_and: [{date: {_gte: $_gte}}, {date: {_lte: $_lte}}]}) {
     date
     index
     recipe {
@@ -2296,7 +2337,7 @@ export const GetPlannerRecipeByDateDocument = gql`
   }
 }
     `;
-export type GetPlannerRecipeByDateQueryResult = Apollo.QueryResult<GetPlannerRecipeByDateQuery, GetPlannerRecipeByDateQueryVariables>;
+export type GetPlannerRecipeByWeekQueryResult = Apollo.QueryResult<GetPlannerRecipeByWeekQuery, GetPlannerRecipeByWeekQueryVariables>;
 export const GetRecipeDetailsDocument = gql`
     query GetRecipeDetails($id: String!) {
   recipe_by_pk(id: $id) {
@@ -2314,6 +2355,8 @@ export const GetRecipeDetailsDocument = gql`
       quantity
       unit
       formatted_text
+      comment
+      other
     }
   }
 }

@@ -85,6 +85,9 @@ export default function MainFormArea({ control, setValue }: IProps) {
               <IonSelectOption color="primary" value="desert">
                 Dessert
               </IonSelectOption>
+              <IonSelectOption color="primary" value="uncategorized">
+                Uncategorized
+              </IonSelectOption>
             </IonSelect>
           )}
         />

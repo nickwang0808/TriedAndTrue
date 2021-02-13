@@ -1,13 +1,12 @@
 import { array, mixed, number, object, string } from "yup";
 
-const mealTypeArray = [
+export const mealTypeArray = [
   "breakfast",
   "lunch",
   "dinner",
   "snack",
   "desert",
   "uncategorized",
-  null,
 ];
 
 export type mealType =
@@ -32,7 +31,7 @@ export interface IRecipeForm {
 
 export const recipeFormSchema = object().shape({
   title: string().required(),
-  meal_type: mixed().oneOf(mealTypeArray).nullable(),
+  meal_type: mixed().oneOf(mealTypeArray),
   total_time: number().nullable(),
   yields: string().nullable(),
   cuisine: string().nullable(),
