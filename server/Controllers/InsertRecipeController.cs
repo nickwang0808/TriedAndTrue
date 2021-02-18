@@ -20,13 +20,7 @@ namespace server.Controllers
             _context = context;
         }
 
-        // GET: api/InsertRecipe
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipes()
-        {
-            return await _context.Recipes.ToListAsync();
-        }
-
+        // do not delete this because the post will call this one to return the result
         // GET: api/InsertRecipe/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Recipe>> GetRecipe(string id)
@@ -41,64 +35,18 @@ namespace server.Controllers
             return recipe;
         }
 
-        // PUT: api/InsertRecipe/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutRecipe(string id, Recipe recipe)
-        {
-            if (id != recipe.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(recipe).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RecipeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
 
         // POST: api/InsertRecipe
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Recipe>> PostRecipe(Recipe recipe)
         {
-            Console.WriteLine(recipe.RecipeIngredients);
+            recipe.Cuisine = "Chinese";
             _context.Recipes.Add(recipe);
             await _context.SaveChangesAsync();
-            Console.WriteLine(recipe.Id);
             return CreatedAtAction("GetRecipe", new { id = recipe.Id }, recipe);
         }
 
-        // DELETE: api/InsertRecipe/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRecipe(string id)
-        {
-            var recipe = await _context.Recipes.FindAsync(id);
-            if (recipe == null)
-            {
-                return NotFound();
-            }
-
-            _context.Recipes.Remove(recipe);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
 
         private bool RecipeExists(string id)
         {
