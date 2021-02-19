@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using server.Models;
+using System.Net;
+using server.Utils;
 
 namespace server.Controllers
 {
@@ -41,7 +43,8 @@ namespace server.Controllers
         [HttpPost]
         public async Task<ActionResult<Recipe>> PostRecipe(Recipe recipe)
         {
-            recipe.Cuisine = "Chinese";
+            var userId = ParseUserId.GetUserId(Request.Headers);
+            recipe.Owner = userId;
             _context.Recipes.Add(recipe);
             await _context.SaveChangesAsync();
             return CreatedAtAction("GetRecipe", new { id = recipe.Id }, recipe);
