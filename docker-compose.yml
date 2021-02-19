@@ -2,6 +2,8 @@ version: "3.6"
 services:
   scraper:
     image: nickwangtech/recipe-scraper-dockerized
+  parser:
+    image: nickwangtech/ingredient-parser
   postgres:
     image: postgres:12
     restart: always
