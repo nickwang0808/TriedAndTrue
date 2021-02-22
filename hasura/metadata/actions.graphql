@@ -25,7 +25,14 @@ type Mutation {
 
 type Mutation {
   insertRecipeOneDerived (
-    object: insertRecipeOneDerivedInput!
+    title: String!
+    img: String
+    total_time: Int
+    yields: String
+    cuisine: String
+    meal_type: String
+    ingredients: [String!]
+    directions: json
   ): InsertRecipeOneOutput!
 }
 

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using server.Models;
 using System.Net;
 using server.Utils;
+using System.Net.Http;
 
 namespace server.Controllers
 {
@@ -41,27 +42,32 @@ namespace server.Controllers
         // POST: api/InsertRecipe
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Recipe>> PostRecipe(RecipeInputDTO recipeInput)
+        public async Task<object> PostRecipe(RecipeInput recipeInputRaw)
         {
             var userId = ParseUserId.GetUserId(Request.Headers);
 
-            var parserResults = await Task.WhenAll(recipeInput.ingredients.Select
-                (ingredient => Parser.RunParser(ingredient)));
+            var recipeInput = recipeInputRaw.input;
 
-            ICollection<RecipeIngredient> recipeIngredients = parserResults.Select((ingredient, i) => new RecipeIngredient()
+            List<RecipeIngredient> recipeIngredients = new();
+            if (recipeInput.ingredients is not null)
             {
-                Name = ingredient.Name,
-                Unit = ingredient.Unit,
-                Comment = ingredient.Comment,
-                RawText = ingredient.Input,
-                // TODO: implemen text formating
-                FormattedText = ingredient.Input,
-                Other = ingredient.Other,
-                Index = i,
-                Quantity = ingredient.Qty
-            }).ToList();
+                recipeIngredients = (await Task.WhenAll(recipeInput.ingredients.Select
+                    (ingredient => Parser.RunParser(ingredient))))
+                    .Select((ingredient, i) => new RecipeIngredient()
+                    {
+                        Name = ingredient.Name,
+                        Unit = ingredient.Unit,
+                        Comment = ingredient.Comment,
+                        RawText = ingredient.Input,
+                        // TODO: implemen text formating
+                        FormattedText = ingredient.Input,
+                        Other = ingredient.Other,
+                        Index = i,
+                        Quantity = ingredient.Qty
+                    }).ToList();
+            }
 
-            Recipe recipe = new()
+            Recipe  recipe = new()
             {
                 Directions = recipeInput.directions,
                 Owner = userId,
@@ -77,7 +83,7 @@ namespace server.Controllers
 
             _context.Recipes.Add(recipe);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetRecipe), new { id = recipe.Id }, recipe);
+            return new {id = recipe.Id};
         }
 
 

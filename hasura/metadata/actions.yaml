@@ -23,7 +23,7 @@ actions:
 - name: insertRecipeOneDerived
   definition:
     kind: synchronous
-    handler: http://35.220.182.160:5001/InsertRecipeOneDerived
+    handler: http://35.220.182.160:5001/api/InsertRecipe
     forward_client_headers: true
   permissions:
   - role: user
