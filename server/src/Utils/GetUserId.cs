@@ -15,5 +15,6 @@ namespace server.Utils
             string userId = decodedToken.Claims.First(c => c.Type == "user_id").Value;
             return userId;
         }
+
     }
 }

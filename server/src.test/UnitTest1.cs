@@ -20,5 +20,14 @@ namespace src.test
             Assert.Equal("JEFe2Smd7lOtw4OEBe2vovG8OzH2", userId);
 
         }
+
+        [Fact]
+        public async void ParseIngredients()
+        {
+            string input = "1lbs beef";
+            var result = await Parser.RunParser(input);
+            Console.WriteLine(result);
+            Assert.True(true);
+        }
     }
 }

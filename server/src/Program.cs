@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using server.Utils;
 
 namespace server
 {
@@ -13,6 +14,7 @@ namespace server
     {
         public static void Main(string[] args)
         {
+            // Parser.RunParser("1lbs beef").GetAwaiter().GetResult();
             CreateHostBuilder(args).Build().Run();
         }
 
