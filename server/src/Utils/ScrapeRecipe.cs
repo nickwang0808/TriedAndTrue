@@ -7,7 +7,7 @@ namespace server.Utils
     public static class Scraper
     {
         static readonly HttpClient client = new();
-        public static Task<Recipe> RunScraPer(string url)
+        public static Task<Recipe> RunScraper(string url)
         {
             throw new NotImplementedException();
         }

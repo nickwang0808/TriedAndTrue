@@ -41,13 +41,43 @@ namespace server.Controllers
         // POST: api/InsertRecipe
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Recipe>> PostRecipe(Recipe recipe)
+        public async Task<ActionResult<Recipe>> PostRecipe(RecipeInputDTO recipeInput)
         {
             var userId = ParseUserId.GetUserId(Request.Headers);
-            recipe.Owner = userId;
+
+            var parserResults = await Task.WhenAll(recipeInput.ingredients.Select
+                (ingredient => Parser.RunParser(ingredient)));
+
+            ICollection<RecipeIngredient> recipeIngredients = parserResults.Select((ingredient, i) => new RecipeIngredient()
+            {
+                Name = ingredient.Name,
+                Unit = ingredient.Unit,
+                Comment = ingredient.Comment,
+                RawText = ingredient.Input,
+                // TODO: implemen text formating
+                FormattedText = ingredient.Input,
+                Other = ingredient.Other,
+                Index = i,
+                Quantity = ingredient.Qty
+            }).ToList();
+
+            Recipe recipe = new()
+            {
+                Directions = recipeInput.directions,
+                Owner = userId,
+                Img = recipeInput.img,
+                TotalTime = recipeInput.total_time,
+                Yields = recipeInput.yields,
+                Cuisine = recipeInput.cuisine,
+                MealType = recipeInput.meal_type,
+                Title = recipeInput.title,
+                RecipeIngredients = recipeIngredients
+            };
+
+
             _context.Recipes.Add(recipe);
             await _context.SaveChangesAsync();
-            return CreatedAtAction("GetRecipe", new { id = recipe.Id }, recipe);
+            return CreatedAtAction(nameof(GetRecipe), new { id = recipe.Id }, recipe);
         }
 
 
