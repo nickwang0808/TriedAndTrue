@@ -8,11 +8,11 @@ using Xunit;
 namespace src.test
 {
     [Collection("intergration test")]
-    public class ParseIngredientCOntrollerTest
+    public class ParseIngredientControllerTest
     {
         private readonly WebApplicationFactory<Startup> _factory;
 
-        public ParseIngredientCOntrollerTest(WebApplicationFactory<Startup> factory)
+        public ParseIngredientControllerTest(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }
