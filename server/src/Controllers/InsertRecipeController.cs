@@ -26,7 +26,7 @@ namespace server.Controllers
         // POST: api/InsertRecipe
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<object> PostRecipe(RecipeInput recipeInputRaw)
+        public async Task<object> PostRecipe(InsertRecipeInput recipeInputRaw)
         {
             var userId = ParseUserId.GetUserId(Request.Headers);
 
@@ -38,7 +38,7 @@ namespace server.Controllers
             {
                 recipeIngredients = (await Task.WhenAll(recipeInput.ingredients.Select
                     (ingredient => Parser.RunParser(ingredient))))
-                    .Select(MapParsedIngredient).ToList();
+                    .Select(Parser.MapParsedIngredient).ToList();
             }
 
             // map everything to their proper location for db write
@@ -61,20 +61,5 @@ namespace server.Controllers
             return new { id = recipe.Id };
         }
 
-        private static RecipeIngredient MapParsedIngredient(ParserResult ingredient, int i)
-        {
-            return new RecipeIngredient()
-            {
-                Name = ingredient.Name,
-                Unit = ingredient.Unit,
-                Comment = ingredient.Comment,
-                RawText = ingredient.Input,
-                // TODO: implemen text formating
-                FormattedText = ingredient.Input,
-                Other = ingredient.Other,
-                Index = i,
-                Quantity = ingredient.Qty
-            };
-        }
     }
 }

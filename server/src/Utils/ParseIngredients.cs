@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using server.Models;
 
 
 namespace server.Utils
@@ -29,6 +30,22 @@ namespace server.Utils
             Console.WriteLine("parser res: " + parsedResponse.Name);
             return parsedResponse;
 
+        }
+
+        public static RecipeIngredient MapParsedIngredient(ParserResult ingredient, int i)
+        {
+            return new RecipeIngredient()
+            {
+                Name = ingredient.Name,
+                Unit = ingredient.Unit,
+                Comment = ingredient.Comment,
+                RawText = ingredient.Input,
+                // TODO: implemen text formating
+                FormattedText = ingredient.Input,
+                Other = ingredient.Other,
+                Index = i,
+                Quantity = ingredient.Qty
+            };
         }
     }
 

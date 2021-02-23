@@ -30,7 +30,7 @@ actions:
 - name: overRideIngredients
   definition:
     kind: synchronous
-    handler: http://35.220.182.160:5001/overwrite-ingredients
+    handler: http://35.220.182.160:5001/api/OverWriteIngredients
     forward_client_headers: true
   permissions:
   - role: user

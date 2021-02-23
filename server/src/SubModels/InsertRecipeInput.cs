@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace server.Models
 {
-    public class RecipeInputDTO
+    public class InsertRecipeArgs
     {
         public string title { set; get; }
         public string img { set; get; }
@@ -19,9 +19,9 @@ namespace server.Models
         public string directions { set; get; }
     }
 
-    public class RecipeInput
+    public class InsertRecipeInput
     {
-        public RecipeInputDTO input { set; get; } = new();
+        public InsertRecipeArgs input { set; get; } = new();
     }
 
 }
