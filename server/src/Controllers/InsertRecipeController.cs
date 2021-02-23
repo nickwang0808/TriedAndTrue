@@ -38,18 +38,7 @@ namespace server.Controllers
             {
                 recipeIngredients = (await Task.WhenAll(recipeInput.ingredients.Select
                     (ingredient => Parser.RunParser(ingredient))))
-                    .Select((ingredient, i) => new RecipeIngredient()
-                    {
-                        Name = ingredient.Name,
-                        Unit = ingredient.Unit,
-                        Comment = ingredient.Comment,
-                        RawText = ingredient.Input,
-                        // TODO: implemen text formating
-                        FormattedText = ingredient.Input,
-                        Other = ingredient.Other,
-                        Index = i,
-                        Quantity = ingredient.Qty
-                    }).ToList();
+                    .Select(MapParsedIngredient).ToList();
             }
 
             // map everything to their proper location for db write
@@ -70,6 +59,22 @@ namespace server.Controllers
             _context.Recipes.Add(recipe);
             await _context.SaveChangesAsync();
             return new { id = recipe.Id };
+        }
+
+        private static RecipeIngredient MapParsedIngredient(ParserResult ingredient, int i)
+        {
+            return new RecipeIngredient()
+            {
+                Name = ingredient.Name,
+                Unit = ingredient.Unit,
+                Comment = ingredient.Comment,
+                RawText = ingredient.Input,
+                // TODO: implemen text formating
+                FormattedText = ingredient.Input,
+                Other = ingredient.Other,
+                Index = i,
+                Quantity = ingredient.Qty
+            };
         }
     }
 }
