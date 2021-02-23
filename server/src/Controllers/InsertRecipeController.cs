@@ -23,22 +23,6 @@ namespace server.Controllers
             _context = context;
         }
 
-        // do not delete this because the post will call this one to return the result
-        // GET: api/InsertRecipe/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Recipe>> GetRecipe(string id)
-        {
-            var recipe = await _context.Recipes.FindAsync(id);
-
-            if (recipe == null)
-            {
-                return NotFound();
-            }
-
-            return recipe;
-        }
-
-
         // POST: api/InsertRecipe
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -48,6 +32,7 @@ namespace server.Controllers
 
             var recipeInput = recipeInputRaw.input;
 
+            // parse the ingredient text and map it
             List<RecipeIngredient> recipeIngredients = new();
             if (recipeInput.ingredients is not null)
             {
@@ -67,7 +52,8 @@ namespace server.Controllers
                     }).ToList();
             }
 
-            Recipe  recipe = new()
+            // map everything to their proper location for db write
+            Recipe recipe = new()
             {
                 Directions = recipeInput.directions,
                 Owner = userId,
@@ -83,13 +69,7 @@ namespace server.Controllers
 
             _context.Recipes.Add(recipe);
             await _context.SaveChangesAsync();
-            return new {id = recipe.Id};
-        }
-
-
-        private bool RecipeExists(string id)
-        {
-            return _context.Recipes.Any(e => e.Id == id);
+            return new { id = recipe.Id };
         }
     }
 }
