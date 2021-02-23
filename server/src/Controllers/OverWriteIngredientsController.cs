@@ -48,13 +48,11 @@ namespace server.Controllers
                 ingredient.RecipeId = recipe_id;
             }
 
-
-            // return all ids
             _context.RecipeIngredients.AddRange(recipeIngredients);
             await _context.SaveChangesAsync();
 
+            // return all ids
             var response = recipeIngredients
-                .Where(ingredient => ingredient.RecipeId == recipe_id)
                 .Select(ing => new { id = ing.Id })
                 .ToList();
 
