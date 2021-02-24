@@ -38,14 +38,14 @@ namespace server.Controllers
             }
             // delete everything related to recipe id
             _context.RecipeIngredients.RemoveRange(_context.RecipeIngredients
-                .Where(ingredient => ingredient.RecipeId == recipe_id));
+                .Where(ingredient => ingredient.RecipeId.ToString() == recipe_id));
             // parse the new ingredients
             ICollection<RecipeIngredient> recipeIngredients = (await Task.WhenAll(ingredientsStrings.
             Select(Parser.RunParser))).ToList();
             // insert in
             foreach (var ingredient in recipeIngredients)
             {
-                ingredient.RecipeId = recipe_id;
+                ingredient.RecipeId = new Guid(recipe_id);
             }
 
             _context.RecipeIngredients.AddRange(recipeIngredients);
@@ -61,7 +61,7 @@ namespace server.Controllers
 
         private bool RecipeExists(string id)
         {
-            return _context.Recipes.Any(e => e.Id == id);
+            return _context.Recipes.Any(e => e.Id.ToString() == id);
         }
     }
 }

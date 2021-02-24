@@ -8,7 +8,7 @@ namespace server.Models
     public partial class Planner
     {
         public string UserId { get; set; }
-        public string RecipeId { get; set; }
+        public Guid RecipeId { get; set; }
         public DateTime Date { get; set; }
         public int Index { get; set; }
 

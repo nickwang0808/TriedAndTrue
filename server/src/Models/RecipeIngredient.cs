@@ -11,7 +11,7 @@ namespace server.Models
         public string Name { get; set; }
         public string Unit { get; set; }
         public string Comment { get; set; }
-        public string RecipeId { get; set; }
+        public Guid RecipeId { get; set; }
         public string RawText { get; set; }
         public string FormattedText { get; set; }
         public string Other { get; set; }
