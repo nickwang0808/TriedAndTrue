@@ -14,21 +14,21 @@ namespace sec.test
     [Collection("intergration test")]
     public class InsertRecipeControllerTest
     {
-        private readonly WebApplicationFactory<Startup> _factory;
+        private readonly CustomWebApplicationFactory<Startup> _factory;
         // todo: implement db clean up
 
-        public InsertRecipeControllerTest(WebApplicationFactory<Startup> factory)
+        public InsertRecipeControllerTest(CustomWebApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }
 
         [Fact]
-        public async Task ParseIngredient()
+        public async Task InsertRecipeShouldReturnId()
         {
             //Given
             var client = _factory.CreateClient();
             client.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", Config.Token);
+                new AuthenticationHeaderValue("Bearer", Utilities.Token);
             //When
             InsertRecipeInput reqBody = new()
             {

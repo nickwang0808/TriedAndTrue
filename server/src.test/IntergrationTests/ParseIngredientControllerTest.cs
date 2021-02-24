@@ -10,9 +10,9 @@ namespace src.test
     [Collection("intergration test")]
     public class ParseIngredientControllerTest
     {
-        private readonly WebApplicationFactory<Startup> _factory;
+        private readonly CustomWebApplicationFactory<Startup> _factory;
 
-        public ParseIngredientControllerTest(WebApplicationFactory<Startup> factory)
+        public ParseIngredientControllerTest(CustomWebApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }

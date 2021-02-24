@@ -1,12 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Json;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using server.Models;
 using server.Utils;
 
@@ -31,7 +24,7 @@ namespace server.Controllers
             try
             {
                 Recipe recipe = await Scraper.RunScraper(url);
-                var userId = ParseUserId.GetUserId(Request.Headers);
+                string userId = ParseUserId.GetUserId(Request.Headers);
 
                 recipe.Owner = userId;
 
