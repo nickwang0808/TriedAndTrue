@@ -14,14 +14,6 @@ namespace server.Controllers
     [ApiController]
     public class ParseIngredientController : ControllerBase
     {
-        private readonly PostgresContext _context;
-
-        public ParseIngredientController(PostgresContext context)
-        {
-            _context = context;
-        }
-
-        // GET: api/ParseIngredient/5
         [HttpPost]
         public async Task<ActionResult<string>> GetRecipeIngredient(string[] ingredients)
         {
@@ -30,7 +22,7 @@ namespace server.Controllers
             {
                 return NotFound();
             }
-            return (await Parser.RunParser(ingredient)).Input;
+            return (await Parser.RunParser(ingredient)).RawText;
         }
 
     }

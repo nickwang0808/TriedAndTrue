@@ -30,7 +30,7 @@ namespace sec.test
             client.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", Config.Token);
             //When
-            RecipeInput reqBody = new()
+            InsertRecipeInput reqBody = new()
             {
                 input = new()
                 {

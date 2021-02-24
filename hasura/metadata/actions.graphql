@@ -10,7 +10,6 @@ type Mutation {
 type Mutation {
   importRecipe (
     url: String!
-    wildMode: Boolean
   ): ImportedRecipe!
 }
 

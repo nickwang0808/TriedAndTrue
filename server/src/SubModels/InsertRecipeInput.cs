@@ -21,7 +21,7 @@ namespace server.Models
 
     public class InsertRecipeInput
     {
-        public InsertRecipeArgs input { set; get; } = new();
+        public InsertRecipeArgs input { set; get; }
     }
 
 }

@@ -41,7 +41,7 @@ namespace server.Controllers
                 .Where(ingredient => ingredient.RecipeId == recipe_id));
             // parse the new ingredients
             ICollection<RecipeIngredient> recipeIngredients = (await Task.WhenAll(ingredientsStrings.
-            Select(Parser.RunParser))).Select(Parser.MapParsedIngredient).ToList();
+            Select(Parser.RunParser))).ToList();
             // insert in
             foreach (var ingredient in recipeIngredients)
             {

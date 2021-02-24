@@ -38,7 +38,7 @@ namespace server.Controllers
             {
                 recipeIngredients = (await Task.WhenAll(recipeInput.ingredients.Select
                     (ingredient => Parser.RunParser(ingredient))))
-                    .Select(Parser.MapParsedIngredient).ToList();
+                    .ToList();
             }
 
             // map everything to their proper location for db write
