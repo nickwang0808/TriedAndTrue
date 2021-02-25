@@ -7,22 +7,17 @@ using Xunit;
 namespace src.test
 {
     [Collection("intergration test")]
-    public class ParseIngredientControllerTest
+    public class ParseIngredientControllerTest : DbContextFixture
     {
-        private readonly CustomWebApplicationFactory<Startup> _factory;
 
-        public ParseIngredientControllerTest(CustomWebApplicationFactory<Startup> factory)
+        public ParseIngredientControllerTest(CustomWebApplicationFactory<Startup> factory) : base(factory)
         {
-            _factory = factory;
         }
 
         [Fact]
         public async Task ParseIngredientReturnParsedIngredient()
         {
-            //Given
-            var client = _factory.CreateClient();
-            //When
-            var res = await client.PostAsJsonAsync("/api/ParseIngredient", new List<string>() { "1 lbs egg" });
+            var res = await Client.PostAsJsonAsync("/api/ParseIngredient", new List<string>() { "1 lbs egg" });
             //Then
             res.EnsureSuccessStatusCode();
             Assert.NotNull(res.Content);

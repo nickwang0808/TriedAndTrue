@@ -20,11 +20,6 @@ namespace sec.test
         [Fact]
         public async Task InsertRecipeShouldReturnId()
         {
-            //Given
-            var client = _factory.CreateClient();
-            client.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", Utilities.Token);
-            //When
             InsertRecipeInput reqBody = new()
             {
                 input = new()
@@ -33,22 +28,19 @@ namespace sec.test
                     ingredients = new List<string>() { "1 lbs beef" }
                 }
             };
-            var response = await client.PostAsJsonAsync("/api/InsertRecipe", reqBody);
+            var response = await Client.PostAsJsonAsync("/api/InsertRecipe", reqBody);
             //Then
             response.EnsureSuccessStatusCode();
             Assert.NotNull(response.Content);
 
-            var body = await response.Content.ReadFromJsonAsync<InsertRecipeResponse>();
+            var body = await response.Content.ReadFromJsonAsync<ResponseWithIdOnly>();
 
             Assert.True(body.Id is string);
 
-            var recipe = _context.Recipes.Find(new Guid(body.Id));
+            var recipe = Context.Recipes.Find(new Guid(body.Id));
             Console.WriteLine(recipe.Title);
         }
 
-        class InsertRecipeResponse
-        {
-            public string Id { get; set; }
-        }
+
     }
 }
