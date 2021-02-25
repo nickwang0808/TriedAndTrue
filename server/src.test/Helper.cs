@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using server.Models;
 using server.Utils;
@@ -36,6 +37,16 @@ namespace src.test
             {
                 Title = "Initial Recipe From xunit",
                 Owner = BuildUser().Id,
+                RecipeIngredients = new List<RecipeIngredient>() {
+                    new () {
+                        Name = "Initial Ingredient 1",
+                        RawText = "Initial Ingredient 1",
+                    },
+                    new () {
+                        Name = "Initial Ingredient 2",
+                        RawText = "Initial Ingredient 2",
+                    }
+                }
             };
         }
 

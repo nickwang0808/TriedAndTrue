@@ -41,10 +41,10 @@ namespace src.test
             //When
             Recipe recipe = await Scraper.RunScraper(urlToTest);
             //Then
-            Assert.True(recipe.Title == "Spinach and Feta Turkey Burgers");
-            Assert.True(recipe.TotalTime == 35);
-            Assert.True(recipe.MealType is null);
-            Assert.True(recipe.RecipeIngredients.Count == 5);
+            Assert.True(recipe.Title == "Spinach and Feta Turkey Burgers", "title should match");
+            Assert.True(recipe.TotalTime == 35, "totalTime should match");
+            Assert.True(recipe.MealType is null, "meal type should be unset and null");
+            Assert.True(recipe.RecipeIngredients.Count == 5, "there should be 5 ingredients related to this recipe");
         }
 
     }

@@ -40,7 +40,5 @@ namespace sec.test
             var recipe = Context.Recipes.Find(new Guid(body.Id));
             Console.WriteLine(recipe.Title);
         }
-
-
     }
 }
