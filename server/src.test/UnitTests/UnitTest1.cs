@@ -2,6 +2,7 @@ using System;
 using Xunit;
 using server.Utils;
 using Microsoft.AspNetCore.Http;
+using server.Models;
 
 namespace src.test
 {
@@ -10,10 +11,10 @@ namespace src.test
     {
 
         [Fact]
-        public void GetUserIdTest()
+        public void ItShouldExtractUserIdFromAuthToken()
         {
             var httpContext = new DefaultHttpContext();
-            httpContext.Request.Headers["authorization"] = "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjJjMmVkODQ5YThkZTI3ZTI0NjFlNGJjM2VmMDZhYzdhYjc4OGQyMmIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTmljayBXYW5nIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hLS9BT2gxNEdnNkJGa2tMVGQwbmpaV2QxS3NzXzYzQ3VFQ3pTRzVid3JCUTNsMlJnPXM5Ni1jIiwiaHR0cHM6Ly9oYXN1cmEuaW8vand0L2NsYWltcyI6eyJ4LWhhc3VyYS1kZWZhdWx0LXJvbGUiOiJ1c2VyIiwieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJ1c2VyIiwiYWRtaW4iXSwieC1oYXN1cmEtdXNlci1pZCI6IkpFRmUyU21kN2xPdHc0T0VCZTJ2b3ZHOE96SDIifSwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RyaWVkYW5kdHJ1ZS04ZTdiOSIsImF1ZCI6InRyaWVkYW5kdHJ1ZS04ZTdiOSIsImF1dGhfdGltZSI6MTYxMjg1MTcxNSwidXNlcl9pZCI6IkpFRmUyU21kN2xPdHc0T0VCZTJ2b3ZHOE96SDIiLCJzdWIiOiJKRUZlMlNtZDdsT3R3NE9FQmUydm92RzhPekgyIiwiaWF0IjoxNjEzMTE3MjA4LCJleHAiOjE2MTMxMjA4MDgsImVtYWlsIjoid2FuZzcwMzAwMzUxNUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjEwMDQzNTc0MDM3NTQ2NDA2NjAwMCJdLCJlbWFpbCI6WyJ3YW5nNzAzMDAzNTE1QGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.eyW55XmOIekKvQ7KwYT3sI_E75OLhgOsmke4Fowe4pMhXDuDwVMHesChh4V3nyw373ue1M0Z6fuiHCbPA0ER3GdTri2D9YfjO-SDhoYA5UiCULnswLjwUHkMV5x0uUvXqufZ5E02r-30RM-knD0wwCd6N5HQY4tAppxFmdt5e2PMEXzHalzP__QcHJjNUkVQ1NYehgHlv0kDF1jom0MRnU-36sf1GfK8_YGYCBGfLX85iEp0EaCwk2o_Ut4nJHdmTNXl-MwmpWj6fl_PMlBnhrEv7ObCoAbwmsYGesVnPpNyIj9DkAAofQqFVSeCnQoL-fm6TkA1N_6cXudzz5usdg";
+            httpContext.Request.Headers["authorization"] = $"Bearer {Utilities.Token}";
 
             string userId = ParseUserId.GetUserId(httpContext.Request.Headers);
             Assert.Equal("JEFe2Smd7lOtw4OEBe2vovG8OzH2", userId);
@@ -21,12 +22,30 @@ namespace src.test
         }
 
         [Fact]
-        public async void ParseIngredients()
+        public async void ItShouldParseIngredient()
         {
             string input = "1lbs beef";
             var result = await Parser.RunParser(input);
             Console.WriteLine(result);
-            Assert.True(true);
+            // TODO: fix this
+            Assert.True(result.Name == "beef");
+            Assert.True(result.Quantity == "1");
+            Assert.True(result.Unit == "pound");
         }
+
+        [Fact]
+        public async void ItShouldScrapeRecipeFromSite()
+        {
+            //Given
+            string urlToTest = "https://www.allrecipes.com/recipe/158968/spinach-and-feta-turkey-burgers/";
+            //When
+            Recipe recipe = await Scraper.RunScraper(urlToTest);
+            //Then
+            Assert.True(recipe.Title == "Spinach and Feta Turkey Burgers");
+            Assert.True(recipe.TotalTime == 35);
+            Assert.True(recipe.MealType is null);
+            Assert.True(recipe.RecipeIngredients.Count == 5);
+        }
+
     }
 }
