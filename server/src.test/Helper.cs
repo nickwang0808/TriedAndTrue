@@ -10,7 +10,8 @@ namespace src.test
         #region snippet1
         public static void InitializeDbForTests(PostgresContext db)
         {
-            db.Users.Add(CreateUser());
+            db.Users.Add(BuildUser());
+            db.Recipes.Add(BuildRecipe());
             db.SaveChanges();
         }
 
@@ -20,13 +21,22 @@ namespace src.test
             InitializeDbForTests(db);
         }
 
-        public static User CreateUser()
+        public static User BuildUser()
         {
             return new User()
             {
                 Id = ParseUserId.GetUserId(CreateAuthHeader().Request.Headers),
                 Email = "xunit@dotnet.com",
                 Name = "xunit"
+            };
+        }
+
+        public static Recipe BuildRecipe()
+        {
+            return new Recipe()
+            {
+                Title = "Initial Recipe From xunit",
+                Owner = BuildUser().Id,
             };
         }
 

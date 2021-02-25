@@ -8,6 +8,7 @@ using server;
 using server.Models;
 using src.test;
 using Xunit;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace sec.test
 {
@@ -42,17 +43,23 @@ namespace sec.test
             //Then
             response.EnsureSuccessStatusCode();
             Assert.NotNull(response.Content);
-            Assert.True((await response.Content.ReadFromJsonAsync<InsertRecipeResponse>()).Id is string);
+
+            var body = await response.Content.ReadFromJsonAsync<InsertRecipeResponse>();
+
+            Assert.True(body.Id is string);
+
+            var scopeFactory = _factory.Services.GetService<IServiceScopeFactory>();
+            using (var scope = scopeFactory.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetService<PostgresContext>();
+                var recipe = context.Recipes.Find(new Guid(body.Id));
+                Console.WriteLine(recipe.Title);
+            }
         }
 
         class InsertRecipeResponse
         {
             public string Id { get; set; }
         }
-
-        // public void Dispose(int recipeId)
-        // {
-        //     // run query to remove the recipe inserted
-        // }
     }
 }
