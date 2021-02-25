@@ -68,7 +68,7 @@ input insertIngredientToListInput {
   date : String!
   recipe_id : String!
   recipe_index : Int!
-  ingredients : [String!]!
+  ingredientIds : [String!]!
 }
 
 type ParsedIngredients {

@@ -36,6 +36,9 @@ namespace src.test
             Assert.True(recipe.MealType is null, "meal type should be unset and null");
             /* the first db query did not find the ingredients for the recipe 
             performing manual db query to get the ingredients*/
+
+            // TODO: user linq include to get the relate date
+
             List<RecipeIngredient> ingredients = Context.RecipeIngredients
                 .Where(ing => ing.RecipeId.ToString() == Id).ToList();
             Assert.True(ingredients.Count == 5, "there should be 5 ingredients related to this recipe");
