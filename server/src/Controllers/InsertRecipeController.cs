@@ -36,8 +36,8 @@ namespace server.Controllers
             List<RecipeIngredient> recipeIngredients = new();
             if (recipeInput.ingredients is not null)
             {
-                recipeIngredients = (await Task.WhenAll(recipeInput.ingredients.Select
-                    (ingredient => Parser.RunParser(ingredient))))
+                recipeIngredients = (await Task.WhenAll(recipeInput.ingredients
+                    .Select(Parser.RunParser)))
                     .ToList();
             }
 

@@ -24,7 +24,7 @@ namespace server.Utils
             }
 
             List<RecipeIngredient> parsedIngredient = (await Task.WhenAll(
-                scraperResponse.ingredients.Select(ing => Parser.RunParser(ing))))
+                scraperResponse.ingredients.Select(Parser.RunParser)))
                 .ToList();
 
             // check for empty response
