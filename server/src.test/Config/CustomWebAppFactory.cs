@@ -3,17 +3,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using server;
-using Xunit;
 using System;
 using Microsoft.Extensions.Logging;
 using server.Models;
 
 namespace src.test
 {
-
     public class CustomWebApplicationFactory<TStartup>
-    : WebApplicationFactory<TStartup> where TStartup : class
+   : WebApplicationFactory<TStartup> where TStartup : class
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -52,8 +49,4 @@ namespace src.test
             });
         }
     }
-
-    [CollectionDefinition("intergration test")]
-    public class IntergrationTestSetup : ICollectionFixture<CustomWebApplicationFactory<Startup>>
-    { }
 }

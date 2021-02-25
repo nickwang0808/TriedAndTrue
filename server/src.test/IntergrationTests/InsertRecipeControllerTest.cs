@@ -3,24 +3,18 @@ using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Testing;
 using server;
 using server.Models;
 using src.test;
 using Xunit;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace sec.test
 {
     [Collection("intergration test")]
-    public class InsertRecipeControllerTest
+    public class InsertRecipeControllerTest : DbContextFixture
     {
-        private readonly CustomWebApplicationFactory<Startup> _factory;
-        // todo: implement db clean up
-
-        public InsertRecipeControllerTest(CustomWebApplicationFactory<Startup> factory)
+        public InsertRecipeControllerTest(CustomWebApplicationFactory<Startup> factory) : base(factory)
         {
-            _factory = factory;
         }
 
         [Fact]
@@ -48,13 +42,8 @@ namespace sec.test
 
             Assert.True(body.Id is string);
 
-            var scopeFactory = _factory.Services.GetService<IServiceScopeFactory>();
-            using (var scope = scopeFactory.CreateScope())
-            {
-                var context = scope.ServiceProvider.GetService<PostgresContext>();
-                var recipe = context.Recipes.Find(new Guid(body.Id));
-                Console.WriteLine(recipe.Title);
-            }
+            var recipe = _context.Recipes.Find(new Guid(body.Id));
+            Console.WriteLine(recipe.Title);
         }
 
         class InsertRecipeResponse
