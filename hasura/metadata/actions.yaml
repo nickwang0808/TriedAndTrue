@@ -16,7 +16,7 @@ actions:
 - name: insertIngredientToList
   definition:
     kind: synchronous
-    handler: http://35.220.182.160:5001/addIngredientToList
+    handler: http://35.220.182.160:5001/api/InsertIngredientsToList
     forward_client_headers: true
   permissions:
   - role: user
