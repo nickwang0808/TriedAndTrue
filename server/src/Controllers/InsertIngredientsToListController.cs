@@ -124,7 +124,7 @@ namespace server.Controllers
                 Name = ingredient.Name,
                 Comment = ingredient.Comment,
                 List = new Guid(listId),
-                Quantity = Double.Parse(ingredient.Quantity),
+                Quantity = ingredient.Quantity != null ? Double.Parse(ingredient.Quantity) : null,
                 Other = ingredient.Other,
                 Unit = ingredient.Unit,
                 Recipes = recipesMetaInJson,

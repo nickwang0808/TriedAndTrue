@@ -35,7 +35,7 @@ namespace src.test
                 var db = scopedServices.GetRequiredService<PostgresContext>();
                 var logger = scopedServices
                     .GetRequiredService<ILogger<CustomWebApplicationFactory<TStartup>>>();
-
+                db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
 
                 try

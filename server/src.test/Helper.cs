@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using server.Models;
@@ -12,6 +13,7 @@ namespace src.test
         {
             db.Users.Add(BuildUser());
             db.Recipes.Add(BuildRecipe());
+            db.Lists.Add(BuildShoppingList());
             db.SaveChanges();
         }
 
@@ -47,6 +49,16 @@ namespace src.test
                         RawText = "Initial Ingredient 2",
                     }
                 }
+            };
+        }
+
+        public static List BuildShoppingList()
+        {
+            return new List()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Test Shopping List",
+                UserId = BuildUser().Id,
             };
         }
 
