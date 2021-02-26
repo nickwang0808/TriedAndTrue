@@ -10,7 +10,7 @@ namespace src.test
     public class ParseIngredientControllerTest : DbContextFixture
     {
 
-        public ParseIngredientControllerTest(CustomWebApplicationFactory<Startup> factory) : base(factory)
+        public ParseIngredientControllerTest(CustomCollectionFixture factory) : base(factory)
         {
         }
 

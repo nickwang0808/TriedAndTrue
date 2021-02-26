@@ -13,7 +13,7 @@ namespace src.test
     {
 
         private readonly string url = "https://www.allrecipes.com/recipe/158968/spinach-and-feta-turkey-burgers/";
-        public ScraperControllerTest(CustomWebApplicationFactory<Startup> factory) : base(factory)
+        public ScraperControllerTest(CustomCollectionFixture factory) : base(factory)
         {
         }
 

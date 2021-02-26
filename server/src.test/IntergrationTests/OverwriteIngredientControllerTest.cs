@@ -11,7 +11,7 @@ namespace src.test
     [Collection("intergration test")]
     public class OverwriteIngredientControllerTest : DbContextFixture
     {
-        public OverwriteIngredientControllerTest(CustomWebApplicationFactory<Startup> factory) : base(factory)
+        public OverwriteIngredientControllerTest(CustomCollectionFixture factory) : base(factory)
         {
         }
 

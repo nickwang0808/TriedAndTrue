@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using Microsoft.Extensions.Logging;
 using server.Models;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace src.test
 {
@@ -24,7 +25,7 @@ namespace src.test
 
                 services.AddDbContext<PostgresContext>(options =>
                 {
-                    options.UseInMemoryDatabase("InMemoryDbForTesting");
+                    options.UseNpgsql("Host=127.0.0.1;Port=5432;Database=test;Username=postgres;Password=postgrespassword");
                 });
 
                 var sp = services.BuildServiceProvider();
