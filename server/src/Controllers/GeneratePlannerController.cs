@@ -71,27 +71,37 @@ namespace server.Controllers
             List<int> SevenDays = new() { 0, 1, 2, 3, 4, 5, 6 };
             foreach (int day in SevenDays)
             {
-                for (int i = 0; i < mealTypes.Count; i++)
+                int recipeIndex = 0;
+                foreach (var mealType in mealTypes)
                 {
-                    /* ensure the same recipe won't appear twice in a day by only inserting
-                     it based on the mealType prop */
-                    Guid recipeId = shuffledRecipes
-                        .Find(r => r.MealType == mealTypes[i])
-                        .Id;
-
-                    /* add i day every loop */
-                    DateTime currentDate = startDate.AddDays(day);
-
-                    Planner planner = new()
+                    try
                     {
-                        Date = currentDate,
-                        Index = i,
-                        RecipeId = recipeId,
-                        UserId = userId,
-                    };
+                        /* ensure the same recipe won't appear twice in a day by only inserting
+                         it based on the mealType prop */
+                        Guid recipeId = shuffledRecipes
+                            .Find(r => r.MealType == mealType)
+                            .Id;
 
-                    /* use this array to keep track of all the planner inserted */
-                    newPlanners.Add(planner);
+                        /* add i day every loop */
+                        DateTime currentDate = startDate.AddDays(day);
+
+                        Planner planner = new()
+                        {
+                            Date = currentDate,
+                            Index = recipeIndex,
+                            RecipeId = recipeId,
+                            UserId = userId,
+                        };
+                        recipeIndex++;
+                        /* use this array to keep track of all the planner inserted */
+                        newPlanners.Add(planner);
+                    }
+                    /* in case there is no recipe availible in the meal types, we catch
+                    the exception from the find linq and just continue */
+                    catch (NullReferenceException)
+                    {
+                        continue;
+                    }
                 }
             }
             return newPlanners;
