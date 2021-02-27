@@ -20,11 +20,12 @@ export default function useRecipeFormSubmit(
   const dispatch = useDispatch();
 
   // prettier-ignore
-  const { formState, handleSubmit, control, reset, setValue } = useForm <IRecipeForm>({
+  const { formState, handleSubmit, control, reset, setValue,errors } = useForm <IRecipeForm>({
       resolver: yupResolver(recipeFormSchema),
       defaultValues,
     });
 
+  console.log(errors);
   // console.log(watch());
 
   // formState needed to be read before it starts to work per rhf doc
@@ -46,8 +47,8 @@ export default function useRecipeFormSubmit(
   const onSubmit = async (data: IRecipeForm) => {
     const { ingredients, ...dataWIthOutIngredients } = data;
 
+    console.log("submit");
     if (isCreateNew) {
-      console.log("submit");
       try {
         insertRecipeOne({
           variables: {
@@ -93,8 +94,7 @@ export default function useRecipeFormSubmit(
   };
 
   return {
-    onSubmit,
-    handleSubmit,
+    handleSubmit: handleSubmit(onSubmit),
     control,
     setValue,
     isDirty,

@@ -44,7 +44,7 @@ export const emptyDefaultValue: IRecipeForm = {
   cuisine: null,
   total_time: null,
   img: null,
-  meal_type: null,
+  meal_type: "uncategorized",
   yields: null,
   title: null,
   directions: [],
