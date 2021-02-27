@@ -288,7 +288,17 @@
   select_permissions:
   - role: user
     permission:
-      columns: []
+      columns:
+      - id
+      - name
+      - unit
+      - comment
+      - recipe_id
+      - raw_text
+      - formatted_text
+      - other
+      - index
+      - quantity
       filter:
         recipe:
           user:
@@ -297,7 +307,16 @@
   update_permissions:
   - role: user
     permission:
-      columns: []
+      columns:
+      - comment
+      - formatted_text
+      - index
+      - name
+      - other
+      - quantity
+      - raw_text
+      - recipe_id
+      - unit
       filter:
         recipe:
           user:

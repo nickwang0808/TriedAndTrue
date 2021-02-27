@@ -51,11 +51,11 @@ export default function useRecipeFormSubmit(
       try {
         insertRecipeOne({
           variables: {
-            object: {
-              ...dataWIthOutIngredients,
-              title: dataWIthOutIngredients.title!,
-              ingredients: ingredients?.map((e) => e.value) || [],
-            },
+            ...dataWIthOutIngredients,
+            title: dataWIthOutIngredients.title!,
+            ingredients: ingredients?.map((e) => e.value) || [],
+            directions:
+              dataWIthOutIngredients.directions?.map((e) => e.value) || [],
           },
         });
         dispatch(setShowToast({ text: "Recipe created!" }));
@@ -69,7 +69,11 @@ export default function useRecipeFormSubmit(
         try {
           await updateRecipeDetails({
             variables: {
-              _set: { ...dataWIthOutIngredients },
+              _set: {
+                ...dataWIthOutIngredients,
+                directions:
+                  dataWIthOutIngredients.directions?.map((e) => e.value) || [],
+              },
               id,
               ingredientsStrings: ingredients?.map((ing) => ing.value) || [],
             },
@@ -77,7 +81,6 @@ export default function useRecipeFormSubmit(
           setTimeout(() => {
             dispatch(setShowToast({ text: "Recipe Updated" }));
           }, 500);
-
         } catch (error) {
           console.log(error);
           dispatch(

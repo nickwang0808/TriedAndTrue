@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { IonButton, IonInput, IonItem, IonList } from "@ionic/react";
 import React, { useState } from "react";
 import { Control, Controller, useFieldArray } from "react-hook-form";
-import parseIngredientAndStringify from "../../utils/stringifyParsedIngredient";
+import parseIngredientAndStringify from "../../../utils/stringifyParsedIngredient";
 import AddIngredientListItem from "./AddIngredientListItem";
 
 interface IProps {

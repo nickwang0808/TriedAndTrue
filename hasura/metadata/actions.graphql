@@ -39,7 +39,7 @@ type Mutation {
 type Mutation {
   overRideIngredients (
     ingredientsStrings: [String]!
-    recipe_id: String!
+    recipe_id: uuid!
   ): [UpdatedRecipeIngredients]!
 }
 

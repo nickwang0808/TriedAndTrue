@@ -43,7 +43,7 @@ const RecipeDetailsPage: React.FC = () => {
     content = <p>404 recipe not found</p>;
   } else {
     //prettier-ignore
-    const { id, img, title, total_time, yields, directions, recipe_ingredients_list } = data.recipe_by_pk;
+    const { id, img, title, total_time, yields, directions, recipe_ingredients } = data.recipe_by_pk;
     content = (
       <>
         <IonFab vertical="top" horizontal="start" slot="fixed">
@@ -69,7 +69,7 @@ const RecipeDetailsPage: React.FC = () => {
         </IonSegment>
         <StyledIngredientList lines="none">
           {showDirections
-            ? (directions as [{ value: string }])?.map(({ value }, i) => (
+            ? (directions as string[])?.map((value, i) => (
                 <DirectionsListItem
                   key={i}
                   content={value}
@@ -77,7 +77,7 @@ const RecipeDetailsPage: React.FC = () => {
                   index={i + 1}
                 />
               ))
-            : recipe_ingredients_list?.map(
+            : recipe_ingredients?.map(
                 ({ name, quantity, unit, comment }, i) => (
                   <IngredientListItem
                     key={(name || "") + i}

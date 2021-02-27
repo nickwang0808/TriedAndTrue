@@ -1,11 +1,11 @@
 import { IonContent } from "@ionic/react";
 import React from "react";
-import AddDirections from "../../components/AddRecipeComp/AddDirections";
-import AddIngredients from "../../components/AddRecipeComp/AddIngredients";
 import SaveFooterButton from "../../components/layout/SaveFooterButton";
 import BlockSeparator from "../../components/misc/BlockSeparator";
 import useRecipeFormSubmit from "../../hooks/useRecipeFormSubmit";
 import { IRecipeForm } from "../../utils/recipeSchema";
+import AddDirections from "./AddRecipeComp/AddDirections";
+import AddIngredients from "./AddRecipeComp/AddIngredients";
 import MainFormArea from "./MainFormArea";
 
 interface IProps {

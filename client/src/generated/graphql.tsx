@@ -122,7 +122,7 @@ export type GeneratedPlanner = {
 
 export type InsertIngredientToListInput = {
   date: Scalars['String'];
-  ingredients: Array<Scalars['String']>;
+  ingredientIds: Array<Scalars['String']>;
   recipe_id: Scalars['String'];
   recipe_index: Scalars['Int'];
 };
@@ -228,7 +228,12 @@ export type List_Insert_Input = {
   name?: Maybe<Scalars['String']>;
 };
 
-/** columns and relationships of "list_items" */
+/**
+ * recipeMeta info structure { title, img, date }
+ *
+ *
+ * columns and relationships of "list_items"
+ */
 export type List_Items = {
   __typename?: 'list_items';
   category?: Maybe<Scalars['String']>;
@@ -246,7 +251,12 @@ export type List_Items = {
 };
 
 
-/** columns and relationships of "list_items" */
+/**
+ * recipeMeta info structure { title, img, date }
+ *
+ *
+ * columns and relationships of "list_items"
+ */
 export type List_ItemsRecipesArgs = {
   path?: Maybe<Scalars['String']>;
 };
@@ -594,7 +604,7 @@ export type Mutation_RootDelete_PlannerArgs = {
 export type Mutation_RootDelete_Planner_By_PkArgs = {
   date: Scalars['date'];
   index: Scalars['Int'];
-  recipe_id: Scalars['String'];
+  recipe_id: Scalars['uuid'];
 };
 
 
@@ -606,7 +616,7 @@ export type Mutation_RootDelete_RecipeArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Recipe_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['uuid'];
 };
 
 
@@ -633,7 +643,6 @@ export type Mutation_RootGeneratePlannerArgs = {
 /** mutation root */
 export type Mutation_RootImportRecipeArgs = {
   url: Scalars['String'];
-  wildMode?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -646,7 +655,14 @@ export type Mutation_RootInsertIngredientToListArgs = {
 
 /** mutation root */
 export type Mutation_RootInsertRecipeOneDerivedArgs = {
-  object: InsertRecipeOneDerivedInput;
+  cuisine?: Maybe<Scalars['String']>;
+  directions?: Maybe<Scalars['json']>;
+  img?: Maybe<Scalars['String']>;
+  ingredients?: Maybe<Array<Scalars['String']>>;
+  meal_type?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  total_time?: Maybe<Scalars['Int']>;
+  yields?: Maybe<Scalars['String']>;
 };
 
 
@@ -721,7 +737,7 @@ export type Mutation_RootInsert_Recipe_OneArgs = {
 /** mutation root */
 export type Mutation_RootOverRideIngredientsArgs = {
   ingredientsStrings: Array<Maybe<Scalars['String']>>;
-  recipe_id: Scalars['String'];
+  recipe_id: Scalars['uuid'];
 };
 
 
@@ -783,6 +799,7 @@ export type Mutation_RootUpdate_Recipe_By_PkArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_IngredientsArgs = {
+  _inc?: Maybe<Recipe_Ingredients_Inc_Input>;
   _set?: Maybe<Recipe_Ingredients_Set_Input>;
   where: Recipe_Ingredients_Bool_Exp;
 };
@@ -790,6 +807,7 @@ export type Mutation_RootUpdate_Recipe_IngredientsArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_Recipe_Ingredients_By_PkArgs = {
+  _inc?: Maybe<Recipe_Ingredients_Inc_Input>;
   _set?: Maybe<Recipe_Ingredients_Set_Input>;
   pk_columns: Recipe_Ingredients_Pk_Columns_Input;
 };
@@ -831,7 +849,7 @@ export type Planner = {
   index: Scalars['Int'];
   /** An object relationship */
   recipe: Recipe;
-  recipe_id: Scalars['String'];
+  recipe_id: Scalars['uuid'];
   /** An object relationship */
   user: User;
   user_id: Scalars['String'];
@@ -850,7 +868,7 @@ export type Planner_Bool_Exp = {
   date?: Maybe<Date_Comparison_Exp>;
   index?: Maybe<Int_Comparison_Exp>;
   recipe?: Maybe<Recipe_Bool_Exp>;
-  recipe_id?: Maybe<String_Comparison_Exp>;
+  recipe_id?: Maybe<Uuid_Comparison_Exp>;
   user?: Maybe<User_Bool_Exp>;
   user_id?: Maybe<String_Comparison_Exp>;
 };
@@ -860,7 +878,7 @@ export type Planner_Insert_Input = {
   date?: Maybe<Scalars['date']>;
   index?: Maybe<Scalars['Int']>;
   recipe?: Maybe<Recipe_Obj_Rel_Insert_Input>;
-  recipe_id?: Maybe<Scalars['String']>;
+  recipe_id?: Maybe<Scalars['uuid']>;
 };
 
 /** response of any mutation on the table "planner" */
@@ -891,7 +909,7 @@ export type Planner_Order_By = {
 export type Planner_Pk_Columns_Input = {
   date: Scalars['date'];
   index: Scalars['Int'];
-  recipe_id: Scalars['String'];
+  recipe_id: Scalars['uuid'];
 };
 
 /** select columns of table "planner" */
@@ -990,7 +1008,7 @@ export type Query_RootPlannerArgs = {
 export type Query_RootPlanner_By_PkArgs = {
   date: Scalars['date'];
   index: Scalars['Int'];
-  recipe_id: Scalars['String'];
+  recipe_id: Scalars['uuid'];
 };
 
 
@@ -1006,7 +1024,7 @@ export type Query_RootRecipeArgs = {
 
 /** query root */
 export type Query_RootRecipe_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['uuid'];
 };
 
 
@@ -1047,14 +1065,14 @@ export type Recipe = {
   created_at: Scalars['timestamptz'];
   cuisine?: Maybe<Scalars['String']>;
   directions?: Maybe<Scalars['json']>;
-  id: Scalars['String'];
+  id: Scalars['uuid'];
   img?: Maybe<Scalars['String']>;
   meal_type?: Maybe<Scalars['String']>;
   owner: Scalars['String'];
   /** An array relationship */
   planners: Array<Planner>;
   /** An array relationship */
-  recipe_ingredients_list: Array<Recipe_Ingredients>;
+  recipe_ingredients: Array<Recipe_Ingredients>;
   title: Scalars['String'];
   total_time?: Maybe<Scalars['Int']>;
   /** An object relationship */
@@ -1080,7 +1098,7 @@ export type RecipePlannersArgs = {
 
 
 /** columns and relationships of "recipe" */
-export type RecipeRecipe_Ingredients_ListArgs = {
+export type RecipeRecipe_IngredientsArgs = {
   distinct_on?: Maybe<Array<Recipe_Ingredients_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -1102,12 +1120,12 @@ export type Recipe_Bool_Exp = {
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   cuisine?: Maybe<String_Comparison_Exp>;
   directions?: Maybe<Json_Comparison_Exp>;
-  id?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Uuid_Comparison_Exp>;
   img?: Maybe<String_Comparison_Exp>;
   meal_type?: Maybe<String_Comparison_Exp>;
   owner?: Maybe<String_Comparison_Exp>;
   planners?: Maybe<Planner_Bool_Exp>;
-  recipe_ingredients_list?: Maybe<Recipe_Ingredients_Bool_Exp>;
+  recipe_ingredients?: Maybe<Recipe_Ingredients_Bool_Exp>;
   title?: Maybe<String_Comparison_Exp>;
   total_time?: Maybe<Int_Comparison_Exp>;
   user?: Maybe<User_Bool_Exp>;
@@ -1140,7 +1158,7 @@ export type Recipe_Ingredients = {
   raw_text: Scalars['String'];
   /** An object relationship */
   recipe: Recipe;
-  recipe_id: Scalars['String'];
+  recipe_id: Scalars['uuid'];
   unit?: Maybe<Scalars['String']>;
 };
 
@@ -1164,7 +1182,7 @@ export type Recipe_Ingredients_Bool_Exp = {
   quantity?: Maybe<String_Comparison_Exp>;
   raw_text?: Maybe<String_Comparison_Exp>;
   recipe?: Maybe<Recipe_Bool_Exp>;
-  recipe_id?: Maybe<String_Comparison_Exp>;
+  recipe_id?: Maybe<Uuid_Comparison_Exp>;
   unit?: Maybe<String_Comparison_Exp>;
 };
 
@@ -1176,17 +1194,23 @@ export enum Recipe_Ingredients_Constraint {
   RecipeIngredientsPkey = 'recipe_ingredients_pkey'
 }
 
+/** input type for incrementing integer column in table "recipe_ingredients" */
+export type Recipe_Ingredients_Inc_Input = {
+  index?: Maybe<Scalars['Int']>;
+};
+
 /** input type for inserting data into table "recipe_ingredients" */
 export type Recipe_Ingredients_Insert_Input = {
   comment?: Maybe<Scalars['String']>;
   formatted_text?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
   index?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
   other?: Maybe<Scalars['String']>;
   quantity?: Maybe<Scalars['String']>;
   raw_text?: Maybe<Scalars['String']>;
   recipe?: Maybe<Recipe_Obj_Rel_Insert_Input>;
-  recipe_id?: Maybe<Scalars['String']>;
+  recipe_id?: Maybe<Scalars['uuid']>;
   unit?: Maybe<Scalars['String']>;
 };
 
@@ -1258,13 +1282,37 @@ export enum Recipe_Ingredients_Select_Column {
 
 /** input type for updating data in table "recipe_ingredients" */
 export type Recipe_Ingredients_Set_Input = {
+  comment?: Maybe<Scalars['String']>;
+  formatted_text?: Maybe<Scalars['String']>;
+  index?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  other?: Maybe<Scalars['String']>;
+  quantity?: Maybe<Scalars['String']>;
   raw_text?: Maybe<Scalars['String']>;
+  recipe_id?: Maybe<Scalars['uuid']>;
+  unit?: Maybe<Scalars['String']>;
 };
 
 /** update columns of table "recipe_ingredients" */
 export enum Recipe_Ingredients_Update_Column {
   /** column name */
-  RawText = 'raw_text'
+  Comment = 'comment',
+  /** column name */
+  FormattedText = 'formatted_text',
+  /** column name */
+  Index = 'index',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Other = 'other',
+  /** column name */
+  Quantity = 'quantity',
+  /** column name */
+  RawText = 'raw_text',
+  /** column name */
+  RecipeId = 'recipe_id',
+  /** column name */
+  Unit = 'unit'
 }
 
 /** input type for inserting data into table "recipe" */
@@ -1274,7 +1322,7 @@ export type Recipe_Insert_Input = {
   img?: Maybe<Scalars['String']>;
   meal_type?: Maybe<Scalars['String']>;
   planners?: Maybe<Planner_Arr_Rel_Insert_Input>;
-  recipe_ingredients_list?: Maybe<Recipe_Ingredients_Arr_Rel_Insert_Input>;
+  recipe_ingredients?: Maybe<Recipe_Ingredients_Arr_Rel_Insert_Input>;
   title?: Maybe<Scalars['String']>;
   total_time?: Maybe<Scalars['Int']>;
   yields?: Maybe<Scalars['String']>;
@@ -1319,7 +1367,7 @@ export type Recipe_Order_By = {
 
 /** primary key columns input for table: "recipe" */
 export type Recipe_Pk_Columns_Input = {
-  id: Scalars['String'];
+  id: Scalars['uuid'];
 };
 
 /** select columns of table "recipe" */
@@ -1464,7 +1512,7 @@ export type Subscription_RootPlannerArgs = {
 export type Subscription_RootPlanner_By_PkArgs = {
   date: Scalars['date'];
   index: Scalars['Int'];
-  recipe_id: Scalars['String'];
+  recipe_id: Scalars['uuid'];
 };
 
 
@@ -1480,7 +1528,7 @@ export type Subscription_RootRecipeArgs = {
 
 /** subscription root */
 export type Subscription_RootRecipe_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['uuid'];
 };
 
 
@@ -1661,7 +1709,7 @@ export type Uuid_Comparison_Exp = {
 };
 
 export type UpdateRecipeDetailMutationVariables = Exact<{
-  id: Scalars['String'];
+  id: Scalars['uuid'];
   _set: Recipe_Set_Input;
   ingredientsStrings: Array<Scalars['String']> | Scalars['String'];
 }>;
@@ -1710,7 +1758,7 @@ export type DeleteListByIdMutation = (
 export type DeleteRecipeFromPlannerMutationVariables = Exact<{
   index: Scalars['Int'];
   date: Scalars['date'];
-  recipe_id: Scalars['String'];
+  recipe_id: Scalars['uuid'];
 }>;
 
 
@@ -1726,7 +1774,7 @@ export type DeleteRecipeFromPlannerMutation = (
 );
 
 export type DeleteRecipeOneMutationVariables = Exact<{
-  id: Scalars['String'];
+  id: Scalars['uuid'];
 }>;
 
 
@@ -1755,7 +1803,6 @@ export type GeneratePlannerMutation = (
 
 export type ImportRecipeMutationVariables = Exact<{
   url: Scalars['String'];
-  wildMode?: Maybe<Scalars['Boolean']>;
 }>;
 
 
@@ -1798,7 +1845,14 @@ export type InsertNewListOneMutation = (
 );
 
 export type InsertRecipeMutationVariables = Exact<{
-  object: InsertRecipeOneDerivedInput;
+  cuisine?: Maybe<Scalars['String']>;
+  directions?: Maybe<Scalars['json']>;
+  img?: Maybe<Scalars['String']>;
+  ingredients?: Maybe<Array<Scalars['String']> | Scalars['String']>;
+  meal_type?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  total_time?: Maybe<Scalars['Int']>;
+  yields?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -1927,7 +1981,7 @@ export type GetAllIngredientsInweekQuery = (
     & { recipe: (
       { __typename?: 'recipe' }
       & Pick<Recipe, 'id' | 'title'>
-      & { recipe_ingredients_list: Array<(
+      & { recipe_ingredients: Array<(
         { __typename?: 'recipe_ingredients' }
         & Pick<Recipe_Ingredients, 'id' | 'comment' | 'quantity' | 'unit' | 'name'>
       )> }
@@ -1936,7 +1990,7 @@ export type GetAllIngredientsInweekQuery = (
 );
 
 export type GetOneRecipeFromPlannerQueryVariables = Exact<{
-  _eq: Scalars['String'];
+  _eq: Scalars['uuid'];
 }>;
 
 
@@ -1948,7 +2002,7 @@ export type GetOneRecipeFromPlannerQuery = (
     & { recipe: (
       { __typename?: 'recipe' }
       & Pick<Recipe, 'id' | 'title'>
-      & { recipe_ingredients_list: Array<(
+      & { recipe_ingredients: Array<(
         { __typename?: 'recipe_ingredients' }
         & Pick<Recipe_Ingredients, 'id' | 'comment' | 'quantity' | 'unit' | 'name'>
       )> }
@@ -2027,7 +2081,7 @@ export type GetPlannerRecipeByWeekQuery = (
 );
 
 export type GetRecipeDetailsQueryVariables = Exact<{
-  id: Scalars['String'];
+  id: Scalars['uuid'];
 }>;
 
 
@@ -2036,7 +2090,7 @@ export type GetRecipeDetailsQuery = (
   & { recipe_by_pk?: Maybe<(
     { __typename?: 'recipe' }
     & Pick<Recipe, 'cuisine' | 'directions' | 'id' | 'img' | 'meal_type' | 'owner' | 'title' | 'total_time' | 'yields'>
-    & { recipe_ingredients_list: Array<(
+    & { recipe_ingredients: Array<(
       { __typename?: 'recipe_ingredients' }
       & Pick<Recipe_Ingredients, 'name' | 'quantity' | 'unit' | 'formatted_text' | 'comment' | 'other'>
     )> }
@@ -2058,7 +2112,7 @@ export type GetShoppingListNameQuery = (
 
 
 export const UpdateRecipeDetailDocument = gql`
-    mutation UpdateRecipeDetail($id: String!, $_set: recipe_set_input!, $ingredientsStrings: [String!]!) {
+    mutation UpdateRecipeDetail($id: uuid!, $_set: recipe_set_input!, $ingredientsStrings: [String!]!) {
   update_recipe_by_pk(pk_columns: {id: $id}, _set: $_set) {
     cuisine
     directions
@@ -2101,7 +2155,7 @@ export type DeleteListByIdMutationFn = Apollo.MutationFunction<DeleteListByIdMut
 export type DeleteListByIdMutationResult = Apollo.MutationResult<DeleteListByIdMutation>;
 export type DeleteListByIdMutationOptions = Apollo.BaseMutationOptions<DeleteListByIdMutation, DeleteListByIdMutationVariables>;
 export const DeleteRecipeFromPlannerDocument = gql`
-    mutation DeleteRecipeFromPlanner($index: Int!, $date: date!, $recipe_id: String!) {
+    mutation DeleteRecipeFromPlanner($index: Int!, $date: date!, $recipe_id: uuid!) {
   delete_planner_by_pk(date: $date, recipe_id: $recipe_id, index: $index) {
     recipe {
       id
@@ -2113,7 +2167,7 @@ export type DeleteRecipeFromPlannerMutationFn = Apollo.MutationFunction<DeleteRe
 export type DeleteRecipeFromPlannerMutationResult = Apollo.MutationResult<DeleteRecipeFromPlannerMutation>;
 export type DeleteRecipeFromPlannerMutationOptions = Apollo.BaseMutationOptions<DeleteRecipeFromPlannerMutation, DeleteRecipeFromPlannerMutationVariables>;
 export const DeleteRecipeOneDocument = gql`
-    mutation DeleteRecipeOne($id: String!) {
+    mutation DeleteRecipeOne($id: uuid!) {
   delete_recipe_by_pk(id: $id) {
     id
   }
@@ -2133,8 +2187,8 @@ export type GeneratePlannerMutationFn = Apollo.MutationFunction<GeneratePlannerM
 export type GeneratePlannerMutationResult = Apollo.MutationResult<GeneratePlannerMutation>;
 export type GeneratePlannerMutationOptions = Apollo.BaseMutationOptions<GeneratePlannerMutation, GeneratePlannerMutationVariables>;
 export const ImportRecipeDocument = gql`
-    mutation ImportRecipe($url: String!, $wildMode: Boolean = false) {
-  importRecipe(url: $url, wildMode: $wildMode) {
+    mutation ImportRecipe($url: String!) {
+  importRecipe(url: $url) {
     recipe {
       id
       img
@@ -2172,8 +2226,17 @@ export type InsertNewListOneMutationFn = Apollo.MutationFunction<InsertNewListOn
 export type InsertNewListOneMutationResult = Apollo.MutationResult<InsertNewListOneMutation>;
 export type InsertNewListOneMutationOptions = Apollo.BaseMutationOptions<InsertNewListOneMutation, InsertNewListOneMutationVariables>;
 export const InsertRecipeDocument = gql`
-    mutation InsertRecipe($object: insertRecipeOneDerivedInput!) {
-  insertRecipeOneDerived(object: $object) {
+    mutation InsertRecipe($cuisine: String, $directions: json, $img: String, $ingredients: [String!], $meal_type: String, $title: String!, $total_time: Int, $yields: String) {
+  insertRecipeOneDerived(
+    cuisine: $cuisine
+    directions: $directions
+    img: $img
+    ingredients: $ingredients
+    meal_type: $meal_type
+    title: $title
+    total_time: $total_time
+    yields: $yields
+  ) {
     recipe {
       id
       title
@@ -2277,7 +2340,7 @@ export const GetAllIngredientsInweekDocument = gql`
     recipe {
       id
       title
-      recipe_ingredients_list {
+      recipe_ingredients {
         id
         comment
         quantity
@@ -2290,14 +2353,14 @@ export const GetAllIngredientsInweekDocument = gql`
     `;
 export type GetAllIngredientsInweekQueryResult = Apollo.QueryResult<GetAllIngredientsInweekQuery, GetAllIngredientsInweekQueryVariables>;
 export const GetOneRecipeFromPlannerDocument = gql`
-    query GetOneRecipeFromPlanner($_eq: String!) {
+    query GetOneRecipeFromPlanner($_eq: uuid!) {
   planner(order_by: {date: asc, index: asc}, limit: 1) {
     date
     index
     recipe {
       id
       title
-      recipe_ingredients_list(where: {recipe: {id: {_eq: $_eq}}}) {
+      recipe_ingredients(where: {recipe: {id: {_eq: $_eq}}}) {
         id
         comment
         quantity
@@ -2380,7 +2443,7 @@ export const GetPlannerRecipeByWeekDocument = gql`
     `;
 export type GetPlannerRecipeByWeekQueryResult = Apollo.QueryResult<GetPlannerRecipeByWeekQuery, GetPlannerRecipeByWeekQueryVariables>;
 export const GetRecipeDetailsDocument = gql`
-    query GetRecipeDetails($id: String!) {
+    query GetRecipeDetails($id: uuid!) {
   recipe_by_pk(id: $id) {
     cuisine
     directions
@@ -2391,7 +2454,7 @@ export const GetRecipeDetailsDocument = gql`
     title
     total_time
     yields
-    recipe_ingredients_list {
+    recipe_ingredients {
       name
       quantity
       unit

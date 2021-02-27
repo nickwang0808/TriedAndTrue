@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { IonIcon, IonInput, IonItem } from "@ionic/react";
 import React from "react";
-import trash from "../../assets/svg/trash.svg";
+import trash from "../../../assets/svg/trash.svg";
 
 interface IProps {
   showBackground?: boolean;
