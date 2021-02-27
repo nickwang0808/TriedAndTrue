@@ -3,6 +3,7 @@ using Xunit;
 using server.Utils;
 using Microsoft.AspNetCore.Http;
 using server.Models;
+using server.Controllers;
 
 namespace src.test
 {
@@ -46,6 +47,5 @@ namespace src.test
             Assert.True(recipe.MealType is null, "meal type should be unset and null");
             Assert.True(recipe.RecipeIngredients.Count == 5, "there should be 5 ingredients related to this recipe");
         }
-
     }
 }

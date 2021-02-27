@@ -39,6 +39,7 @@ namespace src.test
             {
                 Title = "Initial Recipe From xunit",
                 Owner = BuildUser().Id,
+                MealType = "lunch",
                 RecipeIngredients = new List<RecipeIngredient>() {
                     new () {
                         Name = "Initial Ingredient 1",
