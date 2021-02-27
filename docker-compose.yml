@@ -1,5 +1,15 @@
 version: "3.6"
 services:
+  scraper:
+    image: nickwangtech/recipe-scraper-dockerized
+    restart: always
+    ports:
+      - 3003:5000
+  parser:
+    image: nickwangtech/ingredient-parser
+    restart: always
+    ports:
+      - 3005:3005
   postgres:
     image: postgres:12
     restart: always

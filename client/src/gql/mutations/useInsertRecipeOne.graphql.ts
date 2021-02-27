@@ -5,8 +5,26 @@ import {
 } from "../../generated/graphql";
 
 export const INSERT_RECIPE_ONE = gql`
-  mutation InsertRecipe($object: insertRecipeOneDerivedInput!) {
-    insertRecipeOneDerived(object: $object) {
+  mutation InsertRecipe(
+    $cuisine: String
+    $directions: json
+    $img: String
+    $ingredients: [String!]
+    $meal_type: String
+    $title: String!
+    $total_time: Int
+    $yields: String
+  ) {
+    insertRecipeOneDerived(
+      cuisine: $cuisine
+      directions: $directions
+      img: $img
+      ingredients: $ingredients
+      meal_type: $meal_type
+      title: $title
+      total_time: $total_time
+      yields: $yields
+    ) {
       recipe {
         id
         title

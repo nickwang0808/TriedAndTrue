@@ -15,7 +15,7 @@ export const DELETE_RECIPE_FROM_PLANNER = gql`
   mutation DeleteRecipeFromPlanner(
     $index: Int!
     $date: date!
-    $recipe_id: String!
+    $recipe_id: uuid!
   ) {
     delete_planner_by_pk(date: $date, recipe_id: $recipe_id, index: $index) {
       recipe {

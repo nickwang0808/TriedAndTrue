@@ -1,11 +1,11 @@
 import { IonContent } from "@ionic/react";
 import React from "react";
-import AddDirections from "../../components/AddRecipeComp/AddDirections";
-import AddIngredients from "../../components/AddRecipeComp/AddIngredients";
 import SaveFooterButton from "../../components/layout/SaveFooterButton";
 import BlockSeparator from "../../components/misc/BlockSeparator";
 import useRecipeFormSubmit from "../../hooks/useRecipeFormSubmit";
 import { IRecipeForm } from "../../utils/recipeSchema";
+import AddDirections from "./AddRecipeComp/AddDirections";
+import AddIngredients from "./AddRecipeComp/AddIngredients";
 import MainFormArea from "./MainFormArea";
 
 interface IProps {
@@ -22,7 +22,6 @@ export default function AddOrEditRecipeChild({
   handleDismiss,
 }: IProps) {
   const {
-    onSubmit,
     handleSubmit,
     control,
     setValue,
@@ -35,7 +34,7 @@ export default function AddOrEditRecipeChild({
   return (
     <>
       <IonContent fullscreen>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit}>
           <MainFormArea control={control} setValue={setValue} />
 
           <div className="ion-margin-vertical" />
@@ -49,9 +48,9 @@ export default function AddOrEditRecipeChild({
       </IonContent>
 
       <SaveFooterButton
-        disabled={!isDirty || loading_update}
+        // disabled={!isDirty || loading_update}
         text={buttonText}
-        action={() => handleSubmit(onSubmit)()}
+        action={handleSubmit}
       />
     </>
   );

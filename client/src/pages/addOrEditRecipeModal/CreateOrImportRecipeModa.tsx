@@ -46,7 +46,7 @@ export default function ImportRecipeModal() {
   const handleImport = async () => {
     if (!url.length) return;
     try {
-      await importRecipe({ variables: { url, wildMode: !!warning } });
+      await importRecipe({ variables: { url } });
       dispatch(setShowToast({ text: "Recipe imported successfully!" }));
     } catch (err) {
       console.log(err.message);

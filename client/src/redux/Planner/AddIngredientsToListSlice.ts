@@ -13,11 +13,11 @@ export interface IRecipeIngredients {
   date: string;
   recipe_id: string;
   recipe_index: number;
-  ingredients: string[]; // ids
+  ingredientIds: string[]; // ids
 }
 
 export interface setCheckedIngType
-  extends Omit<IRecipeIngredients, "ingredients"> {
+  extends Omit<IRecipeIngredients, "ingredientIds"> {
   id: string;
 }
 
@@ -86,9 +86,9 @@ const addIngredientsToListSlice = createSlice({
       if (foundIndex !== -1) {
         state.selectedIngredients[
           foundIndex
-        ].ingredients = state.selectedIngredients[
+        ].ingredientIds = state.selectedIngredients[
           foundIndex
-        ]!.ingredients.filter((elem) => elem !== payload.id);
+        ]!.ingredientIds.filter((elem) => elem !== payload.id);
       }
     },
     /* pull initial list of data in the component nad by checking one ingredient,
@@ -99,7 +99,7 @@ const addIngredientsToListSlice = createSlice({
     ) => {
       const found = state.selectedIngredients.find((elem) =>
         checkMatch(elem, payload)
-      )?.ingredients;
+      )?.ingredientIds;
       if (!found) {
         return state;
       } else if (found?.find((e) => e === payload.id)) {

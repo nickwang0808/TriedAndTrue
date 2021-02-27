@@ -10,7 +10,6 @@ type Mutation {
 type Mutation {
   importRecipe (
     url: String!
-    wildMode: Boolean
   ): ImportedRecipe!
 }
 
@@ -25,7 +24,14 @@ type Mutation {
 
 type Mutation {
   insertRecipeOneDerived (
-    object: insertRecipeOneDerivedInput!
+    title: String!
+    img: String
+    total_time: Int
+    yields: String
+    cuisine: String
+    meal_type: String
+    ingredients: [String!]
+    directions: json
   ): InsertRecipeOneOutput!
 }
 
@@ -33,7 +39,7 @@ type Mutation {
 type Mutation {
   overRideIngredients (
     ingredientsStrings: [String]!
-    recipe_id: String!
+    recipe_id: uuid!
   ): [UpdatedRecipeIngredients]!
 }
 
@@ -62,7 +68,7 @@ input insertIngredientToListInput {
   date : String!
   recipe_id : String!
   recipe_index : Int!
-  ingredients : [String!]!
+  ingredientIds : [String!]!
 }
 
 type ParsedIngredients {

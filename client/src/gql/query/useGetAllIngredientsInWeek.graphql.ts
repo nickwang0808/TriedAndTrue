@@ -19,7 +19,7 @@ export const GET_ALL_INGREDIENTS_IN_WEEK = gql`
       recipe {
         id
         title
-        recipe_ingredients_list {
+        recipe_ingredients {
           id
           comment
           quantity
@@ -32,14 +32,14 @@ export const GET_ALL_INGREDIENTS_IN_WEEK = gql`
 `;
 
 export const GET_RERIPE_FROM_PLANNER = gql`
-  query GetOneRecipeFromPlanner($_eq: String!) {
+  query GetOneRecipeFromPlanner($_eq: uuid!) {
     planner(order_by: { date: asc, index: asc }, limit: 1) {
       date
       index
       recipe {
         id
         title
-        recipe_ingredients_list(where: { recipe: { id: { _eq: $_eq } } }) {
+        recipe_ingredients(where: { recipe: { id: { _eq: $_eq } } }) {
           id
           comment
           quantity
