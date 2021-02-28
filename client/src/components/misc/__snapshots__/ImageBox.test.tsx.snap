@@ -1,12 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render image box with loading and with src from turkey burger 1`] = `
+.emotion-0 {
+  width: 100%;
+  max-width: calc(50vw - 16px);
+  height: 120px;
+  margin-top: 8px;
+}
+
+.emotion-0>img {
+  border: 1px solid #2a5077;
+  object-fit: contain;
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+}
+
 <div
-  className="css-e5j2yi"
+  className="emotion-0"
   onClick={[Function]}
 >
   <div
-    className="css-1hso2vt"
+    className="emotion-1"
   >
     <img
       src="ttloader.png"
@@ -17,8 +48,20 @@ exports[`should render image box with loading and with src from turkey burger 1`
 `;
 
 exports[`should render image box with loading and with src from turkey burger 2`] = `
+.emotion-0 {
+  width: 100%;
+  max-width: calc(50vw - 16px);
+  height: 120px;
+  margin-top: 8px;
+}
+
+.emotion-0>img {
+  border: 1px solid #2a5077;
+  object-fit: contain;
+}
+
 <div
-  className="css-e5j2yi"
+  className="emotion-0"
   onClick={[Function]}
 >
   <img
@@ -28,12 +71,59 @@ exports[`should render image box with loading and with src from turkey burger 2`
 `;
 
 exports[`should render image box without loading and without src 1`] = `
+.emotion-0 {
+  width: 100%;
+  max-width: calc(50vw - 16px);
+  height: 120px;
+  margin-top: 8px;
+}
+
+.emotion-0>img {
+  border: 1px solid #2a5077;
+  object-fit: contain;
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  background: #f4f6f8;
+  border: 1px solid #2a5077;
+}
+
+.emotion-1>div {
+  font-family: Sura Bold;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  margin-top: 8px;
+  color: var(--ion-color-primary);
+}
+
+.emotion-1>img {
+  object-fit: contain;
+}
+
 <div
-  className="css-e5j2yi"
+  className="emotion-0"
   onClick={[Function]}
 >
   <div
-    className="css-a0ew8a"
+    className="emotion-1"
   >
     <img
       src="addImage.svg"

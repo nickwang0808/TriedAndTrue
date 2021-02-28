@@ -88,7 +88,7 @@ describe("AddIngredientsToListSlice", () => {
 
         expect(result).toEqual({
           ...initialState,
-          selectedIngredients: [{ ...ingredient, ingredients: [] }],
+          selectedIngredients: [{ ...ingredient, ingredientIds: [] }],
         });
       });
     });

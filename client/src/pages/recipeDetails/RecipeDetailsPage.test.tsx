@@ -1,6 +1,4 @@
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
-import { IonApp } from "@ionic/react";
-import { IonReactRouter } from "@ionic/react-router";
 import { act, render } from "@testing-library/react";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -44,17 +42,13 @@ describe("recipe details modal", () => {
       query: GET_RECIPE_DETAILS,
       variables: { id: "65306829-64eb-4b6b-9879-9d605c340eb0" },
     },
-    error: new Error("something wrong happened"),
+    error: new Error("mock error happened"),
   };
 
   const componentBuilder = (mock: MockedResponse<Record<string, any>>) => (
     <MockedProvider mocks={[mock]} addTypename={false}>
       <redux.Provider store={store}>
-        <IonApp>
-          <IonReactRouter>
-            <RecipeDetailsPage />
-          </IonReactRouter>
-        </IonApp>
+        <RecipeDetailsPage />
       </redux.Provider>
     </MockedProvider>
   );
@@ -82,6 +76,6 @@ describe("recipe details modal", () => {
 
     await act(() => new Promise((resolve) => setTimeout(resolve, 10)));
 
-    expect(comp).toMatchSnapshot();
+    expect(comp.findByText("mock error happened")).toBeDefined();
   });
 });

@@ -1,8 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`toast should render toast with 'hello' 1`] = `
+.emotion-0 {
+  --toast-width: 96vw;
+  visibility: visible;
+  width: var(--toast-width);
+  margin-left: calc(var(--toast-width) / 2 * -1);
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 72px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0>div {
+  color: var(--ion-color-dark);
+}
+
 <div
-  className="css-15qcocs"
+  className="emotion-0"
 >
   <div>
     hello
@@ -14,4 +42,3 @@ exports[`toast should render toast with 'hello' 1`] = `
   />
 </div>
 `;
-
