@@ -1,0 +1,513 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recipe details modal should render the full page modal with error 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .emotion-0 {
+  -webkit-align-items: unset;
+  -webkit-box-align: unset;
+  -ms-flex-align: unset;
+  align-items: unset;
+  --backdrop-opacity: var(--ion-backdrop-opacity, 0.4);
+}
+
+.emotion-0 .modal-wrapper {
+  margin-top: 16px;
+  border-radius: 16px 16px 0px 0px;
+  -webkit-filter: drop-shadow(0px -4px 8px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0px -4px 8px rgba(0, 0, 0, 0.25));
+  height: calc(100% - 16px);
+}
+
+<body>
+    <div>
+      <ion-app>
+        <div
+          class="emotion-0"
+        >
+          
+          <div>
+            <ion-content>
+              <p>
+                something wrong happened
+              </p>
+            </ion-content>
+          </div>
+        </div>
+      </ion-app>
+    </div>
+  </body>,
+  "container": .emotion-0 {
+  -webkit-align-items: unset;
+  -webkit-box-align: unset;
+  -ms-flex-align: unset;
+  align-items: unset;
+  --backdrop-opacity: var(--ion-backdrop-opacity, 0.4);
+}
+
+.emotion-0 .modal-wrapper {
+  margin-top: 16px;
+  border-radius: 16px 16px 0px 0px;
+  -webkit-filter: drop-shadow(0px -4px 8px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0px -4px 8px rgba(0, 0, 0, 0.25));
+  height: calc(100% - 16px);
+}
+
+<div>
+    <ion-app>
+      <div
+        class="emotion-0"
+      >
+        
+        <div>
+          <ion-content>
+            <p>
+              something wrong happened
+            </p>
+          </ion-content>
+        </div>
+      </div>
+    </ion-app>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`recipe details modal should render the full page modal with mock data without error 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .emotion-0 {
+  -webkit-align-items: unset;
+  -webkit-box-align: unset;
+  -ms-flex-align: unset;
+  align-items: unset;
+  --backdrop-opacity: var(--ion-backdrop-opacity, 0.4);
+}
+
+.emotion-0 .modal-wrapper {
+  margin-top: 16px;
+  border-radius: 16px 16px 0px 0px;
+  -webkit-filter: drop-shadow(0px -4px 8px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0px -4px 8px rgba(0, 0, 0, 0.25));
+  height: calc(100% - 16px);
+}
+
+.emotion-1 {
+  width: 100%;
+  height: 215;
+  object-fit: cover;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-family: SuraBold;
+  font-size: 22px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  padding: 0 8px;
+  color: var(--ion-color-dark);
+  margin-top: -20px;
+}
+
+.emotion-3 {
+  background: white;
+  padding: 8px 8px 16px 8px;
+  max-width: calc(100% - 120px);
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 125%;
+}
+
+.emotion-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 120px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.emotion-4 ion-icon {
+  padding-top: 24px;
+  width: 40px;
+  height: 40px;
+}
+
+.emotion-5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 16px;
+  padding-bottom: 16px;
+}
+
+.emotion-6 {
+  --color-checked: var(--ion-color-secondary);
+}
+
+.emotion-8 {
+  padding: 8px;
+}
+
+<body>
+    <div>
+      <ion-app>
+        <div
+          class="emotion-0"
+        >
+          
+          <div>
+            <ion-content>
+              <ion-fab
+                horizontal="start"
+                slot="fixed"
+                vertical="top"
+              >
+                <ion-fab-button
+                  color="light"
+                  size="small"
+                >
+                  <ion-icon
+                    src="close-x.svg"
+                  />
+                </ion-fab-button>
+              </ion-fab>
+              <img
+                class="emotion-1"
+                height="215"
+                src="https://loremflickr.com/640/480/dinner"
+              />
+              <div
+                class="emotion-2"
+              >
+                <div
+                  class="emotion-3"
+                >
+                  test
+                </div>
+                <div
+                  class="emotion-4"
+                >
+                  <ion-icon
+                    icon="addtocalendar.svg"
+                  />
+                  <ion-icon
+                    icon="addtoList.svg"
+                  />
+                  <ion-icon
+                    icon="ellipsis.svg"
+                  />
+                </div>
+              </div>
+              <div
+                class="emotion-5"
+              />
+              <ion-segment
+                value="ingredients"
+              >
+                <ion-segment-button
+                  class="emotion-6"
+                  value="ingredients"
+                >
+                  <ion-label>
+                    Ingredients
+                  </ion-label>
+                </ion-segment-button>
+                <ion-segment-button
+                  class="emotion-6"
+                  value="directions"
+                >
+                  <ion-label>
+                    Directions
+                  </ion-label>
+                </ion-segment-button>
+              </ion-segment>
+              <ion-list
+                class="emotion-8"
+                lines="none"
+              />
+            </ion-content>
+          </div>
+        </div>
+      </ion-app>
+    </div>
+  </body>,
+  "container": .emotion-0 {
+  -webkit-align-items: unset;
+  -webkit-box-align: unset;
+  -ms-flex-align: unset;
+  align-items: unset;
+  --backdrop-opacity: var(--ion-backdrop-opacity, 0.4);
+}
+
+.emotion-0 .modal-wrapper {
+  margin-top: 16px;
+  border-radius: 16px 16px 0px 0px;
+  -webkit-filter: drop-shadow(0px -4px 8px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0px -4px 8px rgba(0, 0, 0, 0.25));
+  height: calc(100% - 16px);
+}
+
+.emotion-1 {
+  width: 100%;
+  height: 215;
+  object-fit: cover;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-family: SuraBold;
+  font-size: 22px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  padding: 0 8px;
+  color: var(--ion-color-dark);
+  margin-top: -20px;
+}
+
+.emotion-3 {
+  background: white;
+  padding: 8px 8px 16px 8px;
+  max-width: calc(100% - 120px);
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 125%;
+}
+
+.emotion-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 120px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.emotion-4 ion-icon {
+  padding-top: 24px;
+  width: 40px;
+  height: 40px;
+}
+
+.emotion-5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 16px;
+  padding-bottom: 16px;
+}
+
+.emotion-6 {
+  --color-checked: var(--ion-color-secondary);
+}
+
+.emotion-8 {
+  padding: 8px;
+}
+
+<div>
+    <ion-app>
+      <div
+        class="emotion-0"
+      >
+        
+        <div>
+          <ion-content>
+            <ion-fab
+              horizontal="start"
+              slot="fixed"
+              vertical="top"
+            >
+              <ion-fab-button
+                color="light"
+                size="small"
+              >
+                <ion-icon
+                  src="close-x.svg"
+                />
+              </ion-fab-button>
+            </ion-fab>
+            <img
+              class="emotion-1"
+              height="215"
+              src="https://loremflickr.com/640/480/dinner"
+            />
+            <div
+              class="emotion-2"
+            >
+              <div
+                class="emotion-3"
+              >
+                test
+              </div>
+              <div
+                class="emotion-4"
+              >
+                <ion-icon
+                  icon="addtocalendar.svg"
+                />
+                <ion-icon
+                  icon="addtoList.svg"
+                />
+                <ion-icon
+                  icon="ellipsis.svg"
+                />
+              </div>
+            </div>
+            <div
+              class="emotion-5"
+            />
+            <ion-segment
+              value="ingredients"
+            >
+              <ion-segment-button
+                class="emotion-6"
+                value="ingredients"
+              >
+                <ion-label>
+                  Ingredients
+                </ion-label>
+              </ion-segment-button>
+              <ion-segment-button
+                class="emotion-6"
+                value="directions"
+              >
+                <ion-label>
+                  Directions
+                </ion-label>
+              </ion-segment-button>
+            </ion-segment>
+            <ion-list
+              class="emotion-8"
+              lines="none"
+            />
+          </ion-content>
+        </div>
+      </div>
+    </ion-app>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

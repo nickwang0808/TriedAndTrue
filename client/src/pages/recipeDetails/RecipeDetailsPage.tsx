@@ -9,7 +9,7 @@ import {
   IonSegment,
   IonSegmentButton,
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import xclose from "../../assets/svg/close-x.svg";
 import CookTime from "../../components/detailsPageComp/CookTime";
@@ -30,12 +30,16 @@ const RecipeDetailsPage: React.FC = () => {
 
   const dispatch = useDispatch();
   const handleDismiss = () => dispatch(setRecipeDetailsId(null));
-  const runQuery = () => getRecipeDetails({ variables: { id: id! } });
+
+  useEffect(() => {
+    if (id) getRecipeDetails({ variables: { id: id! } });
+  }, [id]);
 
   const [showDirections, setShowDirections] = useState(false);
 
   let content;
   if (loading) {
+    // content = <p>loading...</p>;
     content = <DetailsSkeleton />;
   } else if (error) {
     content = <p>{error.message}</p>;
@@ -97,7 +101,7 @@ const RecipeDetailsPage: React.FC = () => {
     <FancyModalWithRoundTop
       isOpen={!!id}
       onDidDismiss={handleDismiss}
-      onWillPresent={runQuery}
+      // onWillPresent={runQuery}
     >
       <IonContent>{content}</IonContent>
     </FancyModalWithRoundTop>
