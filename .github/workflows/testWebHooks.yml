@@ -47,38 +47,27 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         uses: kkak10/pr-number-action@v1.3
 
-      #   # set report file and title
-      # - name: Set Test Title
-      #   run: |
-      #     if ${{ github.event_name == 'pull_request' }}
-      #     then
-      #       echo "::set-env name=title::Test Run for PR #${{steps.PRNUMBER.outputs.pr}} (${{github.run_number}})"
-      #       echo "::set-env name=file_name::TestReport.${{steps.PRNUMBER.outputs.pr}}.${{github.run_number}}.md"
-      #     else
-      #       echo "::set-env name=title::Test Run ${{github.run_number}}"
-      #       echo "::set-env name=file_name::TestReport.${{github.run_number}}.md"
-      #     fi
-
       # run tests with built project
       - name: Test PR
         run: dotnet test --no-restore --no-build --configuration $config
         # run: dotnet test
-        working-directory:
-          ./server/src.test
+        working-directory: ./server/src.test
 
-          # upload report as build artifact
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2
-        if: ${{always()}}
-        with:
-          name: "Test Run"
-          path: ${{github.workspace}}/${{env.file_name}}
-
-        # add report as PR comment (if PR)
-      - name: comment PR
-        uses: machine-learning-apps/pr-comment@master
-        if: ${{ github.event_name == 'pull_request' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          path: ${{env.file_name}}
+      - name: Tests ✅
+        if: ${{ success() }}
+        run: |
+          curl --request POST           --url https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}'           --header 'content-type: application/json'           --data '{
+            "context": "tests",
+            "state": "success",
+            "description": "Tests passed",
+            "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          }'
+      - name: Tests 🚨
+        if: ${{ failure() }}
+        run: |
+          curl --request POST           --url https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}'           --header 'content-type: application/json'           --data '{
+            "context": "tests",
+            "state": "failure",
+            "description": "Tests failed",
+            "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          }'
