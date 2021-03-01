@@ -27,7 +27,7 @@ actions:
       forward_client_headers: true
     permissions:
       - role: user
-  - name: overRideIngredients
+  - name: overwriteIngredients
     definition:
       kind: synchronous
       handler: http://host.docker.internal:5001/api/OverWriteIngredients

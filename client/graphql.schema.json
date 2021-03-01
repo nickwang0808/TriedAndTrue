@@ -4590,8 +4590,8 @@
             "deprecationReason": null
           },
           {
-            "name": "overRideIngredients",
-            "description": "perform the action: \"overRideIngredients\"",
+            "name": "overwriteIngredients",
+            "description": "perform the action: \"overwriteIngredients\"",
             "args": [
               {
                 "name": "ingredientsStrings",
