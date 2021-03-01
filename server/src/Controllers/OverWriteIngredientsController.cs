@@ -34,7 +34,7 @@ namespace server.Controllers
             }
             if (ingredientsStrings.Count == 0)
             {
-                return Ok(new List());
+                return Ok(Array.Empty<object>());
             }
             // delete everything related to recipe id
             _context.RecipeIngredients.RemoveRange(_context.RecipeIngredients
