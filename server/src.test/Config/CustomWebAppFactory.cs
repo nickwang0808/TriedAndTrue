@@ -25,7 +25,8 @@ namespace src.test
 
                 services.AddDbContext<PostgresContext>(options =>
                 {
-                    options.UseNpgsql("Host=127.0.0.1;Port=5432;Database=test;Username=postgres;Password=postgrespassword");
+                    // options.UseNpgsql("Host=127.0.0.1;Port=5432;Database=test;Username=postgres;Password=postgrespassword");
+                    options.UseInMemoryDatabase("InMemoryDbForTesting");
                 });
 
                 var sp = services.BuildServiceProvider();

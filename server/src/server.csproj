@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <NoWarn>$(NoWarn),IDE1006</NoWarn>
+    <!-- <InvariantGlobalization>true</InvariantGlobalization> -->
   </PropertyGroup>
 
   <ItemGroup>
