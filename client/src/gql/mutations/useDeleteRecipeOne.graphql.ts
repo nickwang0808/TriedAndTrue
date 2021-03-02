@@ -7,7 +7,7 @@ import {
 import { setRecipeDetailsId } from "../../redux/RecipeDetailsSlice/recipeDetailsSlice";
 
 export const DELETE_RECIPE = gql`
-  mutation DeleteRecipeOne($id: String!) {
+  mutation DeleteRecipeOne($id: uuid!) {
     delete_recipe_by_pk(id: $id) {
       id
     }

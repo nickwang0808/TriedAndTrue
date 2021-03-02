@@ -7,7 +7,7 @@ import { GET_RECIPE_DETAILS } from "../query/useGetRecipeDetails";
 
 export const UPDATE_RECIPE_DETAILS = gql`
   mutation UpdateRecipeDetail(
-    $id: String!
+    $id: uuid!
     $_set: recipe_set_input!
     $ingredientsStrings: [String!]!
   ) {
@@ -22,7 +22,7 @@ export const UPDATE_RECIPE_DETAILS = gql`
       total_time
       yields
     }
-    overRideIngredients(
+    overwriteIngredients(
       ingredientsStrings: $ingredientsStrings
       recipe_id: $id
     ) {

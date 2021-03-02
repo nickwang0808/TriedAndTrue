@@ -20,11 +20,15 @@ import { IAppState } from "../../../../redux/store";
 
 export default function AddIngredientsToListModel() {
   const dispatch = useDispatch();
-  const { selectedIngredients, showAddIngredientToListModal } = useSelector(
+  const {
+    selectedIngredients,
+    showAddIngredientToListModal,
+    singleRecipeId,
+  } = useSelector(
     ({ addIngredientsToListSlice }: IAppState) => addIngredientsToListSlice
   );
 
-  const { data, loading, error } = useGetAllIngredientsInWeek();
+  const { data, loading, error } = useGetAllIngredientsInWeek(singleRecipeId);
 
   const handleDismiss = () => dispatch(setShowIngredientToListModal(false));
   const isFound = (
@@ -34,7 +38,7 @@ export default function AddIngredientsToListModel() {
     _recipe_Id: string
   ) =>
     !!selectedIngredients.find(
-      ({ date, recipe_index, ingredients, recipe_id }) =>
+      ({ date, recipe_index, ingredientIds: ingredients, recipe_id }) =>
         date === _date &&
         recipe_index === _index &&
         ingredients.find((e) => e === id) &&
@@ -60,12 +64,12 @@ export default function AddIngredientsToListModel() {
      refetch for the query above */
     console.log(data);
     const ids: IRecipeIngredients[] = data!.planner!.map(
-      ({ date, index, recipe: { id, recipe_ingredients_list } }) => {
+      ({ date, index, recipe: { id, recipe_ingredients } }) => {
         return {
           recipe_id: id,
           date,
           recipe_index: index,
-          ingredients: recipe_ingredients_list.map((e) => e.id),
+          ingredientIds: recipe_ingredients.map((e) => e.id),
         };
       }
     );
@@ -75,7 +79,7 @@ export default function AddIngredientsToListModel() {
 
   const getAllCheckedIds = () =>
     selectedIngredients
-      .map(({ ingredients }) => {
+      .map(({ ingredientIds: ingredients }) => {
         return [...ingredients];
       })
       .flat();
@@ -97,14 +101,14 @@ export default function AddIngredientsToListModel() {
           ({
             date,
             index,
-            recipe: { id: recipe_id, title, recipe_ingredients_list },
+            recipe: { id: recipe_id, title, recipe_ingredients },
           }) => {
-            if (!recipe_ingredients_list.length) return null;
+            if (!recipe_ingredients.length) return null;
             return (
               <React.Fragment key={date + index + recipe_id}>
                 <BlockSeparator title={title} />
                 <IonList lines="full">
-                  {recipe_ingredients_list.map(
+                  {recipe_ingredients.map(
                     ({ id, quantity, comment, name, unit }) => (
                       <ShoppingListCheckBox
                         value={id}
@@ -132,7 +136,7 @@ export default function AddIngredientsToListModel() {
     <FancyModalWithRoundTop
       isOpen={showAddIngredientToListModal}
       onDidDismiss={handleDismiss}
-      onWillPresent={preCheckAllItems}
+      onDidPresent={preCheckAllItems}
     >
       <ModalHeader
         title="Add Ingredients to List"

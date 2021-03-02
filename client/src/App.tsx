@@ -41,6 +41,7 @@ import AddIngredientsToListModel from "./pages/mealPlanner/PlannerModals/AddIngr
 import SelectListModal from "./pages/mealPlanner/PlannerModals/AddIngredientsToListModal/SelectListModal";
 import AddMultiRecipeToPlannerModal from "./pages/mealPlanner/PlannerModals/AddMultiRecipeToPlannerModal/AddMultiRecipeToPlannerModal";
 import EditPlannerItemModal from "./pages/mealPlanner/PlannerModals/EditPlannerItemModal/EditPlannerItemModal";
+import GeneratePlannerModal from "./pages/mealPlanner/PlannerModals/GeneratePlannerModal/GeneratePlannerModal";
 import ReCreatePlannerModal from "./pages/mealPlanner/PlannerModals/ReCreatePlannerModal/ReCreatePlannerModal";
 import SelectDayModal from "./pages/mealPlanner/PlannerModals/SelectDayModal/SelectDayModal";
 import SelectWeekModal from "./pages/mealPlanner/PlannerModals/SelectWeekModal/SelectWeekModal";
@@ -97,6 +98,7 @@ const App: React.FC = () => {
             <SelectWeekModal />
             <SelectDayModal />
             <SelectListModal />
+            <GeneratePlannerModal />
 
             <AddNewShoppingListModal />
             <ShoppingItemDetailsModal />

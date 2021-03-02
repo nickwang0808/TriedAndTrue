@@ -1,72 +1,80 @@
 actions:
-- name: importRecipe
-  definition:
-    kind: synchronous
-    handler: http://35.220.182.160:5001/scraper
-    forward_client_headers: true
-  permissions:
-  - role: user
-- name: insertIngredientToList
-  definition:
-    kind: synchronous
-    handler: http://35.220.182.160:5001/addIngredientToList
-    forward_client_headers: true
-  permissions:
-  - role: user
-- name: insertRecipeOneDerived
-  definition:
-    kind: synchronous
-    handler: http://35.220.182.160:5001/InsertRecipeOneDerived
-    forward_client_headers: true
-  permissions:
-  - role: user
-- name: overRideIngredients
-  definition:
-    kind: synchronous
-    handler: http://35.220.182.160:5001/overwrite-ingredients
-    forward_client_headers: true
-  permissions:
-  - role: user
-- name: parseIngredients
-  definition:
-    kind: ""
-    handler: http://35.220.182.160:5001/ingredients
-    forward_client_headers: true
-  permissions:
-  - role: user
+  - name: generatePlanner
+    definition:
+      kind: synchronous
+      handler: http://host.docker.internal:5001/api/GeneratePlanners
+      forward_client_headers: true
+    permissions:
+      - role: user
+  - name: importRecipe
+    definition:
+      kind: synchronous
+      handler: http://host.docker.internal:5001/api/Scraper
+      forward_client_headers: true
+    permissions:
+      - role: user
+  - name: insertIngredientToList
+    definition:
+      kind: synchronous
+      handler: http://host.docker.internal:5001/api/InsertIngredientsToList
+      forward_client_headers: true
+    permissions:
+      - role: user
+  - name: insertRecipeOneDerived
+    definition:
+      kind: synchronous
+      handler: http://host.docker.internal:5001/api/InsertRecipe
+      forward_client_headers: true
+    permissions:
+      - role: user
+  - name: overwriteIngredients
+    definition:
+      kind: synchronous
+      handler: http://host.docker.internal:5001/api/OverWriteIngredients
+      forward_client_headers: true
+    permissions:
+      - role: user
+  - name: parseIngredients
+    definition:
+      kind: ""
+      handler: http://host.docker.internal:5001/api/ingredients
+      forward_client_headers: true
+    permissions:
+      - role: user
 custom_types:
   enums: []
   input_objects:
-  - name: insertRecipeOneDerivedInput
-  - name: insertIngredientToListInput
+    - name: insertRecipeOneDerivedInput
+    - name: insertIngredientToListInput
   objects:
-  - name: ParsedIngredients
-  - name: UpdatedRecipeIngredients
-    relationships:
-    - remote_table:
-        schema: public
-        name: recipe_ingredients
-      name: newIngredients
-      type: array
-      field_mapping:
-        id: id
-  - name: ImportedRecipe
-    relationships:
-    - remote_table:
-        schema: public
-        name: recipe
-      name: recipe
-      type: object
-      field_mapping:
-        id: id
-  - name: InsertRecipeOneOutput
-    relationships:
-    - remote_table:
-        schema: public
-        name: recipe
-      name: recipe
-      type: object
-      field_mapping:
-        id: id
-  - name: shoppingListItems
+    - name: ParsedIngredients
+    - name: UpdatedRecipeIngredients
+      relationships:
+        - remote_table:
+            schema: public
+            name: recipe_ingredients
+          name: newIngredients
+          type: array
+          field_mapping:
+            id: id
+    - name: ImportedRecipe
+      relationships:
+        - remote_table:
+            schema: public
+            name: recipe
+          name: recipe
+          type: object
+          field_mapping:
+            id: id
+    - name: InsertRecipeOneOutput
+      relationships:
+        - remote_table:
+            schema: public
+            name: recipe
+          name: recipe
+          type: object
+          field_mapping:
+            id: id
+    - name: shoppingListItems
+    - name: generatedPlanner
   scalars: []

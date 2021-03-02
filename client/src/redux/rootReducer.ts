@@ -2,6 +2,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 import addOrEditRecipeSlice from "./AddOrEditRecipe/AddOrEditRecipeSlice";
 import AddRecipeControlSlice from "./AddOrEditRecipe/AddRecipeControlSlice";
 import addIngredientsToListSlice from "./Planner/AddIngredientsToListSlice";
+import generatePlannerModalSlice from "./Planner/GeneratePlannerModalSlice";
 import plannerDateRangeSlice from "./Planner/PlannerDateRangeSlice";
 import PlannerItemModalSlice from "./Planner/PlannerItemModalSlice";
 import plannerModalSlice from "./Planner/PlannerModalSlice";
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   addIngredientsToListSlice,
   shoppingListHomeSlice,
   profileSlice,
+  generatePlannerModalSlice,
 });
 
 export default rootReducer;

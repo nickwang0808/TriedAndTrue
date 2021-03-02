@@ -1,12 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BlockSeperator with content should render block separator with today tag  1`] = `
+.emotion-0 {
+  height: 3rem;
+  width: 100vw;
+  background-color: rgba(227, 236, 240, 0.5);
+  border-bottom: 1px solid #dcdcdc;
+  padding: 0 16px;
+  font-size: 16px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.emotion-1 {
+  font-weight: 700;
+}
+
+.emotion-2 {
+  opacity: 0.5;
+  width: 100%;
+  text-align: right;
+}
+
 <div
-  className="css-32bzbt"
+  className="emotion-0"
   id="id"
 >
   <div
-    className="css-g90fw7"
+    className="emotion-1"
   >
     title
   </div>
@@ -14,7 +42,7 @@ exports[`BlockSeperator with content should render block separator with today ta
     sub
   </div>
   <div
-    className="css-1011qfy"
+    className="emotion-2"
   >
     (Today)
   </div>
@@ -22,12 +50,34 @@ exports[`BlockSeperator with content should render block separator with today ta
 `;
 
 exports[`BlockSeperator with content should render block separator without today tag 1`] = `
+.emotion-0 {
+  height: 3rem;
+  width: 100vw;
+  background-color: rgba(227, 236, 240, 0.5);
+  border-bottom: 1px solid #dcdcdc;
+  padding: 0 16px;
+  font-size: 16px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.emotion-1 {
+  font-weight: 700;
+}
+
 <div
-  className="css-32bzbt"
+  className="emotion-0"
   id="id"
 >
   <div
-    className="css-g90fw7"
+    className="emotion-1"
   >
     title
   </div>

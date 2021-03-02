@@ -2,4 +2,10 @@
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
-import '@testing-library/jest-dom/extend-expect';
+import { createSerializer, matchers } from "@emotion/jest";
+import { mockIonicReact } from "@ionic/react-test-utils";
+import "@testing-library/jest-dom/extend-expect";
+expect.addSnapshotSerializer(createSerializer());
+expect.extend(matchers);
+
+mockIonicReact();

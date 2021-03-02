@@ -192,7 +192,7 @@
         table:
           schema: public
           name: planner
-  - name: recipe_ingredients_list
+  - name: recipe_ingredients
     using:
       foreign_key_constraint_on:
         column: recipe_id
@@ -274,15 +274,16 @@
             id:
               _eq: X-Hasura-User-Id
       columns:
-      - comment
-      - formatted_text
-      - index
+      - id
       - name
-      - other
-      - quantity
-      - raw_text
-      - recipe_id
       - unit
+      - comment
+      - recipe_id
+      - raw_text
+      - formatted_text
+      - other
+      - index
+      - quantity
       backend_only: false
   select_permissions:
   - role: user
@@ -307,7 +308,15 @@
   - role: user
     permission:
       columns:
+      - comment
+      - formatted_text
+      - index
+      - name
+      - other
+      - quantity
       - raw_text
+      - recipe_id
+      - unit
       filter:
         recipe:
           user:

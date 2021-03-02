@@ -1,1 +1,0 @@
-CREATE TABLE "public"."list"("user_id" text NOT NULL, "name" text NOT NULL, PRIMARY KEY ("user_id","name") , FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON UPDATE cascade ON DELETE cascade);

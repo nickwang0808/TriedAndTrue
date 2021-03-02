@@ -1,6 +1,22 @@
 version: "3.6"
 services:
+  scraper:
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    image: nickwangtech/recipe-scraper-dockerized
+    restart: always
+    ports:
+      - 3003:5000
+  parser:
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    image: nickwangtech/ingredient-parser
+    restart: always
+    ports:
+      - 3005:3005
   postgres:
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
     image: postgres:12
     restart: always
     ports:
@@ -10,6 +26,8 @@ services:
     environment:
       POSTGRES_PASSWORD: postgrespassword
   graphql-engine:
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
     image: hasura/graphql-engine:v1.3.3
     ports:
       - "8080:8080"

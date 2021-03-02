@@ -33,7 +33,7 @@ describe("AddIngredientsToListSlice", () => {
       date: "2021-11-01",
       recipe_id: "test-recipe",
       recipe_index: 1,
-      ingredients: ["test-ingredient"],
+      ingredientIds: ["test-ingredient"],
     };
 
     describe("pre check all", () => {
@@ -54,7 +54,7 @@ describe("AddIngredientsToListSlice", () => {
           {
             ...initialState,
             /* reset the ingredient id array to empty */
-            selectedIngredients: [{ ...ingredient, ingredients: [] }],
+            selectedIngredients: [{ ...ingredient, ingredientIds: [] }],
           },
           checkIngredients({
             date: "2021-11-01",
@@ -88,7 +88,7 @@ describe("AddIngredientsToListSlice", () => {
 
         expect(result).toEqual({
           ...initialState,
-          selectedIngredients: [{ ...ingredient, ingredients: [] }],
+          selectedIngredients: [{ ...ingredient, ingredientIds: [] }],
         });
       });
     });

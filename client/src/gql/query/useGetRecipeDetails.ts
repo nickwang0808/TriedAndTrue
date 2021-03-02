@@ -5,7 +5,7 @@ import {
 } from "../../generated/graphql";
 
 export const GET_RECIPE_DETAILS = gql`
-  query GetRecipeDetails($id: String!) {
+  query GetRecipeDetails($id: uuid!) {
     recipe_by_pk(id: $id) {
       cuisine
       directions
@@ -16,11 +16,13 @@ export const GET_RECIPE_DETAILS = gql`
       title
       total_time
       yields
-      recipe_ingredients_list {
+      recipe_ingredients {
         name
         quantity
         unit
         formatted_text
+        comment
+        other
       }
     }
   }

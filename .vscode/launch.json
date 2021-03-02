@@ -5,9 +5,16 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}"
+    },
+
+    {
       "type": "pwa-chrome",
       "request": "attach",
-      "url": "http://localhost:49744/lists",
+      "url": "http://localhost/",
       "name": "attach to chrome",
       "port": 9222,
       "webRoot": "${workspaceFolder}"

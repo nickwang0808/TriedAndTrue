@@ -9,7 +9,7 @@ import {
   IonSegment,
   IonSegmentButton,
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import xclose from "../../assets/svg/close-x.svg";
 import CookTime from "../../components/detailsPageComp/CookTime";
@@ -30,12 +30,16 @@ const RecipeDetailsPage: React.FC = () => {
 
   const dispatch = useDispatch();
   const handleDismiss = () => dispatch(setRecipeDetailsId(null));
-  const runQuery = () => getRecipeDetails({ variables: { id: id! } });
+
+  useEffect(() => {
+    if (id) getRecipeDetails({ variables: { id: id! } });
+  }, [id]);
 
   const [showDirections, setShowDirections] = useState(false);
 
   let content;
   if (loading) {
+    // content = <p>loading...</p>;
     content = <DetailsSkeleton />;
   } else if (error) {
     content = <p>{error.message}</p>;
@@ -43,7 +47,7 @@ const RecipeDetailsPage: React.FC = () => {
     content = <p>404 recipe not found</p>;
   } else {
     //prettier-ignore
-    const { id, img, title, total_time, yields, directions, recipe_ingredients_list } = data.recipe_by_pk;
+    const { id, img, title, total_time, yields, directions, recipe_ingredients } = data.recipe_by_pk;
     content = (
       <>
         <IonFab vertical="top" horizontal="start" slot="fixed">
@@ -69,7 +73,7 @@ const RecipeDetailsPage: React.FC = () => {
         </IonSegment>
         <StyledIngredientList lines="none">
           {showDirections
-            ? (directions as [{ value: string }])?.map(({ value }, i) => (
+            ? (directions as string[])?.map((value, i) => (
                 <DirectionsListItem
                   key={i}
                   content={value}
@@ -77,14 +81,18 @@ const RecipeDetailsPage: React.FC = () => {
                   index={i + 1}
                 />
               ))
-            : recipe_ingredients_list?.map(({ name, quantity, unit }, i) => (
-                <IngredientListItem
-                  key={(name || "") + i}
-                  materialText={name || ""}
-                  quantityText={`${quantity || ""} ${unit || ""}`}
-                  showBackground={i % 2 === 0 ? true : false}
-                />
-              ))}
+            : recipe_ingredients?.map(
+                ({ name, quantity, unit, comment }, i) => (
+                  <IngredientListItem
+                    key={(name || "") + i}
+                    materialText={`${name || ""}${
+                      comment ? ", " + comment : ""
+                    }`}
+                    quantityText={`${quantity || ""} ${unit || ""}`}
+                    showBackground={i % 2 === 0 ? true : false}
+                  />
+                )
+              )}
         </StyledIngredientList>
       </>
     );
@@ -93,7 +101,7 @@ const RecipeDetailsPage: React.FC = () => {
     <FancyModalWithRoundTop
       isOpen={!!id}
       onDidDismiss={handleDismiss}
-      onWillPresent={runQuery}
+      // onWillPresent={runQuery}
     >
       <IonContent>{content}</IonContent>
     </FancyModalWithRoundTop>

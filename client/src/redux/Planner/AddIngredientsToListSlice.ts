@@ -4,17 +4,20 @@ interface IState {
   showAddIngredientToListModal: boolean;
   selectedIngredients: IRecipeIngredients[];
   showSelectListModal: boolean;
+  /*this field control whether or not to only add one recipes ingredient in or
+  all ingredient in*/
+  singleRecipeId: string | null;
 }
 
 export interface IRecipeIngredients {
   date: string;
   recipe_id: string;
   recipe_index: number;
-  ingredients: string[]; // ids
+  ingredientIds: string[]; // ids
 }
 
 export interface setCheckedIngType
-  extends Omit<IRecipeIngredients, "ingredients"> {
+  extends Omit<IRecipeIngredients, "ingredientIds"> {
   id: string;
 }
 
@@ -22,6 +25,7 @@ export const initialState: IState = {
   selectedIngredients: [],
   showAddIngredientToListModal: false,
   showSelectListModal: false,
+  singleRecipeId: null,
 };
 
 const checkMatch = (arg: IRecipeIngredients, payload: setCheckedIngType) => {
@@ -40,11 +44,21 @@ const addIngredientsToListSlice = createSlice({
   name: "addIngredientsToList",
   initialState,
   reducers: {
+    setSingleRecipeId: (
+      state,
+      { payload }: PayloadAction<IState["singleRecipeId"]>
+    ) => {
+      state.singleRecipeId = payload;
+    },
+
     setShowIngredientToListModal: (
       state,
       { payload }: PayloadAction<IState["showAddIngredientToListModal"]>
     ) => {
       state.showAddIngredientToListModal = payload;
+      if (!payload) {
+        state.singleRecipeId = null;
+      }
     },
 
     setShowSelectListModal: (
@@ -72,9 +86,9 @@ const addIngredientsToListSlice = createSlice({
       if (foundIndex !== -1) {
         state.selectedIngredients[
           foundIndex
-        ].ingredients = state.selectedIngredients[
+        ].ingredientIds = state.selectedIngredients[
           foundIndex
-        ]!.ingredients.filter((elem) => elem !== payload.id);
+        ]!.ingredientIds.filter((elem) => elem !== payload.id);
       }
     },
     /* pull initial list of data in the component nad by checking one ingredient,
@@ -85,7 +99,7 @@ const addIngredientsToListSlice = createSlice({
     ) => {
       const found = state.selectedIngredients.find((elem) =>
         checkMatch(elem, payload)
-      )?.ingredients;
+      )?.ingredientIds;
       if (!found) {
         return state;
       } else if (found?.find((e) => e === payload.id)) {
@@ -98,6 +112,7 @@ const addIngredientsToListSlice = createSlice({
 });
 
 export const {
+  setSingleRecipeId,
   setShowIngredientToListModal,
   checkIngredients,
   unCheckIngredients,

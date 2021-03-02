@@ -4,24 +4,21 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import AddCardOutLined from "../../components/card/AddCardOutLined";
 import RecipeCardSmall from "../../components/card/RecipeCardSmall";
-import LoaderCentered from "../../components/loading/LoaderCentered";
 import BlockSeparator from "../../components/misc/BlockSeparator";
-import useGetPlannerRecipeByDate from "../../gql/query/useGetPlannerRecipeByDate";
+import useGetPlannerRecipeByWeek from "../../gql/query/useGetPlannerRecipeByWeek";
 import { setShowModifyModal } from "../../redux/Planner/PlannerItemModalSlice";
 import { openPlannerModal } from "../../redux/Planner/PlannerModalSlice";
 
 interface IProps {
   date: string;
+  planner: ReturnType<
+    ReturnType<typeof useGetPlannerRecipeByWeek>["plannerByDate"]
+  >;
 }
 
-export default function PlannerRow({ date }: IProps) {
-  const { planner, loading, error } = useGetPlannerRecipeByDate(
-    format(new Date(date), "yyyy-MM-dd")
-  );
+export default function PlannerRow({ date, planner }: IProps) {
   const dispatch = useDispatch();
 
-  if (loading) return <LoaderCentered />;
-  if (error) return <p>{error.message}</p>;
   return (
     <StyledFadedOverLay fade={isPast(addDays(new Date(date), 1))}>
       <BlockSeparator
@@ -31,15 +28,17 @@ export default function PlannerRow({ date }: IProps) {
         id={`row-${format(new Date(date), "yyyy-MM-dd")}`}
       />
       <StyledContainer>
-        {planner?.map(({ recipe: { title, img, id }, index }) => (
-          <RecipeCardSmall
-            title={title}
-            img={img}
-            id={id}
-            key={id + index}
-            onClick={() => dispatch(setShowModifyModal({ id, date, index }))}
-          />
-        ))}
+        {planner
+          .sort((a, b) => b.index - a.index)
+          .map(({ recipe: { title, img, id }, index }) => (
+            <RecipeCardSmall
+              title={title}
+              img={img}
+              id={id}
+              key={id + index}
+              onClick={() => dispatch(setShowModifyModal({ id, date, index }))}
+            />
+          ))}
         <AddCardOutLined onClick={() => dispatch(openPlannerModal(date))} />
       </StyledContainer>
     </StyledFadedOverLay>

@@ -1,0 +1,204 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DetailsOptionsModal should render the modal 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .emotion-0 {
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  --backdrop-opacity: var(--ion-backdrop-opacity, 0.4);
+  --backdrop-opacity: var(--ion-backdrop-opacity, 0.4);
+}
+
+.emotion-0 .modal-wrapper {
+  margin-top: 16px;
+  border-radius: 16px 16px 0px 0px;
+  -webkit-filter: drop-shadow(0px -4px 8px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0px -4px 8px rgba(0, 0, 0, 0.25));
+  height: 165px;
+}
+
+.emotion-1 {
+  padding-inline: 0!important;
+}
+
+<body>
+    <div>
+      <div
+        class="emotion-0"
+        height="165px"
+      >
+        
+        <div>
+          <ion-header>
+            <ion-toolbar>
+              <ion-title
+                class="emotion-1"
+                color="primary"
+              >
+                Options
+              </ion-title>
+              <ion-buttons
+                slot="start"
+              >
+                <ion-button>
+                  <ion-icon
+                    src="close-x.svg"
+                  />
+                </ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content>
+            <ion-list
+              lines="full"
+            >
+              <ion-item>
+                <ion-label
+                  color="primary"
+                >
+                  Edit Recipe
+                </ion-label>
+              </ion-item>
+              <ion-item
+                lines="none"
+              >
+                <ion-label
+                  color="primary"
+                >
+                  Delete Recipe
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-content>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": .emotion-0 {
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  --backdrop-opacity: var(--ion-backdrop-opacity, 0.4);
+  --backdrop-opacity: var(--ion-backdrop-opacity, 0.4);
+}
+
+.emotion-0 .modal-wrapper {
+  margin-top: 16px;
+  border-radius: 16px 16px 0px 0px;
+  -webkit-filter: drop-shadow(0px -4px 8px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0px -4px 8px rgba(0, 0, 0, 0.25));
+  height: 165px;
+}
+
+.emotion-1 {
+  padding-inline: 0!important;
+}
+
+<div>
+    <div
+      class="emotion-0"
+      height="165px"
+    >
+      
+      <div>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title
+              class="emotion-1"
+              color="primary"
+            >
+              Options
+            </ion-title>
+            <ion-buttons
+              slot="start"
+            >
+              <ion-button>
+                <ion-icon
+                  src="close-x.svg"
+                />
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <ion-list
+            lines="full"
+          >
+            <ion-item>
+              <ion-label
+                color="primary"
+              >
+                Edit Recipe
+              </ion-label>
+            </ion-item>
+            <ion-item
+              lines="none"
+            >
+              <ion-label
+                color="primary"
+              >
+                Delete Recipe
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

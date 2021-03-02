@@ -1,1 +1,0 @@
-ALTER TABLE "public"."list" ALTER COLUMN "unit" DROP NOT NULL;
