@@ -42,7 +42,7 @@ export default function AddOrEditRecipeModal() {
           meal_type: (meal_type as mealType) || null,
           yields: yields || null,
           title: title || null,
-          directions: (directions as Array<string>).map(d => ({value: d})) || [],
+          directions: (directions as Array<string>)?.map(d => ({value: d})) || [],
           ingredients:
             recipe_ingredients?.map((ing) => ({
               value: ing.formatted_text as string,
