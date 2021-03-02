@@ -2,12 +2,12 @@ name: frontend test
 on:
   push:
     branches:
-      - master
+      - [master]
     paths:
       - "client/**"
-  pull-request:
+  pull_request:
     branches:
-      - master
+      - [master]
     paths:
       - "client/**"
 jobs:
