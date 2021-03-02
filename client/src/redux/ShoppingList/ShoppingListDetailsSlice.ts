@@ -13,7 +13,7 @@ const initialState: IState = {
   showItemDetails: null,
   showConfigShoppingListModal: false,
   listId: "",
-  showAddCustomIngredientModal: false;
+  showAddCustomIngredientModal: false,
 };
 
 const shoppingListDetailSlice = createSlice({
@@ -41,13 +41,15 @@ const shoppingListDetailSlice = createSlice({
       state.showConfigShoppingListModal = payload;
     },
 
-    setListid: (state, {payload}: PayloadAction<IState["listId"]>) => {
-      state.listId = payload
+    setListid: (state, { payload }: PayloadAction<IState["listId"]>) => {
+      state.listId = payload;
     },
-    setShowAddCustomIngredientModal: (state, {payload}: PayloadAction<IState["showAddCustomIngredientModal"]>) => {
-      state.showAddCustomIngredientModal = payload
-
-    }
+    setShowAddCustomIngredientModal: (
+      state,
+      { payload }: PayloadAction<IState["showAddCustomIngredientModal"]>
+    ) => {
+      state.showAddCustomIngredientModal = payload;
+    },
   },
 });
 
@@ -56,6 +58,6 @@ export const {
   setShowItemDetails,
   setShowConfigShoppingListModal,
   setListid,
-  setShowAddCustomIngredientModal
+  setShowAddCustomIngredientModal,
 } = shoppingListDetailSlice.actions;
 export default shoppingListDetailSlice.reducer;
