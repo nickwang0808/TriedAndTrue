@@ -25,6 +25,9 @@ jobs:
         with:
           dotnet-version: 5.0.103
 
+      - name: Install dependencies docker containers
+        run: docker-compose up -d
+
       # restore dependencies
       - name: Install dependencies src
         run: dotnet restore
