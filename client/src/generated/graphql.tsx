@@ -545,8 +545,8 @@ export type Mutation_Root = {
   insert_recipe_ingredients_one?: Maybe<Recipe_Ingredients>;
   /** insert a single row into the table: "recipe" */
   insert_recipe_one?: Maybe<Recipe>;
-  /** perform the action: "overRideIngredients" */
-  overRideIngredients: Array<Maybe<UpdatedRecipeIngredients>>;
+  /** perform the action: "overwriteIngredients" */
+  overwriteIngredients: Array<Maybe<UpdatedRecipeIngredients>>;
   /** update data of the table: "list" */
   update_list?: Maybe<List_Mutation_Response>;
   /** update single row of the table: "list" */
@@ -735,7 +735,7 @@ export type Mutation_RootInsert_Recipe_OneArgs = {
 
 
 /** mutation root */
-export type Mutation_RootOverRideIngredientsArgs = {
+export type Mutation_RootOverwriteIngredientsArgs = {
   ingredientsStrings: Array<Maybe<Scalars['String']>>;
   recipe_id: Scalars['uuid'];
 };
@@ -1720,7 +1720,7 @@ export type UpdateRecipeDetailMutation = (
   & { update_recipe_by_pk?: Maybe<(
     { __typename?: 'recipe' }
     & Pick<Recipe, 'cuisine' | 'directions' | 'id' | 'img' | 'meal_type' | 'owner' | 'title' | 'total_time' | 'yields'>
-  )>, overRideIngredients: Array<Maybe<(
+  )>, overwriteIngredients: Array<Maybe<(
     { __typename?: 'UpdatedRecipeIngredients' }
     & Pick<UpdatedRecipeIngredients, 'id'>
   )>> }
@@ -2124,7 +2124,7 @@ export const UpdateRecipeDetailDocument = gql`
     total_time
     yields
   }
-  overRideIngredients(ingredientsStrings: $ingredientsStrings, recipe_id: $id) {
+  overwriteIngredients(ingredientsStrings: $ingredientsStrings, recipe_id: $id) {
     id
   }
 }
