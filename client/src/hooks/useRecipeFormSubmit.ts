@@ -57,7 +57,7 @@ export default function useRecipeFormSubmit(
             ingredients: ingredients?.map((e) => e.value) || [],
             directions:
               dataWIthOutIngredients.directions &&
-              String(dataWIthOutIngredients.directions.map((e) => e.value)),
+              dataWIthOutIngredients.directions.map((e) => e.value),
           },
         });
         dispatch(setShowToast({ text: "Recipe created!" }));
@@ -75,7 +75,7 @@ export default function useRecipeFormSubmit(
                 ...dataWIthOutIngredients,
                 directions:
                   dataWIthOutIngredients.directions &&
-                  String(dataWIthOutIngredients.directions.map((e) => e.value)),
+                  dataWIthOutIngredients.directions.map((e) => e.value),
               },
               id,
               ingredientsStrings: ingredients?.map((ing) => ing.value) || [],
