@@ -15,7 +15,6 @@ import { format, isPast, isSameMonth } from "date-fns";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import listIconForHeader from "../../assets/svg/addtoList.svg";
-import refresh from "../../assets/svg/refresh.svg";
 import { setShowIngredientToListModal } from "../../redux/Planner/AddIngredientsToListSlice";
 import { setSelectedWeek } from "../../redux/Planner/PlannerDateRangeSlice";
 import { IAppState } from "../../redux/store";
@@ -46,9 +45,9 @@ export default function Header({ weeks }: IProps) {
       <IonToolbar>
         <IonTitle color="primary">Weekly Meal Plan</IonTitle>
         <IonButtons slot="end">
-          <IonButton>
+          {/* <IonButton>
             <IonIcon icon={refresh} />
-          </IonButton>
+          </IonButton> */}
           <IonButton
             onClick={() => dispatch(setShowIngredientToListModal(true))}
           >

@@ -1,5 +1,5 @@
 import { IonContent, IonPage, IonSlide, IonSlides } from "@ionic/react";
-import React from "react";
+import React, { useRef } from "react";
 import slideOneGraphic from "../../assets/svg/slideOneGraphic.svg";
 import slideTwoGraphic from "../../assets/svg/slideTwoGraphic.svg";
 import SlideBase from "./SlideBase";
@@ -14,17 +14,20 @@ interface IProps {
 }
 
 export default function OnBoarding({ onComplete }: IProps) {
+  const slidesEl = useRef(document.createElement("ion-slides"));
+  const handleNext = () => slidesEl.current.slideNext();
+
   return (
     <IonPage>
       <IonContent>
-        <IonSlides pager={true} options={slideOpts}>
+        <IonSlides pager={true} options={slideOpts} ref={slidesEl}>
           <IonSlide>
             <SlideBase
               title="Quickly Add"
               subTitle="your tried & true recipes"
               graphic={slideOneGraphic}
               buttonText="Continue"
-              buttonAction={() => {}}
+              buttonAction={handleNext}
             />
           </IonSlide>
           <IonSlide>
