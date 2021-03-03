@@ -24,11 +24,19 @@ export default function AuthChecker({ children }: IProps) {
     variables: { uid: auth.currentUser?.uid as string },
   });
 
-  const handleGoogleSignIn = async () => {
+  const isProd = process.env.NODE_ENV === "production";
+
+  const handleSignIn = async () => {
     // console.log("sign in window");
-    const provider = new firebase.auth.GoogleAuthProvider();
-    const { user } = await auth.signInWithPopup(provider);
-    if (!user) throw new Error("something wrong");
+
+    if (!isProd) {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      const { user } = await auth.signInWithPopup(provider);
+      if (!user) throw new Error("something wrong");
+    } else {
+      const { user } = await auth.signInAnonymously();
+      if (!user) throw new Error("something wrong");
+    }
 
     // function returns boolean
     const result = await cloudFn.httpsCallable("customClaims")();
@@ -68,17 +76,17 @@ export default function AuthChecker({ children }: IProps) {
   const handleComplete = () => {
     console.log("slide clicked");
     window.localStorage.setItem("isFirstTime", "false");
-    handleGoogleSignIn();
+    handleSignIn();
   };
 
   if (!isAuthed && checkIsFirstTime()) {
     return <OnBoarding onComplete={handleComplete} />;
   }
 
-  if (!isAuthed) {
+  if (!isAuthed && !isProd) {
     return (
       <StyledDiv>
-        <IonButton size="large" onClick={handleGoogleSignIn}>
+        <IonButton size="large" onClick={handleSignIn}>
           Sign in with Google
         </IonButton>
         <IonButton size="large" color="warning" onClick={() => auth.signOut()}>

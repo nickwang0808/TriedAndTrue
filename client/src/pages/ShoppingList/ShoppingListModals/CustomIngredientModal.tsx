@@ -55,7 +55,10 @@ export default function CustomIngredientModal() {
   }
 
   return (
-    <FancyModalWithRoundTop isOpen onDidDismiss={handleDismiss}>
+    <FancyModalWithRoundTop
+      isOpen={showAddCustomIngredientModal}
+      onDidDismiss={handleDismiss}
+    >
       <ModalHeader title="Add to My Weekly List" handleClose={handleDismiss} />
       <IonContent>
         <IonItem className="ion-margin-bottom">
