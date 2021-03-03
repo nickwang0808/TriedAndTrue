@@ -3,14 +3,14 @@ import {
   IonButton,
   IonButtons,
   IonHeader,
-  IonIcon,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import { add } from "ionicons/icons";
 import React from "react";
 import { useDispatch } from "react-redux";
-import addnew from "../../assets/svg/addnew.svg";
 import { setShowAddRecipeControlModal } from "../../redux/AddOrEditRecipe/AddRecipeControlSlice";
+import StyledIonIcon from "../misc/StyledIonIcon";
 
 export default function RecipePageHeader() {
   const dispatch = useDispatch();
@@ -21,8 +21,10 @@ export default function RecipePageHeader() {
         <IonButtons slot="end">
           <IonButton
             onClick={() => dispatch(setShowAddRecipeControlModal(true))}
-          ><StylizedTitleButtonText>Add Recipe</StylizedTitleButtonText>
-            <IonIcon icon={addnew} color="secondary" />
+          >
+            {/* <StylizedTitleButtonText>Add Recipe</StylizedTitleButtonText> */}
+            {/* <IonIcon icon={add} size="large" color="secondary" /> */}
+            <StyledIonIcon icon={add} fontSize={40} color="secondary" />
           </IonButton>
         </IonButtons>
       </IonToolbar>
