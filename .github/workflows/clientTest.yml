@@ -1,15 +1,9 @@
 name: frontend test
 on:
   push:
-    branches:
-      - master
-    paths:
-      - "client/**"
-  pull-request:
-    branches:
-      - master
-    paths:
-      - "client/**"
+    branches: [master]
+  pull_request:
+    branches: [master]
 jobs:
   test:
     runs-on: ubuntu-latest

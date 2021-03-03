@@ -2110,6 +2110,19 @@ export type GetShoppingListNameQuery = (
   )> }
 );
 
+export type SuggestPastListItemsQueryVariables = Exact<{
+  _like?: Maybe<Scalars['String']>;
+}>;
+
+
+export type SuggestPastListItemsQuery = (
+  { __typename?: 'query_root' }
+  & { list_items: Array<(
+    { __typename?: 'list_items' }
+    & Pick<List_Items, 'quantity' | 'unit' | 'name' | 'comment' | 'other' | 'id'>
+  )> }
+);
+
 
 export const UpdateRecipeDetailDocument = gql`
     mutation UpdateRecipeDetail($id: uuid!, $_set: recipe_set_input!, $ingredientsStrings: [String!]!) {
@@ -2475,3 +2488,16 @@ export const GetShoppingListNameDocument = gql`
 }
     `;
 export type GetShoppingListNameQueryResult = Apollo.QueryResult<GetShoppingListNameQuery, GetShoppingListNameQueryVariables>;
+export const SuggestPastListItemsDocument = gql`
+    query SuggestPastListItems($_like: String = "%eg%") {
+  list_items(limit: 20, where: {name: {_like: $_like}}) {
+    quantity
+    unit
+    name
+    comment
+    other
+    id
+  }
+}
+    `;
+export type SuggestPastListItemsQueryResult = Apollo.QueryResult<SuggestPastListItemsQuery, SuggestPastListItemsQueryVariables>;

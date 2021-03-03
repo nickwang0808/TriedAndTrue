@@ -1,29 +1,24 @@
 type Mutation {
-  generatePlanner (
+  generatePlanner(
     mealTypes: [String!]!
     _gte: String!
     _lte: String!
   ): [generatedPlanner!]!
 }
 
-
 type Mutation {
-  importRecipe (
-    url: String!
-  ): ImportedRecipe!
+  importRecipe(url: String!): ImportedRecipe!
 }
 
-
 type Mutation {
-  insertIngredientToList (
+  insertIngredientToList(
     ingredientsToAddToList: [insertIngredientToListInput!]!
     shoppingListId: String!
   ): [shoppingListItems!]!
 }
 
-
 type Mutation {
-  insertRecipeOneDerived (
+  insertRecipeOneDerived(
     title: String!
     img: String
     total_time: Int
@@ -35,63 +30,55 @@ type Mutation {
   ): InsertRecipeOneOutput!
 }
 
-
 type Mutation {
-  overwriteIngredients (
+  overwriteIngredients(
     ingredientsStrings: [String]!
     recipe_id: uuid!
   ): [UpdatedRecipeIngredients]!
 }
 
-
 type Query {
-  parseIngredients (
-    ingredientsToParse: [String]
-  ): [ParsedIngredients!]!
+  parseIngredients(ingredientsToParse: [String]): [ParsedIngredients!]!
 }
 
-
-
-
 input insertRecipeOneDerivedInput {
-  title : String!
-  img : String
-  total_time : Int
-  yields : String
-  cuisine : String
-  meal_type : String
-  ingredients : [String!]
-  directions : json
+  title: String!
+  img: String
+  total_time: Int
+  yields: String
+  cuisine: String
+  meal_type: String
+  ingredients: [String!]
+  directions: json
 }
 
 input insertIngredientToListInput {
-  date : String!
-  recipe_id : String!
-  recipe_index : Int!
-  ingredientIds : [String!]!
+  date: String!
+  recipe_id: String!
+  recipe_index: Int!
+  ingredientIds: [String!]!
 }
 
 type ParsedIngredients {
-  name : String!
+  name: String!
 }
 
 type UpdatedRecipeIngredients {
-  id : String!
+  id: String!
 }
 
 type ImportedRecipe {
-  id : String!
+  id: String!
 }
 
 type InsertRecipeOneOutput {
-  id : String!
+  id: String!
 }
 
 type shoppingListItems {
-  id : String!
+  id: String!
 }
 
 type generatedPlanner {
-  id : String!
+  id: String!
 }
-
