@@ -2,42 +2,42 @@ actions:
   - name: generatePlanner
     definition:
       kind: synchronous
-      handler: http://host.docker.internal:5001/api/GeneratePlanners
+      handler: "{{ACTION_BASE_ENDPOINT}}/GeneratePlanners"
       forward_client_headers: true
     permissions:
       - role: user
   - name: importRecipe
     definition:
       kind: synchronous
-      handler: http://host.docker.internal:5001/api/Scraper
+      handler: "{{ACTION_BASE_ENDPOINT}}/Scraper"
       forward_client_headers: true
     permissions:
       - role: user
   - name: insertIngredientToList
     definition:
       kind: synchronous
-      handler: http://host.docker.internal:5001/api/InsertIngredientsToList
+      handler: "{{ACTION_BASE_ENDPOINT}}/InsertIngredientsToList"
       forward_client_headers: true
     permissions:
       - role: user
   - name: insertRecipeOneDerived
     definition:
       kind: synchronous
-      handler: http://host.docker.internal:5001/api/InsertRecipe
+      handler: "{{ACTION_BASE_ENDPOINT}}/InsertRecipe"
       forward_client_headers: true
     permissions:
       - role: user
-  - name: overRideIngredients
+  - name: overwriteIngredients
     definition:
       kind: synchronous
-      handler: http://host.docker.internal:5001/api/OverWriteIngredients
+      handler: "{{ACTION_BASE_ENDPOINT}}/OverWriteIngredients"
       forward_client_headers: true
     permissions:
       - role: user
   - name: parseIngredients
     definition:
       kind: ""
-      handler: http://host.docker.internal:5001/api/ingredients
+      handler: "{{ACTION_BASE_ENDPOINT}}/ingredients"
       forward_client_headers: true
     permissions:
       - role: user
