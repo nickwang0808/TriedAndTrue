@@ -4,12 +4,30 @@ using server.Utils;
 using Microsoft.AspNetCore.Http;
 using server.Models;
 using server.Controllers;
+using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 
 namespace src.test
 {
 
     public class UnitTest1
     {
+
+        public static IConfiguration Configuration
+        {
+            get
+            {
+                var inMemConfig = new Dictionary<string, string>()
+                    {
+                        {"scraper", "http://localhost:3003/"},
+                        {"parser", "http://localhost:3005/"}
+                    };
+
+                return new ConfigurationBuilder()
+                    .AddInMemoryCollection(inMemConfig)
+                    .Build();
+            }
+        }
 
         [Fact]
         public void ItShouldExtractUserIdFromAuthToken()
@@ -26,7 +44,7 @@ namespace src.test
         public async void ItShouldParseIngredient()
         {
             string input = "1lbs beef";
-            var result = await Parser.RunParser(input);
+            var result = await Parser.RunParser(input, Configuration);
             Console.WriteLine(result);
             // TODO: fix this
             Assert.True(result.Name == "beef");
@@ -40,7 +58,7 @@ namespace src.test
             //Given
             string urlToTest = "https://www.allrecipes.com/recipe/158968/spinach-and-feta-turkey-burgers/";
             //When
-            Recipe recipe = await Scraper.RunScraper(urlToTest);
+            Recipe recipe = await Scraper.RunScraper(urlToTest, Configuration);
             //Then
             Assert.True(recipe.Title == "Spinach and Feta Turkey Burgers", "title should match");
             Assert.True(recipe.TotalTime == 35, "totalTime should match");

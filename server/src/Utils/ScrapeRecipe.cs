@@ -6,6 +6,8 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using server.Models;
 using System.Text.Json;
+using server;
+using Microsoft.Extensions.Configuration;
 
 
 namespace server.Utils
@@ -13,9 +15,13 @@ namespace server.Utils
     public static class Scraper
     {
         private static readonly HttpClient client = new();
-        public static async Task<Recipe> RunScraper(string url)
+
+        public static async Task<Recipe> RunScraper(string url,
+        IConfiguration configuration
+        )
         {
-            string scraperUrl = "http://localhost:3003/";
+            string scraperUrl = configuration.GetValue<string>("scraper");
+
             HttpResponseMessage response = await client.PostAsJsonAsync(scraperUrl, new { url });
             ScraperOutput scraperResponse = await response.Content.ReadFromJsonAsync<ScraperOutput>();
             if (String.IsNullOrEmpty(scraperResponse.title))
@@ -24,7 +30,7 @@ namespace server.Utils
             }
 
             List<RecipeIngredient> parsedIngredient = (await Task.WhenAll(
-                scraperResponse.ingredients.Select(Parser.RunParser)))
+                scraperResponse.ingredients.Select((ing, i) => Parser.RunParser(ing, configuration, i))))
                 .ToList();
 
             // check for empty response

@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using server.Models;
 using server.Utils;
 
@@ -10,10 +11,12 @@ namespace server.Controllers
     public class ScraperController : ControllerBase
     {
         private readonly PostgresContext _context;
+        private readonly IConfiguration _configuration;
 
-        public ScraperController(PostgresContext context)
+        public ScraperController(PostgresContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         [HttpPost]
@@ -23,7 +26,7 @@ namespace server.Controllers
 
             try
             {
-                Recipe recipe = await Scraper.RunScraper(url);
+                Recipe recipe = await Scraper.RunScraper(url, _configuration);
                 string userId = ParseUserId.GetUserId(Request.Headers);
 
                 recipe.Owner = userId;

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using server.Models;
 using server.Utils;
 
@@ -14,6 +15,14 @@ namespace server.Controllers
     [ApiController]
     public class ParseIngredientController : ControllerBase
     {
+
+        private readonly IConfiguration _configuration;
+
+        public ParseIngredientController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         [HttpPost]
         public async Task<ActionResult<string>> GetRecipeIngredient(string[] ingredients)
         {
@@ -22,7 +31,7 @@ namespace server.Controllers
             {
                 return NotFound();
             }
-            return (await Parser.RunParser(ingredient)).RawText;
+            return (await Parser.RunParser(ingredient, configuration: _configuration)).RawText;
         }
 
     }

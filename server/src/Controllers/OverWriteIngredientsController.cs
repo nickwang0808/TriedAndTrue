@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using server.Models;
 using server.Utils;
 
@@ -17,8 +18,13 @@ namespace server.Controllers
     {
         private readonly PostgresContext _context;
 
-        public OverWriteIngredientsController(PostgresContext context)
+
+        private readonly IConfiguration _configuration;
+
+
+        public OverWriteIngredientsController(PostgresContext context, IConfiguration configuration)
         {
+            _configuration = configuration;
             _context = context;
         }
 
@@ -41,7 +47,7 @@ namespace server.Controllers
                 .Where(ingredient => ingredient.RecipeId.ToString() == recipe_id));
             // parse the new ingredients
             ICollection<RecipeIngredient> recipeIngredients = (await Task.WhenAll(ingredientsStrings.
-            Select(Parser.RunParser))).ToList();
+            Select((ing, i) => Parser.RunParser(ing, _configuration, i)))).ToList();
             // insert in
             foreach (var ingredient in recipeIngredients)
             {

@@ -9,6 +9,7 @@ using server.Models;
 using System.Net;
 using server.Utils;
 using System.Net.Http;
+using Microsoft.Extensions.Configuration;
 
 namespace server.Controllers
 {
@@ -17,10 +18,11 @@ namespace server.Controllers
     public class InsertRecipeController : ControllerBase
     {
         private readonly PostgresContext _context;
-
-        public InsertRecipeController(PostgresContext context)
+        private readonly IConfiguration _configuration;
+        public InsertRecipeController(PostgresContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         // POST: api/InsertRecipe
@@ -37,7 +39,7 @@ namespace server.Controllers
             if (recipeInput.ingredients is not null)
             {
                 recipeIngredients = (await Task.WhenAll(recipeInput.ingredients
-                    .Select(Parser.RunParser)))
+                    .Select((ing, i) => Parser.RunParser(ing, _configuration, i))))
                     .ToList();
             }
 
