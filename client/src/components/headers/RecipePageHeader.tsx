@@ -24,7 +24,7 @@ export default function RecipePageHeader() {
           >
             {/* <StylizedTitleButtonText>Add Recipe</StylizedTitleButtonText> */}
             {/* <IonIcon icon={add} size="large" color="secondary" /> */}
-            <StyledIonIcon icon={add} fontSize={40} color="secondary" />
+            <StyledIonIcon icon={add} />
           </IonButton>
         </IonButtons>
       </IonToolbar>

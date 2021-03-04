@@ -3,7 +3,6 @@ import {
   IonButton,
   IonButtons,
   IonHeader,
-  IonIcon,
   IonLabel,
   IonSegment,
   IonSegmentButton,
@@ -12,13 +11,14 @@ import {
   useIonViewDidEnter,
 } from "@ionic/react";
 import { format, isPast, isSameMonth } from "date-fns";
+import { bagAddOutline, refresh } from "ionicons/icons";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import listIconForHeader from "../../assets/svg/addtoList.svg";
 import { setShowIngredientToListModal } from "../../redux/Planner/AddIngredientsToListSlice";
 import { setSelectedWeek } from "../../redux/Planner/PlannerDateRangeSlice";
 import { IAppState } from "../../redux/store";
 import getAllMonAndSun from "../../utils/getAllMonAndSun";
+import StyledIonIcon from "../misc/StyledIonIcon";
 
 interface IProps {
   weeks: string[][];
@@ -45,13 +45,13 @@ export default function Header({ weeks }: IProps) {
       <IonToolbar>
         <IonTitle color="primary">Weekly Meal Plan</IonTitle>
         <IonButtons slot="end">
-          {/* <IonButton>
-            <IonIcon icon={refresh} />
-          </IonButton> */}
+          <IonButton>
+            <StyledIonIcon icon={refresh} />
+          </IonButton>
           <IonButton
             onClick={() => dispatch(setShowIngredientToListModal(true))}
           >
-            <IonIcon icon={listIconForHeader} />
+            <StyledIonIcon icon={bagAddOutline} />
           </IonButton>
         </IonButtons>
       </IonToolbar>

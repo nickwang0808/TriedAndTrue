@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
-import { IonIcon } from "@ionic/react";
 import React from "react";
 import { useDispatch } from "react-redux";
-import addtocalendar from "../../assets/svg/addtocalendar.svg";
-import addtoList from "../../assets/svg/addtoList.svg";
+// import addtocalendar from "../../assets/svg/addtocalendar.svg";
+// import addtoList from "../../assets/svg/addtoList.svg";
 import ellipsisVertical from "../../assets/svg/ellipsis.svg";
 import { setShowDetailsOptionModal } from "../../redux/RecipeDetailsSlice/recipeDetailsSlice";
+import StyledIonIcon from "../misc/StyledIonIcon";
 
 interface IProps {
   img: string | null;
@@ -26,9 +26,9 @@ export default function DetailsPageTitle({ title, img, id }: IProps) {
       <StyledTitleAndIconWrapper>
         <StyledTitle>{title}</StyledTitle>
         <StyledIconWrapper>
-          <IonIcon icon={addtocalendar} />
-          <IonIcon icon={addtoList} />
-          <IonIcon
+          {/* <StyledIonIcon icon={addtocalendar} />
+          <StyledIonIcon icon={addtoList} /> */}
+          <StyledIonIcon
             // style={{ fontSize: 30 }}
             icon={ellipsisVertical}
             onClick={() => dispatch(setShowDetailsOptionModal(true))}
@@ -60,7 +60,8 @@ const StyledTitleAndIconWrapper = styled.div`
 const StyledIconWrapper = styled.div`
   display: flex;
   width: 120px;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: flex-end;
 
   ion-icon {
     padding-top: 24px;

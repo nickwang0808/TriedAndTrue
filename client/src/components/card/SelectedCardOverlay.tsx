@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
-import { IonIcon } from "@ionic/react";
 import React from "react";
 import selectedCheck from "../../assets/svg/selectedCheck.svg";
+import StyledIonIcon from "../misc/StyledIonIcon";
 
 export default function SelectedCardOverlay() {
   return (
     <StyledImgOverlay>
       <StyledIconContainer>
-        <IonIcon src={selectedCheck} />
+        <StyledIonIcon icon={selectedCheck} />
       </StyledIconContainer>
     </StyledImgOverlay>
   );

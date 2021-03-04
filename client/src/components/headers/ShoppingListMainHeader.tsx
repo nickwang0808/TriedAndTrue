@@ -3,14 +3,14 @@ import {
   IonButton,
   IonButtons,
   IonHeader,
-  IonIcon,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import { add } from "ionicons/icons";
 import React from "react";
 import { useDispatch } from "react-redux";
-import addnew from "../../assets/svg/addnew.svg";
 import { setShowAddNewListModal } from "../../redux/ShoppingList/ShoppingListHomeSlice";
+import StyledIonIcon from "../misc/StyledIonIcon";
 
 export default function ShoppingListMainHeader() {
   const dispatch = useDispatch();
@@ -22,8 +22,7 @@ export default function ShoppingListMainHeader() {
         <IonTitle color="primary">Shopping Lists</IonTitle>
         <IonButtons slot="end">
           <IonButton onClick={handleAdd}>
-          <StylizedTitleButtonText>Create List</StylizedTitleButtonText>
-            <IonIcon icon={addnew} color="secondary" />
+            <StyledIonIcon icon={add} />
           </IonButton>
         </IonButtons>
       </IonToolbar>

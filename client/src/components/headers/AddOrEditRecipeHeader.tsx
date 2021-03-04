@@ -1,21 +1,20 @@
+import styled from "@emotion/styled";
 import {
   IonButton,
   IonButtons,
   IonHeader,
-  IonIcon,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import { close } from "ionicons/icons";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import xclose from "../../assets/svg/close-x.svg";
 import {
   resetAddOrEditRecipe,
   setShowConfirmCancelModal,
 } from "../../redux/AddOrEditRecipe/AddOrEditRecipeSlice";
 import { IAppState } from "../../redux/store";
-import styled from "@emotion/styled";
-
+import StyledIonIcon from "../misc/StyledIonIcon";
 
 interface IProps {
   isNew: boolean;
@@ -43,7 +42,7 @@ export default function AddOrEditRecipeHeader({ isNew }: IProps) {
         </StyledHeader>
         <IonButtons slot="start">
           <IonButton onClick={handleClose}>
-            <IonIcon icon={xclose} color="secondary" />
+            <StyledIonIcon icon={close} />
           </IonButton>
         </IonButtons>
       </IonToolbar>
@@ -54,4 +53,3 @@ export default function AddOrEditRecipeHeader({ isNew }: IProps) {
 const StyledHeader = styled(IonTitle)`
   padding-inline: 0 !important;
 `;
-

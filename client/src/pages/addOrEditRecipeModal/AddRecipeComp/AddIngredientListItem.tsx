@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { IonIcon, IonInput, IonItem } from "@ionic/react";
+import { trashOutline } from "ionicons/icons";
 import React from "react";
-import trash from "../../../assets/svg/trash.svg";
 
 interface IProps {
   showBackground?: boolean;
@@ -25,7 +25,13 @@ export default function AddIngredientListItem({
         onIonChange={(e) => onChange(e.detail.value)}
         ref={inputRef}
       />
-      <IonIcon onClick={remove} icon={trash} size="small" slot="end" />
+      <IonIcon
+        onClick={remove}
+        icon={trashOutline}
+        size="small"
+        slot="end"
+        color="secondary"
+      />
     </StyledWrapper>
   );
 }

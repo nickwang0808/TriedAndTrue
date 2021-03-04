@@ -1,15 +1,14 @@
+import styled from "@emotion/styled";
 import {
   IonButton,
   IonButtons,
   IonHeader,
-  IonIcon,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import { close } from "ionicons/icons";
 import React from "react";
-import xclose from "../../assets/svg/close-x.svg";
-import styled from "@emotion/styled";
-
+import StyledIonIcon from "../misc/StyledIonIcon";
 
 interface IProps {
   title: string;
@@ -23,7 +22,7 @@ export default function ModalHeader({ title, handleClose }: IProps) {
         <StyledHeader color="primary">{title}</StyledHeader>
         <IonButtons slot="start">
           <IonButton onClick={handleClose}>
-            <IonIcon src={xclose} />
+            <StyledIonIcon icon={close} />
           </IonButton>
         </IonButtons>
       </IonToolbar>

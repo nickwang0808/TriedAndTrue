@@ -1,13 +1,8 @@
 import styled from "@emotion/styled";
-import {
-  IonButton,
-  IonButtons,
-  IonCheckbox,
-  IonIcon,
-  IonItem,
-} from "@ionic/react";
+import { IonButton, IonButtons, IonCheckbox, IonItem } from "@ionic/react";
 import React from "react";
 import lightPencil from "../../assets/svg/lightPencil.svg";
+import StyledIonIcon from "../misc/StyledIonIcon";
 interface IProps {
   text: string;
   quantity?: string;
@@ -45,7 +40,7 @@ export default function ShoppingListCheckBox({
       {!!showDetails && (
         <IonButtons slot="end">
           <IonButton onClick={showDetails}>
-            <IonIcon icon={lightPencil} />
+            <StyledIonIcon icon={lightPencil} fontSize={32} />
           </IonButton>
         </IonButtons>
       )}

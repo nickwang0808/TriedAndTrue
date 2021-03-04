@@ -3,20 +3,20 @@ import {
   IonContent,
   IonFab,
   IonFabButton,
-  IonIcon,
   IonLabel,
   IonList,
   IonSegment,
   IonSegmentButton,
 } from "@ionic/react";
+import { close } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import xclose from "../../assets/svg/close-x.svg";
 import CookTime from "../../components/detailsPageComp/CookTime";
 import DetailsPageTitle from "../../components/detailsPageComp/DetailsPageTitle";
 import DirectionsListItem from "../../components/listItem/DirectionsListItem";
 import IngredientListItem from "../../components/listItem/IngredientListItem";
 import DetailsSkeleton from "../../components/loading/DetailsSkeleton";
+import StyledIonIcon from "../../components/misc/StyledIonIcon";
 import { FancyModalWithRoundTop } from "../../components/modals/FancyModalWithRoundTop";
 import useGetRecipeDetails from "../../gql/query/useGetRecipeDetails";
 import { setRecipeDetailsId } from "../../redux/RecipeDetailsSlice/recipeDetailsSlice";
@@ -52,7 +52,7 @@ const RecipeDetailsPage: React.FC = () => {
       <>
         <IonFab vertical="top" horizontal="start" slot="fixed">
           <IonFabButton size="small" color="light" onClick={handleDismiss}>
-            <IonIcon src={xclose} />
+            <StyledIonIcon icon={close} />
           </IonFabButton>
         </IonFab>
         <DetailsPageTitle id={id} img={img || null} title={title} />

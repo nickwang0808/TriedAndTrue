@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { IonIcon, IonItem, IonTextarea } from "@ionic/react";
+import { trashOutline } from "ionicons/icons";
 import React from "react";
-import trash from "../../../assets/svg/trash.svg";
 
 interface IProps {
   showBackground?: boolean;
@@ -32,7 +32,13 @@ export default function AddDirectionListItem({
         // mode="ios"
       />
 
-      <IonIcon onClick={remove} size="small" slot="end" src={trash} />
+      <IonIcon
+        onClick={remove}
+        size="small"
+        slot="end"
+        icon={trashOutline}
+        color="secondary"
+      />
     </StyledWrapper>
   );
 }

@@ -10,7 +10,7 @@ interface IProps {
 export default function AddCardOutLined({ onClick }: IProps) {
   return (
     <StyledFlexBox onClick={onClick}>
-      <StyledIonIcon icon={add} size="medium" color="secondary" />
+      <StyledIonIcon icon={add} color="secondary" />
     </StyledFlexBox>
   );
 }
@@ -25,4 +25,5 @@ const StyledFlexBox = styled.div`
 const StyledIonIcon = styled(IonIcon)`
   border: 1px solid var(--ion-color-secondary);
   padding: 16px;
+  font-size: 24px;
 `;

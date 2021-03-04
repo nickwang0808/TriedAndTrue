@@ -2,14 +2,13 @@ import {
   IonButton,
   IonButtons,
   IonHeader,
-  IonIcon,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import { close } from "ionicons/icons";
 import React from "react";
 import { useDispatch } from "react-redux";
-import xclose from "../../../../assets/svg/close-x.svg";
-import filter from "../../../../assets/svg/filter.svg";
+import StyledIonIcon from "../../../../components/misc/StyledIonIcon";
 import { closePlannerModal } from "../../../../redux/Planner/PlannerModalSlice";
 
 export default function Header() {
@@ -21,7 +20,7 @@ export default function Header() {
         <IonTitle color="primary">Add Recipe</IonTitle>
         <IonButtons slot="start">
           <IonButton onClick={() => dispatch(closePlannerModal())}>
-            <IonIcon icon={xclose} color="secondary" />
+            <StyledIonIcon icon={close} />
           </IonButton>
         </IonButtons>
         {/*

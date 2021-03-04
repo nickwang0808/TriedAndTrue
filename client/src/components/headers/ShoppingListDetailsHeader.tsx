@@ -1,26 +1,26 @@
 import styled from "@emotion/styled";
 import {
   IonBackButton,
+  IonButton,
   IonButtons,
   IonHeader,
-  IonIcon,
   IonLabel,
   IonSegment,
   IonSegmentButton,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import { add, ellipsisVertical } from "ionicons/icons";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import addNew from "../../assets/svg/addnew.svg";
-import ellipsis from "../../assets/svg/ellipsis.svg";
 import useGetShoppingListName from "../../gql/query/useGetShopingListName.graphql";
 import {
   setShowActive,
   setShowConfigShoppingListModal,
 } from "../../redux/ShoppingList/ShoppingListDetailsSlice";
 import { IAppState } from "../../redux/store";
+import StyledIonIcon from "../misc/StyledIonIcon";
 
 type segmentValue = "active" | "completed" | undefined;
 
@@ -52,11 +52,12 @@ export default function ShoppingListDetailsHeader() {
         </IonButtons>
         <IonTitle color="primary">{title}</IonTitle>
         <IonButtons slot="end">
-          <StylizedTitleButtonText>Add Item</StylizedTitleButtonText>
-          <IonIcon size="small" src={addNew}/>
-        </IonButtons>
-        <IonButtons slot="end">
-          <IonIcon size="small" src={ellipsis} onClick={handleOpenConfig} />
+          <IonButton>
+            <StyledIonIcon icon={add} />
+          </IonButton>
+          <IonButton>
+            <StyledIonIcon icon={ellipsisVertical} onClick={handleOpenConfig} />
+          </IonButton>
         </IonButtons>
       </IonToolbar>
 

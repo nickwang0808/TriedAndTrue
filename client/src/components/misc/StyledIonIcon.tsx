@@ -4,14 +4,27 @@ import React from "react";
 
 interface IProps {
   icon: string;
-  fontSize: number;
-  color: string;
+  fontSize?: number;
+  color?: string;
+  onClick?: () => void;
 }
 
-export default function StyledIonIcon({ icon, fontSize = 16, color }: IProps) {
-  return <StyledIcon icon={icon} fontSize={fontSize} color={color} />;
+export default function StyledIonIcon({
+  icon,
+  fontSize = 24,
+  color = "secondary",
+  onClick,
+}: IProps) {
+  return (
+    <StyledIcon
+      icon={icon}
+      fontSize={fontSize}
+      color={color}
+      onClick={onClick}
+    />
+  );
 }
 
 const StyledIcon = styled(IonIcon)<{ fontSize: number }>`
-    font-size: ${({ fontSize }) => `${fontSize}px`};
+  font-size: ${({ fontSize }) => `${fontSize}px`};
 `;
