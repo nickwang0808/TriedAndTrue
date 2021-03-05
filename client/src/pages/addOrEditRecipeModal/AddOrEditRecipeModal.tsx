@@ -20,7 +20,7 @@ export default function AddOrEditRecipeModal() {
   );
 
   const { error, loading, data, getRecipeDetails } = useGetRecipeDetails();
-  const runQuery = () => getRecipeDetails({ variables: { id: id! } });
+  const runQuery = () => id && getRecipeDetails({ variables: { id: id } });
   // prettier-ignore
   const handleDismiss = () => dispatch(resetAddOrEditRecipe());
 
