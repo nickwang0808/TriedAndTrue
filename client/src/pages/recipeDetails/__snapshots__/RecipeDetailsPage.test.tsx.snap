@@ -20,12 +20,16 @@ Object {
 }
 
 .emotion-1 {
+  font-size: 24px;
+}
+
+.emotion-2 {
   width: 100%;
   height: 215;
   object-fit: cover;
 }
 
-.emotion-2 {
+.emotion-3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -44,7 +48,7 @@ Object {
   margin-top: -20px;
 }
 
-.emotion-3 {
+.emotion-4 {
   background: white;
   padding: 8px 8px 16px 8px;
   max-width: calc(100% - 120px);
@@ -53,24 +57,25 @@ Object {
   line-height: 125%;
 }
 
-.emotion-4 {
+.emotion-5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   width: 120px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
 }
 
-.emotion-4 ion-icon {
+.emotion-5 ion-icon {
   padding-top: 24px;
   width: 40px;
   height: 40px;
 }
 
-.emotion-5 {
+.emotion-7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -79,11 +84,11 @@ Object {
   padding-bottom: 16px;
 }
 
-.emotion-6 {
+.emotion-8 {
   --color-checked: var(--ion-color-secondary);
 }
 
-.emotion-8 {
+.emotion-10 {
   padding: 8px;
 }
 
@@ -105,45 +110,43 @@ Object {
                 size="small"
               >
                 <ion-icon
-                  src="close-x.svg"
+                  class="emotion-1"
+                  color="secondary"
+                  icon="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Close</title><path d='M289.94 256l95-95A24 24 0 00351 127l-95 95-95-95a24 24 0 00-34 34l95 95-95 95a24 24 0 1034 34l95-95 95 95a24 24 0 0034-34z'/></svg>"
                 />
               </ion-fab-button>
             </ion-fab>
             <img
-              class="emotion-1"
+              class="emotion-2"
               height="215"
               src="https://loremflickr.com/640/480/dinner"
             />
             <div
-              class="emotion-2"
+              class="emotion-3"
             >
               <div
-                class="emotion-3"
+                class="emotion-4"
               >
                 test
               </div>
               <div
-                class="emotion-4"
+                class="emotion-5"
               >
                 <ion-icon
-                  icon="addtocalendar.svg"
-                />
-                <ion-icon
-                  icon="addtoList.svg"
-                />
-                <ion-icon
+                  class="emotion-1"
+                  color="secondary"
                   icon="ellipsis.svg"
                 />
               </div>
             </div>
             <div
-              class="emotion-5"
+              class="emotion-7"
             />
             <ion-segment
               value="ingredients"
             >
               <ion-segment-button
-                class="emotion-6"
+                class="emotion-8"
                 value="ingredients"
               >
                 <ion-label>
@@ -151,7 +154,7 @@ Object {
                 </ion-label>
               </ion-segment-button>
               <ion-segment-button
-                class="emotion-6"
+                class="emotion-8"
                 value="directions"
               >
                 <ion-label>
@@ -160,7 +163,7 @@ Object {
               </ion-segment-button>
             </ion-segment>
             <ion-list
-              class="emotion-8"
+              class="emotion-10"
               lines="none"
             />
           </ion-content>
@@ -185,12 +188,16 @@ Object {
 }
 
 .emotion-1 {
+  font-size: 24px;
+}
+
+.emotion-2 {
   width: 100%;
   height: 215;
   object-fit: cover;
 }
 
-.emotion-2 {
+.emotion-3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -209,7 +216,7 @@ Object {
   margin-top: -20px;
 }
 
-.emotion-3 {
+.emotion-4 {
   background: white;
   padding: 8px 8px 16px 8px;
   max-width: calc(100% - 120px);
@@ -218,24 +225,25 @@ Object {
   line-height: 125%;
 }
 
-.emotion-4 {
+.emotion-5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   width: 120px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
 }
 
-.emotion-4 ion-icon {
+.emotion-5 ion-icon {
   padding-top: 24px;
   width: 40px;
   height: 40px;
 }
 
-.emotion-5 {
+.emotion-7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -244,11 +252,11 @@ Object {
   padding-bottom: 16px;
 }
 
-.emotion-6 {
+.emotion-8 {
   --color-checked: var(--ion-color-secondary);
 }
 
-.emotion-8 {
+.emotion-10 {
   padding: 8px;
 }
 
@@ -269,45 +277,43 @@ Object {
               size="small"
             >
               <ion-icon
-                src="close-x.svg"
+                class="emotion-1"
+                color="secondary"
+                icon="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Close</title><path d='M289.94 256l95-95A24 24 0 00351 127l-95 95-95-95a24 24 0 00-34 34l95 95-95 95a24 24 0 1034 34l95-95 95 95a24 24 0 0034-34z'/></svg>"
               />
             </ion-fab-button>
           </ion-fab>
           <img
-            class="emotion-1"
+            class="emotion-2"
             height="215"
             src="https://loremflickr.com/640/480/dinner"
           />
           <div
-            class="emotion-2"
+            class="emotion-3"
           >
             <div
-              class="emotion-3"
+              class="emotion-4"
             >
               test
             </div>
             <div
-              class="emotion-4"
+              class="emotion-5"
             >
               <ion-icon
-                icon="addtocalendar.svg"
-              />
-              <ion-icon
-                icon="addtoList.svg"
-              />
-              <ion-icon
+                class="emotion-1"
+                color="secondary"
                 icon="ellipsis.svg"
               />
             </div>
           </div>
           <div
-            class="emotion-5"
+            class="emotion-7"
           />
           <ion-segment
             value="ingredients"
           >
             <ion-segment-button
-              class="emotion-6"
+              class="emotion-8"
               value="ingredients"
             >
               <ion-label>
@@ -315,7 +321,7 @@ Object {
               </ion-label>
             </ion-segment-button>
             <ion-segment-button
-              class="emotion-6"
+              class="emotion-8"
               value="directions"
             >
               <ion-label>
@@ -324,7 +330,7 @@ Object {
             </ion-segment-button>
           </ion-segment>
           <ion-list
-            class="emotion-8"
+            class="emotion-10"
             lines="none"
           />
         </ion-content>

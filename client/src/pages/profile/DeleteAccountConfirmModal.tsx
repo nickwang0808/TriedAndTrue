@@ -16,6 +16,7 @@ export default function DeleteAccountConfirmModal() {
 
   const handleDismiss = () => dispatch(setShowDeleteAccountModal(false));
   const handleSubmit = () => {
+    localStorage.clear();
     auth.signOut();
     window.location.reload();
   };

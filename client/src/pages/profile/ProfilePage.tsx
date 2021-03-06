@@ -20,8 +20,10 @@ import {
 
 export default function ProfilePage() {
   const dispatch = useDispatch();
-  const handleSignOut = () =>
+  const handleSignOut = () => {
+    localStorage.clear();
     auth.signOut().then(() => window.location.reload());
+  };
   const handleDelete = () => dispatch(setShowDeleteAccountModal(true));
 
   return (

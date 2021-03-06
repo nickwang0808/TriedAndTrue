@@ -5,6 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Launch Chrome",
+      "request": "launch",
+      "type": "pwa-chrome",
+      "url": "http://localhost:8080",
+      "webRoot": "${workspaceFolder}/client"
+    },
+    {
       "name": ".NET Core Attach",
       "type": "coreclr",
       "request": "attach",
@@ -14,10 +21,10 @@
     {
       "type": "pwa-chrome",
       "request": "attach",
-      "url": "http://localhost/",
+      "url": "http://localhost:62072/",
       "name": "attach to chrome",
       "port": 9222,
-      "webRoot": "${workspaceFolder}"
+      "webRoot": "${workspaceFolder}/client"
     }
   ]
 }
