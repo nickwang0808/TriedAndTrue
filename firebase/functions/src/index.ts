@@ -31,8 +31,8 @@ export const newUserRecordWrite = functions.auth
     const { uid, email, photoURL, displayName } = user;
 
     const admin_secret = "myadminsecretkey";
-    const url = "http://35.220.182.160:8080/v1/graphql";
-    const query = `mutation ($id: String!, $name: String, $imgURL: String, $email: String!) {
+    const url = `http://${functions.config().server.uri}:8080/v1/graphql`;
+    const query = `mutation ($id: String!, $name: String, $imgURL: String, $email: String) {
         insert_user(objects: [{email: $email, id: $id, img: $imgURL, name: $name}], on_conflict: {constraint: user_pkey, update_columns: [name, email, img]}) {
           affected_rows
         }
