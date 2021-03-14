@@ -1,5 +1,5 @@
 version: 2
-endpoint: http://35.220.182.160:8080
+endpoint: http://35.225.62.128:8080
 admin_secret: myadminsecretkey
 metadata_directory: metadata
 actions:
