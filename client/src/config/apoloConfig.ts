@@ -1,7 +1,9 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
-const prodUri = "http://35.225.62.128:8080/v1/graphql";
+// const prodUri = "https://api.tnt.nickwangtech.com";
+// const devUri = "http://35.220.182.160:8080/v1/graphql";
+const prodUri = "https://api.tnt.nickwangtech.com/v1/graphql";
 const devUri = "http://35.220.182.160:8080/v1/graphql";
 
 let uri: string = process.env.NODE_ENV === "production" ? prodUri : devUri;
