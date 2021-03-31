@@ -21,7 +21,7 @@ namespace server.Utils
         )
         {
             string scraperUrl = configuration.GetValue<string>("scraper");
-
+            Console.WriteLine(scraperUrl);
             HttpResponseMessage response = await client.PostAsJsonAsync(scraperUrl, new { url });
             ScraperOutput scraperResponse = await response.Content.ReadFromJsonAsync<ScraperOutput>();
             if (String.IsNullOrEmpty(scraperResponse.title))
