@@ -12,3 +12,9 @@ Tried And True(t&t) is a recipe management app focusing on ease of use.
 
 - in /client, simply run `npm test` to start the jest test suite.
 - in /server/src.test, run `dotnet test` to test the webhooks
+
+
+## deployment
+- first make sure Caddy is installed, and domain is pointed to the server
+- use prod docker-compose to spin up all containers
+- start caddy with the root dir caddyfile
